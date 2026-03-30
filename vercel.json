@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/bio", "destination": "/index.html" },
+    { "source": "/form", "destination": "/index.html" },
+    { "source": "/agendar", "destination": "/agendar.html" },
+    { "source": "/lp", "destination": "/lp.html" }
+  ]
+}
