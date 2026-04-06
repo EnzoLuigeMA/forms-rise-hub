@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise Hub — Agende sua Consultoria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body,input,select,textarea,button{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+:root{
+  --rh-dark:#07060e;--rh-surface:#0f0e1a;--rh-surface2:#16152a;--rh-border:#282640;
+  --rh-accent:#9b59b6;--rh-accent2:#e74c8b;--rh-accent-light:#c39bd3;
+  --rh-accent-glow:rgba(155,89,182,.3);--rh-accent2-glow:rgba(231,76,139,.25);
+  --rh-green:#00b894;--rh-green-glow:rgba(0,184,148,.25);
+  --rh-text:#f0eef8;--rh-text-dim:#908caa;--rh-text-muted:#5a5678;
+  --rh-radius:16px;--rh-radius-sm:12px;
+  --rh-gradient:linear-gradient(135deg, var(--rh-accent2), var(--rh-accent));
+}
+body{
+  background:var(--rh-dark);color:var(--rh-text);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;position:relative;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 600px 600px at 25% 15%, rgba(155,89,182,.07) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 75% 85%, rgba(231,76,139,.05) 0%, transparent 70%);
+  z-index:0;pointer-events:none;
+}
+
+.page{position:relative;z-index:1;width:100%;max-width:600px}
+
+/* Header */
+.header{text-align:center;margin-bottom:24px}
+.logo-img{
+  width:64px;height:64px;border-radius:18px;
+  object-fit:cover;
+  box-shadow:0 6px 30px var(--rh-accent-glow), 0 0 0 1px rgba(155,89,182,.15);
+  margin-bottom:16px;
+}
+.header h1{
+  font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;
+  margin-bottom:6px;
+}
+.header h1 span{
+  background:var(--rh-gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.header p{font-size:.88rem;color:var(--rh-text-dim);line-height:1.5}
+
+/* Diagnosis Card */
+.diagnosis{
+  background:var(--rh-surface);border:1px solid var(--rh-border);
+  border-radius:var(--rh-radius);padding:24px;margin-bottom:20px;
+  position:relative;overflow:hidden;
+}
+.diagnosis::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--rh-gradient);opacity:.5;
+}
+.diagnosis-title{
+  font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;
+  color:var(--rh-accent-light);margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.diagnosis-items{display:flex;flex-direction:column;gap:10px}
+.diagnosis-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:.82rem;color:var(--rh-text-dim);
+}
+.diagnosis-item .di-icon{
+  width:32px;height:32px;border-radius:9px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;
+  background:rgba(155,89,182,.08);border:1px solid rgba(155,89,182,.12);
+}
+.diagnosis-item strong{color:var(--rh-text);font-weight:600}
+
+/* Main Card */
+.card{
+  background:var(--rh-surface);border:1px solid var(--rh-border);
+  border-radius:var(--rh-radius);padding:28px 24px;
+  box-shadow:0 4px 60px rgba(0,0,0,.5);position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--rh-gradient);opacity:.4;
+}
+
+/* Meeting Info */
+.meeting-info{
+  display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;
+}
+.mi-tag{
+  display:flex;align-items:center;gap:6px;
+  font-size:.76rem;color:var(--rh-text-dim);
+  background:var(--rh-surface2);border:1px solid var(--rh-border);
+  border-radius:8px;padding:8px 12px;
+}
+.mi-tag svg{width:14px;height:14px;opacity:.6}
+
+/* Calendar */
+.cal-section-title{
+  font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;
+  margin-bottom:16px;
+}
+
+/* Week Navigation */
+.week-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;
+}
+.week-label{font-size:.82rem;font-weight:600;color:var(--rh-text-dim)}
+.week-btn{
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--rh-border);
+  background:var(--rh-surface2);color:var(--rh-text-dim);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  font-size:.9rem;transition:border-color .15s;
+}
+.week-btn:hover{border-color:var(--rh-accent)}
+.week-btn:disabled{opacity:.3;cursor:not-allowed}
+
+/* Day Grid */
+.day-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
+  margin-bottom:20px;
+}
+.day-card{
+  text-align:center;padding:12px 6px;
+  border:1.5px solid var(--rh-border);border-radius:var(--rh-radius-sm);
+  cursor:pointer;transition:border-color .15s,background .15s;
+}
+.day-card:hover{border-color:rgba(155,89,182,.4);background:rgba(155,89,182,.03)}
+.day-card.selected{
+  border-color:var(--rh-accent);background:rgba(155,89,182,.08);
+  outline:2px solid var(--rh-accent-glow);outline-offset:-1px;
+}
+.day-card.disabled{opacity:.25;cursor:not-allowed;pointer-events:none}
+.day-weekday{font-size:.68rem;color:var(--rh-text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.day-number{font-size:1.1rem;font-weight:700;color:var(--rh-text);margin-top:2px}
+.day-month{font-size:.65rem;color:var(--rh-text-muted);margin-top:1px}
+
+/* Time Slots */
+.time-section{display:none;margin-bottom:20px}
+.time-section.visible{display:block}
+.time-label{font-size:.8rem;color:var(--rh-text-dim);margin-bottom:10px;font-weight:600}
+.time-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(max-width:480px){.time-grid{grid-template-columns:repeat(2,1fr)}}
+.time-slot{
+  text-align:center;padding:11px 8px;
+  border:1.5px solid var(--rh-border);border-radius:var(--rh-radius-sm);
+  cursor:pointer;font-size:.84rem;font-weight:600;color:var(--rh-text-dim);
+  transition:border-color .15s,background .15s;
+}
+.time-slot:hover{border-color:rgba(155,89,182,.4);color:var(--rh-text)}
+.time-slot.selected{
+  border-color:var(--rh-green);background:rgba(0,184,148,.08);
+  color:var(--rh-green);
+  outline:2px solid var(--rh-green-glow);outline-offset:-1px;
+}
+.time-slot.unavailable{opacity:.2;cursor:not-allowed;pointer-events:none}
+
+/* Confirm Button */
+.btn-confirm{
+  width:100%;padding:16px;border:none;border-radius:var(--rh-radius-sm);
+  background:linear-gradient(135deg,var(--rh-green),#55efc4);
+  color:#07060e;font-family:inherit;font-size:.95rem;font-weight:700;
+  cursor:pointer;letter-spacing:.3px;
+  box-shadow:0 4px 24px var(--rh-green-glow);
+  transition:transform .15s,box-shadow .15s;
+  display:none;
+}
+.btn-confirm.visible{display:block}
+.btn-confirm:hover{transform:translateY(-1px);box-shadow:0 8px 32px var(--rh-green-glow)}
+.btn-confirm:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+
+/* Confirmed Screen */
+.confirmed{display:none;text-align:center;padding:20px 0}
+.confirmed.active{display:block}
+.confirmed-icon{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--rh-green),#55efc4);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 18px;
+  box-shadow:0 8px 32px var(--rh-green-glow);
+  font-size:2rem;
+}
+.confirmed h2{
+  font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;
+  margin-bottom:8px;
+}
+.confirmed p{font-size:.85rem;color:var(--rh-text-dim);line-height:1.6;margin-bottom:16px}
+.conf-details{
+  background:var(--rh-surface2);border:1px solid var(--rh-border);
+  border-radius:var(--rh-radius-sm);padding:20px;
+  text-align:left;margin-bottom:20px;
+}
+.conf-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 0;border-bottom:1px solid var(--rh-border);
+  font-size:.84rem;color:var(--rh-text-dim);
+}
+.conf-row:last-child{border-bottom:none}
+.conf-row svg{width:18px;height:18px;flex-shrink:0;opacity:.5}
+.conf-row strong{color:var(--rh-text);font-weight:600}
+
+.conf-whatsapp{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 20px;border-radius:10px;
+  background:rgba(0,184,148,.08);border:1px solid rgba(0,184,148,.15);
+  font-size:.82rem;color:var(--rh-green);font-weight:600;
+}
+
+/* Trust */
+.trust{
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;margin-top:20px;flex-wrap:wrap;
+}
+.trust span{font-size:.7rem;color:var(--rh-text-muted)}
+
+/* Spinner */
+.spinner{
+  display:none;width:20px;height:20px;
+  border:2.5px solid rgba(7,6,14,.3);border-top-color:#07060e;
+  border-radius:50%;animation:spin .6s linear infinite;margin:0 auto;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:480px){
+  .card{padding:22px 18px}
+  .day-grid{gap:6px}
+  .meeting-info{gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <img src="data:image/webp;base64,UklGRvYCAABXRUJQVlA4IOoCAADwFwCdASqgAKAAPm00lkekIyIhKBUpSIANiWNu4MAAZn6KX1bOPla7l9MfpT/13mV/pL7/+cB5sfSAdMv6AHS1fs/+wGYp3Ke3VbHXLvVVx1IFOsEydkHGjp1y70NMvaVfxrBpXxKZRkkMoqSGOoqCkeFfxJFS+bA9ksKPzkYKIDuRfenl0vsy8cxJAALB5RWNKVXfGGpYM+uye1hf7j7P50RAJvKrEnSdk/kARk7n8Pt8+YBBbtkEY8OAox+OBB2pgIp1wYxMAAD+0cYAGz51x8w/HDklS2RkFuPmEdVzDWT0nInhuZbv6hxV3Kz3hpo5IO04gxwIFxC5q2mjJYBleKGHZxPzExbF6S8L4fTrQCn01uc3+w1mjldq9v9DVfSZK7m03CZJNm9h+pBjt9mwnOjPziB6WMBF7DtxBaUQLMizh+lz7nW7ohD7A2r0GDrXAHr1S1fI4231vUeeKxnfLqV+XuLebW+5EGL09WKgiyJmvD2MhkhjnMC032mnGC1vye2GfRcSBiWBJ9Z1X+8Je5F+yssmH/jDll+Xj8rCG0fY4eMwCFfxZVt9dryJnJZvCE4QDfjAk9WLsDF56brb8tIRZ4qNhDAnLTtazKOdo/KvKKc2kiwIRmrOUv9JUszNUB8f8ElI4b8f8DkQdTsm1fc3K9MMqCHy9NpnVyMYz79vfkQsy/hOwVEbU6hh7wiEG7pGI5Cxxno0desp+Rgs69lbopIKEEckAVK1G4NjU2tzAD2tTRvfiJu2cT0OxCijfDx1Qw5B00VudEKR/3CzSLYk87XecF+8RdCwVsFMdTOx06JE1JcatoXR1wAH6bSPWyzdhcni+2zj/XHLOGapzdACvftN4qe7P9+Q9kCljq+/5yS/9qcXCPKJe/j+hv6Y7UfBpZABvLlTLPmKA7VaTb7yi+NBZBVlH2W5OCtbSNfQhavxsOBbm/giuqKGY4gzCa1vB0khxtimoetFbCalsLqPJaAAAAAAAA==" alt="Rise Hub" class="logo-img" width="64" height="64">
+    <h1><span id="leadName">Sua consultoria</span>, quase lá!</h1>
+    <p>Escolha o melhor dia e horário para conversar com um especialista Rise Hub sobre sua clínica.</p>
+  </div>
+
+  <!-- Diagnosis Card -->
+  <div class="diagnosis" id="diagnosisCard" style="display:none">
+    <div class="diagnosis-title">📋 O que identificamos sobre sua clínica</div>
+    <div class="diagnosis-items" id="diagnosisItems"></div>
+  </div>
+
+  <!-- Main Card -->
+  <div class="card" id="bookingCard">
+    <!-- Meeting Info -->
+    <div class="meeting-info">
+      <div class="mi-tag">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        1h30
+      </div>
+      <div class="mi-tag">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        Google Meet
+      </div>
+      <div class="mi-tag">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Horário de Brasília
+      </div>
+    </div>
+
+    <!-- Calendar Section -->
+    <div class="cal-section-title">Escolha o dia</div>
+
+    <div class="week-nav">
+      <button class="week-btn" id="prevWeek" disabled>‹</button>
+      <span class="week-label" id="weekLabel"></span>
+      <button class="week-btn" id="nextWeek">›</button>
+    </div>
+
+    <div class="day-grid" id="dayGrid"></div>
+
+    <!-- Time Slots -->
+    <div class="time-section" id="timeSection">
+      <div class="time-label" id="timeLabel">Horários disponíveis</div>
+      <div class="time-grid" id="timeGrid"></div>
+    </div>
+
+    <!-- Confirm -->
+    <button class="btn-confirm" id="btnConfirm">
+      <span id="confirmText">Confirmar consultoria</span>
+      <div class="spinner" id="confirmSpinner"></div>
+    </button>
+  </div>
+
+  <!-- Confirmed Screen -->
+  <div class="confirmed" id="confirmedScreen">
+    <div class="confirmed-icon">✅</div>
+    <h2>Consultoria confirmada!</h2>
+    <p>Você receberá uma confirmação e o link do Google Meet pelo WhatsApp em instantes.</p>
+
+    <div class="conf-details">
+      <div class="conf-row">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <span>Data: <strong id="confDate">—</strong></span>
+      </div>
+      <div class="conf-row">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Horário: <strong id="confTime">—</strong></span>
+      </div>
+      <div class="conf-row">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        <span>Plataforma: <strong>Google Meet</strong></span>
+      </div>
+      <div class="conf-row">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Duração: <strong>1h30</strong></span>
+      </div>
+    </div>
+
+    <div class="conf-whatsapp">
+      📱 Confirmação e link enviados para seu WhatsApp
+    </div>
+  </div>
+
+  <div class="trust">
+    <span>🔒 Dados protegidos</span>
+    <span>✓ Especialistas em clínicas</span>
+    <span>⚡ Atendimento prioritário</span>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  CONFIG
+// ============================================================
+const SUPABASE_URL = 'https://ibidukamkkgsurqswsvf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliaWR1a2Fta2tnc3VycXN3c3ZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjMwMjksImV4cCI6MjA4OTUzOTAyOX0.YRLsf8b8ZNK0w9MXNy27Xz4WoBKV9DzNZfGVWf4zK2E';
+
+// Schedule: Mon-Fri, 9h-18h, 1h slots
+const WORK_DAYS = [1,2,3,4,5]; // Mon=1, Fri=5
+const START_HOUR = 9;
+const END_HOUR = 18;
+const SLOT_DURATION = 90; // minutes
+
+// Gerar horários de início com espaçamento de 1h30
+// 9:00, 10:30, 12:00, 13:30, 15:00, 16:30
+const SLOT_STARTS = [];
+for (let m = START_HOUR * 60; m + SLOT_DURATION <= END_HOUR * 60; m += SLOT_DURATION) {
+  SLOT_STARTS.push(m); // em minutos desde 00:00
+}
+
+function formatSlotTime(minutes) {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+function formatSlotRange(startMinutes) {
+  return `${formatSlotTime(startMinutes)} — ${formatSlotTime(startMinutes + SLOT_DURATION)}`;
+}
+
+const WEEKDAY_NAMES = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const MONTH_NAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+
+// ============================================================
+//  PARSE URL PARAMS (data from form)
+// ============================================================
+const params = new URLSearchParams(window.location.search);
+const leadData = {
+  nome: params.get('nome') || '',
+  email: params.get('email') || '',
+  whatsapp: params.get('whatsapp') || '',
+  clinica: params.get('clinica') || '',
+  dor: params.get('dor') || '',
+  interesses: params.get('interesses') || '',
+  segmento: params.get('segmento') || '',
+  lead_id: params.get('lead_id') || '',
+};
+
+// Personalize header
+const firstName = leadData.nome.split(' ')[0];
+if (firstName) {
+  document.getElementById('leadName').textContent = firstName;
+}
+
+// Diagnosis card
+const dorLabels = {
+  'leads_perdidos': '📱 Leads se perdendo no WhatsApp',
+  'agendamento_lento': '📅 Agendamento lento e manual',
+  'no_show': '🚫 Alto índice de faltas (no-show)',
+  'atendimento_24h': '🌙 Necessidade de atendimento fora do horário',
+  'escalar': '📈 Escalar sem aumentar equipe',
+};
+const interesseLabels = {
+  'ia_whatsapp': '🤖 IA no WhatsApp',
+  'agendamento_auto': '📅 Agendamento Automatizado',
+  'qualificacao_leads': '🎯 Qualificação de Leads',
+  'crm_automacao': '⚡ CRM + Automação',
+};
+
+function buildDiagnosis() {
+  const items = [];
+  if (leadData.clinica) items.push({ icon: '🏥', text: `Clínica: <strong>${leadData.clinica}</strong>` });
+  if (leadData.dor && dorLabels[leadData.dor]) items.push({ icon: '🎯', text: `Principal dor: <strong>${dorLabels[leadData.dor].slice(2)}</strong>` });
+  if (leadData.interesses) {
+    const ints = leadData.interesses.split(',').map(i => interesseLabels[i.trim()]).filter(Boolean);
+    if (ints.length) items.push({ icon: '⚡', text: `Soluções recomendadas: <strong>${ints.map(i => i.slice(2)).join(', ')}</strong>` });
+  }
+  
+  if (items.length > 0) {
+    const container = document.getElementById('diagnosisItems');
+    items.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'diagnosis-item';
+      div.innerHTML = `<div class="di-icon">${item.icon}</div><span>${item.text}</span>`;
+      container.appendChild(div);
+    });
+    document.getElementById('diagnosisCard').style.display = 'block';
+  }
+}
+buildDiagnosis();
+
+// ============================================================
+//  REAL BOOKINGS FROM SUPABASE
+// ============================================================
+let realBookings = {}; // { '2026-04-02': [9, 14, 16], ... }
+let bookingsLoaded = false;
+
+async function loadBookings() {
+  try {
+    const from = new Date();
+    from.setHours(0,0,0,0);
+    const to = new Date(from);
+    to.setDate(to.getDate() + 28);
+    
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/bookings_rise_hub?status=eq.confirmado&booking_date=gte.${from.toISOString()}&booking_date=lte.${to.toISOString()}&select=booking_date,duration_minutes`,
+      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+    );
+    
+    if (res.ok) {
+      const bookings = await res.json();
+      realBookings = {};
+      bookings.forEach(b => {
+        const d = new Date(b.booking_date);
+        const key = d.toISOString().split('T')[0];
+        const startMin = d.getHours() * 60 + d.getMinutes();
+        if (!realBookings[key]) realBookings[key] = [];
+        // Marcar todos os minutos ocupados pelo booking
+        realBookings[key].push(startMin);
+      });
+      console.log(`Loaded ${bookings.length} real bookings`);
+    }
+  } catch(err) {
+    console.log('Failed to load bookings:', err);
+  }
+  bookingsLoaded = true;
+}
+
+// Gera 1 slot fake por dia para prova social
+function getFakeTakenSlots(date) {
+  const seed = date.getDate() * 7 + date.getMonth() * 31;
+  const fakeSlots = new Set();
+  const idx = seed % SLOT_STARTS.length;
+  fakeSlots.add(SLOT_STARTS[idx]);
+  return fakeSlots;
+}
+
+// Retorna todos os slots indisponíveis para uma data (reais + fake)
+function getUnavailableSlots(date) {
+  const dateKey = date.toISOString().split('T')[0];
+  const realTakenMins = realBookings[dateKey] || [];
+  
+  // Verificar quais slots colidem com bookings reais
+  const realTaken = new Set();
+  for (const slotStart of SLOT_STARTS) {
+    const slotEnd = slotStart + SLOT_DURATION;
+    for (const bookedStart of realTakenMins) {
+      const bookedEnd = bookedStart + SLOT_DURATION;
+      // Colisão: se o slot sobrepõe o booking
+      if (slotStart < bookedEnd && slotEnd > bookedStart) {
+        realTaken.add(slotStart);
+        break;
+      }
+    }
+  }
+  
+  const allTaken = new Set([...realTaken]);
+  
+  // Adicionar 1 fake se não tem muitos reais
+  if (realTaken.size < SLOT_STARTS.length - 2) {
+    const fakeTaken = getFakeTakenSlots(date);
+    for (const fh of fakeTaken) {
+      if (!realTaken.has(fh)) allTaken.add(fh);
+    }
+  }
+  
+  return allTaken;
+}
+
+// Carregar bookings ao iniciar
+loadBookings();
+
+// ============================================================
+//  CALENDAR LOGIC
+// ============================================================
+let currentWeekStart = getNextWeekday(new Date());
+let selectedDate = null;
+let selectedTime = null;
+
+function getNextWeekday(date) {
+  const d = new Date(date);
+  d.setHours(0,0,0,0);
+  // If today is weekend, jump to Monday
+  while (!WORK_DAYS.includes(d.getDay())) {
+    d.setDate(d.getDate() + 1);
+  }
+  // Go to Monday of this week
+  while (d.getDay() !== 1) {
+    d.setDate(d.getDate() - 1);
+  }
+  return d;
+}
+
+function renderWeek() {
+  const grid = document.getElementById('dayGrid');
+  grid.innerHTML = '';
+  
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  
+  const endOfWeek = new Date(currentWeekStart);
+  endOfWeek.setDate(endOfWeek.getDate() + 4);
+  
+  document.getElementById('weekLabel').textContent = 
+    `${currentWeekStart.getDate()} ${MONTH_NAMES[currentWeekStart.getMonth()]} — ${endOfWeek.getDate()} ${MONTH_NAMES[endOfWeek.getMonth()]}`;
+  
+  for (let i = 0; i < 5; i++) {
+    const d = new Date(currentWeekStart);
+    d.setDate(d.getDate() + i);
+    
+    const isPast = d < today;
+    const isToday = d.getTime() === today.getTime();
+    const isSelected = selectedDate && d.getTime() === selectedDate.getTime();
+    
+    // Calcular slots disponíveis neste dia
+    let availableSlots = 0;
+    if (!isPast) {
+      const unavailable = getUnavailableSlots(d);
+      const nowMin = isToday ? new Date().getHours() * 60 + new Date().getMinutes() : -1;
+      for (const slotMin of SLOT_STARTS) {
+        if (!unavailable.has(slotMin) && slotMin > nowMin) availableSlots++;
+      }
+    }
+    
+    const isFull = !isPast && availableSlots === 0;
+    
+    const card = document.createElement('div');
+    card.className = 'day-card' + ((isPast || isFull) ? ' disabled' : '') + (isSelected ? ' selected' : '');
+    
+    // Indicador de disponibilidade
+    let availLabel = '';
+    if (!isPast && !isFull) {
+      if (availableSlots <= 2) availLabel = `<div style="font-size:.6rem;color:var(--accent2);margin-top:3px;font-weight:700">${availableSlots} vaga${availableSlots>1?'s':''}</div>`;
+      else if (availableSlots <= 5) availLabel = `<div style="font-size:.6rem;color:var(--amber);margin-top:3px">${availableSlots} vagas</div>`;
+      else availLabel = `<div style="font-size:.6rem;color:var(--green);margin-top:3px">Disponível</div>`;
+    } else if (isFull) {
+      availLabel = `<div style="font-size:.6rem;color:var(--text-muted);margin-top:3px">Lotado</div>`;
+    }
+    
+    card.innerHTML = `
+      <div class="day-weekday">${WEEKDAY_NAMES[d.getDay()]}</div>
+      <div class="day-number">${d.getDate()}</div>
+      <div class="day-month">${MONTH_NAMES[d.getMonth()]}</div>
+      ${availLabel}
+    `;
+    
+    if (!isPast && !isFull) {
+      card.addEventListener('click', () => selectDate(d));
+    }
+    grid.appendChild(card);
+  }
+  
+  // Disable prev if current week is this week
+  const thisWeekMon = getNextWeekday(new Date());
+  document.getElementById('prevWeek').disabled = currentWeekStart <= thisWeekMon;
+}
+
+function selectDate(date) {
+  selectedDate = date;
+  selectedTime = null;
+  document.getElementById('btnConfirm').classList.remove('visible');
+  renderWeek();
+  renderTimeSlots();
+}
+
+function renderTimeSlots() {
+  const section = document.getElementById('timeSection');
+  const grid = document.getElementById('timeGrid');
+  
+  if (!selectedDate) {
+    section.classList.remove('visible');
+    return;
+  }
+  
+  section.classList.add('visible');
+  grid.innerHTML = '';
+  
+  // Remove urgency message if exists
+  const oldUrgency = section.querySelector('[data-urgency]');
+  if (oldUrgency) oldUrgency.remove();
+  
+  const now = new Date();
+  const isToday = selectedDate.toDateString() === now.toDateString();
+  const nowMin = isToday ? now.getHours() * 60 + now.getMinutes() : -1;
+  
+  document.getElementById('timeLabel').textContent = 
+    `Horários para ${WEEKDAY_NAMES[selectedDate.getDay()]}, ${selectedDate.getDate()} de ${MONTH_NAMES[selectedDate.getMonth()]}`;
+  
+  const unavailable = getUnavailableSlots(selectedDate);
+  let availableCount = 0;
+  
+  for (const slotMin of SLOT_STARTS) {
+    const isPast = isToday && slotMin <= nowMin;
+    const isTaken = unavailable.has(slotMin);
+    const isSelected = selectedTime === slotMin;
+    
+    if (!isPast && !isTaken) availableCount++;
+    
+    const slot = document.createElement('div');
+    slot.className = 'time-slot' + ((isPast || isTaken) ? ' unavailable' : '') + (isSelected ? ' selected' : '');
+    slot.textContent = formatSlotTime(slotMin);
+    
+    if (!isPast && !isTaken) {
+      slot.addEventListener('click', () => selectTime(slotMin));
+    }
+    grid.appendChild(slot);
+  }
+  
+  if (availableCount > 0 && availableCount <= 2) {
+    const urgency = document.createElement('div');
+    urgency.setAttribute('data-urgency', '1');
+    urgency.style.cssText = 'text-align:center;font-size:.75rem;color:var(--accent2);margin-top:10px;font-weight:600';
+    urgency.textContent = `⚡ Apenas ${availableCount} ${availableCount === 1 ? 'horário disponível' : 'horários disponíveis'} neste dia`;
+    section.appendChild(urgency);
+  }
+}
+
+function selectTime(hour) {
+  selectedTime = hour;
+  renderTimeSlots();
+  document.getElementById('btnConfirm').classList.add('visible');
+}
+
+// Week navigation
+document.getElementById('prevWeek').addEventListener('click', () => {
+  currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+  selectedDate = null;
+  selectedTime = null;
+  document.getElementById('timeSection').classList.remove('visible');
+  document.getElementById('btnConfirm').classList.remove('visible');
+  renderWeek();
+});
+document.getElementById('nextWeek').addEventListener('click', () => {
+  currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+  selectedDate = null;
+  selectedTime = null;
+  document.getElementById('timeSection').classList.remove('visible');
+  document.getElementById('btnConfirm').classList.remove('visible');
+  renderWeek();
+});
+
+// Initial render (espera bookings carregarem para mostrar disponibilidade real)
+async function init() {
+  await loadBookings();
+  renderWeek();
+}
+init();
+
+// ============================================================
+//  CONFIRM BOOKING
+// ============================================================
+document.getElementById('btnConfirm').addEventListener('click', async () => {
+  if (!selectedDate || selectedTime === null) return;
+  
+  const btn = document.getElementById('btnConfirm');
+  const txt = document.getElementById('confirmText');
+  const spinner = document.getElementById('confirmSpinner');
+  btn.disabled = true; txt.style.display = 'none'; spinner.style.display = 'block';
+  
+  const bookingDate = new Date(selectedDate);
+  bookingDate.setHours(Math.floor(selectedTime / 60), selectedTime % 60, 0, 0);
+  
+  const dateStr = `${WEEKDAY_NAMES[selectedDate.getDay()]}, ${selectedDate.getDate()} de ${MONTH_NAMES[selectedDate.getMonth()]}`;
+  const timeStr = formatSlotRange(selectedTime);
+  
+  // Save booking to Supabase
+  const booking = {
+    lead_nome: leadData.nome,
+    lead_email: leadData.email,
+    lead_whatsapp: leadData.whatsapp,
+    lead_clinica: leadData.clinica,
+    lead_id: leadData.lead_id || null,
+    booking_date: bookingDate.toISOString(),
+    booking_display: `${dateStr} às ${timeStr}`,
+    platform: 'google_meet',
+    duration_minutes: SLOT_DURATION,
+    status: 'confirmado',
+    created_at: new Date().toISOString(),
+  };
+  
+  try {
+    // 1. Salvar booking na tabela de agendamentos
+    await fetch(`${SUPABASE_URL}/rest/v1/bookings_rise_hub`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(booking)
+    });
+
+    // 2. Atualizar status do lead para "agendado" no pipeline do CRM
+    //    Busca por email (mais confiável) ou WhatsApp
+    const emailEnc = encodeURIComponent(leadData.email.trim().toLowerCase());
+    await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub?email=eq.${emailEnc}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        status: 'agendado',
+        notas_internas: `Consultoria agendada: ${dateStr} às ${timeStr} | Google Meet | 1h30`
+      })
+    });
+
+    console.log('Booking saved + lead status updated to agendado');
+  } catch(err) {
+    console.log('Booking/status save error (continuing):', err);
+  }
+  
+  // Show confirmation
+  document.getElementById('bookingCard').style.display = 'none';
+  document.getElementById('diagnosisCard').style.display = 'none';
+  document.getElementById('confirmedScreen').classList.add('active');
+  document.getElementById('confDate').textContent = dateStr;
+  document.getElementById('confTime').textContent = timeStr;
+  
+  document.querySelector('.header h1').innerHTML = 'Confirmado! 🎉';
+  document.querySelector('.header p').textContent = `${firstName || 'Sua consultoria'}, tudo certo para sua reunião com nosso time.`;
+});
+</script>
+</body>
+</html>
