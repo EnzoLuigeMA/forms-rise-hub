@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise Hub — IA que transforma sua clínica</title>
+<meta name="description" content="Automatize atendimento, agendamentos e qualificação de leads com IA no WhatsApp. Feito exclusivamente para clínicas médicas, odonto e estética.">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var fbclid = params.get('fbclid');
+  if (fbclid && !document.cookie.includes('_fbc=')) {
+    var fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+    document.cookie = '_fbc=' + fbc + '; max-age=7776000; path=/; SameSite=Lax';
+  }
+})();
+
+fbq('init', '2238173290034845');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2238173290034845&ev=PageView&noscript=1"/></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+:root{
+  --dark:#07060e;
+  --surface:#0f0e1a;
+  --surface2:#16152a;
+  --surface3:#1e1c38;
+  --border:#282640;
+  --border-strong:#3a3758;
+  --accent:#9b59b6;
+  --accent2:#e74c8b;
+  --accent-light:#c39bd3;
+  --accent-glow:rgba(155,89,182,.3);
+  --accent2-glow:rgba(231,76,139,.25);
+  --green:#00b894;
+  --green-glow:rgba(0,184,148,.25);
+  --red:#ff6b6b;
+  --amber:#fdcb6e;
+  --text:#f0eef8;
+  --text-dim:#908caa;
+  --text-muted:#5a5678;
+  --radius:16px;
+  --radius-sm:12px;
+  --radius-lg:24px;
+  --gradient:linear-gradient(135deg,var(--accent2),var(--accent));
+  --gradient-soft:linear-gradient(135deg,rgba(231,76,139,.15),rgba(155,89,182,.15));
+}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--dark);color:var(--text);
+  line-height:1.6;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 800px 600px at 20% 10%,rgba(155,89,182,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 600px 500px at 80% 40%,rgba(231,76,139,.06) 0%,transparent 60%),
+    radial-gradient(ellipse 700px 700px at 50% 90%,rgba(155,89,182,.05) 0%,transparent 60%);
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(155,89,182,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(155,89,182,.02) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.container{max-width:1180px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 24px;
+  background:rgba(7,6,14,.8);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(40,38,64,.5);
+  transition:transform .4s ease;
+}
+.nav-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;
+  color:var(--text);text-decoration:none;
+}
+.nav-logo-img{
+  width:36px;height:36px;border-radius:10px;
+  object-fit:cover;
+  box-shadow:0 4px 16px var(--accent-glow);
+}
+.nav-cta{
+  padding:10px 22px;border-radius:10px;
+  background:var(--gradient);color:#fff;
+  font-family:inherit;font-size:.85rem;font-weight:700;
+  border:none;cursor:pointer;text-decoration:none;
+  box-shadow:0 4px 20px var(--accent2-glow);
+  transition:transform .2s,box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 28px var(--accent2-glow)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  padding:140px 0 80px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:999px;
+  background:rgba(155,89,182,.1);
+  border:1px solid rgba(155,89,182,.3);
+  font-size:.78rem;font-weight:600;color:var(--accent-light);
+  margin-bottom:24px;
+}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-dot 2s ease infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,3.8rem);
+  margin-bottom:20px;
+}
+.hero h1 .highlight{
+  background:var(--gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:inline-block;
+}
+.hero-subtitle{
+  font-size:1.1rem;color:var(--text-dim);
+  margin-bottom:32px;max-width:560px;line-height:1.65;
+}
+.hero-cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-primary{
+  padding:16px 32px;border-radius:14px;
+  background:var(--gradient);color:#fff;
+  font-family:inherit;font-size:.95rem;font-weight:700;
+  border:none;cursor:pointer;text-decoration:none;
+  box-shadow:0 8px 32px var(--accent2-glow);
+  transition:transform .2s,box-shadow .2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px var(--accent2-glow)}
+.btn-primary .arrow{transition:transform .2s}
+.btn-primary:hover .arrow{transform:translateX(4px)}
+.btn-secondary{
+  padding:16px 28px;border-radius:14px;
+  background:transparent;color:var(--text);
+  font-family:inherit;font-size:.9rem;font-weight:600;
+  border:1.5px solid var(--border-strong);cursor:pointer;text-decoration:none;
+  transition:border-color .2s,background .2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-secondary:hover{border-color:var(--accent);background:rgba(155,89,182,.05)}
+
+.hero-trust{
+  display:flex;gap:28px;margin-top:32px;flex-wrap:wrap;
+}
+.hero-trust-item{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-muted)}
+.hero-trust-item svg{width:18px;height:18px;color:var(--accent-light)}
+
+/* Hero phone mockup */
+.hero-phone{
+  position:relative;
+  margin:0 auto;
+  max-width:320px;
+}
+.phone-frame{
+  background:var(--surface);
+  border:1.5px solid var(--border-strong);
+  border-radius:32px;
+  padding:16px 12px;
+  box-shadow:0 20px 80px rgba(0,0,0,.5),0 0 0 1px rgba(155,89,182,.1);
+  position:relative;
+}
+.phone-notch{
+  width:90px;height:20px;
+  background:var(--dark);
+  border-radius:0 0 12px 12px;
+  margin:-16px auto 12px;
+}
+.phone-header{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 12px 14px;border-bottom:1px solid var(--border);
+  margin-bottom:12px;
+}
+.phone-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;
+  flex-shrink:0;
+}
+.phone-contact strong{display:block;font-size:.85rem;color:var(--text)}
+.phone-contact .status{font-size:.68rem;color:var(--green)}
+.chat-msg{
+  max-width:80%;padding:10px 14px;border-radius:14px;
+  font-size:.78rem;line-height:1.4;margin-bottom:8px;
+  animation:slideIn .4s ease;
+}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.chat-msg.received{
+  background:var(--surface2);color:var(--text);
+  border-bottom-left-radius:4px;
+}
+.chat-msg.sent{
+  background:var(--gradient);color:#fff;
+  border-bottom-right-radius:4px;
+  margin-left:auto;
+}
+.chat-msg .time{display:block;font-size:.62rem;opacity:.6;margin-top:2px}
+.chat-typing{
+  display:inline-flex;gap:4px;padding:10px 14px;
+  background:var(--surface2);border-radius:14px;
+  border-bottom-left-radius:4px;
+}
+.chat-typing span{
+  width:6px;height:6px;border-radius:50%;background:var(--text-muted);
+  animation:typing 1.2s ease infinite;
+}
+.chat-typing span:nth-child(2){animation-delay:.15s}
+.chat-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+.phone-glow{
+  position:absolute;inset:-40px;
+  background:radial-gradient(circle,rgba(155,89,182,.15) 0%,transparent 60%);
+  z-index:-1;filter:blur(40px);
+  animation:float 6s ease infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar{
+  padding:50px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(155,89,182,.03),transparent);
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  text-align:center;
+}
+@media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-number{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(2rem,4vw,2.8rem);font-weight:700;
+  background:var(--gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.stat-label{
+  font-size:.78rem;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:.8px;
+  margin-top:8px;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+section{padding:100px 0;position:relative}
+.section-tag{
+  display:inline-block;
+  padding:6px 14px;border-radius:999px;
+  background:rgba(155,89,182,.1);
+  border:1px solid rgba(155,89,182,.25);
+  font-size:.72rem;font-weight:700;color:var(--accent-light);
+  text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:16px;
+}
+.section-title{
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin-bottom:16px;max-width:720px;
+}
+.section-title .highlight{
+  background:var(--gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.section-subtitle{
+  font-size:1.05rem;color:var(--text-dim);
+  max-width:680px;margin-bottom:60px;line-height:1.65;
+}
+.section-center{text-align:center}
+.section-center .section-title,.section-center .section-subtitle{margin-left:auto;margin-right:auto}
+
+/* ============================================================
+   PROBLEMA SECTION
+   ============================================================ */
+.problema-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+@media(max-width:900px){.problema-grid{grid-template-columns:1fr}}
+.problema-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px;
+  position:relative;
+  transition:border-color .3s,transform .3s;
+}
+.problema-card:hover{border-color:rgba(231,76,139,.3);transform:translateY(-4px)}
+.problema-icon{
+  width:56px;height:56px;border-radius:14px;
+  background:rgba(255,107,107,.08);
+  border:1px solid rgba(255,107,107,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin-bottom:20px;
+}
+.problema-card h3{font-size:1.15rem;margin-bottom:10px;color:var(--text)}
+.problema-card p{font-size:.88rem;color:var(--text-dim);line-height:1.6}
+.problema-stat{
+  margin-top:16px;padding-top:16px;border-top:1px dashed var(--border);
+  font-size:.78rem;color:var(--red);font-weight:600;
+}
+
+/* ============================================================
+   SOLUÇÃO SECTION
+   ============================================================ */
+.solucao-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:900px){.solucao-split{grid-template-columns:1fr}}
+.solucao-features{display:flex;flex-direction:column;gap:24px;margin-top:32px}
+.solucao-feature{
+  display:flex;gap:16px;padding:20px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);
+  transition:border-color .3s;
+}
+.solucao-feature:hover{border-color:var(--accent)}
+.solucao-feature-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:var(--gradient-soft);
+  border:1px solid rgba(155,89,182,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.solucao-feature h4{font-size:1rem;margin-bottom:6px;color:var(--text)}
+.solucao-feature p{font-size:.85rem;color:var(--text-dim);line-height:1.55}
+
+.solucao-visual{
+  background:var(--surface);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  padding:32px;
+  position:relative;overflow:hidden;
+}
+.solucao-visual::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 20%,rgba(155,89,182,.15),transparent 60%);
+  pointer-events:none;
+}
+.sofia-avatar{
+  width:100px;height:100px;border-radius:50%;
+  background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;
+  font-size:42px;font-weight:800;color:#fff;
+  margin:0 auto 20px;
+  box-shadow:0 12px 40px var(--accent-glow);
+  position:relative;z-index:1;
+}
+.sofia-name{
+  text-align:center;font-family:'Space Grotesk',sans-serif;
+  font-size:1.3rem;font-weight:700;margin-bottom:6px;position:relative;z-index:1;
+}
+.sofia-role{
+  text-align:center;font-size:.85rem;color:var(--accent-light);
+  margin-bottom:24px;position:relative;z-index:1;
+}
+.sofia-skills{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative;z-index:1}
+.sofia-skill{
+  background:var(--surface2);border:1px solid var(--border);
+  padding:12px;border-radius:var(--radius-sm);
+  font-size:.78rem;color:var(--text-dim);
+  display:flex;align-items:center;gap:8px;
+}
+.sofia-skill .check{
+  width:18px;height:18px;border-radius:50%;
+  background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.sofia-skill .check svg{width:10px;height:10px;color:#07060e}
+
+/* ============================================================
+   COMO FUNCIONA
+   ============================================================ */
+.passos{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  position:relative;
+}
+@media(max-width:900px){.passos{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.passos{grid-template-columns:1fr}}
+.passo{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px;
+  position:relative;
+  transition:transform .3s,border-color .3s;
+}
+.passo:hover{transform:translateY(-4px);border-color:var(--accent)}
+.passo-num{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.2rem;font-weight:700;color:#fff;
+  margin-bottom:16px;
+  box-shadow:0 4px 16px var(--accent2-glow);
+}
+.passo h3{font-size:1.05rem;margin-bottom:10px;color:var(--text)}
+.passo p{font-size:.85rem;color:var(--text-dim);line-height:1.55}
+.passo-time{
+  display:inline-block;margin-top:12px;
+  font-size:.72rem;font-weight:600;color:var(--accent-light);
+  padding:4px 10px;border-radius:6px;
+  background:rgba(155,89,182,.1);
+}
+
+/* ============================================================
+   RESULTADOS
+   ============================================================ */
+.resultados-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+@media(max-width:900px){.resultados-grid{grid-template-columns:1fr}}
+.resultado-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:36px 28px;
+  text-align:center;
+  position:relative;overflow:hidden;
+  transition:transform .3s,border-color .3s;
+}
+.resultado-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gradient);
+}
+.resultado-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.resultado-number{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:3.5rem;font-weight:800;
+  background:var(--gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:8px;
+}
+.resultado-label{
+  font-size:1rem;font-weight:600;color:var(--text);
+  margin-bottom:12px;
+}
+.resultado-desc{font-size:.82rem;color:var(--text-dim);line-height:1.55}
+
+/* ============================================================
+   DEPOIMENTOS
+   ============================================================ */
+.depoimentos-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+@media(max-width:900px){.depoimentos-grid{grid-template-columns:1fr}}
+.depoimento{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px;
+  position:relative;
+  transition:border-color .3s,transform .3s;
+}
+.depoimento:hover{border-color:var(--accent);transform:translateY(-4px)}
+.depoimento-stars{
+  display:flex;gap:2px;margin-bottom:16px;
+  color:var(--amber);
+}
+.depoimento-text{
+  font-size:.92rem;color:var(--text);
+  line-height:1.65;margin-bottom:20px;
+  font-style:italic;
+}
+.depoimento-author{
+  display:flex;align-items:center;gap:12px;
+  padding-top:20px;border-top:1px solid var(--border);
+}
+.depoimento-avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:#fff;font-size:16px;
+  flex-shrink:0;
+}
+.depoimento-author strong{display:block;font-size:.88rem;color:var(--text)}
+.depoimento-author span{font-size:.76rem;color:var(--text-muted)}
+
+/* ============================================================
+   SOBRE
+   ============================================================ */
+.sobre{
+  background:linear-gradient(180deg,transparent,rgba(155,89,182,.03));
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.sobre-content{
+  max-width:860px;margin:0 auto;text-align:center;
+}
+.sobre-highlights{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin-top:50px;
+}
+@media(max-width:700px){.sobre-highlights{grid-template-columns:1fr}}
+.sobre-highlight{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+}
+.sobre-highlight-icon{
+  font-size:32px;margin-bottom:12px;
+}
+.sobre-highlight h4{font-size:1rem;margin-bottom:8px;color:var(--text)}
+.sobre-highlight p{font-size:.82rem;color:var(--text-dim);line-height:1.55}
+
+/* ============================================================
+   FORM EMBUTIDO
+   ============================================================ */
+.form-section{
+  padding:100px 0;
+  background:linear-gradient(180deg,rgba(231,76,139,.04),rgba(155,89,182,.04));
+  border-top:1px solid var(--border);
+  position:relative;
+}
+.form-container{
+  max-width:640px;margin:0 auto;
+  background:var(--surface);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  padding:48px 40px;
+  position:relative;overflow:hidden;
+  box-shadow:0 20px 80px rgba(0,0,0,.4);
+}
+.form-container::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gradient);
+}
+@media(max-width:600px){.form-container{padding:32px 24px}}
+
+.progress-section{margin-bottom:28px;display:none}
+.progress-section.visible{display:block}
+.progress-track{
+  width:100%;height:4px;background:var(--border);
+  border-radius:2px;overflow:hidden;margin-bottom:10px;
+}
+.progress-fill{
+  height:100%;width:0%;
+  background:var(--gradient);
+  border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);
+}
+.progress-label{
+  text-align:center;font-size:.72rem;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:.8px;font-weight:600;
+}
+
+.form-step{display:none;animation:stepIn .3s ease}
+.form-step.active{display:block}
+@keyframes stepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.step-title{font-size:1.3rem;font-weight:700;margin-bottom:6px;color:var(--text);font-family:'Space Grotesk',sans-serif}
+.step-subtitle{font-size:.86rem;color:var(--text-dim);margin-bottom:24px;line-height:1.55}
+
+.field{margin-bottom:18px}
+.field label{
+  display:block;font-size:.76rem;font-weight:600;
+  color:var(--text-dim);text-transform:uppercase;letter-spacing:.7px;
+  margin-bottom:8px;
+}
+.field label .req{color:var(--accent2);margin-left:2px}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--surface2);
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:14px 16px;font-family:inherit;font-size:.92rem;color:var(--text);
+  transition:border-color .15s,background .15s;outline:none;
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-muted)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--accent);
+  outline:3px solid var(--accent-glow);outline-offset:-1px;
+}
+.field select{
+  appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23908caa' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5l6.5 6 6.5-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;
+}
+.field select option{background:var(--surface);color:var(--text)}
+.field textarea{resize:vertical;min-height:90px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.field-row{grid-template-columns:1fr}}
+.field.error input,.field.error select,.field.error textarea{
+  border-color:var(--red);outline:3px solid rgba(255,107,107,.2);outline-offset:-1px;
+}
+.field .error-msg{font-size:.72rem;color:var(--red);margin-top:5px;display:none}
+.field.error .error-msg{display:block}
+
+.option-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.option-grid.single-col{grid-template-columns:1fr}
+@media(max-width:480px){.option-grid{grid-template-columns:1fr}}
+.option-card{
+  position:relative;cursor:pointer;background:var(--surface2);
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:14px 16px;transition:border-color .15s,background .15s;
+  display:flex;align-items:center;gap:12px;
+}
+.option-card:hover{border-color:rgba(155,89,182,.4);background:rgba(155,89,182,.04)}
+.option-card.selected{
+  border-color:var(--accent);background:rgba(155,89,182,.08);
+  outline:3px solid var(--accent-glow);outline-offset:-1px;
+}
+.option-card input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+  width:0;height:0;
+}
+.option-icon{
+  font-size:1.2rem;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(155,89,182,.1);border-radius:10px;flex-shrink:0;
+}
+.option-card.selected .option-icon{background:rgba(155,89,182,.2)}
+.option-label{font-size:.84rem;font-weight:600;color:var(--text);line-height:1.3}
+.option-desc{font-size:.72rem;color:var(--text-dim);margin-top:2px;font-weight:400}
+
+.btn-row{display:flex;gap:12px;margin-top:28px}
+.btn{
+  flex:1;font-family:inherit;font-size:.88rem;font-weight:700;
+  padding:14px 24px;border-radius:var(--radius-sm);border:none;cursor:pointer;
+  transition:transform .15s,box-shadow .15s;letter-spacing:.3px;
+}
+.btn-back{
+  background:var(--surface2);color:var(--text-dim);
+  border:1.5px solid var(--border);flex:.4;
+}
+.btn-back:hover{border-color:var(--text-dim);color:var(--text)}
+.btn-next{
+  background:var(--gradient);color:#fff;
+  box-shadow:0 4px 24px var(--accent2-glow);
+}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 8px 32px var(--accent2-glow)}
+.btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none!important}
+.btn-submit{
+  background:linear-gradient(135deg,var(--green),#55efc4);color:#07060e;
+  box-shadow:0 4px 24px var(--green-glow);
+}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 8px 32px var(--green-glow)}
+
+.spinner{
+  display:none;width:20px;height:20px;
+  border:2.5px solid rgba(7,6,14,.3);border-top-color:#07060e;
+  border-radius:50%;animation:spin .6s linear infinite;margin:0 auto;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============================================================
+   AGENDAMENTO (STEP 5 — EMBUTIDO)
+   ============================================================ */
+.week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.week-btn{
+  width:34px;height:34px;border-radius:10px;
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--text-dim);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;transition:all .2s;
+}
+.week-btn:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+.week-btn:disabled{opacity:.3;cursor:not-allowed}
+.week-label{font-size:.82rem;font-weight:600;color:var(--text-dim)}
+.day-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:24px}
+.day-card{
+  background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);padding:14px 8px;text-align:center;
+  cursor:pointer;transition:all .2s;
+}
+.day-card:hover:not(.disabled){border-color:rgba(155,89,182,.4);background:rgba(155,89,182,.04)}
+.day-card.selected{
+  border-color:var(--accent);background:rgba(155,89,182,.1);
+  outline:3px solid var(--accent-glow);outline-offset:-1px;
+}
+.day-card.disabled{opacity:.3;cursor:not-allowed}
+.day-weekday{font-size:.66rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.day-number{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:700;color:var(--text);margin:2px 0}
+.day-month{font-size:.62rem;color:var(--text-muted)}
+
+.time-label{font-size:.78rem;color:var(--text-dim);margin-bottom:10px;font-weight:600}
+.time-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.time-slot{
+  background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);padding:12px;text-align:center;
+  cursor:pointer;font-size:.86rem;font-weight:600;color:var(--text-dim);
+  transition:all .2s;
+}
+.time-slot:hover:not(.unavailable){border-color:var(--accent);color:var(--text);background:rgba(155,89,182,.04)}
+.time-slot.selected{
+  background:rgba(155,89,182,.1);border-color:var(--accent);color:var(--text);
+  outline:3px solid var(--accent-glow);outline-offset:-1px;
+}
+.time-slot.unavailable{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+
+.time-section{display:none;margin-top:20px}
+.time-section.visible{display:block}
+
+/* ============================================================
+   SUCCESS SCREEN (INLINE)
+   ============================================================ */
+.success-screen{display:none;animation:stepIn .5s ease;text-align:center}
+.success-screen.active{display:block}
+.success-check{
+  width:86px;height:86px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),#55efc4);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;
+  box-shadow:0 12px 48px var(--green-glow);
+  animation:pulseSuccess 2.5s ease infinite;
+}
+@keyframes pulseSuccess{0%,100%{box-shadow:0 12px 48px var(--green-glow)}50%{box-shadow:0 12px 60px rgba(0,184,148,.5)}}
+.success-check svg{width:42px;height:42px;color:#07060e}
+.success-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.5rem;font-weight:700;margin-bottom:10px;color:var(--text);
+}
+.success-subtitle{
+  font-size:.92rem;color:var(--text-dim);
+  margin-bottom:28px;line-height:1.55;
+}
+.success-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:20px;margin-bottom:20px;
+  text-align:left;
+}
+.success-card strong{display:block;font-size:.86rem;color:var(--text);margin-bottom:4px;font-family:'Space Grotesk',sans-serif}
+.success-card p{font-size:.82rem;color:var(--text-dim);line-height:1.55}
+
+/* Success buttons row */
+.success-btn-row{
+  display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;justify-content:center;
+}
+.success-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 22px;border-radius:var(--radius-sm);
+  font-family:inherit;font-size:.85rem;font-weight:700;
+  text-decoration:none;letter-spacing:.3px;
+  transition:all .3s ease;border:none;cursor:pointer;
+}
+.success-btn-insta{
+  background:var(--gradient);color:#fff;
+  box-shadow:0 4px 20px var(--accent2-glow);
+}
+.success-btn-insta:hover{transform:translateY(-1px);box-shadow:0 8px 28px var(--accent2-glow)}
+.success-btn-wpp{
+  background:#25d366;color:#fff;
+  box-shadow:0 4px 20px rgba(37,211,102,.3);
+}
+.success-btn-wpp:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(37,211,102,.4)}
+.success-btn svg{flex-shrink:0}
+
+/* BLOCKED SCREENS */
+.blocked-screen{
+  display:none;text-align:center;padding:32px 20px;
+  animation:stepIn .5s ease;
+}
+.blocked-screen.active{display:block}
+.blocked-icon{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(253,203,110,.08);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;font-size:2.5rem;
+  border:2px solid rgba(253,203,110,.2);
+}
+.blocked-screen h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.3rem;font-weight:700;margin-bottom:10px;color:var(--amber);
+}
+.blocked-screen p{
+  font-size:.88rem;color:var(--text-dim);line-height:1.65;
+  max-width:420px;margin:0 auto;
+}
+.blocked-divider{
+  width:60px;height:2px;background:var(--border);
+  margin:24px auto;border-radius:1px;
+}
+.blocked-cta{
+  font-size:.82rem;color:var(--text-muted);
+}
+.blocked-cta a{color:var(--accent-light);text-decoration:none}
+.blocked-cta a:hover{text-decoration:underline}
+.wpp-direct-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;border-radius:var(--radius-sm);
+  background:#25d366;color:#fff;
+  font-family:inherit;font-size:.88rem;font-weight:700;
+  text-decoration:none;letter-spacing:.3px;
+  box-shadow:0 4px 20px rgba(37,211,102,.3);
+  transition:all .3s ease;margin-top:8px;
+}
+.wpp-direct-btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(37,211,102,.4)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  padding:40px 0;
+  border-top:1px solid var(--border);
+  background:var(--surface);
+}
+.footer-inner{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:20px;font-size:.8rem;color:var(--text-muted);
+}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:var(--text-dim);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--accent-light)}
+
+/* ============================================================
+   REVEAL ANIMATIONS
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(20px);transition:all .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="data:image/webp;base64,UklGRvYCAABXRUJQVlA4IOoCAADwFwCdASqgAKAAPm00lkekIyIhKBUpSIANiWNu4MAAZn6KX1bOPla7l9MfpT/13mV/pL7/+cB5sfSAdMv6AHS1fs/+wGYp3Ke3VbHXLvVVx1IFOsEydkHGjp1y70NMvaVfxrBpXxKZRkkMoqSGOoqCkeFfxJFS+bA9ksKPzkYKIDuRfenl0vsy8cxJAALB5RWNKVXfGGpYM+uye1hf7j7P50RAJvKrEnSdk/kARk7n8Pt8+YBBbtkEY8OAox+OBB2pgIp1wYxMAAD+0cYAGz51x8w/HDklS2RkFuPmEdVzDWT0nInhuZbv6hxV3Kz3hpo5IO04gxwIFxC5q2mjJYBleKGHZxPzExbF6S8L4fTrQCn01uc3+w1mjldq9v9DVfSZK7m03CZJNm9h+pBjt9mwnOjPziB6WMBF7DtxBaUQLMizh+lz7nW7ohD7A2r0GDrXAHr1S1fI4231vUeeKxnfLqV+XuLebW+5EGL09WKgiyJmvD2MhkhjnMC032mnGC1vye2GfRcSBiWBJ9Z1X+8Je5F+yssmH/jDll+Xj8rCG0fY4eMwCFfxZVt9dryJnJZvCE4QDfjAk9WLsDF56brb8tIRZ4qNhDAnLTtazKOdo/KvKKc2kiwIRmrOUv9JUszNUB8f8ElI4b8f8DkQdTsm1fc3K9MMqCHy9NpnVyMYz79vfkQsy/hOwVEbU6hh7wiEG7pGI5Cxxno0desp+Rgs69lbopIKEEckAVK1G4NjU2tzAD2tTRvfiJu2cT0OxCijfDx1Qw5B00VudEKR/3CzSLYk87XecF+8RdCwVsFMdTOx06JE1JcatoXR1wAH6bSPWyzdhcni+2zj/XHLOGapzdACvftN4qe7P9+Q9kCljq+/5yS/9qcXCPKJe/j+hv6Y7UfBpZABvLlTLPmKA7VaTb7yi+NBZBVlH2W5OCtbSNfQhavxsOBbm/giuqKGY4gzCa1vB0khxtimoetFbCalsLqPJaAAAAAAAA==" alt="Rise Hub" class="nav-logo-img">
+      <span>Rise Hub</span>
+    </a>
+    <a href="#formulario" class="nav-cta">Quero minha clínica com IA</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="dot"></span> IA treinada para clínicas médicas</div>
+        <h1>Sua clínica atendendo <span class="highlight">24 horas por dia</span>, sem aumentar sua equipe.</h1>
+        <p class="hero-subtitle">A Rise Hub implementa IA no WhatsApp da sua clínica que responde pacientes em menos de 5 segundos, agenda consultas automaticamente e elimina faltas. Enquanto você dorme, sua agenda se preenche.</p>
+        
+        <div class="hero-cta-row">
+          <a href="#formulario" class="btn-primary">
+            Quero resolver isso na minha clínica <span class="arrow">→</span>
+          </a>
+          <a href="#como-funciona" class="btn-secondary">
+            Como funciona
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="hero-trust-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Especialistas em clínicas
+          </div>
+          <div class="hero-trust-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Implementação em 7 dias
+          </div>
+          <div class="hero-trust-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            LGPD compliant
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-phone">
+        <div class="phone-glow"></div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-header">
+            <div class="phone-avatar">S</div>
+            <div class="phone-contact">
+              <strong>Sofia — Clínica Derma+</strong>
+              <div class="status">● online</div>
+            </div>
+          </div>
+          <div class="chat-msg received">
+            Olá! Vi o anúncio de vocês. Quanto custa o botox?
+            <span class="time">23:47</span>
+          </div>
+          <div class="chat-msg sent">
+            Oi! Tudo bem? 😊 Posso te ajudar agora mesmo. O valor varia por região aplicada. Me conta, é sua primeira vez?
+            <span class="time">23:47</span>
+          </div>
+          <div class="chat-msg received">
+            Primeira vez. Quero testa ruga testa
+            <span class="time">23:48</span>
+          </div>
+          <div class="chat-msg sent">
+            Perfeito! Temos horário amanhã 14h ou quinta 10h. Qual fica melhor pra você?
+            <span class="time">23:48</span>
+          </div>
+          <div class="chat-typing">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS BAR
+     ============================================================ -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-number">+68%</div>
+        <div class="stat-label">Mais agendamentos</div>
+      </div>
+      <div>
+        <div class="stat-number">-74%</div>
+        <div class="stat-label">Redução de no-show</div>
+      </div>
+      <div>
+        <div class="stat-number">&lt;5s</div>
+        <div class="stat-label">Tempo de resposta</div>
+      </div>
+      <div>
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Atendimento ativo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROBLEMA
+     ============================================================ -->
+<section id="problema">
+  <div class="container">
+    <div class="section-center">
+      <span class="section-tag">O problema real</span>
+      <h2 class="section-title">Toda clínica está <span class="highlight">sangrando dinheiro</span> e nem percebe.</h2>
+      <p class="section-subtitle">Estes são os 3 buracos invisíveis que drenam o faturamento de 9 em cada 10 clínicas no Brasil hoje.</p>
+    </div>
+
+    <div class="problema-grid">
+      <div class="problema-card">
+        <div class="problema-icon">📱</div>
+        <h3>Leads esquecidos no WhatsApp</h3>
+        <p>Paciente manda mensagem às 22h querendo agendar. Sua recepção só vê no dia seguinte. Ele já marcou em outra clínica.</p>
+        <div class="problema-stat">📉 78% dos leads são perdidos por atraso na resposta</div>
+      </div>
+
+      <div class="problema-card">
+        <div class="problema-icon">❌</div>
+        <h3>No-show destruindo a agenda</h3>
+        <p>Paciente marca e não aparece. Horário perdido, equipe ociosa, faturamento no lixo. E ninguém tempo pra ficar ligando pra confirmar.</p>
+        <div class="problema-stat">📉 Média de 30% de faltas em clínicas sem automação</div>
+      </div>
+
+      <div class="problema-card">
+        <div class="problema-icon">🔄</div>
+        <h3>Pacientes antigos esquecidos</h3>
+        <p>Você tem centenas de pacientes na base que não voltam há meses. Ninguém vai atrás. Receita recorrente virando pó.</p>
+        <div class="problema-stat">📉 85% das clínicas nunca reativam pacientes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOLUÇÃO
+     ============================================================ -->
+<section id="solucao" style="background:linear-gradient(180deg,transparent,rgba(155,89,182,.03));border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="solucao-split">
+      <div>
+        <span class="section-tag">A solução</span>
+        <h2 class="section-title">Conheça a <span class="highlight">Sofia</span>, sua nova recepcionista de IA.</h2>
+        <p class="section-subtitle">A Sofia é uma IA treinada especificamente para clínicas médicas. Ela atende pacientes no WhatsApp 24h por dia, entende áudio, imagem e texto, agenda consultas direto na sua agenda e qualifica leads antes da recepção.</p>
+
+        <div class="solucao-features">
+          <div class="solucao-feature">
+            <div class="solucao-feature-icon">🤖</div>
+            <div>
+              <h4>Entende áudio, imagem e texto</h4>
+              <p>Paciente manda áudio perguntando sobre preço? Foto do dente com problema? Ela entende e responde como uma recepcionista humana.</p>
+            </div>
+          </div>
+          <div class="solucao-feature">
+            <div class="solucao-feature-icon">📅</div>
+            <div>
+              <h4>Agenda integrada ao seu sistema</h4>
+              <p>Integração nativa com Doctoralia, iClinic, Nimer e outros. A Sofia consulta agenda em tempo real e marca direto.</p>
+            </div>
+          </div>
+          <div class="solucao-feature">
+            <div class="solucao-feature-icon">🎯</div>
+            <div>
+              <h4>Qualifica antes de passar pra equipe</h4>
+              <p>Só chegam na sua recepção pacientes que já estão prontos pra agendar. Sem curioso, sem perguntinha à toa.</p>
+            </div>
+          </div>
+          <div class="solucao-feature">
+            <div class="solucao-feature-icon">🔔</div>
+            <div>
+              <h4>Confirmação e lembretes automáticos</h4>
+              <p>24h antes, a Sofia confirma. 2h antes, lembra. No-show cai mais de 70% no primeiro mês.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solucao-visual">
+        <div class="sofia-avatar">S</div>
+        <div class="sofia-name">Sofia</div>
+        <div class="sofia-role">IA Atendente • Rise Hub</div>
+        <div class="sofia-skills">
+          <div class="sofia-skill">
+            <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+            WhatsApp 24/7
+          </div>
+          <div class="sofia-skill">
+            <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+            Entende áudio
+          </div>
+          <div class="sofia-skill">
+            <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+            Agenda sozinha
+          </div>
+          <div class="sofia-skill">
+            <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+            Reativa pacientes
+          </div>
+          <div class="sofia-skill">
+            <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+            Qualifica leads
+          </div>
+          <div class="sofia-skill">
+            <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+            LGPD compliant
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMO FUNCIONA
+     ============================================================ -->
+<section id="como-funciona">
+  <div class="container">
+    <div class="section-center">
+      <span class="section-tag">Como funciona</span>
+      <h2 class="section-title">Do zero à IA atendendo em <span class="highlight">7 dias úteis</span>.</h2>
+      <p class="section-subtitle">Nosso time cuida de toda a implementação. Você não precisa entender de tecnologia nem contratar desenvolvedor.</p>
+    </div>
+
+    <div class="passos">
+      <div class="passo">
+        <div class="passo-num">1</div>
+        <h3>Diagnóstico da clínica</h3>
+        <p>Nosso especialista analisa sua operação, fluxo de atendimento, gargalos e oportunidades.</p>
+        <div class="passo-time">Dia 1</div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">2</div>
+        <h3>Treinamento da IA</h3>
+        <p>Alimentamos a Sofia com seus procedimentos, preços, perguntas frequentes e personalidade da marca.</p>
+        <div class="passo-time">Dia 2-4</div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">3</div>
+        <h3>Integração e testes</h3>
+        <p>Conectamos ao seu WhatsApp, agenda e CRM. Testamos cenários reais antes de ir ao ar.</p>
+        <div class="passo-time">Dia 5-6</div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">4</div>
+        <h3>Go live e acompanhamento</h3>
+        <p>A Sofia entra em operação. Acompanhamento semanal nos primeiros 30 dias pra ajustar.</p>
+        <div class="passo-time">Dia 7+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RESULTADOS
+     ============================================================ -->
+<section id="resultados" style="background:linear-gradient(180deg,transparent,rgba(231,76,139,.03));border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-center">
+      <span class="section-tag">Resultados reais</span>
+      <h2 class="section-title">Clínicas Rise Hub estão <span class="highlight">crescendo sem aumentar equipe</span>.</h2>
+      <p class="section-subtitle">Números médios das clínicas atendidas nos primeiros 60 dias de operação com a Sofia.</p>
+    </div>
+
+    <div class="resultados-grid">
+      <div class="resultado-card">
+        <div class="resultado-number">68%</div>
+        <div class="resultado-label">Mais agendamentos</div>
+        <div class="resultado-desc">Aumento médio no volume de consultas agendadas sem precisar gastar mais com ads.</div>
+      </div>
+      <div class="resultado-card">
+        <div class="resultado-number">74%</div>
+        <div class="resultado-label">Menos faltas</div>
+        <div class="resultado-desc">Redução drástica de no-show com confirmação e lembretes automáticos via WhatsApp.</div>
+      </div>
+      <div class="resultado-card">
+        <div class="resultado-number">3x</div>
+        <div class="resultado-label">Mais rápido</div>
+        <div class="resultado-desc">Triplicou a velocidade de resposta aos leads. De minutos pra segundos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEPOIMENTOS
+     ============================================================ -->
+<section id="depoimentos">
+  <div class="container">
+    <div class="section-center">
+      <span class="section-tag">Quem usa</span>
+      <h2 class="section-title">Clínicas que <span class="highlight">já tomaram a decisão</span>.</h2>
+      <p class="section-subtitle">Veja o que nossos clientes estão falando sobre a transformação que a Rise Hub trouxe pra operação deles.</p>
+    </div>
+
+    <div class="depoimentos-grid">
+      <div class="depoimento">
+        <div class="depoimento-stars">★★★★★</div>
+        <p class="depoimento-text">"A Sofia virou o jogo. Antes a gente perdia lead de madrugada. Agora ela agenda, confirma e a gente só atende. Faturamento subiu 40% em 2 meses."</p>
+        <div class="depoimento-author">
+          <div class="depoimento-avatar">M</div>
+          <div>
+            <strong>Dra. Mariana Costa</strong>
+            <span>Clínica Derma+, São Paulo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="depoimento">
+        <div class="depoimento-stars">★★★★★</div>
+        <p class="depoimento-text">"Minha recepção tava afogada. Hoje ela só cuida do paciente que já vem qualificado. A Sofia filtra tudo. Melhor investimento do ano."</p>
+        <div class="depoimento-author">
+          <div class="depoimento-avatar">R</div>
+          <div>
+            <strong>Dr. Rafael Lima</strong>
+            <span>Odonto Excellence, Rio de Janeiro</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="depoimento">
+        <div class="depoimento-stars">★★★★★</div>
+        <p class="depoimento-text">"Implementação foi rápida e o suporte é absurdo. Em 7 dias tava tudo funcionando. No-show caiu de 28% pra 6%. Simplesmente outro patamar."</p>
+        <div class="depoimento-author">
+          <div class="depoimento-avatar">J</div>
+          <div>
+            <strong>Juliana Mendes</strong>
+            <span>Instituto Saúde+, Belo Horizonte</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOBRE
+     ============================================================ -->
+<section id="sobre" class="sobre">
+  <div class="container">
+    <div class="sobre-content">
+      <span class="section-tag">Sobre a Rise Hub</span>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto">Somos <span class="highlight">especialistas em IA para clínicas</span>. Não fazemos nada além disso.</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto">A Rise Hub nasceu da experiência real de quem já trabalhou dentro de clínicas e entende os gargalos. Não somos agência genérica. Somos especialistas que transformam operações de saúde com IA, automação e inteligência conversacional. Atendemos do consultório solo ao grupo com múltiplas unidades.</p>
+
+      <div class="sobre-highlights">
+        <div class="sobre-highlight">
+          <div class="sobre-highlight-icon">🏥</div>
+          <h4>Foco exclusivo</h4>
+          <p>Só atendemos clínicas e consultórios da saúde. Nada de trabalhar com imobiliária ou e-commerce.</p>
+        </div>
+        <div class="sobre-highlight">
+          <div class="sobre-highlight-icon">🧠</div>
+          <h4>IA de ponta</h4>
+          <p>Tecnologia Claude e GPT treinada com conhecimento do universo médico e dos fluxos de atendimento.</p>
+        </div>
+        <div class="sobre-highlight">
+          <div class="sobre-highlight-icon">⚡</div>
+          <h4>Implementação rápida</h4>
+          <p>Em 7 dias sua clínica está com a IA rodando. Sem complicação, sem dor de cabeça.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FORM + AGENDAMENTO EMBUTIDOS
+     ============================================================ -->
+<section id="formulario" class="form-section">
+  <div class="container">
+    <div class="section-center" style="margin-bottom:40px">
+      <span class="section-tag">Fale com um especialista</span>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto">Pronto pra ter sua <span class="highlight">clínica com IA</span>?</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto">Responda 4 perguntas rápidas e agende uma conversa com um dos nossos especialistas. Leva menos de 2 minutos.</p>
+    </div>
+
+    <div class="form-container">
+      <div class="progress-section" id="progressSection">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-label" id="progressLabel">Etapa 1 de 5</div>
+      </div>
+
+      <form id="riseForm" novalidate>
+
+        <!-- STEP 1: SEGMENTO -->
+        <div class="form-step active" data-step="1">
+          <div class="step-title">Qual é o seu segmento?</div>
+          <div class="step-subtitle">Nossas soluções são exclusivas para clínicas e consultórios da saúde.</div>
+
+          <div class="option-grid single-col" id="segmentOptions">
+            <label class="option-card">
+              <input type="radio" name="segmento" value="clinica_medica">
+              <div class="option-icon">🏥</div>
+              <div><div class="option-label">Clínica Médica</div><div class="option-desc">Consultórios, policlínicas, centros médicos</div></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="segmento" value="clinica_odonto">
+              <div class="option-icon">🦷</div>
+              <div><div class="option-label">Clínica Odontológica</div><div class="option-desc">Dentistas, ortodontia, implantes</div></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="segmento" value="clinica_estetica">
+              <div class="option-icon">✨</div>
+              <div><div class="option-label">Clínica de Estética</div><div class="option-desc">Dermatologia estética, procedimentos</div></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="segmento" value="clinica_psico">
+              <div class="option-icon">🧠</div>
+              <div><div class="option-label">Psicologia / Psiquiatria</div><div class="option-desc">Saúde mental</div></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="segmento" value="clinica_outra">
+              <div class="option-icon">🩺</div>
+              <div><div class="option-label">Outra clínica da saúde</div><div class="option-desc">Fisioterapia, nutrição, etc.</div></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="segmento" value="nao_clinica">
+              <div class="option-icon">🏢</div>
+              <div><div class="option-label">Não sou clínica</div><div class="option-desc">Outro tipo de negócio</div></div>
+            </label>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-next" id="btnStep1" disabled style="flex:1">
+              Continuar →
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: DADOS -->
+        <div class="form-step" data-step="2">
+          <div class="step-title">Seus dados de contato</div>
+          <div class="step-subtitle">Pro nosso time entender sua operação e preparar a conversa.</div>
+
+          <div class="field">
+            <label>Nome completo <span class="req">*</span></label>
+            <input type="text" id="nome" placeholder="Seu nome completo" required>
+            <div class="error-msg" id="nomeError">Informe seu nome completo</div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>WhatsApp <span class="req">*</span></label>
+              <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
+              <div class="error-msg" id="whatsappError">WhatsApp inválido</div>
+            </div>
+            <div class="field">
+              <label>E-mail <span class="req">*</span></label>
+              <input type="email" id="email" placeholder="seu@email.com" required>
+              <div class="error-msg" id="emailError">E-mail inválido</div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Nome da clínica <span class="req">*</span></label>
+              <input type="text" id="nomeClinica" placeholder="Ex: Clínica Saúde Plena" required>
+              <div class="error-msg">Informe o nome</div>
+            </div>
+            <div class="field">
+              <label>Cargo</label>
+              <select id="cargo">
+                <option value="" disabled selected>Selecione</option>
+                <option value="proprietario">Proprietário(a)</option>
+                <option value="socio">Sócio(a)</option>
+                <option value="gerente">Gerente</option>
+                <option value="marketing">Marketing</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Cidade / Estado</label>
+            <input type="text" id="cidade" placeholder="Ex: Belo Horizonte - MG">
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="goToStep(1)">Voltar</button>
+            <button type="button" class="btn btn-next" id="btnStep2">Continuar →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: QUALIFICAÇÃO -->
+        <div class="form-step" data-step="3">
+          <div class="step-title">Entendendo sua operação</div>
+          <div class="step-subtitle">Quanto mais detalhes, mais precisa será a análise.</div>
+
+          <div class="field">
+            <label>Volume mensal de atendimentos <span class="req">*</span></label>
+            <div class="option-grid" id="volumeOptions">
+              <label class="option-card"><input type="radio" name="volume" value="ate_100"><div class="option-label">Até 100</div></label>
+              <label class="option-card"><input type="radio" name="volume" value="100_300"><div class="option-label">100 a 300</div></label>
+              <label class="option-card"><input type="radio" name="volume" value="300_500"><div class="option-label">300 a 500</div></label>
+              <label class="option-card"><input type="radio" name="volume" value="mais_500"><div class="option-label">500+</div></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Quantos profissionais atendem?</label>
+            <div class="option-grid">
+              <label class="option-card"><input type="radio" name="profissionais" value="1_2"><div class="option-label">1 a 2</div></label>
+              <label class="option-card"><input type="radio" name="profissionais" value="3_5"><div class="option-label">3 a 5</div></label>
+              <label class="option-card"><input type="radio" name="profissionais" value="6_10"><div class="option-label">6 a 10</div></label>
+              <label class="option-card"><input type="radio" name="profissionais" value="mais_10"><div class="option-label">10+</div></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Investe em tráfego pago (Meta/Google)?</label>
+            <div class="option-grid">
+              <label class="option-card"><input type="radio" name="investe_ads" value="nao"><div class="option-label">Não invisto</div></label>
+              <label class="option-card"><input type="radio" name="investe_ads" value="ate_2k"><div class="option-label">Até R$ 2k</div></label>
+              <label class="option-card"><input type="radio" name="investe_ads" value="2k_5k"><div class="option-label">R$ 2k-5k</div></label>
+              <label class="option-card"><input type="radio" name="investe_ads" value="acima_5k"><div class="option-label">Acima R$ 5k</div></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Maior gargalo hoje <span class="req">*</span></label>
+            <select id="dorAtual" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="leads_perdidos">Leads chegam e ninguém responde a tempo</option>
+              <option value="agendamento_lento">Agendamento manual demais</option>
+              <option value="no_show">Pacientes faltam muito</option>
+              <option value="atendimento_24h">Perco pacientes fora do horário</option>
+              <option value="escalar">Quero crescer sem aumentar equipe</option>
+              <option value="reativacao">Pacientes antigos não voltam</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="goToStep(2)">Voltar</button>
+            <button type="button" class="btn btn-next" id="btnStep3">Continuar →</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: INTERESSE -->
+        <div class="form-step" data-step="4">
+          <div class="step-title">Último passo — escolha as soluções</div>
+          <div class="step-subtitle">Selecione o que faz sentido pra sua clínica.</div>
+
+          <div class="field">
+            <label>Qual solução mais interessa? <span class="req">*</span></label>
+            <div class="option-grid single-col">
+              <label class="option-card"><input type="checkbox" name="interesse" value="ia_whatsapp"><div class="option-icon">🤖</div><div><div class="option-label">IA no WhatsApp (24h)</div><div class="option-desc">Atendimento automático humanizado</div></div></label>
+              <label class="option-card"><input type="checkbox" name="interesse" value="agendamento_auto"><div class="option-icon">📅</div><div><div class="option-label">Agendamento Inteligente</div><div class="option-desc">Confirmação + lembretes anti no-show</div></div></label>
+              <label class="option-card"><input type="checkbox" name="interesse" value="qualificacao_leads"><div class="option-icon">🎯</div><div><div class="option-label">Qualificação de Leads</div><div class="option-desc">Só atender quem quer agendar</div></div></label>
+              <label class="option-card"><input type="checkbox" name="interesse" value="crm_automacao"><div class="option-icon">⚡</div><div><div class="option-label">CRM + Funil Completo</div><div class="option-desc">Da captação à retenção</div></div></label>
+              <label class="option-card"><input type="checkbox" name="interesse" value="reativacao"><div class="option-icon">🔄</div><div><div class="option-label">Reativação de Pacientes</div><div class="option-desc">Traga de volta quem sumiu</div></div></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Investimento mensal previsto</label>
+            <select id="orcamento">
+              <option value="" disabled selected>Selecione</option>
+              <option value="1000_2000">R$ 1.000 a R$ 2.000</option>
+              <option value="2000_3500">R$ 2.000 a R$ 3.500</option>
+              <option value="3500_5000">R$ 3.500 a R$ 5.000</option>
+              <option value="acima_5000">Acima de R$ 5.000</option>
+              <option value="nao_sei">Preciso entender o retorno</option>
+            </select>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="goToStep(3)">Voltar</button>
+            <button type="button" class="btn btn-next" id="btnStep4">
+              <span id="step4Text">Ir para agendamento →</span>
+              <div class="spinner" id="step4Spinner"></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 5: AGENDAMENTO -->
+        <div class="form-step" data-step="5">
+          <div class="step-title">Escolha um horário</div>
+          <div class="step-subtitle">Conversa de 1h30 via Google Meet com um especialista.</div>
+
+          <div class="week-nav">
+            <button type="button" class="week-btn" id="prevWeek">‹</button>
+            <div class="week-label" id="weekLabel">—</div>
+            <button type="button" class="week-btn" id="nextWeek">›</button>
+          </div>
+
+          <div class="day-grid" id="dayGrid"></div>
+
+          <div class="time-section" id="timeSection">
+            <div class="time-label" id="timeLabel">Horários</div>
+            <div class="time-grid" id="timeGrid"></div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="goToStep(4)">Voltar</button>
+            <button type="button" class="btn btn-submit" id="btnConfirm" disabled>
+              <span id="submitText">Confirmar agendamento</span>
+              <div class="spinner" id="submitSpinner"></div>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- BLOCKED SCREEN (não-clínica) -->
+      <div class="blocked-screen" id="blockedScreen">
+        <div class="blocked-icon">🚫</div>
+        <h2>Sentimos muito!</h2>
+        <p>No momento, a Rise Hub atende exclusivamente <strong style="color:var(--text)">clínicas e consultórios da área da saúde</strong>.</p>
+        <p style="margin-top:12px">Estamos trabalhando para expandir nossas soluções de IA para outros segmentos em breve. Agradecemos o interesse!</p>
+        <div class="blocked-divider"></div>
+        <div class="blocked-cta">
+          Quer ser avisado quando abrirmos para outros segmentos?<br>
+          <a href="https://www.instagram.com/risehub.br/" target="_blank">Siga-nos no Instagram @risehub.br</a>
+        </div>
+      </div>
+
+      <!-- DUPLICATE LEAD SCREEN -->
+      <div class="blocked-screen" id="duplicateScreen">
+        <div class="blocked-icon" style="background:rgba(155,89,182,.08);border-color:rgba(155,89,182,.2)">✅</div>
+        <h2 style="color:var(--accent-light)">Você já está no nosso radar!</h2>
+        <p>Identificamos que seus dados já estão cadastrados na nossa base. Nossa equipe já recebeu suas informações e um especialista entrará em contato em breve.</p>
+        <p style="margin-top:12px">Caso tenha urgência, fale conosco diretamente:</p>
+        <div class="blocked-divider"></div>
+        <a href="https://wa.me/5522997810444?text=Olá!%20Já%20preenchi%20o%20formulário%20da%20Rise%20Hub%20e%20gostaria%20de%20falar%20com%20um%20especialista." target="_blank" class="wpp-direct-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Falar com especialista
+        </a>
+      </div>
+
+      <!-- SUCCESS SCREEN -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-check">
+          <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 class="success-title">Agendamento confirmado!</h2>
+        <p class="success-subtitle">Pronto, <span id="successNome"></span>. Sua reunião está na agenda.</p>
+
+        <div class="success-card">
+          <strong>📅 Data e horário</strong>
+          <p id="successDateTime">—</p>
+        </div>
+
+        <div class="success-card">
+          <strong>📱 Próximos passos</strong>
+          <p>Você vai receber um lembrete no WhatsApp <strong style="color:var(--text)">24h e 2h antes</strong> da reunião com o link do Google Meet. Nos vemos lá!</p>
+        </div>
+
+        <div class="success-btn-row">
+          <a href="https://wa.me/5522997810444?text=Olá!%20Acabei%20de%20agendar%20uma%20reunião%20com%20a%20Rise%20Hub%20e%20gostaria%20de%20falar%20com%20um%20especialista." target="_blank" class="success-btn success-btn-wpp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Falar com especialista
+          </a>
+          <a href="https://www.instagram.com/risehub.br/" target="_blank" class="success-btn success-btn-insta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            Seguir @risehub.br
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>© 2026 Rise Hub — IA para clínicas médicas</div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/risehub.br/" target="_blank">Instagram</a>
+        <a href="#formulario">Fale com um especialista</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+//  CONFIG
+// ============================================================
+const SUPABASE_URL = 'https://ibidukamkkgsurqswsvf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliaWR1a2Fta2tnc3VycXN3c3ZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjMwMjksImV4cCI6MjA4OTUzOTAyOX0.YRLsf8b8ZNK0w9MXNy27Xz4WoBKV9DzNZfGVWf4zK2E';
+const META_PIXEL_ID = '2238173290034845';
+const META_ACCESS_TOKEN = 'EAAHw1qXwSgwBQyxCU6yd1PKu8QZAtSH6QC6gf2StBaWwjJQWJ5ooeleZBIPNRoMmnxbrDiRGjulxYGM5ox7uKx5keY6OiVr3vCJjkXaFqpvAJOjyqrNHwHFHwJsYwNGZCiEQlnJGHREqcVscfmyNPsjImsbsbw1ZCAIAbD0VP3a1gydqP9cxLEhpAL5q0wZDZD';
+
+const WORK_DAYS = [1,2,3,4,5];
+const START_HOUR = 9;
+const END_HOUR = 18;
+const SLOT_DURATION = 90;
+const SLOT_STARTS = [];
+for (let m = START_HOUR * 60; m + SLOT_DURATION <= END_HOUR * 60; m += SLOT_DURATION) {
+  SLOT_STARTS.push(m);
+}
+const WEEKDAY_NAMES = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const MONTH_NAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+
+let currentStep = 1;
+let savedLeadId = null;
+let savedPayload = null;
+
+// ============================================================
+//  OPTION CARDS
+// ============================================================
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.option-card');
+  if (!card) return;
+  const input = card.querySelector('input');
+  if (!input) return;
+  
+  // Sempre prevenir comportamento padrão (evita scroll do label/focus)
+  e.preventDefault();
+  e.stopPropagation();
+  
+  if (input.type === 'checkbox') {
+    input.checked = !input.checked;
+    card.classList.toggle('selected', input.checked);
+  } else {
+    const siblings = card.parentElement.children;
+    for (let i = 0; i < siblings.length; i++) siblings[i].classList.remove('selected');
+    card.classList.add('selected');
+    input.checked = true;
+  }
+  
+  if (input.name === 'segmento') {
+    if (input.value === 'nao_clinica') {
+      blockNonClinic();
+      return;
+    }
+    document.getElementById('btnStep1').disabled = false;
+  }
+});
+
+// ============================================================
+//  PROTOCOLO DE SEGURANÇA
+// ============================================================
+
+// Bloqueio permanente para não-clínicas
+function blockNonClinic() {
+  document.getElementById('riseForm').style.display = 'none';
+  document.getElementById('progressSection').style.display = 'none';
+  document.getElementById('blockedScreen').classList.add('active');
+}
+
+// Tela de duplicado
+function showDuplicateScreen() {
+  document.getElementById('riseForm').style.display = 'none';
+  document.getElementById('progressSection').style.display = 'none';
+  document.getElementById('duplicateScreen').classList.add('active');
+}
+
+// Marca localmente que já preencheu (sobrevive limpeza de cookies por 365 dias)
+function markLocalDuplicate() {
+  try {
+    const data = { filled: true, ts: Date.now() };
+    localStorage.setItem('rh_lead_submitted', JSON.stringify(data));
+    const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = `rh_lead=1; expires=${expires}; path=/; SameSite=Lax`;
+  } catch(e) {}
+}
+
+// Verifica localmente se já preencheu
+function checkLocalDuplicate() {
+  try {
+    const stored = localStorage.getItem('rh_lead_submitted');
+    if (stored) {
+      const data = JSON.parse(stored);
+      if (data.filled) return true;
+    }
+    if (document.cookie.includes('rh_lead=1')) return true;
+  } catch(e) {}
+  return false;
+}
+
+// Checa duplicado local + Supabase
+async function checkDuplicateLead() {
+  if (checkLocalDuplicate()) return true;
+
+  const email = document.getElementById('email').value.trim().toLowerCase();
+  const phoneFormatted = document.getElementById('whatsapp').value.trim();
+
+  try {
+    const emailCheck = await fetch(
+      `${SUPABASE_URL}/rest/v1/leads_rise_hub?email=eq.${encodeURIComponent(email)}&select=id&limit=1`,
+      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+    );
+    const emailResults = await emailCheck.json();
+    if (emailResults && emailResults.length > 0) {
+      markLocalDuplicate();
+      return true;
+    }
+
+    const phoneCheck = await fetch(
+      `${SUPABASE_URL}/rest/v1/leads_rise_hub?whatsapp=eq.${encodeURIComponent(phoneFormatted)}&select=id&limit=1`,
+      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+    );
+    const phoneResults = await phoneCheck.json();
+    if (phoneResults && phoneResults.length > 0) {
+      markLocalDuplicate();
+      return true;
+    }
+  } catch (err) {
+    console.log('Duplicate check failed:', err);
+  }
+  return false;
+}
+
+// Verificar na abertura da página se já preencheu antes
+(function checkOnLoad() {
+  if (checkLocalDuplicate()) {
+    // Aguarda DOM montar e mostra tela de duplicado
+    setTimeout(() => showDuplicateScreen(), 100);
+  }
+})();
+
+// ============================================================
+//  NAVIGATION
+// ============================================================
+function goToStep(step) {
+  const current = document.querySelector('.form-step.active');
+  if (current) current.classList.remove('active');
+  document.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
+  currentStep = step;
+  updateProgress();
+  
+  // Scroll suave pro topo do form APENAS se ele não estiver visível
+  const formContainer = document.querySelector('.form-container');
+  const rect = formContainer.getBoundingClientRect();
+  if (rect.top < 0 || rect.top > window.innerHeight * 0.5) {
+    formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  
+  if (typeof fbq === 'function') {
+    switch(step) {
+      case 2: fbq('track', 'ViewContent', { content_name: 'lp_step_dados' }); break;
+      case 3: fbq('track', 'InitiateCheckout', { content_name: 'lp_step_qualificacao' }); break;
+      case 4: fbq('track', 'AddToCart', { content_name: 'lp_step_interesse' }); break;
+      case 5: fbq('track', 'AddPaymentInfo', { content_name: 'lp_step_agendamento' }); break;
+    }
+  }
+}
+
+function updateProgress() {
+  const ps = document.getElementById('progressSection');
+  ps.classList.add('visible');
+  const pct = (currentStep / 5) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `Etapa ${currentStep} de 5`;
+}
+
+// ============================================================
+//  PHONE MASK
+// ============================================================
+document.getElementById('whatsapp').addEventListener('input', function(e) {
+  let v = e.target.value.replace(/\D/g, '');
+  if (v.length > 11) v = v.slice(0, 11);
+  if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+  else if (v.length > 0) v = `(${v}`;
+  e.target.value = v;
+});
+
+// ============================================================
+//  VALIDATION — DETECÇÃO DE DADOS FALSOS (mesma do form original)
+// ============================================================
+function validateNome(value) {
+  const v = value.trim();
+  if (v.length < 3) return 'Informe seu nome completo';
+  const parts = v.split(/\s+/).filter(p => p.length > 0);
+  if (parts.length < 2) return 'Informe nome e sobrenome';
+  if (parts.some(p => p.length < 2)) return 'Nome parece incompleto';
+  if (!/^[a-zA-ZÀ-ÿ\s'-]+$/.test(v)) return 'Nome não pode conter números ou símbolos';
+  if (/(.)\1{2,}/i.test(v.replace(/\s/g, ''))) return 'Por favor, informe seu nome real';
+  
+  const fakeNames = [
+    'teste','test','asdf','qwerty','nenhum','nada','xxx','abc','aaa',
+    'fulano','ciclano','beltrano','joao silva','maria silva','nome nome',
+    'blabla','lalala','oi oi','nao sei','qualquer','hahaha','kkk'
+  ];
+  if (fakeNames.some(fn => v.toLowerCase().replace(/\s+/g,' ') === fn)) return 'Por favor, informe seu nome real';
+  
+  const keyboardSeqs = ['qwer','asdf','zxcv','abcd','1234','aaaa','bbbb'];
+  if (keyboardSeqs.some(s => v.toLowerCase().replace(/\s/g, '').includes(s))) return 'Por favor, informe seu nome real';
+  
+  return null;
+}
+
+function validateEmail(value) {
+  const v = value.trim().toLowerCase();
+  if (!v) return 'Informe seu e-mail';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return 'E-mail com formato inválido';
+  
+  const domain = v.split('@')[1];
+  if (!domain || !domain.includes('.')) return 'E-mail com formato inválido';
+  
+  const disposableDomains = [
+    'tempmail.com','throwaway.email','guerrillamail.com','mailinator.com',
+    'yopmail.com','10minutemail.com','trashmail.com','fakeinbox.com',
+    'sharklasers.com','guerrillamailblock.com','grr.la','dispostable.com',
+    'maildrop.cc','temp-mail.org','emailondeck.com','getnada.com',
+    'mohmal.com','burnermail.io','inboxbear.com'
+  ];
+  if (disposableDomains.includes(domain)) return 'Use um e-mail permanente, não temporário';
+  
+  const local = v.split('@')[0];
+  if (/^(.)\1+$/.test(local)) return 'E-mail parece inválido';
+  if (/^(teste|test|asdf|qwerty|nada|fake|spam|lixo|abc123)$/.test(local)) return 'Por favor, informe um e-mail real';
+  
+  const typoMap = {
+    'gmial.com':'gmail.com','gmal.com':'gmail.com','gmai.com':'gmail.com',
+    'gmail.co':'gmail.com','gamil.com':'gmail.com','gnail.com':'gmail.com',
+    'gmail.con':'gmail.com','gmail.om':'gmail.com','gmail.cm':'gmail.com',
+    'hotmal.com':'hotmail.com','hotmai.com':'hotmail.com','hotmil.com':'hotmail.com',
+    'hotmail.co':'hotmail.com','hitmail.com':'hotmail.com','hotamil.com':'hotmail.com',
+    'outloo.com':'outlook.com','outlok.com':'outlook.com','outlook.co':'outlook.com',
+    'yaho.com':'yahoo.com','yahooo.com':'yahoo.com','yahoo.co':'yahoo.com'
+  };
+  if (typoMap[domain]) return `Você quis dizer ${local}@${typoMap[domain]}?`;
+  
+  return null;
+}
+
+function validateWhatsapp(value) {
+  const digits = value.replace(/\D/g, '');
+  if (digits.length < 10) return 'Número precisa ter DDD + 9 dígitos';
+  if (digits.length > 11) return 'Número com dígitos a mais';
+  
+  const ddd = parseInt(digits.substring(0, 2));
+  const dddsValidos = [
+    11,12,13,14,15,16,17,18,19,
+    21,22,24,27,28,
+    31,32,33,34,35,37,38,
+    41,42,43,44,45,46,47,48,49,
+    51,53,54,55,
+    61,62,63,64,65,66,67,68,69,
+    71,73,74,75,77,79,
+    81,82,83,84,85,86,87,88,89,
+    91,92,93,94,95,96,97,98,99
+  ];
+  if (!dddsValidos.includes(ddd)) return `DDD ${ddd} não existe no Brasil`;
+  
+  if (digits.length === 11 && digits[2] !== '9') return 'Celular precisa começar com 9 após o DDD';
+  
+  if (/^(\d)\1+$/.test(digits)) return 'Número parece inválido';
+  if (/1234567|7654321|9999999|0000000|1111111/.test(digits)) return 'Por favor, informe um número real';
+  
+  const fakePhones = ['11999999999','11911111111','11900000000','00000000000','12345678901'];
+  if (fakePhones.includes(digits)) return 'Por favor, informe seu número real';
+  
+  return null;
+}
+
+function validateStep2() {
+  let valid = true;
+  const checks = [
+    ['nome', validateNome, 'nomeError'],
+    ['whatsapp', validateWhatsapp, 'whatsappError'],
+    ['email', validateEmail, 'emailError']
+  ];
+  checks.forEach(([id, fn, errId]) => {
+    const el = document.getElementById(id);
+    const err = fn(el.value);
+    const field = el.closest('.field');
+    if (err) {
+      field.classList.add('error');
+      document.getElementById(errId).textContent = err;
+      valid = false;
+    } else {
+      field.classList.remove('error');
+    }
+  });
+  const clinica = document.getElementById('nomeClinica');
+  if (clinica.value.trim().length < 2) {
+    clinica.closest('.field').classList.add('error');
+    valid = false;
+  } else {
+    clinica.closest('.field').classList.remove('error');
+  }
+  return valid;
+}
+
+function validateStep3() {
+  const volume = document.querySelector('input[name="volume"]:checked');
+  const dor = document.getElementById('dorAtual').value;
+  if (!volume || !dor) { alert('Preencha volume e maior gargalo'); return false; }
+  return true;
+}
+
+function validateStep4() {
+  const interesses = document.querySelectorAll('input[name="interesse"]:checked');
+  if (interesses.length === 0) { alert('Selecione pelo menos uma solução'); return false; }
+  return true;
+}
+
+// ============================================================
+//  LEAD SCORING
+// ============================================================
+function calculateLeadScore() {
+  let score = 0;
+  const volume = document.querySelector('input[name="volume"]:checked')?.value;
+  switch(volume) {
+    case 'mais_500': score += 40; break;
+    case '300_500':  score += 30; break;
+    case '100_300':  score += 20; break;
+    case 'ate_100':  score += 10; break;
+  }
+  const dor = document.getElementById('dorAtual').value;
+  switch(dor) {
+    case 'leads_perdidos':   score += 25; break;
+    case 'atendimento_24h':  score += 25; break;
+    case 'escalar':          score += 20; break;
+    case 'agendamento_lento': score += 20; break;
+    case 'no_show':          score += 15; break;
+    default:                 score += 10;
+  }
+  const orc = document.getElementById('orcamento').value;
+  switch(orc) {
+    case 'acima_5000': score += 35; break;
+    case '3500_5000':  score += 30; break;
+    case '2000_3500':  score += 25; break;
+    case '1000_2000':  score += 15; break;
+    case 'nao_sei':    score += 10; break;
+  }
+  const interesses = document.querySelectorAll('input[name="interesse"]:checked').length;
+  score += interesses * 5;
+  const cargo = document.getElementById('cargo').value;
+  if (cargo === 'proprietario' || cargo === 'socio') score += 20;
+  else if (cargo === 'gerente') score += 10;
+  const ads = document.querySelector('input[name="investe_ads"]:checked')?.value;
+  switch(ads) {
+    case 'acima_5k': score += 20; break;
+    case '2k_5k':    score += 15; break;
+    case 'ate_2k':   score += 10; break;
+  }
+  const profs = document.querySelector('input[name="profissionais"]:checked')?.value;
+  switch(profs) {
+    case 'mais_10': score += 15; break;
+    case '6_10':    score += 10; break;
+    case '3_5':     score += 5;  break;
+  }
+  let classification;
+  if (score >= 140) classification = 'HOT';
+  else if (score >= 80) classification = 'WARM';
+  else classification = 'COLD';
+  return { score, classification };
+}
+
+// ============================================================
+//  STEP BUTTONS
+// ============================================================
+document.getElementById('btnStep1').addEventListener('click', () => {
+  const seg = document.querySelector('input[name="segmento"]:checked');
+  if (!seg || seg.value === 'nao_clinica') return;
+  goToStep(2);
+});
+
+// Step 2: validação rigorosa + verificação de duplicado no Supabase
+document.getElementById('btnStep2').addEventListener('click', async () => {
+  if (!validateStep2()) return;
+
+  const btn = document.getElementById('btnStep2');
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner" style="display:block"></div>';
+
+  const isDuplicate = await checkDuplicateLead();
+  if (isDuplicate) {
+    showDuplicateScreen();
+    return;
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = originalText;
+  goToStep(3);
+});
+
+document.getElementById('btnStep3').addEventListener('click', () => {
+  if (validateStep3()) goToStep(4);
+});
+
+// Step 4: Salva o lead no Supabase + dispara Meta, depois vai pro agendamento
+document.getElementById('btnStep4').addEventListener('click', async () => {
+  if (!validateStep4()) return;
+  
+  const btn = document.getElementById('btnStep4');
+  const txt = document.getElementById('step4Text');
+  const spinner = document.getElementById('step4Spinner');
+  btn.disabled = true; txt.style.display = 'none'; spinner.style.display = 'block';
+  
+  const interesses = Array.from(document.querySelectorAll('input[name="interesse"]:checked')).map(i => i.value);
+  const params = new URLSearchParams(window.location.search);
+  const score = calculateLeadScore();
+  
+  const payload = {
+    segmento: document.querySelector('input[name="segmento"]:checked')?.value || '',
+    nome: document.getElementById('nome').value.trim(),
+    whatsapp: document.getElementById('whatsapp').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    nome_clinica: document.getElementById('nomeClinica').value.trim(),
+    cargo: document.getElementById('cargo').value || null,
+    cidade: document.getElementById('cidade').value.trim() || null,
+    volume_atendimentos: document.querySelector('input[name="volume"]:checked')?.value || '',
+    profissionais: document.querySelector('input[name="profissionais"]:checked')?.value || null,
+    investe_ads: document.querySelector('input[name="investe_ads"]:checked')?.value || null,
+    maior_dor: document.getElementById('dorAtual').value,
+    interesses: interesses,
+    orcamento: document.getElementById('orcamento').value || null,
+    created_at: new Date().toISOString(),
+    lead_score: score.score,
+    lead_classification: score.classification,
+    utm_source: params.get('utm_source') || null,
+    utm_medium: params.get('utm_medium') || null,
+    utm_campaign: params.get('utm_campaign') || null,
+    fbclid: params.get('fbclid') || null,
+    entry_point: 'landing_page'
+  };
+  
+  savedPayload = payload;
+  
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data[0]) savedLeadId = data[0].id;
+    }
+  } catch(e) { console.error('Lead save error:', e); }
+  
+  // Meta Pixel + CAPI
+  const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  sendMetaConversionEvent(payload, eventId);
+  if (typeof fbq === 'function') {
+    const orcValue = payload.orcamento === 'acima_5000' ? 5000 : payload.orcamento === '3500_5000' ? 3500 : payload.orcamento === '2000_3500' ? 2000 : payload.orcamento === '1000_2000' ? 1000 : 0;
+    fbq('track', 'Lead', {
+      content_name: 'lead_rise_hub_lp',
+      currency: 'BRL',
+      value: orcValue
+    }, {
+      eventID: eventId,
+      userData: {
+        em: payload.email.toLowerCase(),
+        ph: '55' + payload.whatsapp.replace(/\D/g, ''),
+        fn: payload.nome.split(' ')[0].toLowerCase(),
+        external_id: payload.email.toLowerCase(),
+        country: 'br'
+      }
+    });
+  }
+  
+  btn.disabled = false; txt.style.display = 'inline'; spinner.style.display = 'none';
+  goToStep(5);
+  await loadBookings();
+  renderWeek();
+});
+
+// ============================================================
+//  META CAPI
+// ============================================================
+async function hashSHA256(value) {
+  if (!value) return null;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(value.trim().toLowerCase());
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function sendMetaConversionEvent(lead, eventId) {
+  try {
+    const [em, ph, fn, ln] = await Promise.all([
+      hashSHA256(lead.email),
+      hashSHA256('55' + lead.whatsapp.replace(/\D/g, '')),
+      hashSHA256(lead.nome.split(' ')[0]),
+      hashSHA256(lead.nome.split(' ').slice(1).join(' ') || '')
+    ]);
+    const externalId = await hashSHA256(lead.email);
+    const country = await hashSHA256('br');
+    
+    const fbp = (document.cookie.split(';').find(c => c.trim().startsWith('_fbp=')) || '').split('=').slice(1).join('=').trim() || null;
+    let fbc = (document.cookie.split(';').find(c => c.trim().startsWith('_fbc=')) || '').split('=').slice(1).join('=').trim() || null;
+    if (!fbc) {
+      const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+      if (fbclid) fbc = `fb.1.${Date.now()}.${fbclid}`;
+    }
+    
+    const orcValue = lead.orcamento === 'acima_5000' ? 5000 : lead.orcamento === '3500_5000' ? 3500 : lead.orcamento === '2000_3500' ? 2000 : lead.orcamento === '1000_2000' ? 1000 : 0;
+    
+    await fetch(`https://graph.facebook.com/v21.0/${META_PIXEL_ID}/events?access_token=${META_ACCESS_TOKEN}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        data: [{
+          event_name: 'Lead',
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: eventId,
+          event_source_url: window.location.href,
+          action_source: 'website',
+          user_data: {
+            em: [em], ph: [ph], fn: [fn], ln: [ln],
+            country: [country], external_id: [externalId],
+            client_user_agent: navigator.userAgent,
+            fbp: fbp, fbc: fbc
+          },
+          custom_data: {
+            lead_segmento: lead.segmento,
+            lead_clinica: lead.nome_clinica,
+            lead_dor: lead.maior_dor,
+            lead_score: lead.lead_score,
+            lead_classification: lead.lead_classification,
+            currency: 'BRL',
+            value: orcValue
+          }
+        }]
+      })
+    });
+  } catch(e) { console.error('CAPI error:', e); }
+}
+
+// ============================================================
+//  AGENDAMENTO (STEP 5)
+// ============================================================
+let realBookings = {};
+let bookingsLoaded = false;
+let currentWeekStart = getNextWeekday(new Date());
+let selectedDate = null;
+let selectedTime = null;
+
+async function loadBookings() {
+  if (bookingsLoaded) return;
+  try {
+    const from = new Date(); from.setHours(0,0,0,0);
+    const to = new Date(from); to.setDate(to.getDate() + 28);
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/bookings_rise_hub?status=eq.confirmado&booking_date=gte.${from.toISOString()}&booking_date=lte.${to.toISOString()}&select=booking_date`,
+      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+    );
+    if (res.ok) {
+      const bookings = await res.json();
+      realBookings = {};
+      bookings.forEach(b => {
+        const d = new Date(b.booking_date);
+        const key = d.toISOString().split('T')[0];
+        const startMin = d.getHours() * 60 + d.getMinutes();
+        if (!realBookings[key]) realBookings[key] = [];
+        realBookings[key].push(startMin);
+      });
+    }
+  } catch(err) { console.log('Bookings load failed:', err); }
+  bookingsLoaded = true;
+}
+
+function getFakeTakenSlots(date) {
+  const seed = date.getDate() * 7 + date.getMonth() * 31;
+  return new Set([SLOT_STARTS[seed % SLOT_STARTS.length]]);
+}
+
+function getUnavailableSlots(date) {
+  const key = date.toISOString().split('T')[0];
+  const realMins = realBookings[key] || [];
+  const realTaken = new Set();
+  for (const slotStart of SLOT_STARTS) {
+    const slotEnd = slotStart + SLOT_DURATION;
+    for (const bookedStart of realMins) {
+      const bookedEnd = bookedStart + SLOT_DURATION;
+      if (slotStart < bookedEnd && slotEnd > bookedStart) {
+        realTaken.add(slotStart);
+        break;
+      }
+    }
+  }
+  const all = new Set([...realTaken]);
+  if (realTaken.size < SLOT_STARTS.length - 2) {
+    const fake = getFakeTakenSlots(date);
+    for (const f of fake) if (!realTaken.has(f)) all.add(f);
+  }
+  return all;
+}
+
+function getNextWeekday(date) {
+  const d = new Date(date); d.setHours(0,0,0,0);
+  while (!WORK_DAYS.includes(d.getDay())) d.setDate(d.getDate() + 1);
+  while (d.getDay() !== 1) d.setDate(d.getDate() - 1);
+  return d;
+}
+
+function formatTime(min) {
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+function renderWeek() {
+  const grid = document.getElementById('dayGrid');
+  grid.innerHTML = '';
+  const today = new Date(); today.setHours(0,0,0,0);
+  const endWeek = new Date(currentWeekStart); endWeek.setDate(endWeek.getDate() + 4);
+  document.getElementById('weekLabel').textContent = 
+    `${currentWeekStart.getDate()} ${MONTH_NAMES[currentWeekStart.getMonth()]} — ${endWeek.getDate()} ${MONTH_NAMES[endWeek.getMonth()]}`;
+  
+  for (let i = 0; i < 5; i++) {
+    const d = new Date(currentWeekStart); d.setDate(d.getDate() + i);
+    const isPast = d < today;
+    const isToday = d.getTime() === today.getTime();
+    const isSelected = selectedDate && d.getTime() === selectedDate.getTime();
+    
+    let avail = 0;
+    if (!isPast) {
+      const unav = getUnavailableSlots(d);
+      const nowMin = isToday ? new Date().getHours() * 60 : -1;
+      for (const s of SLOT_STARTS) if (!unav.has(s) && s > nowMin) avail++;
+    }
+    const isFull = !isPast && avail === 0;
+    
+    const card = document.createElement('div');
+    card.className = 'day-card' + ((isPast || isFull) ? ' disabled' : '') + (isSelected ? ' selected' : '');
+    card.innerHTML = `
+      <div class="day-weekday">${WEEKDAY_NAMES[d.getDay()]}</div>
+      <div class="day-number">${d.getDate()}</div>
+      <div class="day-month">${MONTH_NAMES[d.getMonth()]}</div>
+    `;
+    if (!isPast && !isFull) card.addEventListener('click', () => selectDate(d));
+    grid.appendChild(card);
+  }
+  
+  const thisMon = getNextWeekday(new Date());
+  document.getElementById('prevWeek').disabled = currentWeekStart <= thisMon;
+}
+
+function selectDate(date) {
+  selectedDate = date;
+  selectedTime = null;
+  document.getElementById('btnConfirm').disabled = true;
+  renderWeek();
+  renderTimeSlots();
+}
+
+function renderTimeSlots() {
+  const section = document.getElementById('timeSection');
+  const grid = document.getElementById('timeGrid');
+  if (!selectedDate) { section.classList.remove('visible'); return; }
+  section.classList.add('visible');
+  grid.innerHTML = '';
+  
+  const now = new Date();
+  const isToday = selectedDate.toDateString() === now.toDateString();
+  const nowMin = isToday ? now.getHours() * 60 + now.getMinutes() : -1;
+  
+  document.getElementById('timeLabel').textContent = 
+    `Horários para ${WEEKDAY_NAMES[selectedDate.getDay()]}, ${selectedDate.getDate()} de ${MONTH_NAMES[selectedDate.getMonth()]}`;
+  
+  const unav = getUnavailableSlots(selectedDate);
+  
+  for (const slotMin of SLOT_STARTS) {
+    const isPast = isToday && slotMin <= nowMin;
+    const isTaken = unav.has(slotMin);
+    const isSel = selectedTime === slotMin;
+    
+    const slot = document.createElement('div');
+    slot.className = 'time-slot' + ((isPast || isTaken) ? ' unavailable' : '') + (isSel ? ' selected' : '');
+    slot.textContent = formatTime(slotMin);
+    if (!isPast && !isTaken) slot.addEventListener('click', () => selectTime(slotMin));
+    grid.appendChild(slot);
+  }
+}
+
+function selectTime(min) {
+  selectedTime = min;
+  renderTimeSlots();
+  document.getElementById('btnConfirm').disabled = false;
+}
+
+document.getElementById('prevWeek').addEventListener('click', () => {
+  currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+  selectedDate = null; selectedTime = null;
+  document.getElementById('timeSection').classList.remove('visible');
+  document.getElementById('btnConfirm').disabled = true;
+  renderWeek();
+});
+document.getElementById('nextWeek').addEventListener('click', () => {
+  currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+  selectedDate = null; selectedTime = null;
+  document.getElementById('timeSection').classList.remove('visible');
+  document.getElementById('btnConfirm').disabled = true;
+  renderWeek();
+});
+
+// Confirmar agendamento
+document.getElementById('btnConfirm').addEventListener('click', async () => {
+  if (!selectedDate || selectedTime === null) return;
+  const btn = document.getElementById('btnConfirm');
+  const txt = document.getElementById('submitText');
+  const spinner = document.getElementById('submitSpinner');
+  btn.disabled = true; txt.style.display = 'none'; spinner.style.display = 'block';
+  
+  const bookingDate = new Date(selectedDate);
+  bookingDate.setHours(Math.floor(selectedTime / 60), selectedTime % 60, 0, 0);
+  const dateStr = `${WEEKDAY_NAMES[selectedDate.getDay()]}, ${selectedDate.getDate()} de ${MONTH_NAMES[selectedDate.getMonth()]}`;
+  const timeStr = `${formatTime(selectedTime)} — ${formatTime(selectedTime + SLOT_DURATION)}`;
+  
+  const booking = {
+    lead_nome: savedPayload.nome,
+    lead_email: savedPayload.email,
+    lead_whatsapp: savedPayload.whatsapp,
+    lead_clinica: savedPayload.nome_clinica,
+    lead_id: savedLeadId,
+    booking_date: bookingDate.toISOString(),
+    booking_display: `${dateStr} às ${timeStr}`,
+    platform: 'google_meet',
+    duration_minutes: SLOT_DURATION,
+    status: 'confirmado',
+    created_at: new Date().toISOString()
+  };
+  
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/bookings_rise_hub`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(booking)
+    });
+    
+    // Atualizar lead com status agendado
+    if (savedLeadId) {
+      await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub?id=eq.${savedLeadId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          status: 'agendado',
+          notas_internas: `Consultoria agendada: ${dateStr} às ${timeStr} | Google Meet | 1h30`
+        })
+      });
+    }
+  } catch(e) { console.error('Booking error:', e); }
+  
+  // Schedule event no Pixel
+  if (typeof fbq === 'function') {
+    fbq('track', 'Schedule', {
+      content_name: 'booking_rise_hub',
+      content_category: 'consultoria'
+    });
+  }
+  
+  // Mostrar success screen
+  markLocalDuplicate();
+  document.getElementById('riseForm').style.display = 'none';
+  document.getElementById('progressSection').style.display = 'none';
+  document.getElementById('successScreen').classList.add('active');
+  document.getElementById('successNome').textContent = savedPayload.nome.split(' ')[0];
+  document.getElementById('successDateTime').textContent = `${dateStr} às ${timeStr}`;
+  
+  // Scroll pro topo do container
+  document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });
+});
+
+// ============================================================
+//  REVEAL ANIMATIONS
+// ============================================================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.problema-card, .passo, .resultado-card, .depoimento, .sobre-highlight, .solucao-feature').forEach(el => {
+  el.classList.add('reveal');
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
