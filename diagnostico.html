@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise Hub — Diagnóstico Supabase</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:monospace;background:#0a0a0a;color:#00ff88;padding:30px;font-size:14px;line-height:1.8}
+h1{color:#fff;margin-bottom:20px;font-size:18px}
+.test{padding:12px 16px;margin:8px 0;border-radius:8px;background:#111}
+.pass{border-left:4px solid #00ff88}
+.fail{border-left:4px solid #ff4444;color:#ff4444}
+.warn{border-left:4px solid #ffaa00;color:#ffaa00}
+button{background:#00ff88;color:#000;padding:12px 24px;border:none;border-radius:8px;font-size:16px;cursor:pointer;margin:20px 0;font-weight:bold}
+button:hover{background:#00cc66}
+</style>
+</head>
+<body>
+<h1>🔍 Diagnóstico Completo — Rise Hub Supabase</h1>
+<button onclick="runDiagnostic()">🚀 Rodar Diagnóstico</button>
+<div id="results"></div>
+<script>
+const SB = 'https://ibidukamkkgsurqswsvf.supabase.co';
+const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliaWR1a2Fta2tnc3VycXN3c3ZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjMwMjksImV4cCI6MjA4OTUzOTAyOX0.YRLsf8b8ZNK0w9MXNy27Xz4WoBKV9DzNZfGVWf4zK2E';
+const H = {'apikey':KEY,'Authorization':'Bearer '+KEY};
+const r = document.getElementById('results');
+function log(m,t='pass'){r.innerHTML+=`<div class="test ${t}">${m}</div>`}
+
+async function runDiagnostic(){
+r.innerHTML='';
+const ts=Date.now();
+let leadId=null;
+
+// T1: SELECT leads
+log('⏳ Teste 1: SELECT na tabela leads_rise_hub...','warn');
+try{
+  const res=await fetch(`${SB}/rest/v1/leads_rise_hub?select=id&limit=1`,{headers:H});
+  const body=await res.text();
+  if(res.ok) log('✅ T1: SELECT OK — tabela existe e RLS permite leitura');
+  else log('❌ T1: SELECT falhou — '+res.status+': '+body,'fail');
+}catch(e){log('❌ T1: Erro de rede — '+e.message,'fail');return}
+
+// T2: INSERT mínimo
+log('⏳ Teste 2: INSERT mínimo (6 campos)...','warn');
+try{
+  const res=await fetch(`${SB}/rest/v1/leads_rise_hub`,{
+    method:'POST',headers:{...H,'Content-Type':'application/json','Prefer':'return=representation'},
+    body:JSON.stringify({nome:'DIAG_teste',email:'diag_'+ts+'@test.com',whatsapp:'(99)99999-0000',segmento:'medico',nome_clinica:'Clinica Diag',entry_point:'diagnostico'})
+  });
+  const body=await res.text();
+  if(res.ok){const d=JSON.parse(body);leadId=d[0]?.id;log('✅ T2: INSERT mínimo OK — ID: '+leadId)}
+  else log('❌ T2: INSERT mínimo FALHOU — '+res.status+': '+body,'fail');
+}catch(e){log('❌ T2: '+e.message,'fail')}
+
+// T3: INSERT completo LP v2
+log('⏳ Teste 3: INSERT completo (todos campos da LP v2)...','warn');
+try{
+  const res=await fetch(`${SB}/rest/v1/leads_rise_hub`,{
+    method:'POST',headers:{...H,'Content-Type':'application/json','Prefer':'return=representation'},
+    body:JSON.stringify({
+      segmento:'medico',nome:'DIAG_full',whatsapp:'(99)99999-0001',email:'diag_full_'+ts+'@test.com',
+      nome_clinica:'Clinica Full',cidade:'BH-MG',cargo:'proprietario',especialidade:'Ortopedia',
+      maior_dor:'atendimento_falho',
+      observacao:'WA Clinica: (22)99999-0002|Impacto:8|Ticket:300_500|Fat:25k_50k|Urg:alta|Aut:sozinho',
+      interesses:['atendimento_falho'],orcamento:'25k_50k',
+      lead_score:145,lead_classification:'HOT',
+      utm_source:null,utm_medium:null,utm_campaign:null,fbclid:null,entry_point:'diagnostico_full'
+    })
+  });
+  const body=await res.text();
+  if(res.ok){const d=JSON.parse(body);log('✅ T3: INSERT completo OK — ID: '+d[0]?.id)}
+  else{
+    log('❌ T3: INSERT completo FALHOU — '+res.status+': '+body,'fail');
+    if(body.includes('column')){const m=body.match(/"(\w+)"/);if(m)log('   → Coluna "'+m[1]+'" NÃO EXISTE! Rode o SQL.','fail')}
+    if(res.status===403)log('   → RLS bloqueou INSERT! Rode o SQL pra criar as policies.','fail');
+  }
+}catch(e){log('❌ T3: '+e.message,'fail')}
+
+// T4: PATCH
+if(leadId){
+  log('⏳ Teste 4: PATCH (status → agendado)...','warn');
+  try{
+    const res=await fetch(`${SB}/rest/v1/leads_rise_hub?id=eq.${leadId}`,{
+      method:'PATCH',headers:{...H,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify({status:'agendado',notas_internas:'Teste diag'})
+    });
+    if(res.ok||res.status===204)log('✅ T4: PATCH OK');
+    else log('❌ T4: PATCH falhou — '+res.status+': '+await res.text(),'fail');
+  }catch(e){log('❌ T4: '+e.message,'fail')}
+}else log('⚠️ T4: Pulado (INSERT falhou)','warn');
+
+// T5: Bookings SELECT
+log('⏳ Teste 5: SELECT bookings_rise_hub...','warn');
+try{
+  const res=await fetch(`${SB}/rest/v1/bookings_rise_hub?status=eq.confirmado&select=id&limit=1`,{headers:H});
+  const body=await res.text();
+  if(res.ok)log('✅ T5: Bookings OK');
+  else log('❌ T5: Bookings falhou — '+res.status+': '+body,'fail');
+}catch(e){log('❌ T5: '+e.message,'fail')}
+
+// T6: INSERT booking
+if(leadId){
+  log('⏳ Teste 6: INSERT booking...','warn');
+  try{
+    const bd=new Date();bd.setDate(bd.getDate()+7);bd.setHours(10,0,0,0);
+    const res=await fetch(`${SB}/rest/v1/bookings_rise_hub`,{
+      method:'POST',headers:{...H,'Content-Type':'application/json','Prefer':'return=representation'},
+      body:JSON.stringify({lead_id:leadId,lead_nome:'DIAG_teste',lead_email:'diag_'+ts+'@test.com',
+        lead_whatsapp:'(99)99999-0000',lead_clinica:'Clinica Diag',
+        booking_date:bd.toISOString(),booking_display:'Teste',platform:'google_meet',duration_minutes:90,status:'confirmado'})
+    });
+    const body=await res.text();
+    if(res.ok)log('✅ T6: INSERT booking OK');
+    else log('❌ T6: INSERT booking FALHOU — '+res.status+': '+body,'fail');
+  }catch(e){log('❌ T6: '+e.message,'fail')}
+}else log('⚠️ T6: Pulado','warn');
+
+// Limpar
+try{
+  await fetch(`${SB}/rest/v1/leads_rise_hub?entry_point=eq.diagnostico`,{method:'DELETE',headers:H});
+  await fetch(`${SB}/rest/v1/leads_rise_hub?entry_point=eq.diagnostico_full`,{method:'DELETE',headers:H});
+}catch(e){}
+log('🏁 Diagnóstico finalizado!');
+}
+</script>
+</body>
+</html>
