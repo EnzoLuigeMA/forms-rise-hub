@@ -4,5 +4,26 @@
     { "source": "/form", "destination": "/index.html" },
     { "source": "/agendar", "destination": "/agendar.html" },
     { "source": "/lp", "destination": "/lp.html" }
+  ],
+  "headers": [
+    {
+      "source": "/lp",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    }
   ]
 }
