@@ -4,6 +4,7 @@
     { "source": "/form", "destination": "/index.html" },
     { "source": "/agendar", "destination": "/agendar.html" },
     { "source": "/lp", "destination": "/lp.html" }
+    { "source": "/trafego", "destination": "/lp-trafego.html" }
   ],
   "headers": [
     {
