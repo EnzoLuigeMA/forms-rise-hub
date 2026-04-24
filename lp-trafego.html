@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise Hub — Tráfego Pago para Clínicas</title>
+<meta name="description" content="Gestão profissional de Meta Ads e Google Ads exclusiva para clínicas. Mais pacientes na agenda, menos desperdício de verba.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://ibidukamkkgsurqswsvf.supabase.co">
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;t.defer=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+(function(){
+  var p=new URLSearchParams(window.location.search);
+  var fbclid=p.get('fbclid');
+  if(fbclid&&!document.cookie.includes('_fbc=')){
+    document.cookie='_fbc=fb.1.'+Date.now()+'.'+fbclid+'; max-age=7776000; path=/; SameSite=Lax';
+  }
+})();
+fbq('init', '2238173290034845');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2238173290034845&ev=PageView&noscript=1"/></noscript>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
+
+<style>
+:root{
+  --dark:#07060e;--surface:rgba(22,21,42,.7);--surface2:rgba(30,28,55,.6);
+  --border:rgba(155,89,182,.12);--border-strong:rgba(155,89,182,.2);
+  --text:#f0eef6;--text-dim:rgba(240,238,246,.7);--text-muted:rgba(240,238,246,.4);
+  --accent:#9b59b6;--accent-light:#c084fc;--accent2:#e74c8b;
+  --accent-glow:rgba(155,89,182,.25);--accent2-glow:rgba(231,76,139,.2);
+  --green:#00b894;--red:#ff6b6b;
+  --gradient:linear-gradient(135deg,#9b59b6 0%,#e74c8b 100%);
+  --radius:16px;--radius-sm:10px;--radius-lg:20px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 600px 500px at 20% 10%,rgba(155,89,182,.06) 0%,transparent 60%),
+  radial-gradient(ellipse 500px 400px at 80% 40%,rgba(231,76,139,.04) 0%,transparent 60%)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:1140px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+section{padding:90px 0;position:relative;content-visibility:auto;contain-intrinsic-size:auto 700px}
+.section-tag{display:inline-block;padding:6px 16px;border-radius:999px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;background:rgba(155,89,182,.1);border:1px solid rgba(155,89,182,.3);color:var(--accent-light);margin-bottom:18px}
+.section-title{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;line-height:1.15;margin-bottom:18px;letter-spacing:-.02em}
+.section-subtitle{font-size:clamp(.92rem,1.5vw,1.05rem);color:var(--text-dim);max-width:640px;line-height:1.65}
+.section-center{text-align:center;margin-bottom:50px}
+.section-center .section-subtitle{margin-left:auto;margin-right:auto}
+.highlight{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;background:rgba(7,6,14,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1140px;margin:0 auto;padding:0 24px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:700}
+.nav-logo-img{width:36px;height:36px;border-radius:10px}
+.nav-cta{padding:10px 22px;border-radius:10px;background:var(--gradient);font-size:.82rem;font-weight:700;color:#fff;transition:transform .2s,box-shadow .2s}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 24px var(--accent2-glow)}
+
+/* HERO */
+.hero{padding:140px 0 80px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;background:rgba(155,89,182,.08);border:1px solid rgba(155,89,182,.2);font-size:.78rem;font-weight:600;color:var(--accent-light);margin-bottom:28px}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-dot 2s ease infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.1;margin-bottom:22px;letter-spacing:-.03em;max-width:850px;margin-left:auto;margin-right:auto}
+.hero p{font-size:clamp(.95rem,1.6vw,1.12rem);color:var(--text-dim);max-width:620px;margin:0 auto 36px;line-height:1.65}
+.hero-cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:14px;background:var(--gradient);font-family:inherit;font-size:.95rem;font-weight:700;color:#fff;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 32px var(--accent2-glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px var(--accent2-glow)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:16px 28px;border-radius:14px;background:var(--surface);border:1px solid var(--border-strong);font-family:inherit;font-size:.95rem;font-weight:600;color:var(--text);transition:border-color .2s,transform .2s}
+.btn-secondary:hover{border-color:var(--accent);transform:translateY(-1px)}
+
+/* STATS */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border-radius:var(--radius);overflow:hidden;max-width:900px;margin:-30px auto 0;position:relative;z-index:2;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.stat-item{background:var(--surface);padding:24px 16px;text-align:center;backdrop-filter:blur(12px)}
+.stat-num{font-family:'Sora',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:4px}
+.stat-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+@media(max-width:640px){.stats-bar{grid-template-columns:repeat(2,1fr)}}
+
+/* CARDS */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:780px){.grid-3,.grid-2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:transform .25s,border-color .25s}
+.card:hover{border-color:rgba(155,89,182,.3);transform:translateY(-2px)}
+.card-stat{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2);margin-bottom:8px}
+.card h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.card p{font-size:.84rem;color:var(--text-dim);line-height:1.55}
+.card-icon{width:50px;height:50px;border-radius:14px;background:rgba(155,89,182,.1);border:1px solid rgba(155,89,182,.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.svc-card{display:flex;align-items:flex-start;gap:18px}
+.svc-tag{display:inline-block;margin-top:10px;padding:4px 10px;border-radius:6px;background:rgba(0,184,148,.1);border:1px solid rgba(0,184,148,.2);color:var(--green);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.result-num{font-family:'Sora',sans-serif;font-size:2.5rem;font-weight:800;margin-bottom:6px;text-align:center}
+.result-num.purple{color:var(--accent-light)}.result-num.pink{color:var(--accent2)}.result-num.green{color:var(--green)}
+.result-label{font-size:.92rem;font-weight:700;margin-bottom:6px;text-align:center}
+.result-desc{font-size:.8rem;color:var(--text-dim);line-height:1.5;text-align:center}
+.depo-stars{color:#f59e0b;font-size:.9rem;margin-bottom:12px;letter-spacing:2px}
+.depo-text{font-size:.88rem;color:var(--text-dim);line-height:1.6;margin-bottom:16px;font-style:italic}
+.depo-author{font-size:.8rem;font-weight:700}.depo-role{font-size:.72rem;color:var(--text-muted)}
+
+/* FORM */
+.form-section{background:linear-gradient(180deg,rgba(155,89,182,.04),rgba(231,76,139,.04));border-top:1px solid var(--border);scroll-margin-top:80px}
+.form-container{max-width:660px;margin:0 auto;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:40px 36px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+@media(max-width:560px){.form-container{padding:28px 20px}}
+.progress-section{margin-bottom:28px;display:none}.progress-section.visible{display:block}
+.progress-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--gradient);transition:width .4s;width:0%}
+.progress-label{font-size:.7rem;color:var(--text-muted);margin-top:8px;text-align:right}
+.form-step{display:none}.form-step.active{display:block;animation:fadeStep .4s ease}
+@keyframes fadeStep{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.step-title{font-family:'Sora',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:6px}
+.step-subtitle{font-size:.84rem;color:var(--text-dim);margin-bottom:24px;line-height:1.5}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.78rem;font-weight:600;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.field input,.field select{width:100%;padding:13px 16px;border-radius:var(--radius-sm);background:var(--surface2);border:1.5px solid var(--border);color:var(--text);font-family:inherit;font-size:.9rem;transition:border-color .2s;outline:none}
+.field input:focus,.field select:focus{border-color:var(--accent)}
+.field input::placeholder{color:var(--text-muted)}
+.field .error-msg{font-size:.72rem;color:var(--red);margin-top:5px;display:none}
+.field.error .error-msg{display:block}.field.error input{border-color:var(--red)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.field-row{grid-template-columns:1fr}}
+.req{color:var(--accent2)}
+.option-grid{display:grid;gap:10px}.option-grid.single-col{grid-template-columns:1fr}
+.option-card{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:var(--radius-sm);background:var(--surface2);border:1.5px solid var(--border);cursor:pointer;transition:all .2s;user-select:none}
+.option-card input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.option-card:hover{border-color:rgba(155,89,182,.4)}
+.option-card.selected{border-color:var(--accent);background:rgba(155,89,182,.12)}
+.option-icon{font-size:1.3rem;flex-shrink:0}
+.option-label{font-size:.84rem;font-weight:600;color:var(--text);line-height:1.3}
+.option-desc{font-size:.72rem;color:var(--text-dim);margin-top:2px}
+.btn-row{display:flex;gap:12px;margin-top:24px}
+.btn{flex:1;padding:14px 24px;border-radius:12px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.btn-next{background:var(--gradient);color:#fff}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 24px var(--accent2-glow)}
+.btn-next:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.btn-back{background:var(--surface2);color:var(--text-dim);border:1px solid var(--border)}
+.btn-back:hover{border-color:var(--accent)}
+.btn-submit{background:var(--gradient);color:#fff;flex:2}
+.spinner{display:none;width:20px;height:20px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.screen-overlay{display:none;position:absolute;inset:0;z-index:10;background:var(--dark);border-radius:var(--radius-lg);padding:48px 36px;text-align:center;flex-direction:column;align-items:center;justify-content:center}
+.screen-overlay.visible{display:flex}
+.screen-icon{font-size:3.5rem;margin-bottom:20px}
+.screen-overlay h2{font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:12px}
+.screen-overlay p{font-size:.9rem;color:var(--text-dim);line-height:1.6;max-width:420px;margin:0 auto 20px}
+.success-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:12px;font-family:inherit;font-size:.88rem;font-weight:700;text-decoration:none;transition:all .2s}
+.success-btn-wpp{background:#25d366;color:#fff}.success-btn-wpp:hover{background:#1da851}
+.success-btn-ig{background:var(--surface2);border:1px solid var(--border);color:var(--text)}.success-btn-ig:hover{border-color:var(--accent)}
+.success-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+/* AGENDAMENTO */
+.week-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:20px}
+.week-btn{width:36px;height:36px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s}
+.week-btn:hover{border-color:var(--accent)}
+.week-label{font-size:.88rem;font-weight:600;color:var(--text-dim);min-width:160px;text-align:center}
+.day-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px}
+.day-card{text-align:center;padding:12px 6px;border-radius:10px;background:var(--surface2);border:1.5px solid var(--border);cursor:pointer;transition:all .2s}
+.day-card:hover:not(.disabled){border-color:var(--accent)}
+.day-card.selected{border-color:var(--accent);background:rgba(155,89,182,.12)}
+.day-card.disabled{opacity:.3;cursor:not-allowed}
+.day-card .day-name{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;font-weight:600}
+.day-card .day-num{font-size:1.1rem;font-weight:700;margin:4px 0 2px}
+.day-card .day-slots{font-size:.65rem;font-weight:700}
+.day-card .day-slots.green{color:var(--green)}
+.day-card .day-slots.yellow{color:#f59e0b}
+.day-card .day-slots.red{color:var(--red)}
+.time-section{display:none}
+.time-label{font-size:.8rem;font-weight:600;color:var(--text-dim);margin-bottom:10px}
+.time-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.time-slot{text-align:center;padding:12px;border-radius:10px;background:var(--surface2);border:1.5px solid var(--border);cursor:pointer;font-size:.88rem;font-weight:600;transition:all .2s}
+.time-slot:hover:not(.disabled){border-color:var(--accent)}
+.time-slot.selected{border-color:var(--accent);background:rgba(155,89,182,.15);color:var(--accent-light)}
+.time-slot.disabled{opacity:.3;cursor:not-allowed}
+footer{padding:40px 0;text-align:center;border-top:1px solid var(--border);font-size:.78rem;color:var(--text-muted)}
+footer a{color:var(--accent-light);font-weight:600}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="#" class="nav-logo"><img src="data:image/webp;base64,UklGRvYCAABXRUJQVlA4IOoCAADwFwCdASqgAKAAPm00lkekIyIhKBUpSIANiWNu4MAAZn6KX1bOPla7l9MfpT/13mV/pL7/+cB5sfSAdMv6AHS1fs/+wGYp3Ke3VbHXLvVVx1IFOsEydkHGjp1y70NMvaVfxrBpXxKZRkkMoqSGOoqCkeFfxJFS+bA9ksKPzkYKIDuRfenl0vsy8cxJAALB5RWNKVXfGGpYM+uye1hf7j7P50RAJvKrEnSdk/kARk7n8Pt8+YBBbtkEY8OAox+OBB2pgIp1wYxMAAD+0cYAGz51x8w/HDklS2RkFuPmEdVzDWT0nInhuZbv6hxV3Kz3hpo5IO04gxwIFxC5q2mjJYBleKGHZxPzExbF6S8L4fTrQCn01uc3+w1mjldq9v9DVfSZK7m03CZJNm9h+pBjt9mwnOjPziB6WMBF7DtxBaUQLMizh+lz7nW7ohD7A2r0GDrXAHr1S1fI4231vUeeKxnfLqV+XuLebW+5EGL09WKgiyJmvD2MhkhjnMC032mnGC1vye2GfRcSBiWBJ9Z1X+8Je5F+yssmH/jDll+Xj8rCG0fY4eMwCFfxZVt9dryJnJZvCE4QDfjAk9WLsDF56brb8tIRZ4qNhDAnLTtazKOdo/KvKKc2kiwIRmrOUv9JUszNUB8f8ElI4b8f8DkQdTsm1fc3K9MMqCHy9NpnVyMYz79vfkQsy/hOwVEbU6hh7wiEG7pGI5Cxxno0desp+Rgs69lbopIKEEckAVK1G4NjU2tzAD2tTRvfiJu2cT0OxCijfDx1Qw5B00VudEKR/3CzSLYk87XecF+8RdCwVsFMdTOx06JE1JcatoXR1wAH6bSPWyzdhcni+2zj/XHLOGapzdACvftN4qe7P9+Q9kCljq+/5yS/9qcXCPKJe/j+hv6Y7UfBpZABvLlTLPmKA7VaTb7yi+NBZBVlH2W5OCtbSNfQhavxsOBbm/giuqKGY4gzCa1vB0khxtimoetFbCalsLqPJaAAAAAAAA==" alt="Rise Hub" class="nav-logo-img" width="36" height="36" decoding="async">Rise Hub</a><a href="#formulario" class="nav-cta">Agendar consultoria</a></div></nav>
+<section class="hero"><div class="container">
+  <div class="hero-badge"><div class="dot"></div>Vagas limitadas por mês</div>
+  <h1>Sua clínica gasta em anúncio e <span class="highlight">a agenda continua vazia?</span></h1>
+  <p>Gerenciamos Meta Ads e Google Ads exclusivamente para clínicas. Criamos campanhas que atraem pacientes de verdade, rastreamos cada centavo e otimizamos até o custo por agendamento cair pela metade.</p>
+  <div class="hero-cta-row">
+    <a href="#formulario" class="btn-primary">Agendar consultoria →</a>
+    <a href="#servicos" class="btn-secondary">Ver todos os serviços</a>
+  </div>
+</div></section>
+
+<div class="container">
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">+340%</div><div class="stat-label">ROAS médio</div></div>
+    <div class="stat-item"><div class="stat-num">-62%</div><div class="stat-label">Custo por agendamento</div></div>
+    <div class="stat-item"><div class="stat-num">+89%</div><div class="stat-label">Taxa de conversão</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Rastreabilidade</div></div>
+  </div>
+</div>
+
+<section><div class="container">
+  <div class="section-center">
+    <span class="section-tag">O problema</span>
+    <h2 class="section-title">Três erros que <span class="highlight">drenam seu orçamento</span> de anúncios.</h2>
+    <p class="section-subtitle">90% das clínicas que investem em tráfego pago cometem pelo menos um destes erros.</p>
+  </div>
+  <div class="grid-3">
+    <div class="card"><div class="card-stat">78%</div><h3>Leads sem resposta</h3><p>O paciente clica no anúncio, manda mensagem e ninguém responde em menos de 1 hora. Ele já agendou com o concorrente.</p></div>
+    <div class="card"><div class="card-stat">R$ 0</div><h3>Sem rastreamento real</h3><p>Você não sabe quantos cliques viraram agendamentos. Sem Pixel + CAPI configurados corretamente, o Meta otimiza pra lixo.</p></div>
+    <div class="card"><div class="card-stat">3x</div><h3>CPA triplicado</h3><p>Criativos genéricos, públicos mal segmentados, nenhuma automação no atendimento. Cada paciente custa 3x mais do que deveria.</p></div>
+  </div>
+</div></section>
+
+<section id="servicos"><div class="container">
+  <div class="section-center">
+    <span class="section-tag">Nossos serviços</span>
+    <h2 class="section-title">Tráfego pago é o motor. <span class="highlight">O ecossistema completo</span> é o combustível.</h2>
+    <p class="section-subtitle">Da primeira impressão no anúncio até a fidelização do paciente — tudo integrado.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card svc-card"><div class="card-icon">📢</div><div><h3>Meta Ads + Google Ads</h3><p>Campanhas no Facebook, Instagram e Google otimizadas para agendamentos. Pixel + CAPI + remarketing + lookalike audiences.</p><span class="svc-tag">Serviço principal</span></div></div>
+    <div class="card svc-card"><div class="card-icon">🤖</div><div><h3>Agente de IA no WhatsApp</h3><p>A Sofia responde leads do anúncio em menos de 5 segundos, 24h por dia. Agenda sozinha, qualifica e reativa pacientes antigos.</p><span class="svc-tag">Diferencial competitivo</span></div></div>
+    <div class="card svc-card"><div class="card-icon">📱</div><div><h3>Gestão de redes sociais</h3><p>Calendário editorial, gerenciamento de perfil e presença digital consistente que gera autoridade pra suas campanhas converterem mais.</p></div></div>
+    <div class="card svc-card"><div class="card-icon">🎬</div><div><h3>Criação de conteúdo</h3><p>Roteiros pra reels, criativos de anúncio, carrosséis e stories. Conteúdo que educa, engaja e faz o paciente clicar.</p></div></div>
+    <div class="card svc-card"><div class="card-icon">🌐</div><div><h3>Desenvolvimento de sites</h3><p>Landing pages e sites otimizados pra conversão. Integrados com Pixel, rápidos no mobile e prontos pra receber tráfego pago.</p></div></div>
+    <div class="card svc-card"><div class="card-icon">💼</div><div><h3>Consultoria comercial</h3><p>Diagnóstico da operação, scripts de atendimento, treinamento da equipe e processos de vendas otimizados pra clínicas.</p></div></div>
+    <div class="card svc-card"><div class="card-icon">📊</div><div><h3>CRM Rise</h3><p>Pipeline visual de leads, lead scoring automático, histórico de interações e dashboard de performance em tempo real.</p></div></div>
+    <div class="card svc-card"><div class="card-icon">🏥</div><div><h3>Rise Clinic</h3><p>Sistema completo de gestão para clínicas: prontuário, agenda, financeiro, estoque e relatórios numa plataforma só.</p><span class="svc-tag">Em breve</span></div></div>
+  </div>
+</div></section>
+
+<section><div class="container">
+  <div class="section-center">
+    <span class="section-tag">Resultados</span>
+    <h2 class="section-title">Clínicas que investem com estratégia <span class="highlight">não competem. Dominam.</span></h2>
+  </div>
+  <div class="grid-3">
+    <div class="card"><div class="result-num purple">+340%</div><div class="result-label">ROAS médio</div><div class="result-desc">Para cada R$ 1 investido em anúncio, a clínica fatura R$ 3,40 em consultas.</div></div>
+    <div class="card"><div class="result-num pink">-62%</div><div class="result-label">Custo por lead</div><div class="result-desc">Automação + IA + criativos de alta performance reduzem o CPA pela metade.</div></div>
+    <div class="card"><div class="result-num green">+89%</div><div class="result-label">Taxa de agendamento</div><div class="result-desc">9 em cada 10 leads que entram no WhatsApp agendam quando a IA atende em segundos.</div></div>
+  </div>
+</div></section>
+
+<section><div class="container">
+  <div class="section-center">
+    <span class="section-tag">Depoimentos</span>
+    <h2 class="section-title">Quem <span class="highlight">já fez</span> não volta atrás.</h2>
+  </div>
+  <div class="grid-3">
+    <div class="card"><div class="depo-stars">★★★★★</div><div class="depo-text">"Antes gastávamos R$ 5 mil em anúncio e não sabíamos quantos pacientes vinham disso. Hoje cada real é rastreado e o retorno triplicou."</div><div class="depo-author">Dr. Ricardo M.</div><div class="depo-role">Harmonização — SP</div></div>
+    <div class="card"><div class="depo-stars">★★★★★</div><div class="depo-text">"O ROAS passou de 1.5x pra 4.2x em 60 dias. A combinação de criativos bons + IA respondendo instantaneamente é imbatível."</div><div class="depo-author">Dra. Camila S.</div><div class="depo-role">Ortodontia — RJ</div></div>
+    <div class="card"><div class="depo-stars">★★★★★</div><div class="depo-text">"Trocamos de agência 3 vezes antes da Rise Hub. A diferença é que eles entendem clínica de verdade. Não é agência genérica."</div><div class="depo-author">Dr. Felipe T.</div><div class="depo-role">Dermatologia — MG</div></div>
+  </div>
+</div></section>
+
+<section id="formulario" class="form-section"><div class="container">
+  <div class="section-center">
+    <span class="section-tag">Agende sua consultoria</span>
+    <h2 class="section-title" style="margin-left:auto;margin-right:auto">Vamos <span class="highlight">montar sua estratégia</span> de tráfego pago.</h2>
+    <p class="section-subtitle" style="margin-left:auto;margin-right:auto">Responda 5 perguntas rápidas e agende uma consultoria com nosso time de performance.</p>
+  </div>
+  <div class="form-container">
+    <div class="progress-section" id="progressSection">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">Etapa 1 de 5</div>
+    </div>
+
+    <div class="screen-overlay" id="blockScreen"><div class="screen-icon">😕</div><h2>Nossos serviços são exclusivos para clínicas</h2><p>No momento atendemos apenas clínicas médicas, odontológicas e estéticas.</p><a href="https://instagram.com/risehub.br" target="_blank" class="success-btn success-btn-ig">Seguir @risehub.br</a></div>
+    <div class="screen-overlay" id="duplicateScreen"><div class="screen-icon">👋</div><h2>Você já está no nosso radar!</h2><p>Identificamos que você já preencheu anteriormente. Nosso time entrará em contato.</p><a href="https://wa.me/5531991096296?text=Ol%C3%A1!%20J%C3%A1%20preenchi%20o%20formul%C3%A1rio%20da%20Rise%20Hub." target="_blank" class="success-btn success-btn-wpp">Falar no WhatsApp</a></div>
+    <div class="screen-overlay" id="successScreen"><div class="screen-icon">🎉</div><h2>Consultoria agendada!</h2><p>Nosso time vai analisar seu cenário e entrar em contato em até 24h para agendar sua consultoria, <span id="successNome"></span>.</p><div class="success-btns"><a href="https://wa.me/5531991096296?text=Ol%C3%A1!%20Acabei%20de%20agendar%20uma%20consultoria%20de%20tr%C3%A1fego%20pago." target="_blank" class="success-btn success-btn-wpp">Falar no WhatsApp</a><a href="https://instagram.com/risehub.br" target="_blank" class="success-btn success-btn-ig">Seguir @risehub.br</a></div></div>
+
+    <form id="leadForm" autocomplete="off">
+      <!-- STEP 1 -->
+      <div class="form-step active" data-step="1">
+        <div class="step-title">Qual das opções melhor descreve você?</div>
+        <div class="step-subtitle">Nossos serviços são exclusivos para clínicas e consultórios.</div>
+        <div class="option-grid single-col">
+          <label class="option-card"><input type="radio" name="segmento" value="medico"><div class="option-icon">👨‍⚕️</div><div><div class="option-label">Médico(a)</div></div></label>
+          <label class="option-card"><input type="radio" name="segmento" value="profissional_saude"><div class="option-icon">🩺</div><div><div class="option-label">Profissional de saúde</div><div class="option-desc">Dentista, fisio, psicólogo, nutricionista etc.</div></div></label>
+          <label class="option-card"><input type="radio" name="segmento" value="clinica"><div class="option-icon">🏥</div><div><div class="option-label">Gestor(a) de clínica</div></div></label>
+          <label class="option-card"><input type="radio" name="segmento" value="nao_clinica"><div class="option-icon">👀</div><div><div class="option-label">Não sou da área da saúde</div></div></label>
+        </div>
+        <div class="btn-row"><button type="button" class="btn btn-next" id="btnStep1" disabled style="flex:1">Continuar →</button></div>
+      </div>
+
+      <!-- STEP 2: CONTATO -->
+      <div class="form-step" data-step="2">
+        <div class="step-title">Seus dados de contato</div>
+        <div class="step-subtitle">Para enviarmos a consultoria personalizada.</div>
+        <div class="field"><label>Nome completo <span class="req">*</span></label><input type="text" id="nome" placeholder="Seu nome completo" required><div class="error-msg" id="nomeError">Nome inválido</div></div>
+        <div class="field"><label>WhatsApp <span class="req">*</span></label><input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required><div class="error-msg" id="whatsappError">WhatsApp inválido</div></div>
+        <div class="field"><label>E-mail <span class="req">*</span></label><input type="email" id="email" placeholder="seu@email.com" required><div class="error-msg" id="emailError">E-mail inválido</div></div>
+        <div class="field-row"><div class="field"><label>Nome da clínica <span class="req">*</span></label><input type="text" id="nomeClinica" placeholder="Ex: Clínica Saúde Plena" required><div class="error-msg">Informe o nome</div></div><div class="field"><label>Cidade / Estado</label><input type="text" id="cidade" placeholder="Ex: BH - MG"></div></div>
+        <div class="field"><label>Qual o seu cargo? <span class="req">*</span></label>
+          <div class="option-grid single-col">
+            <label class="option-card"><input type="radio" name="cargo" value="proprietario"><div class="option-label">Proprietário(a) / Sócio(a)</div></label>
+            <label class="option-card"><input type="radio" name="cargo" value="gerente"><div class="option-label">Gerente / Diretor(a)</div></label>
+            <label class="option-card"><input type="radio" name="cargo" value="marketing"><div class="option-label">Marketing / Comercial</div></label>
+            <label class="option-card"><input type="radio" name="cargo" value="medico"><div class="option-label">Médico(a) / Profissional de saúde</div></label>
+            <label class="option-card"><input type="radio" name="cargo" value="outro"><div class="option-label">Outro</div></label>
+          </div>
+        </div>
+        <div class="btn-row"><button type="button" class="btn btn-back" onclick="goToStep(1)">Voltar</button><button type="button" class="btn btn-next" id="btnStep2">Continuar →</button></div>
+      </div>
+
+      <!-- STEP 3: TRÁFEGO -->
+      <div class="form-step" data-step="3">
+        <div class="step-title">Sobre seu investimento em anúncios</div>
+        <div class="step-subtitle">Pra entendermos seu cenário atual de tráfego pago.</div>
+        <div class="field"><label>Você já investe em tráfego pago? <span class="req">*</span></label>
+          <div class="option-grid single-col">
+            <label class="option-card"><input type="radio" name="investe_ads" value="nao_investe"><div class="option-label">Nunca investi</div></label>
+            <label class="option-card"><input type="radio" name="investe_ads" value="ate_1k"><div class="option-label">Sim, até R$ 1.000/mês</div></label>
+            <label class="option-card"><input type="radio" name="investe_ads" value="1k_3k"><div class="option-label">Sim, R$ 1.000 a R$ 3.000/mês</div></label>
+            <label class="option-card"><input type="radio" name="investe_ads" value="3k_5k"><div class="option-label">Sim, R$ 3.000 a R$ 5.000/mês</div></label>
+            <label class="option-card"><input type="radio" name="investe_ads" value="acima_5k"><div class="option-label">Sim, acima de R$ 5.000/mês</div></label>
+          </div>
+        </div>
+        <div class="field"><label>Qual plataforma usa ou quer usar? <span class="req">*</span></label>
+          <div class="option-grid single-col">
+            <label class="option-card"><input type="checkbox" name="plataforma" value="meta_ads"><div class="option-icon">📘</div><div class="option-label">Meta Ads (Facebook / Instagram)</div></label>
+            <label class="option-card"><input type="checkbox" name="plataforma" value="google_ads"><div class="option-icon">🔍</div><div class="option-label">Google Ads (Pesquisa / Maps)</div></label>
+            <label class="option-card"><input type="checkbox" name="plataforma" value="nao_sei"><div class="option-icon">🤷</div><div class="option-label">Não sei — quero recomendação</div></label>
+          </div>
+        </div>
+        <div class="btn-row"><button type="button" class="btn btn-back" onclick="goToStep(2)">Voltar</button><button type="button" class="btn btn-next" id="btnStep3">Continuar →</button></div>
+      </div>
+
+      <!-- STEP 4: SERVIÇOS -->
+      <div class="form-step" data-step="4">
+        <div class="step-title">Quais serviços interessam?</div>
+        <div class="step-subtitle">Selecione tudo que faz sentido pro seu momento.</div>
+        <div class="field"><label>Serviços desejados <span class="req">*</span></label>
+          <div class="option-grid single-col">
+            <label class="option-card"><input type="checkbox" name="interesse" value="trafego_pago"><div class="option-icon">📢</div><div class="option-label">Tráfego pago (Meta + Google Ads)</div></label>
+            <label class="option-card"><input type="checkbox" name="interesse" value="agente_ia"><div class="option-icon">🤖</div><div class="option-label">Agente de IA (Sofia) no WhatsApp</div></label>
+            <label class="option-card"><input type="checkbox" name="interesse" value="social_media"><div class="option-icon">📱</div><div class="option-label">Gestão de redes sociais</div></label>
+            <label class="option-card"><input type="checkbox" name="interesse" value="conteudo"><div class="option-icon">🎬</div><div class="option-label">Criação de conteúdo</div></label>
+            <label class="option-card"><input type="checkbox" name="interesse" value="site"><div class="option-icon">🌐</div><div class="option-label">Desenvolvimento de site</div></label>
+            <label class="option-card"><input type="checkbox" name="interesse" value="consultoria"><div class="option-icon">💼</div><div class="option-label">Consultoria comercial</div></label>
+            <label class="option-card"><input type="checkbox" name="interesse" value="crm_rise"><div class="option-icon">📊</div><div class="option-label">CRM Rise</div></label>
+            <label class="option-card"><input type="checkbox" name="interesse" value="rise_clinic"><div class="option-icon">🏥</div><div class="option-label">Rise Clinic (sistema de gestão)</div></label>
+          </div>
+        </div>
+        <div class="btn-row"><button type="button" class="btn btn-back" onclick="goToStep(3)">Voltar</button><button type="button" class="btn btn-next" id="btnStep4">Continuar →</button></div>
+      </div>
+
+      <!-- STEP 5: FATURAMENTO + URGÊNCIA -->
+      <div class="form-step" data-step="5">
+        <div class="step-title">Pra fecharmos sua proposta</div>
+        <div class="step-subtitle">Duas perguntas finais pra calcular o potencial da sua clínica.</div>
+        <div class="field"><label>Faturamento médio mensal <span class="req">*</span></label>
+          <div class="option-grid single-col">
+            <label class="option-card"><input type="radio" name="faturamento" value="ate_15k"><div class="option-label">Menos de R$ 15.000</div></label>
+            <label class="option-card"><input type="radio" name="faturamento" value="15k_25k"><div class="option-label">R$ 15.000 a R$ 25.000</div></label>
+            <label class="option-card"><input type="radio" name="faturamento" value="25k_50k"><div class="option-label">R$ 25.000 a R$ 50.000</div></label>
+            <label class="option-card"><input type="radio" name="faturamento" value="50k_100k"><div class="option-label">R$ 50.000 a R$ 100.000</div></label>
+            <label class="option-card"><input type="radio" name="faturamento" value="acima_100k"><div class="option-label">Acima de R$ 100.000</div></label>
+          </div>
+        </div>
+        <div class="field"><label>Qual sua urgência? <span class="req">*</span></label>
+          <div class="option-grid single-col">
+            <label class="option-card"><input type="radio" name="urgencia" value="alta"><div class="option-icon">🔥</div><div><div class="option-label">ALTA — Preciso de resultados imediatos</div></div></label>
+            <label class="option-card"><input type="radio" name="urgencia" value="baixa"><div class="option-icon">🕒</div><div><div class="option-label">MODERADA — Estou planejando começar em breve</div></div></label>
+          </div>
+        </div>
+        <div class="btn-row"><button type="button" class="btn btn-back" onclick="goToStep(4)">Voltar</button><button type="button" class="btn btn-submit" id="btnStep5"><span id="step5Text">Agendar consultoria →</span><div class="spinner" id="step5Spinner"></div></button></div>
+      </div>
+      <!-- STEP 6: AGENDAMENTO -->
+      <div class="form-step" data-step="6">
+        <div class="step-title">Escolha o melhor horário</div>
+        <div class="step-subtitle">Consultoria de 1h via Google Meet com nosso time de performance.</div>
+        <div class="week-nav">
+          <button type="button" class="week-btn" id="prevWeek">‹</button>
+          <div class="week-label" id="weekLabel">—</div>
+          <button type="button" class="week-btn" id="nextWeek">›</button>
+        </div>
+        <div class="day-grid" id="dayGrid"></div>
+        <div class="time-section" id="timeSection">
+          <div class="time-label" id="timeLabel">Horários disponíveis</div>
+          <div class="time-grid" id="timeGrid"></div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-back" onclick="goToStep(5)">Voltar</button>
+          <button type="button" class="btn btn-submit" id="btnConfirm" disabled>
+            <span id="confirmText">Confirmar consultoria</span>
+            <div class="spinner" id="confirmSpinner"></div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div></section>
+
+<footer><div class="container"><p>Rise Hub © 2024</p><p style="margin-top:8px"><a href="#formulario">Agendar consultoria</a> · <a href="https://instagram.com/risehub.br" target="_blank">Instagram</a> · <a href="https://wa.me/5531991096296" target="_blank">WhatsApp</a></p></div></footer>
+<script>
+var SUPABASE_URL = 'https://ibidukamkkgsurqswsvf.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliaWR1a2Fta2tnc3VycXN3c3ZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjMwMjksImV4cCI6MjA4OTUzOTAyOX0.YRLsf8b8ZNK0w9MXNy27Xz4WoBKV9DzNZfGVWf4zK2E';
+var META_ACCESS_TOKEN = 'EAAHw1qXwSgwBQyxCU6yd1PKu8QZAtSH6QC6gf2StBaWwjJQWJ5ooeleZBIPNRoMmnxbrDiRGjulxYGM5ox7uKx5keY6OiVr3vCJjkXaFqpvAJOjyqrNHwHFHwJsYwNGZCiEQlnJGHREqcVscfmyNPsjImsbsbw1ZCAIAbD0VP3a1gydqP9cxLEhpAL5q0wZDZD';
+var META_PIXEL_ID = '2238173290034845';
+var currentStep = 1;
+var savedPayload = null;
+var savedLeadId = null;
+
+// UTILS
+async function hashSHA256(value) {
+  if (!value) return null;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(value.trim().toLowerCase());
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// VALIDAÇÕES
+function validateNome(value) {
+  const v = value.trim();
+  if (v.length < 3) return 'Informe seu nome completo';
+  const parts = v.split(/\s+/).filter(p => p.length > 0);
+  if (parts.length < 2) return 'Informe nome e sobrenome';
+  if (parts.some(p => p.length < 2)) return 'Nome parece incompleto';
+  if (!/^[a-zA-ZÀ-ÿ\s'-]+$/.test(v)) return 'Nome não pode conter números ou símbolos';
+  if (/(.)\1{2,}/i.test(v.replace(/\s/g, ''))) return 'Por favor, informe seu nome real';
+  
+  const fakeNames = [
+    'teste','test','asdf','qwerty','nenhum','nada','xxx','abc','aaa',
+    'fulano','ciclano','beltrano','joao silva','maria silva','nome nome',
+    'blabla','lalala','oi oi','nao sei','qualquer','hahaha','kkk'
+  ];
+  if (fakeNames.some(fn => v.toLowerCase().replace(/\s+/g,' ') === fn)) return 'Por favor, informe seu nome real';
+  
+  const keyboardSeqs = ['qwer','asdf','zxcv','abcd','1234','aaaa','bbbb'];
+  if (keyboardSeqs.some(s => v.toLowerCase().replace(/\s/g, '').includes(s))) return 'Por favor, informe seu nome real';
+  
+  return null;
+}
+
+function validateEmail(value) {
+  const v = value.trim().toLowerCase();
+  if (!v) return 'Informe seu e-mail';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return 'E-mail com formato inválido';
+  
+  const domain = v.split('@')[1];
+  if (!domain || !domain.includes('.')) return 'E-mail com formato inválido';
+  
+  const disposableDomains = [
+    'tempmail.com','throwaway.email','guerrillamail.com','mailinator.com',
+    'yopmail.com','10minutemail.com','trashmail.com','fakeinbox.com',
+    'sharklasers.com','guerrillamailblock.com','grr.la','dispostable.com',
+    'maildrop.cc','temp-mail.org','emailondeck.com','getnada.com',
+    'mohmal.com','burnermail.io','inboxbear.com'
+  ];
+  if (disposableDomains.includes(domain)) return 'Use um e-mail permanente, não temporário';
+  
+  const local = v.split('@')[0];
+  if (/^(.)\1+$/.test(local)) return 'E-mail parece inválido';
+  if (/^(teste|test|asdf|qwerty|nada|fake|spam|lixo|abc123)$/.test(local)) return 'Por favor, informe um e-mail real';
+  
+  const typoMap = {
+    'gmial.com':'gmail.com','gmal.com':'gmail.com','gmai.com':'gmail.com',
+    'gmail.co':'gmail.com','gamil.com':'gmail.com','gnail.com':'gmail.com',
+    'gmail.con':'gmail.com','gmail.om':'gmail.com','gmail.cm':'gmail.com',
+    'hotmal.com':'hotmail.com','hotmai.com':'hotmail.com','hotmil.com':'hotmail.com',
+    'hotmail.co':'hotmail.com','hitmail.com':'hotmail.com','hotamil.com':'hotmail.com',
+    'outloo.com':'outlook.com','outlok.com':'outlook.com','outlook.co':'outlook.com',
+    'yaho.com':'yahoo.com','yahooo.com':'yahoo.com','yahoo.co':'yahoo.com'
+  };
+  if (typoMap[domain]) return `Você quis dizer ${local}@${typoMap[domain]}?`;
+  
+  return null;
+}
+
+function validateWhatsapp(value) {
+  const digits = value.replace(/\D/g, '');
+  if (digits.length < 10) return 'Número precisa ter DDD + 9 dígitos';
+  if (digits.length > 11) return 'Número com dígitos a mais';
+  
+  const ddd = parseInt(digits.substring(0, 2));
+  const dddsValidos = [
+    11,12,13,14,15,16,17,18,19,
+    21,22,24,27,28,
+    31,32,33,34,35,37,38,
+    41,42,43,44,45,46,47,48,49,
+    51,53,54,55,
+    61,62,63,64,65,66,67,68,69,
+    71,73,74,75,77,79,
+    81,82,83,84,85,86,87,88,89,
+    91,92,93,94,95,96,97,98,99
+  ];
+  if (!dddsValidos.includes(ddd)) return `DDD ${ddd} não existe no Brasil`;
+  
+  if (digits.length === 11 && digits[2] !== '9') return 'Celular precisa começar com 9 após o DDD';
+  
+  if (/^(\d)\1+$/.test(digits)) return 'Número parece inválido';
+  if (/1234567|7654321|9999999|0000000|1111111/.test(digits)) return 'Por favor, informe um número real';
+  
+  const fakePhones = ['11999999999','11911111111','11900000000','00000000000','12345678901'];
+  if (fakePhones.includes(digits)) return 'Por favor, informe seu número real';
+  
+  return null;
+}
+
+// CAPI
+async function sendMetaConversionEvent(lead, eventId) {
+  try {
+    const [em, ph, fn, ln] = await Promise.all([
+      hashSHA256(lead.email),
+      hashSHA256('55' + lead.whatsapp.replace(/\D/g, '')),
+      hashSHA256(lead.nome.split(' ')[0]),
+      hashSHA256(lead.nome.split(' ').slice(1).join(' ') || '')
+    ]);
+    const externalId = await hashSHA256(lead.email);
+    const country = await hashSHA256('br');
+    
+    const fbp = (document.cookie.split(';').find(c => c.trim().startsWith('_fbp=')) || '').split('=').slice(1).join('=').trim() || null;
+    let fbc = (document.cookie.split(';').find(c => c.trim().startsWith('_fbc=')) || '').split('=').slice(1).join('=').trim() || null;
+    if (!fbc) {
+      const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+      if (fbclid) fbc = `fb.1.${Date.now()}.${fbclid}`;
+    }
+    
+    const fat = lead.faturamento;
+    const orcValue = fat === 'acima_100k' ? 10000 : fat === '50k_100k' ? 7500 : fat === '25k_50k' ? 3750 : fat === '15k_25k' ? 2000 : 1000;
+    
+    await fetch(`https://graph.facebook.com/v21.0/${META_PIXEL_ID}/events?access_token=${META_ACCESS_TOKEN}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        data: [{
+          event_name: 'Lead',
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: eventId,
+          event_source_url: window.location.href,
+          action_source: 'website',
+          user_data: {
+            em: [em], ph: [ph], fn: [fn], ln: [ln],
+            country: [country], external_id: [externalId],
+            client_user_agent: navigator.userAgent,
+            fbp: fbp, fbc: fbc
+          },
+          custom_data: {
+            lead_segmento: lead.segmento,
+            lead_clinica: lead.nome_clinica,
+            lead_dor: lead.maior_dor,
+            lead_score: lead.lead_score,
+            lead_classification: lead.lead_classification,
+            currency: 'BRL',
+            value: orcValue
+          }
+        }]
+      })
+    });
+  } catch(e) { console.error('CAPI error:', e); }
+}
+
+// FORM LOGIC
+function updateProgress() {
+  document.getElementById('progressSection').classList.add('visible');
+  document.getElementById('progressFill').style.width = (currentStep / 6 * 100) + '%';
+  document.getElementById('progressLabel').textContent = 'Etapa ' + currentStep + ' de 6';
+}
+
+function goToStep(step) {
+  var c = document.querySelector('.form-step.active');
+  if (c) c.classList.remove('active');
+  document.querySelector('.form-step[data-step="' + step + '"]').classList.add('active');
+  currentStep = step;
+  updateProgress();
+  var fc = document.querySelector('.form-container');
+  var r = fc.getBoundingClientRect();
+  if (r.top < 0 || r.top > window.innerHeight * 0.5) fc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (typeof fbq === 'function') {
+    var map = {2:'ViewContent',3:'InitiateCheckout',4:'AddToCart',5:'AddPaymentInfo',6:'AddPaymentInfo'};
+    var names = {2:'trafego_step_dados',3:'trafego_step_investimento',4:'trafego_step_servicos',5:'trafego_step_faturamento',6:'trafego_step_agendamento'};
+    if (map[step]) fbq('track', map[step], { content_name: names[step] });
+  }
+}
+
+function blockNonClinic() { document.getElementById('blockScreen').classList.add('visible'); }
+function showDuplicateScreen() { document.getElementById('duplicateScreen').classList.add('visible'); }
+function checkLocalDuplicate() {
+  try { if (localStorage.getItem('rh_trafego_submitted')) return true; } catch(e) {}
+  return document.cookie.includes('rh_trafego=1');
+}
+
+async function checkDuplicateLead() {
+  if (checkLocalDuplicate()) return true;
+  var email = document.getElementById('email').value.trim();
+  var wa = document.getElementById('whatsapp').value.trim();
+  try {
+    var r1 = await fetch(SUPABASE_URL + '/rest/v1/leads_rise_hub?email=eq.' + encodeURIComponent(email) + '&select=id&limit=1', { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY } });
+    if (r1.ok) { var d1 = await r1.json(); if (d1.length > 0) return true; }
+    var r2 = await fetch(SUPABASE_URL + '/rest/v1/leads_rise_hub?whatsapp=eq.' + encodeURIComponent(wa) + '&select=id&limit=1', { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY } });
+    if (r2.ok) { var d2 = await r2.json(); if (d2.length > 0) return true; }
+  } catch(e) { console.error('Dup check error:', e); }
+  return false;
+}
+
+// Click delegation
+document.addEventListener('click', function(e) {
+  var card = e.target.closest('.option-card');
+  if (!card) return;
+  var input = card.querySelector('input');
+  if (!input) return;
+  e.preventDefault(); e.stopPropagation();
+  if (input.type === 'checkbox') { input.checked = !input.checked; card.classList.toggle('selected', input.checked); }
+  else { var s = card.parentElement.children; for (var i = 0; i < s.length; i++) s[i].classList.remove('selected'); card.classList.add('selected'); input.checked = true; }
+  if (input.name === 'segmento') { if (input.value === 'nao_clinica') { blockNonClinic(); return; } document.getElementById('btnStep1').disabled = false; }
+});
+
+(function() { if (checkLocalDuplicate()) setTimeout(function() { showDuplicateScreen(); }, 100); })();
+
+// STEP HANDLERS
+document.getElementById('btnStep1').addEventListener('click', function() {
+  var seg = document.querySelector('input[name="segmento"]:checked');
+  if (!seg || seg.value === 'nao_clinica') return;
+  goToStep(2);
+});
+
+document.getElementById('btnStep2').addEventListener('click', async function() {
+  var valid = true;
+  [['nome',validateNome,'nomeError'],['whatsapp',validateWhatsapp,'whatsappError'],['email',validateEmail,'emailError']].forEach(function(a) {
+    var el = document.getElementById(a[0]); var err = a[1](el.value); var f = el.closest('.field');
+    if (err) { f.classList.add('error'); document.getElementById(a[2]).textContent = err; valid = false; } else { f.classList.remove('error'); }
+  });
+  var cl = document.getElementById('nomeClinica');
+  if (cl.value.trim().length < 2) { cl.closest('.field').classList.add('error'); valid = false; } else { cl.closest('.field').classList.remove('error'); }
+  var cargo = document.querySelector('input[name="cargo"]:checked');
+  if (!cargo) { alert('Selecione seu cargo.'); valid = false; }
+  if (!valid) return;
+  var btn = document.getElementById('btnStep2'); var orig = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<div class="spinner" style="display:block"></div>';
+  var isDup = await checkDuplicateLead();
+  if (isDup) { showDuplicateScreen(); return; }
+  btn.disabled = false; btn.innerHTML = orig;
+  goToStep(3);
+});
+
+document.getElementById('btnStep3').addEventListener('click', function() {
+  if (!document.querySelector('input[name="investe_ads"]:checked') || document.querySelectorAll('input[name="plataforma"]:checked').length === 0) { alert('Preencha todas as perguntas desta etapa.'); return; }
+  goToStep(4);
+});
+
+document.getElementById('btnStep4').addEventListener('click', function() {
+  if (document.querySelectorAll('input[name="interesse"]:checked').length === 0) { alert('Selecione pelo menos um serviço.'); return; }
+  goToStep(5);
+});
+
+document.getElementById('btnStep5').addEventListener('click', async function() {
+  var fat = document.querySelector('input[name="faturamento"]:checked');
+  var urg = document.querySelector('input[name="urgencia"]:checked');
+  if (!fat || !urg) { alert('Preencha faturamento e urgência.'); return; }
+
+  var btn = document.getElementById('btnStep5');
+  var txt = document.getElementById('step5Text');
+  var spinner = document.getElementById('step5Spinner');
+  btn.disabled = true; txt.style.display = 'none'; spinner.style.display = 'block';
+
+  var params = new URLSearchParams(window.location.search);
+  var interesses = Array.from(document.querySelectorAll('input[name="interesse"]:checked')).map(function(i) { return i.value; });
+  var plataformas = Array.from(document.querySelectorAll('input[name="plataforma"]:checked')).map(function(i) { return i.value; });
+
+  var payload = {
+    segmento: (document.querySelector('input[name="segmento"]:checked') || {}).value || '',
+    nome: document.getElementById('nome').value.trim(),
+    whatsapp: document.getElementById('whatsapp').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    nome_clinica: document.getElementById('nomeClinica').value.trim(),
+    cidade: document.getElementById('cidade').value.trim() || null,
+    cargo: (document.querySelector('input[name="cargo"]:checked') || {}).value || null,
+    investe_ads: (document.querySelector('input[name="investe_ads"]:checked') || {}).value || '',
+    maior_dor: 'trafego_pago',
+    observacao: 'Plataformas: ' + plataformas.join(', ') + ' | Serviços: ' + interesses.join(', '),
+    interesses: interesses,
+    faturamento: fat.value,
+    urgencia: urg.value,
+    lead_score: 0,
+    lead_classification: 'WARM',
+    utm_source: params.get('utm_source') || null,
+    utm_medium: params.get('utm_medium') || null,
+    utm_campaign: params.get('utm_campaign') || null,
+    fbclid: params.get('fbclid') || null,
+    entry_point: 'lp_trafego',
+    id_origem: 'LP-Trafego'
+  };
+
+  // Lead scoring
+  var score = 0;
+  if (payload.segmento === 'clinica') score += 25; else if (payload.segmento === 'medico') score += 20; else score += 15;
+  if (urg.value === 'alta') score += 35; else score += 10;
+  switch(fat.value) { case 'acima_100k': score += 40; break; case '50k_100k': score += 35; break; case '25k_50k': score += 25; break; case '15k_25k': score += 15; break; default: score += 5; }
+  var adsV = (document.querySelector('input[name="investe_ads"]:checked') || {}).value || '';
+  switch(adsV) { case 'acima_5k': score += 30; break; case '3k_5k': score += 25; break; case '1k_3k': score += 20; break; case 'ate_1k': score += 10; break; default: score += 5; }
+  score += interesses.length * 3;
+  var cargoVal = (document.querySelector('input[name="cargo"]:checked') || {}).value || '';
+  if (cargoVal === 'proprietario') score += 20; else if (cargoVal === 'gerente') score += 15; else if (cargoVal === 'marketing') score += 10; else score += 5;
+  payload.lead_score = score;
+  payload.lead_classification = score >= 120 ? 'HOT' : score >= 70 ? 'WARM' : 'COLD';
+
+  savedPayload = payload;
+  try {
+    var res = await fetch(SUPABASE_URL + '/rest/v1/leads_rise_hub', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Prefer': 'return=representation' },
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+      var d = await res.json(); if (d && d[0]) savedLeadId = d[0].id;
+      console.log('✅ Lead saved:', savedLeadId);
+      try { localStorage.setItem('rh_trafego_submitted', '1'); } catch(e) {}
+      try { document.cookie = 'rh_trafego=1; max-age=31536000; path=/; SameSite=Lax'; } catch(e) {}
+    } else { var err = await res.text(); console.error('❌ Save failed:', res.status, err); }
+  } catch(e) { console.error('❌ Save error:', e); }
+
+  var eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  sendMetaConversionEvent(payload, eventId);
+  if (typeof fbq === 'function') {
+    var fv = fat.value === 'acima_100k' ? 10000 : fat.value === '50k_100k' ? 7500 : fat.value === '25k_50k' ? 3750 : fat.value === '15k_25k' ? 2000 : 1000;
+    fbq('track', 'Lead', { content_name: 'lead_rise_hub_trafego', currency: 'BRL', value: fv }, { eventID: eventId });
+  }
+
+  btn.disabled = false; txt.style.display = 'inline'; spinner.style.display = 'none';
+  goToStep(6);
+  await loadBookings();
+  renderWeek();
+});
+
+// ============================================================
+//  AGENDAMENTO (slots de 1h)
+// ============================================================
+var START_HOUR = 9;
+var END_HOUR = 18;
+var SLOT_DURATION = 60;
+var SLOT_STARTS = [];
+for (var m = START_HOUR * 60; m + SLOT_DURATION <= END_HOUR * 60; m += SLOT_DURATION) {
+  SLOT_STARTS.push(m);
+}
+var WEEKDAY_NAMES = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+var MONTH_NAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+var currentWeekStart = getNextMonday(new Date());
+var selectedDate = null;
+var selectedTime = null;
+var bookedSlots = [];
+
+function getNextMonday(d) {
+  var date = new Date(d);
+  date.setHours(0,0,0,0);
+  var day = date.getDay();
+  var diff = day === 0 ? 1 : day === 1 ? 0 : 8 - day;
+  date.setDate(date.getDate() + diff);
+  return date;
+}
+
+function formatSlotTime(minutes) {
+  var h = Math.floor(minutes / 60);
+  var m = minutes % 60;
+  return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+}
+
+function isSlotBooked(date, startMin) {
+  var slotStart = new Date(date);
+  slotStart.setHours(Math.floor(startMin/60), startMin%60, 0, 0);
+  var slotEnd = new Date(slotStart.getTime() + SLOT_DURATION * 60000);
+  return bookedSlots.some(function(b) {
+    var bs = new Date(b.booking_date);
+    var be = new Date(bs.getTime() + SLOT_DURATION * 60000);
+    return slotStart < be && slotEnd > bs;
+  });
+}
+
+function getAvailableCount(date) {
+  var count = 0;
+  SLOT_STARTS.forEach(function(s) { if (!isSlotBooked(date, s)) count++; });
+  return count;
+}
+
+async function loadBookings() {
+  var from = new Date(currentWeekStart);
+  var to = new Date(from); to.setDate(to.getDate() + 14);
+  try {
+    var res = await fetch(SUPABASE_URL + '/rest/v1/bookings_rise_hub?status=eq.confirmado&booking_date=gte.' + from.toISOString() + '&booking_date=lte.' + to.toISOString() + '&select=booking_date', {
+      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+    });
+    if (res.ok) bookedSlots = await res.json();
+  } catch(e) { console.error('Bookings load failed:', e); }
+}
+
+function renderWeek() {
+  var grid = document.getElementById('dayGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  var label = document.getElementById('weekLabel');
+  var endWeek = new Date(currentWeekStart);
+  endWeek.setDate(endWeek.getDate() + 4);
+  label.textContent = currentWeekStart.getDate() + ' ' + MONTH_NAMES[currentWeekStart.getMonth()] + ' — ' + endWeek.getDate() + ' ' + MONTH_NAMES[endWeek.getMonth()];
+
+  var today = new Date(); today.setHours(0,0,0,0);
+  for (var i = 0; i < 5; i++) {
+    var d = new Date(currentWeekStart);
+    d.setDate(d.getDate() + i);
+    var isPast = d < today;
+    var avail = isPast ? 0 : getAvailableCount(d);
+    var card = document.createElement('div');
+    card.className = 'day-card' + (isPast || avail === 0 ? ' disabled' : '');
+    var slotsClass = avail >= 5 ? 'green' : avail >= 3 ? 'yellow' : 'red';
+    card.innerHTML = '<div class="day-name">' + WEEKDAY_NAMES[d.getDay()] + '</div><div class="day-num">' + d.getDate() + '</div><div class="day-slots ' + (isPast ? '' : slotsClass) + '">' + (isPast ? 'Passado' : avail === 0 ? 'Lotado' : avail + ' vagas') + '</div>';
+    if (!isPast && avail > 0) {
+      (function(date) {
+        card.addEventListener('click', function() {
+          document.querySelectorAll('.day-card').forEach(function(c) { c.classList.remove('selected'); });
+          card.classList.add('selected');
+          selectedDate = date;
+          selectedTime = null;
+          document.getElementById('btnConfirm').disabled = true;
+          renderTimeSlots(date);
+        });
+      })(new Date(d));
+    }
+    grid.appendChild(card);
+  }
+}
+
+function renderTimeSlots(date) {
+  var section = document.getElementById('timeSection');
+  var grid = document.getElementById('timeGrid');
+  var label = document.getElementById('timeLabel');
+  section.style.display = 'block';
+  label.textContent = 'Horários — ' + WEEKDAY_NAMES[date.getDay()] + ', ' + date.getDate() + '/' + (date.getMonth()+1);
+  grid.innerHTML = '';
+  SLOT_STARTS.forEach(function(startMin) {
+    var booked = isSlotBooked(date, startMin);
+    var slot = document.createElement('div');
+    slot.className = 'time-slot' + (booked ? ' disabled' : '');
+    slot.textContent = formatSlotTime(startMin) + ' — ' + formatSlotTime(startMin + SLOT_DURATION);
+    if (!booked) {
+      (function(sMin) {
+        slot.addEventListener('click', function() {
+          document.querySelectorAll('.time-slot').forEach(function(s) { s.classList.remove('selected'); });
+          slot.classList.add('selected');
+          selectedTime = sMin;
+          document.getElementById('btnConfirm').disabled = false;
+        });
+      })(startMin);
+    }
+    grid.appendChild(slot);
+  });
+}
+
+// Week navigation
+document.getElementById('prevWeek').addEventListener('click', function() {
+  var prev = new Date(currentWeekStart);
+  prev.setDate(prev.getDate() - 7);
+  var today = new Date(); today.setHours(0,0,0,0);
+  if (prev >= today) { currentWeekStart = prev; renderWeek(); }
+});
+document.getElementById('nextWeek').addEventListener('click', function() {
+  var next = new Date(currentWeekStart);
+  next.setDate(next.getDate() + 7);
+  var maxWeeks = new Date(); maxWeeks.setDate(maxWeeks.getDate() + 28);
+  if (next <= maxWeeks) { currentWeekStart = next; renderWeek(); }
+});
+
+// Confirm booking
+document.getElementById('btnConfirm').addEventListener('click', async function() {
+  if (!selectedDate || selectedTime === null || !savedPayload) return;
+  var btn = document.getElementById('btnConfirm');
+  var txt = document.getElementById('confirmText');
+  var spinner = document.getElementById('confirmSpinner');
+  btn.disabled = true; txt.style.display = 'none'; spinner.style.display = 'block';
+
+  var bookingDate = new Date(selectedDate);
+  bookingDate.setHours(Math.floor(selectedTime/60), selectedTime%60, 0, 0);
+  var dateStr = bookingDate.toLocaleDateString('pt-BR');
+  var timeStr = formatSlotTime(selectedTime);
+
+  try {
+    // Save booking
+    await fetch(SUPABASE_URL + '/rest/v1/bookings_rise_hub', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({
+        lead_nome: savedPayload.nome,
+        lead_email: savedPayload.email,
+        lead_whatsapp: savedPayload.whatsapp,
+        lead_clinica: savedPayload.nome_clinica,
+        lead_id: savedLeadId,
+        booking_date: bookingDate.toISOString(),
+        booking_display: dateStr + ' às ' + timeStr,
+        platform: 'google_meet',
+        duration_minutes: 60,
+        status: 'confirmado'
+      })
+    });
+
+    // Update lead status
+    if (savedLeadId) {
+      await fetch(SUPABASE_URL + '/rest/v1/leads_rise_hub?id=eq.' + savedLeadId, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Prefer': 'return=minimal' },
+        body: JSON.stringify({
+          status: 'agendado',
+          notas_internas: 'Consultoria de tráfego agendada: ' + dateStr + ' às ' + timeStr + ' | Google Meet | 1h'
+        })
+      });
+    }
+    console.log('✅ Booking saved');
+  } catch(e) { console.error('Booking error:', e); }
+
+  // Pixel Schedule event
+  if (typeof fbq === 'function') {
+    fbq('track', 'Schedule', { content_name: 'booking_trafego', content_category: 'consultoria' });
+  }
+
+  // Show success
+  try { localStorage.setItem('rh_trafego_submitted', '1'); } catch(e) {}
+  try { document.cookie = 'rh_trafego=1; max-age=31536000; path=/; SameSite=Lax'; } catch(e) {}
+  document.getElementById('successNome').textContent = savedPayload.nome.split(' ')[0];
+  document.getElementById('successScreen').classList.add('visible');
+
+  btn.disabled = false; txt.style.display = 'inline'; spinner.style.display = 'none';
+});
+
+// REVEALS
+if ('requestIdleCallback' in window) { requestIdleCallback(initReveals); } else { setTimeout(initReveals, 200); }
+function initReveals() {
+  if (!('IntersectionObserver' in window)) return;
+  var obs = new IntersectionObserver(function(entries) { entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '50px' });
+  document.querySelectorAll('.card').forEach(function(el) { el.classList.add('reveal'); obs.observe(el); });
+}
+
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
