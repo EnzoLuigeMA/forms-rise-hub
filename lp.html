@@ -1,0 +1,3429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise Hub — IA que transforma sua clínica</title>
+<meta name="description" content="Automatize atendimento, agendamentos e qualificação de leads com IA no WhatsApp. Feito exclusivamente para clínicas médicas, odonto e estética.">
+
+<!-- DNS prefetch / preconnect para recursos críticos -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://ibidukamkkgsurqswsvf.supabase.co">
+
+<!-- Capturar fbclid imediatamente (não bloqueia) -->
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var fbclid = params.get('fbclid');
+  if (fbclid && !document.cookie.includes('_fbc=')) {
+    document.cookie = '_fbc=fb.1.' + Date.now() + '.' + fbclid + '; max-age=7776000; path=/; SameSite=Lax';
+  }
+})();
+</script>
+
+<!-- Meta Pixel — snippet oficial com carregamento deferido via rel=preload -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;t.defer=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2238173290034845');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2238173290034845&ev=PageView&noscript=1"/></noscript>
+
+<!-- Fonts otimizadas — display=swap pra não bloquear render -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"></noscript>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+:root{
+  --dark:#07060e;
+  --surface:#0f0e1a;
+  --surface2:#16152a;
+  --surface3:#1e1c38;
+  --border:#282640;
+  --border-strong:#3a3758;
+  --accent:#9b59b6;
+  --accent2:#e74c8b;
+  --accent-light:#c39bd3;
+  --accent-glow:rgba(155,89,182,.3);
+  --accent2-glow:rgba(231,76,139,.25);
+  --green:#00b894;
+  --green-glow:rgba(0,184,148,.25);
+  --red:#ff6b6b;
+  --amber:#fdcb6e;
+  --text:#f0eef8;
+  --text-dim:#908caa;
+  --text-muted:#5a5678;
+  --radius:16px;
+  --radius-sm:12px;
+  --radius-lg:24px;
+  --gradient:linear-gradient(135deg,var(--accent2),var(--accent));
+  --gradient-soft:linear-gradient(135deg,rgba(231,76,139,.15),rgba(155,89,182,.15));
+}
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--dark);color:var(--text);
+  line-height:1.6;overflow-x:hidden;
+  contain:layout style;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 600px 500px at 20% 10%,rgba(155,89,182,.06) 0%,transparent 60%),
+    radial-gradient(ellipse 500px 400px at 80% 40%,rgba(231,76,139,.04) 0%,transparent 60%);
+  will-change:auto;
+}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.container{max-width:1180px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 24px;
+  background:rgba(7,6,14,.8);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(40,38,64,.5);
+  transition:transform .4s ease;
+}
+.nav-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;
+  color:var(--text);text-decoration:none;
+}
+.nav-logo-img{
+  width:36px;height:36px;border-radius:10px;
+  object-fit:cover;
+  box-shadow:0 4px 16px var(--accent-glow);
+}
+.nav-cta{
+  padding:10px 22px;border-radius:10px;
+  background:var(--gradient);color:#fff;
+  font-family:inherit;font-size:.85rem;font-weight:700;
+  border:none;cursor:pointer;text-decoration:none;
+  box-shadow:0 4px 20px var(--accent2-glow);
+  transition:transform .2s,box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 28px var(--accent2-glow)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  padding:140px 0 80px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:999px;
+  background:rgba(155,89,182,.1);
+  border:1px solid rgba(155,89,182,.3);
+  font-size:.78rem;font-weight:600;color:var(--accent-light);
+  margin-bottom:24px;
+}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-dot 2s ease infinite;will-change:opacity}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,3.8rem);
+  margin-bottom:20px;
+}
+.hero h1 .highlight{
+  background:var(--gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:inline-block;
+}
+.hero-subtitle{
+  font-size:1.1rem;color:var(--text-dim);
+  margin-bottom:32px;max-width:560px;line-height:1.65;
+}
+.hero-cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-primary{
+  padding:16px 32px;border-radius:14px;
+  background:var(--gradient);color:#fff;
+  font-family:inherit;font-size:.95rem;font-weight:700;
+  border:none;cursor:pointer;text-decoration:none;
+  box-shadow:0 8px 32px var(--accent2-glow);
+  transition:transform .2s,box-shadow .2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px var(--accent2-glow)}
+.btn-primary .arrow{transition:transform .2s}
+.btn-primary:hover .arrow{transform:translateX(4px)}
+.btn-secondary{
+  padding:16px 28px;border-radius:14px;
+  background:transparent;color:var(--text);
+  font-family:inherit;font-size:.9rem;font-weight:600;
+  border:1.5px solid var(--border-strong);cursor:pointer;text-decoration:none;
+  transition:border-color .2s,background .2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-secondary:hover{border-color:var(--accent);background:rgba(155,89,182,.05)}
+
+.hero-trust{
+  display:flex;gap:28px;margin-top:32px;flex-wrap:wrap;
+}
+.hero-trust-item{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-muted)}
+.hero-trust-item svg{width:18px;height:18px;color:var(--accent-light)}
+
+/* Hero phone mockup */
+.hero-phone{
+  position:relative;
+  margin:0 auto;
+  max-width:320px;
+}
+.phone-frame{
+  background:var(--surface);
+  border:1.5px solid var(--border-strong);
+  border-radius:32px;
+  padding:16px 12px;
+  box-shadow:0 20px 80px rgba(0,0,0,.5),0 0 0 1px rgba(155,89,182,.1);
+  position:relative;
+}
+.phone-notch{
+  width:90px;height:20px;
+  background:var(--dark);
+  border-radius:0 0 12px 12px;
+  margin:-16px auto 12px;
+}
+.phone-header{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 12px 14px;border-bottom:1px solid var(--border);
+  margin-bottom:12px;
+}
+.phone-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;
+  flex-shrink:0;
+}
+.phone-contact strong{display:block;font-size:.85rem;color:var(--text)}
+.phone-contact .status{font-size:.68rem;color:var(--green)}
+.chat-msg{
+  max-width:80%;padding:10px 14px;border-radius:14px;
+  font-size:.78rem;line-height:1.4;margin-bottom:8px;
+  animation:slideIn .4s ease;
+}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.chat-msg.received{
+  background:var(--surface2);color:var(--text);
+  border-bottom-left-radius:4px;
+}
+.chat-msg.sent{
+  background:var(--gradient);color:#fff;
+  border-bottom-right-radius:4px;
+  margin-left:auto;
+}
+.chat-msg .time{display:block;font-size:.62rem;opacity:.6;margin-top:2px}
+.chat-typing{
+  display:inline-flex;gap:4px;padding:10px 14px;
+  background:var(--surface2);border-radius:14px;
+  border-bottom-left-radius:4px;
+}
+.chat-typing span{
+  width:6px;height:6px;border-radius:50%;background:var(--text-muted);
+  animation:typing 1.2s ease infinite;
+}
+.chat-typing span:nth-child(2){animation-delay:.15s}
+.chat-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+.phone-glow{
+  position:absolute;inset:-40px;
+  background:radial-gradient(circle,rgba(155,89,182,.12) 0%,transparent 60%);
+  z-index:-1;filter:blur(40px);
+}
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar{
+  padding:50px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(155,89,182,.03),transparent);
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  text-align:center;
+}
+@media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-number{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(2rem,4vw,2.8rem);font-weight:700;
+  background:var(--gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.stat-label{
+  font-size:.78rem;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:.8px;
+  margin-top:8px;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+section{padding:100px 0;position:relative;content-visibility:auto;contain-intrinsic-size:auto 800px}
+.section-tag{
+  display:inline-block;
+  padding:6px 14px;border-radius:999px;
+  background:rgba(155,89,182,.1);
+  border:1px solid rgba(155,89,182,.25);
+  font-size:.72rem;font-weight:700;color:var(--accent-light);
+  text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:16px;
+}
+.section-title{
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin-bottom:16px;max-width:720px;
+}
+.section-title .highlight{
+  background:var(--gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.section-subtitle{
+  font-size:1.05rem;color:var(--text-dim);
+  max-width:680px;margin-bottom:60px;line-height:1.65;
+}
+.section-center{text-align:center}
+.section-center .section-title,.section-center .section-subtitle{margin-left:auto;margin-right:auto}
+
+/* ============================================================
+   PROBLEMA SECTION
+   ============================================================ */
+.problema-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+@media(max-width:900px){.problema-grid{grid-template-columns:1fr}}
+.problema-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px;
+  position:relative;
+  transition:transform .25s ease,border-color .25s ease;
+  will-change:auto;
+}
+.problema-card:hover{border-color:rgba(231,76,139,.3);transform:translateY(-3px)}
+.problema-icon{
+  width:56px;height:56px;border-radius:14px;
+  background:rgba(255,107,107,.08);
+  border:1px solid rgba(255,107,107,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin-bottom:20px;
+}
+.problema-card h3{font-size:1.15rem;margin-bottom:10px;color:var(--text)}
+.problema-card p{font-size:.88rem;color:var(--text-dim);line-height:1.6}
+.problema-stat{
+  margin-top:16px;padding-top:16px;border-top:1px dashed var(--border);
+  font-size:.78rem;color:var(--red);font-weight:600;
+}
+
+/* ============================================================
+   SOLUÇÃO SECTION
+   ============================================================ */
+.solucao-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:900px){.solucao-split{grid-template-columns:1fr}}
+.solucao-features{display:flex;flex-direction:column;gap:24px;margin-top:32px}
+.solucao-feature{
+  display:flex;gap:16px;padding:20px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);
+  transition:border-color .3s;
+}
+.solucao-feature:hover{border-color:var(--accent)}
+.solucao-feature-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:var(--gradient-soft);
+  border:1px solid rgba(155,89,182,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.solucao-feature h4{font-size:1rem;margin-bottom:6px;color:var(--text)}
+.solucao-feature p{font-size:.85rem;color:var(--text-dim);line-height:1.55}
+
+.solucao-visual{
+  background:linear-gradient(180deg,var(--surface) 0%,var(--surface2) 100%);
+  border:1px solid var(--border-strong);
+  border-radius:24px;
+  padding:0;
+  position:relative;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.3),0 0 0 1px rgba(155,89,182,.08);
+}
+.solucao-visual::before{
+  content:'';position:absolute;
+  top:-40%;left:-20%;right:-20%;height:80%;
+  background:radial-gradient(ellipse at center,rgba(155,89,182,.18) 0%,rgba(231,76,139,.08) 40%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+.solucao-visual::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;z-index:0;
+  mask-image:radial-gradient(ellipse at 50% 30%,black,transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 30%,black,transparent 70%);
+}
+
+.sofia-card-inner{
+  position:relative;z-index:1;
+  padding:40px 36px 32px;
+}
+
+/* Header com foto e info lado a lado */
+.sofia-header{
+  display:flex;align-items:center;gap:22px;
+  margin-bottom:28px;
+  padding-bottom:26px;
+  border-bottom:1px solid rgba(155,89,182,.15);
+}
+.sofia-photo-wrap{
+  position:relative;flex-shrink:0;
+}
+.sofia-photo-wrap::before{
+  content:'';position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  background:var(--gradient);
+  opacity:.5;
+  filter:blur(14px);
+  z-index:-1;
+}
+.sofia-photo{
+  width:96px;height:96px;border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--surface);
+  box-shadow:0 0 0 2px var(--accent),0 12px 32px var(--accent-glow);
+  display:block;
+}
+.sofia-status-dot{
+  position:absolute;bottom:4px;right:4px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--green);
+  border:3px solid var(--surface);
+  box-shadow:0 0 12px rgba(0,184,148,.6);
+}
+.sofia-status-dot::after{
+  content:'';position:absolute;inset:-3px;
+  border-radius:50%;
+  border:2px solid var(--green);
+  opacity:.4;
+  animation:pulseDot 2s ease infinite;
+}
+@keyframes pulseDot{
+  0%,100%{transform:scale(1);opacity:.4}
+  50%{transform:scale(1.4);opacity:0}
+}
+
+.sofia-info{flex:1;min-width:0}
+.sofia-name{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.5rem;font-weight:700;
+  color:var(--text);
+  margin-bottom:4px;
+  letter-spacing:-.01em;
+  display:flex;align-items:center;gap:8px;
+  flex-wrap:wrap;
+}
+.sofia-verified{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--accent2);
+  flex-shrink:0;
+}
+.sofia-verified svg{width:11px;height:11px;color:#fff}
+.sofia-role{
+  font-size:.82rem;color:var(--accent-light);
+  font-weight:500;
+  margin-bottom:6px;
+  letter-spacing:.2px;
+}
+.sofia-online{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.72rem;color:var(--green);
+  font-weight:600;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+
+/* Skills grid premium */
+.sofia-skills{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  position:relative;z-index:1;
+}
+.sofia-skill{
+  background:rgba(22,21,42,.6);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(155,89,182,.18);
+  padding:14px 14px;
+  border-radius:12px;
+  font-size:.82rem;color:var(--text);
+  display:flex;align-items:center;gap:10px;
+  font-weight:500;
+  transition:all .2s ease;
+}
+.sofia-skill:hover{
+  border-color:rgba(155,89,182,.4);
+  transform:translateY(-1px);
+}
+.sofia-skill .check{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 0 12px rgba(0,184,148,.4);
+}
+.sofia-skill .check svg{width:11px;height:11px;color:#07060e;stroke-width:3.5}
+
+/* Badge premium embaixo */
+.sofia-badge{
+  margin-top:22px;
+  padding:14px 18px;
+  background:linear-gradient(90deg,rgba(155,89,182,.12),rgba(231,76,139,.12));
+  border:1px solid rgba(155,89,182,.25);
+  border-radius:12px;
+  display:flex;align-items:center;gap:12px;
+  position:relative;z-index:1;
+}
+.sofia-badge-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 4px 14px var(--accent2-glow);
+}
+.sofia-badge-icon svg{width:16px;height:16px;color:#fff}
+.sofia-badge-text{
+  flex:1;font-size:.76rem;color:var(--text-dim);line-height:1.4;
+}
+.sofia-badge-text strong{color:var(--text);font-weight:600;display:block;margin-bottom:1px;font-size:.8rem}
+
+@media(max-width:560px){
+  .sofia-card-inner{padding:32px 24px 28px}
+  .sofia-header{gap:16px;margin-bottom:22px;padding-bottom:22px}
+  .sofia-photo{width:80px;height:80px}
+  .sofia-name{font-size:1.25rem}
+  .sofia-skills{grid-template-columns:1fr;gap:8px}
+  .sofia-skill{padding:12px 14px;font-size:.8rem}
+}
+
+/* ============================================================
+   COMO FUNCIONA
+   ============================================================ */
+.passos{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  position:relative;
+}
+@media(max-width:900px){.passos{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.passos{grid-template-columns:1fr}}
+.passo{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px;
+  position:relative;
+  transition:transform .3s,border-color .3s;
+}
+.passo:hover{transform:translateY(-4px);border-color:var(--accent)}
+.passo-num{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.2rem;font-weight:700;color:#fff;
+  margin-bottom:16px;
+  box-shadow:0 4px 16px var(--accent2-glow);
+}
+.passo h3{font-size:1.05rem;margin-bottom:10px;color:var(--text)}
+.passo p{font-size:.85rem;color:var(--text-dim);line-height:1.55}
+.passo-time{
+  display:inline-block;margin-top:12px;
+  font-size:.72rem;font-weight:600;color:var(--accent-light);
+  padding:4px 10px;border-radius:6px;
+  background:rgba(155,89,182,.1);
+}
+
+/* ============================================================
+   RESULTADOS
+   ============================================================ */
+.resultados-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+@media(max-width:900px){.resultados-grid{grid-template-columns:1fr}}
+.resultado-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:36px 28px;
+  text-align:center;
+  position:relative;overflow:hidden;
+  transition:transform .3s,border-color .3s;
+}
+.resultado-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gradient);
+}
+.resultado-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.resultado-number{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:3.5rem;font-weight:800;
+  background:var(--gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:8px;
+}
+.resultado-label{
+  font-size:1rem;font-weight:600;color:var(--text);
+  margin-bottom:12px;
+}
+.resultado-desc{font-size:.82rem;color:var(--text-dim);line-height:1.55}
+
+/* ============================================================
+   DEPOIMENTOS
+   ============================================================ */
+.depoimentos-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+@media(max-width:900px){.depoimentos-grid{grid-template-columns:1fr}}
+.depoimento{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px;
+  position:relative;
+  transition:border-color .3s,transform .3s;
+}
+.depoimento:hover{border-color:var(--accent);transform:translateY(-4px)}
+.depoimento-stars{
+  display:flex;gap:2px;margin-bottom:16px;
+  color:var(--amber);
+}
+.depoimento-text{
+  font-size:.92rem;color:var(--text);
+  line-height:1.65;margin-bottom:20px;
+  font-style:italic;
+}
+.depoimento-author{
+  display:flex;align-items:center;gap:12px;
+  padding-top:20px;border-top:1px solid var(--border);
+}
+.depoimento-avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:#fff;font-size:16px;
+  flex-shrink:0;
+}
+.depoimento-author strong{display:block;font-size:.88rem;color:var(--text)}
+.depoimento-author span{font-size:.76rem;color:var(--text-muted)}
+
+/* ============================================================
+   SOBRE
+   ============================================================ */
+.sobre{
+  background:linear-gradient(180deg,transparent,rgba(155,89,182,.03));
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.sobre-content{
+  max-width:860px;margin:0 auto;text-align:center;
+}
+.sobre-highlights{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin-top:50px;
+}
+@media(max-width:700px){.sobre-highlights{grid-template-columns:1fr}}
+.sobre-highlight{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+}
+.sobre-highlight-icon{
+  font-size:32px;margin-bottom:12px;
+}
+.sobre-highlight h4{font-size:1rem;margin-bottom:8px;color:var(--text)}
+.sobre-highlight p{font-size:.82rem;color:var(--text-dim);line-height:1.55}
+
+/* ============================================================
+   COMO FUNCIONA — TIMELINE INTERATIVO
+   ============================================================ */
+.timeline-wrapper{
+  margin-top:60px;
+  position:relative;
+}
+
+/* Linha de etapas no topo */
+.timeline-steps{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  margin-bottom:50px;
+  padding:0 20px;
+}
+.timeline-line{
+  position:absolute;
+  top:32px;left:10%;right:10%;
+  height:2px;
+  background:var(--border);
+  z-index:0;
+}
+.timeline-line-fill{
+  position:absolute;
+  top:0;left:0;
+  height:100%;
+  background:var(--gradient);
+  width:0%;
+  transition:width .8s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 12px var(--accent-glow);
+}
+.timeline-step{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;
+  cursor:pointer;
+  z-index:1;
+}
+.timeline-step-icon{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--surface);
+  border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:var(--text-muted);
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+.timeline-step.completed .timeline-step-icon{
+  background:rgba(155,89,182,.15);
+  border-color:var(--accent);
+  color:var(--accent-light);
+}
+.timeline-step.active .timeline-step-icon{
+  background:var(--gradient);
+  border-color:var(--accent2);
+  color:#fff;
+  box-shadow:0 0 0 4px rgba(155,89,182,.15),0 8px 32px var(--accent2-glow);
+  transform:scale(1.05);
+}
+.timeline-step.active::after{
+  content:'';
+  position:absolute;
+  top:-6px;left:50%;
+  transform:translateX(-50%);
+  width:76px;height:76px;
+  border:2px solid var(--accent2);
+  border-radius:14px;
+  pointer-events:none;
+  animation:pulseSquare 2s ease infinite;
+}
+@keyframes pulseSquare{
+  0%,100%{opacity:.6;transform:translateX(-50%) scale(1)}
+  50%{opacity:1;transform:translateX(-50%) scale(1.04)}
+}
+.timeline-step-label{
+  margin-top:14px;
+  font-size:.7rem;font-weight:700;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:1px;
+  transition:color .3s;
+}
+.timeline-step.completed .timeline-step-label{color:var(--accent-light)}
+.timeline-step.active .timeline-step-label{color:var(--accent2)}
+
+/* Card de detalhes */
+.timeline-card{
+  background:var(--surface);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  padding:40px 44px 32px;
+  position:relative;
+  overflow:hidden;
+  min-height:240px;
+}
+.timeline-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 50% 100%,rgba(155,89,182,.08),transparent 60%);
+  pointer-events:none;
+}
+.timeline-card-content{
+  position:relative;
+  z-index:1;
+  animation:fadeInCard .5s ease;
+}
+@keyframes fadeInCard{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.timeline-card-header{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:16px;
+}
+.timeline-card-num{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.8rem;font-weight:800;color:#fff;
+  flex-shrink:0;
+  box-shadow:0 4px 16px var(--accent2-glow);
+}
+.timeline-card h3{
+  font-size:1.5rem;
+  margin:0;
+  color:var(--text);
+}
+.timeline-card-desc{
+  font-size:.95rem;
+  color:var(--text-dim);
+  line-height:1.65;
+  margin-bottom:22px;
+  max-width:680px;
+}
+.timeline-card-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:999px;
+  background:rgba(155,89,182,.1);
+  border:1px solid rgba(155,89,182,.3);
+  color:var(--accent-light);
+  font-size:.82rem;font-weight:600;
+  margin-bottom:22px;
+}
+.timeline-card-next{
+  font-size:.8rem;color:var(--text-muted);
+  display:flex;align-items:center;gap:6px;
+  cursor:pointer;
+  transition:color .2s;
+  user-select:none;
+}
+.timeline-card-next:hover{color:var(--accent-light)}
+.timeline-card-next .arrow{display:inline-block;transition:transform .2s}
+.timeline-card-next:hover .arrow{transform:translateX(3px)}
+.timeline-card-next strong{color:var(--text-dim);font-weight:600}
+
+/* Botão próximo minimalista */
+.timeline-next-btn{
+  position:absolute;
+  top:24px;right:24px;
+  width:40px;height:40px;
+  border-radius:50%;
+  background:rgba(155,89,182,.08);
+  border:1px solid rgba(155,89,182,.25);
+  color:var(--accent-light);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .25s ease;
+  z-index:2;
+  padding:0;
+}
+.timeline-next-btn:hover{
+  background:var(--gradient);
+  border-color:var(--accent2);
+  color:#fff;
+  transform:translateX(2px);
+  box-shadow:0 4px 20px var(--accent2-glow);
+}
+.timeline-next-btn:active{transform:translateX(2px) scale(.95)}
+.timeline-next-btn:disabled{
+  opacity:.3;cursor:not-allowed;
+  transform:none!important;box-shadow:none!important;
+  background:rgba(155,89,182,.08)!important;
+  color:var(--text-muted)!important;
+}
+@media(max-width:780px){
+  .timeline-next-btn{top:16px;right:16px;width:34px;height:34px}
+}
+
+/* Progress bar embaixo do card */
+.timeline-progress{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:3px;
+  background:rgba(155,89,182,.1);
+  overflow:hidden;
+}
+.timeline-progress-fill{
+  height:100%;
+  background:var(--gradient);
+  width:0%;
+  box-shadow:0 0 12px var(--accent-glow);
+}
+.timeline-progress-fill.animating{
+  animation:progressFill 6s linear forwards;
+}
+@keyframes progressFill{
+  from{width:0%}
+  to{width:100%}
+}
+
+/* Mensagem final */
+.timeline-complete{
+  display:none;
+  margin-top:18px;
+  padding:14px 20px;
+  background:rgba(0,184,148,.08);
+  border:1px solid rgba(0,184,148,.3);
+  border-radius:var(--radius-sm);
+  color:var(--green);
+  font-size:.86rem;font-weight:600;
+  text-align:center;
+}
+.timeline-complete.visible{display:block;animation:fadeInCard .5s ease}
+
+/* Mobile */
+@media(max-width:780px){
+  .timeline-steps{
+    grid-template-columns:repeat(5,1fr);
+    padding:0 4px;
+    gap:0;
+  }
+  .timeline-step-icon{width:46px;height:46px;font-size:18px}
+  .timeline-line{top:23px;left:12%;right:12%}
+  .timeline-step.active::after{
+    width:58px;height:58px;
+    top:-6px;
+  }
+  .timeline-step-label{font-size:.6rem;margin-top:10px;letter-spacing:.5px}
+  .timeline-card{padding:28px 22px 26px}
+  .timeline-card h3{font-size:1.15rem}
+  .timeline-card-desc{font-size:.86rem}
+}
+
+/* ============================================================
+   SIMULADOR DE ROI
+   ============================================================ */
+.simulador{
+  background:linear-gradient(180deg,rgba(155,89,182,.04),rgba(231,76,139,.04));
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.simulador-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;
+  margin-top:50px;align-items:start;
+}
+@media(max-width:900px){.simulador-grid{grid-template-columns:1fr;gap:20px}}
+
+.sim-input-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px;
+  margin-bottom:16px;
+}
+.sim-input-card:last-child{margin-bottom:0}
+.sim-input-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:18px;gap:14px;
+}
+.sim-label{
+  font-size:.74rem;font-weight:600;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:.6px;line-height:1.3;
+  flex:1;
+}
+.sim-value-box{
+  background:rgba(155,89,182,.12);
+  border:1.5px solid var(--accent);
+  color:var(--accent-light);
+  padding:8px 16px;border-radius:10px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.05rem;font-weight:700;
+  min-width:90px;text-align:center;
+  flex-shrink:0;
+}
+
+/* Slider */
+.sim-slider{
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:6px;
+  background:var(--border);
+  border-radius:3px;outline:none;
+  cursor:pointer;
+}
+.sim-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--gradient);
+  cursor:pointer;border:3px solid var(--surface);
+  box-shadow:0 4px 16px var(--accent2-glow);
+  transition:transform .15s;
+}
+.sim-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.sim-slider::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;
+  background:#9b59b6;
+  cursor:pointer;border:3px solid var(--surface);
+  box-shadow:0 4px 16px var(--accent2-glow);
+}
+
+/* Resultado cards */
+.sim-result-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:22px 24px;
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:14px;
+}
+.sim-result-card:last-child{margin-bottom:0}
+.sim-result-icon{
+  width:42px;height:42px;border-radius:11px;
+  background:rgba(155,89,182,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.sim-result-info{flex:1}
+.sim-result-label{
+  font-size:.78rem;color:var(--text-dim);margin-bottom:4px;line-height:1.3;
+}
+.sim-result-value{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.5rem;font-weight:700;color:var(--text);
+  line-height:1;
+}
+.sim-result-value .small{font-size:.78rem;color:var(--text-dim);font-weight:500;margin-left:4px}
+
+.sim-result-card.highlight{
+  background:rgba(0,184,148,.06);
+  border-color:rgba(0,184,148,.3);
+}
+.sim-result-card.highlight .sim-result-icon{
+  background:rgba(0,184,148,.15);
+}
+.sim-result-card.highlight .sim-result-value{color:var(--green)}
+
+.sim-result-card.bonus{
+  background:rgba(155,89,182,.06);
+  border-color:rgba(155,89,182,.3);
+}
+.sim-result-card.bonus .sim-result-icon{
+  background:rgba(155,89,182,.15);
+}
+.sim-result-card.bonus .sim-result-value{color:var(--accent-light)}
+
+/* Card final big */
+.sim-final-card{
+  background:var(--gradient);
+  border-radius:var(--radius);
+  padding:32px 28px;
+  text-align:center;
+  margin-top:14px;
+  box-shadow:0 12px 48px var(--accent2-glow);
+  position:relative;overflow:hidden;
+}
+.sim-final-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.15),transparent 60%);
+  pointer-events:none;
+}
+.sim-final-label{
+  font-size:.72rem;font-weight:700;color:rgba(255,255,255,.85);
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;
+  position:relative;z-index:1;
+}
+.sim-final-value{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(2.5rem,6vw,3.5rem);font-weight:800;color:#fff;
+  line-height:1;margin-bottom:10px;
+  position:relative;z-index:1;
+}
+.sim-final-extra{
+  font-size:.85rem;color:rgba(255,255,255,.9);
+  position:relative;z-index:1;
+}
+.sim-cta-button{
+  display:inline-block;margin-top:20px;
+  padding:14px 32px;border-radius:12px;
+  background:#fff;color:var(--accent);
+  font-family:inherit;font-size:.92rem;font-weight:700;
+  text-decoration:none;
+  position:relative;z-index:1;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.sim-cta-button:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.3)}
+
+/* ============================================================
+   FORM EMBUTIDO
+   ============================================================ */
+.form-section{
+  padding:100px 0;
+  background:linear-gradient(180deg,rgba(231,76,139,.04),rgba(155,89,182,.04));
+  border-top:1px solid var(--border);
+  position:relative;
+}
+.form-container{
+  max-width:640px;margin:0 auto;
+  background:var(--surface);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  padding:48px 40px;
+  position:relative;overflow:hidden;
+  box-shadow:0 20px 80px rgba(0,0,0,.4);
+}
+.form-container::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gradient);
+}
+@media(max-width:600px){.form-container{padding:32px 24px}}
+
+.progress-section{margin-bottom:28px;display:none}
+.progress-section.visible{display:block}
+.progress-track{
+  width:100%;height:4px;background:var(--border);
+  border-radius:2px;overflow:hidden;margin-bottom:10px;
+}
+.progress-fill{
+  height:100%;width:0%;
+  background:var(--gradient);
+  border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);
+}
+.progress-label{
+  text-align:center;font-size:.72rem;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:.8px;font-weight:600;
+}
+
+.form-step{display:none;animation:stepIn .3s ease}
+.form-step.active{display:block}
+@keyframes stepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.step-title{font-size:1.3rem;font-weight:700;margin-bottom:6px;color:var(--text);font-family:'Space Grotesk',sans-serif}
+.step-subtitle{font-size:.86rem;color:var(--text-dim);margin-bottom:24px;line-height:1.55}
+
+.field{margin-bottom:18px}
+.field label{
+  display:block;font-size:.76rem;font-weight:600;
+  color:var(--text-dim);text-transform:uppercase;letter-spacing:.7px;
+  margin-bottom:8px;
+}
+.field label .req{color:var(--accent2);margin-left:2px}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--surface2);
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:14px 16px;font-family:inherit;font-size:.92rem;color:var(--text);
+  transition:border-color .15s,background .15s;outline:none;
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-muted)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--accent);
+  outline:3px solid var(--accent-glow);outline-offset:-1px;
+}
+.field select{
+  appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23908caa' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5l6.5 6 6.5-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;
+}
+.field select option{background:var(--surface);color:var(--text)}
+.field textarea{resize:vertical;min-height:90px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.field-row{grid-template-columns:1fr}}
+.field.error input,.field.error select,.field.error textarea{
+  border-color:var(--red);outline:3px solid rgba(255,107,107,.2);outline-offset:-1px;
+}
+.field .error-msg{font-size:.72rem;color:var(--red);margin-top:5px;display:none}
+.field.error .error-msg{display:block}
+.field-hint{font-size:.72rem;color:var(--text-muted);margin-top:6px;line-height:1.5}
+
+.option-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.option-grid.single-col{grid-template-columns:1fr}
+@media(max-width:480px){.option-grid{grid-template-columns:1fr}}
+.option-card{
+  position:relative;cursor:pointer;background:var(--surface2);
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:14px 16px;transition:border-color .15s,background .15s;
+  display:flex;align-items:center;gap:12px;
+}
+.option-card:hover{border-color:rgba(155,89,182,.4);background:rgba(155,89,182,.04)}
+.option-card.selected{
+  border-color:var(--accent);background:rgba(155,89,182,.08);
+  outline:3px solid var(--accent-glow);outline-offset:-1px;
+}
+.option-card input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+  width:0;height:0;
+}
+.option-icon{
+  font-size:1.2rem;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(155,89,182,.1);border-radius:10px;flex-shrink:0;
+}
+.option-card.selected .option-icon{background:rgba(155,89,182,.2)}
+.option-label{font-size:.84rem;font-weight:600;color:var(--text);line-height:1.3}
+.option-desc{font-size:.72rem;color:var(--text-dim);margin-top:2px;font-weight:400}
+
+/* Escala 0-10 */
+.scale-wrapper{
+  margin-top:14px;
+  padding:20px 18px 16px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+}
+.scale-grid{
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:8px;
+}
+.scale-item{
+  cursor:pointer;
+  aspect-ratio:1/1;
+  border:1.5px solid var(--border-strong);
+  background:var(--surface3);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.95rem;font-weight:700;
+  color:var(--text-dim);
+  transition:all .2s ease;
+  position:relative;
+  user-select:none;
+}
+.scale-item input{display:none}
+.scale-item:hover{
+  border-color:var(--accent);
+  color:var(--text);
+  transform:translateY(-2px);
+}
+.scale-item.selected{
+  background:var(--gradient);
+  border-color:var(--accent2);
+  color:#fff;
+  box-shadow:0 6px 20px var(--accent2-glow);
+  transform:translateY(-2px);
+}
+.scale-labels{
+  display:flex;justify-content:space-between;
+  margin-top:14px;
+  padding:0 2px;
+  font-size:.68rem;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:.8px;
+  font-weight:600;
+}
+.scale-labels span:last-child{color:var(--accent-light)}
+@media(max-width:560px){
+  .scale-wrapper{padding:16px 12px 14px}
+  .scale-grid{gap:5px}
+  .scale-item{font-size:.82rem;border-radius:8px}
+  .scale-labels{font-size:.6rem;margin-top:10px}
+}
+
+.btn-row{display:flex;gap:12px;margin-top:28px}
+.btn{
+  flex:1;font-family:inherit;font-size:.88rem;font-weight:700;
+  padding:14px 24px;border-radius:var(--radius-sm);border:none;cursor:pointer;
+  transition:transform .15s,box-shadow .15s;letter-spacing:.3px;
+}
+.btn-back{
+  background:var(--surface2);color:var(--text-dim);
+  border:1.5px solid var(--border);flex:.4;
+}
+.btn-back:hover{border-color:var(--text-dim);color:var(--text)}
+.btn-next{
+  background:var(--gradient);color:#fff;
+  box-shadow:0 4px 24px var(--accent2-glow);
+}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 8px 32px var(--accent2-glow)}
+.btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none!important}
+.btn-submit{
+  background:linear-gradient(135deg,var(--green),#55efc4);color:#07060e;
+  box-shadow:0 4px 24px var(--green-glow);
+}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 8px 32px var(--green-glow)}
+
+.spinner{
+  display:none;width:20px;height:20px;
+  border:2.5px solid rgba(7,6,14,.3);border-top-color:#07060e;
+  border-radius:50%;animation:spin .6s linear infinite;margin:0 auto;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============================================================
+   AGENDAMENTO (STEP 5 — EMBUTIDO)
+   ============================================================ */
+.week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.week-btn{
+  width:34px;height:34px;border-radius:10px;
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--text-dim);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;transition:all .2s;
+}
+.week-btn:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+.week-btn:disabled{opacity:.3;cursor:not-allowed}
+.week-label{font-size:.82rem;font-weight:600;color:var(--text-dim)}
+.day-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:24px}
+.day-card{
+  background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);padding:14px 8px;text-align:center;
+  cursor:pointer;transition:all .2s;
+}
+.day-card:hover:not(.disabled){border-color:rgba(155,89,182,.4);background:rgba(155,89,182,.04)}
+.day-card.selected{
+  border-color:var(--accent);background:rgba(155,89,182,.1);
+  outline:3px solid var(--accent-glow);outline-offset:-1px;
+}
+.day-card.disabled{opacity:.3;cursor:not-allowed}
+.day-weekday{font-size:.66rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.day-number{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:700;color:var(--text);margin:2px 0}
+.day-month{font-size:.62rem;color:var(--text-muted)}
+
+.time-label{font-size:.78rem;color:var(--text-dim);margin-bottom:10px;font-weight:600}
+.time-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.time-slot{
+  background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);padding:12px;text-align:center;
+  cursor:pointer;font-size:.86rem;font-weight:600;color:var(--text-dim);
+  transition:all .2s;
+}
+.time-slot:hover:not(.unavailable){border-color:var(--accent);color:var(--text);background:rgba(155,89,182,.04)}
+.time-slot.selected{
+  background:rgba(155,89,182,.1);border-color:var(--accent);color:var(--text);
+  outline:3px solid var(--accent-glow);outline-offset:-1px;
+}
+.time-slot.unavailable{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+
+.time-section{display:none;margin-top:20px}
+.time-section.visible{display:block}
+
+/* ============================================================
+   SUCCESS SCREEN (INLINE)
+   ============================================================ */
+.success-screen{display:none;animation:stepIn .5s ease;text-align:center}
+.success-screen.active{display:block}
+.success-check{
+  width:86px;height:86px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),#55efc4);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;
+  box-shadow:0 12px 48px var(--green-glow);
+  animation:pulseSuccess 2.5s ease infinite;
+}
+@keyframes pulseSuccess{0%,100%{box-shadow:0 12px 48px var(--green-glow)}50%{box-shadow:0 12px 60px rgba(0,184,148,.5)}}
+.success-check svg{width:42px;height:42px;color:#07060e}
+.success-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.5rem;font-weight:700;margin-bottom:10px;color:var(--text);
+}
+.success-subtitle{
+  font-size:.92rem;color:var(--text-dim);
+  margin-bottom:28px;line-height:1.55;
+}
+.success-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:20px;margin-bottom:20px;
+  text-align:left;
+}
+.success-card strong{display:block;font-size:.86rem;color:var(--text);margin-bottom:4px;font-family:'Space Grotesk',sans-serif}
+.success-card p{font-size:.82rem;color:var(--text-dim);line-height:1.55}
+
+/* Success buttons row */
+.success-btn-row{
+  display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;justify-content:center;
+}
+.success-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 22px;border-radius:var(--radius-sm);
+  font-family:inherit;font-size:.85rem;font-weight:700;
+  text-decoration:none;letter-spacing:.3px;
+  transition:all .3s ease;border:none;cursor:pointer;
+}
+.success-btn-insta{
+  background:var(--gradient);color:#fff;
+  box-shadow:0 4px 20px var(--accent2-glow);
+}
+.success-btn-insta:hover{transform:translateY(-1px);box-shadow:0 8px 28px var(--accent2-glow)}
+.success-btn-wpp{
+  background:#25d366;color:#fff;
+  box-shadow:0 4px 20px rgba(37,211,102,.3);
+}
+.success-btn-wpp:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(37,211,102,.4)}
+.success-btn svg{flex-shrink:0}
+
+/* BLOCKED SCREENS */
+.blocked-screen{
+  display:none;text-align:center;padding:32px 20px;
+  animation:stepIn .5s ease;
+}
+.blocked-screen.active{display:block}
+.blocked-icon{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(253,203,110,.08);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;font-size:2.5rem;
+  border:2px solid rgba(253,203,110,.2);
+}
+.blocked-screen h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.3rem;font-weight:700;margin-bottom:10px;color:var(--amber);
+}
+.blocked-screen p{
+  font-size:.88rem;color:var(--text-dim);line-height:1.65;
+  max-width:420px;margin:0 auto;
+}
+.blocked-divider{
+  width:60px;height:2px;background:var(--border);
+  margin:24px auto;border-radius:1px;
+}
+.blocked-cta{
+  font-size:.82rem;color:var(--text-muted);
+}
+.blocked-cta a{color:var(--accent-light);text-decoration:none}
+.blocked-cta a:hover{text-decoration:underline}
+.wpp-direct-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;border-radius:var(--radius-sm);
+  background:#25d366;color:#fff;
+  font-family:inherit;font-size:.88rem;font-weight:700;
+  text-decoration:none;letter-spacing:.3px;
+  box-shadow:0 4px 20px rgba(37,211,102,.3);
+  transition:all .3s ease;margin-top:8px;
+}
+.wpp-direct-btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(37,211,102,.4)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  padding:40px 0;
+  border-top:1px solid var(--border);
+  background:var(--surface);
+}
+.footer-inner{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:20px;font-size:.8rem;color:var(--text-muted);
+}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:var(--text-dim);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--accent-light)}
+
+/* ============================================================
+   REVEAL ANIMATIONS
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(20px);transition:all .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="data:image/webp;base64,UklGRvYCAABXRUJQVlA4IOoCAADwFwCdASqgAKAAPm00lkekIyIhKBUpSIANiWNu4MAAZn6KX1bOPla7l9MfpT/13mV/pL7/+cB5sfSAdMv6AHS1fs/+wGYp3Ke3VbHXLvVVx1IFOsEydkHGjp1y70NMvaVfxrBpXxKZRkkMoqSGOoqCkeFfxJFS+bA9ksKPzkYKIDuRfenl0vsy8cxJAALB5RWNKVXfGGpYM+uye1hf7j7P50RAJvKrEnSdk/kARk7n8Pt8+YBBbtkEY8OAox+OBB2pgIp1wYxMAAD+0cYAGz51x8w/HDklS2RkFuPmEdVzDWT0nInhuZbv6hxV3Kz3hpo5IO04gxwIFxC5q2mjJYBleKGHZxPzExbF6S8L4fTrQCn01uc3+w1mjldq9v9DVfSZK7m03CZJNm9h+pBjt9mwnOjPziB6WMBF7DtxBaUQLMizh+lz7nW7ohD7A2r0GDrXAHr1S1fI4231vUeeKxnfLqV+XuLebW+5EGL09WKgiyJmvD2MhkhjnMC032mnGC1vye2GfRcSBiWBJ9Z1X+8Je5F+yssmH/jDll+Xj8rCG0fY4eMwCFfxZVt9dryJnJZvCE4QDfjAk9WLsDF56brb8tIRZ4qNhDAnLTtazKOdo/KvKKc2kiwIRmrOUv9JUszNUB8f8ElI4b8f8DkQdTsm1fc3K9MMqCHy9NpnVyMYz79vfkQsy/hOwVEbU6hh7wiEG7pGI5Cxxno0desp+Rgs69lbopIKEEckAVK1G4NjU2tzAD2tTRvfiJu2cT0OxCijfDx1Qw5B00VudEKR/3CzSLYk87XecF+8RdCwVsFMdTOx06JE1JcatoXR1wAH6bSPWyzdhcni+2zj/XHLOGapzdACvftN4qe7P9+Q9kCljq+/5yS/9qcXCPKJe/j+hv6Y7UfBpZABvLlTLPmKA7VaTb7yi+NBZBVlH2W5OCtbSNfQhavxsOBbm/giuqKGY4gzCa1vB0khxtimoetFbCalsLqPJaAAAAAAAA==" alt="Rise Hub" class="nav-logo-img" width="36" height="36" decoding="async">
+      <span>Rise Hub</span>
+    </a>
+    <a href="#formulario" class="nav-cta">Agendar demonstração</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="dot"></span> IA treinada para clínicas médicas</div>
+        <h1>Sua clínica atendendo <span class="highlight">24 horas por dia</span>, sem aumentar sua equipe.</h1>
+        <p class="hero-subtitle">A Rise Hub implementa IA no WhatsApp da sua clínica que responde pacientes em menos de 5 segundos, agenda consultas automaticamente e elimina faltas. Enquanto você dorme, sua agenda se preenche.</p>
+        
+        <div class="hero-cta-row">
+          <a href="#formulario" class="btn-primary">
+            Agendar demonstração <span class="arrow">→</span>
+          </a>
+          <a href="#simulador" class="btn-secondary">
+            Calcular meu potencial
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="hero-trust-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Especialistas em clínicas
+          </div>
+          <div class="hero-trust-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Implementação em 7 dias
+          </div>
+          <div class="hero-trust-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            LGPD compliant
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-phone">
+        <div class="phone-glow"></div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-header">
+            <div class="phone-avatar">S</div>
+            <div class="phone-contact">
+              <strong>Sofia — Clínica Derma+</strong>
+              <div class="status">● online</div>
+            </div>
+          </div>
+          <div class="chat-msg received">
+            Olá! Vi o anúncio de vocês. Quanto custa o botox?
+            <span class="time">23:47</span>
+          </div>
+          <div class="chat-msg sent">
+            Oi! Tudo bem? 😊 Posso te ajudar agora mesmo. O valor varia por região aplicada. Me conta, é sua primeira vez?
+            <span class="time">23:47</span>
+          </div>
+          <div class="chat-msg received">
+            Primeira vez. Quero testa ruga testa
+            <span class="time">23:48</span>
+          </div>
+          <div class="chat-msg sent">
+            Perfeito! Temos horário amanhã 14h ou quinta 10h. Qual fica melhor pra você?
+            <span class="time">23:48</span>
+          </div>
+          <div class="chat-typing">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS BAR
+     ============================================================ -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-number">+68%</div>
+        <div class="stat-label">Mais agendamentos</div>
+      </div>
+      <div>
+        <div class="stat-number">-74%</div>
+        <div class="stat-label">Redução de no-show</div>
+      </div>
+      <div>
+        <div class="stat-number">&lt;5s</div>
+        <div class="stat-label">Tempo de resposta</div>
+      </div>
+      <div>
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Atendimento ativo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROBLEMA
+     ============================================================ -->
+<section id="problema">
+  <div class="container">
+    <div class="section-center">
+      <span class="section-tag">O problema real</span>
+      <h2 class="section-title">Toda clínica está <span class="highlight">sangrando dinheiro</span> e nem percebe.</h2>
+      <p class="section-subtitle">Estes são os 3 buracos invisíveis que drenam o faturamento de 9 em cada 10 clínicas no Brasil hoje.</p>
+    </div>
+
+    <div class="problema-grid">
+      <div class="problema-card">
+        <div class="problema-icon">📱</div>
+        <h3>Leads esquecidos no WhatsApp</h3>
+        <p>Paciente manda mensagem às 22h querendo agendar. Sua recepção só vê no dia seguinte. Ele já marcou em outra clínica.</p>
+        <div class="problema-stat">📉 78% dos leads são perdidos por atraso na resposta</div>
+      </div>
+
+      <div class="problema-card">
+        <div class="problema-icon">❌</div>
+        <h3>No-show destruindo a agenda</h3>
+        <p>Paciente marca e não aparece. Horário perdido, equipe ociosa, faturamento no lixo. E ninguém tempo pra ficar ligando pra confirmar.</p>
+        <div class="problema-stat">📉 Média de 30% de faltas em clínicas sem automação</div>
+      </div>
+
+      <div class="problema-card">
+        <div class="problema-icon">🔄</div>
+        <h3>Pacientes antigos esquecidos</h3>
+        <p>Você tem centenas de pacientes na base que não voltam há meses. Ninguém vai atrás. Receita recorrente virando pó.</p>
+        <div class="problema-stat">📉 85% das clínicas nunca reativam pacientes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOLUÇÃO
+     ============================================================ -->
+<section id="solucao" style="background:linear-gradient(180deg,transparent,rgba(155,89,182,.03));border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="solucao-split">
+      <div>
+        <span class="section-tag">A solução</span>
+        <h2 class="section-title">Conheça a <span class="highlight">Sofia</span>, a IA que atende sua clínica como se fosse você.</h2>
+        <p class="section-subtitle">Ela não dorme, não fica de mau humor, não esquece de responder. A Sofia entende áudio, imagem e texto, conversa como uma recepcionista experiente, consulta sua agenda em tempo real e só passa pra você os pacientes que já estão prontos pra marcar.</p>
+
+        <div class="solucao-features">
+          <div class="solucao-feature">
+            <div class="solucao-feature-icon">🤖</div>
+            <div>
+              <h4>Entende áudio, imagem e texto</h4>
+              <p>Paciente manda áudio perguntando sobre preço? Foto do dente com problema? Ela entende e responde como uma recepcionista humana.</p>
+            </div>
+          </div>
+          <div class="solucao-feature">
+            <div class="solucao-feature-icon">📅</div>
+            <div>
+              <h4>Agenda integrada ao seu sistema</h4>
+              <p>Integração nativa com Doctoralia, iClinic, Nimer e outros. A Sofia consulta agenda em tempo real e marca direto.</p>
+            </div>
+          </div>
+          <div class="solucao-feature">
+            <div class="solucao-feature-icon">🎯</div>
+            <div>
+              <h4>Qualifica antes de passar pra equipe</h4>
+              <p>Só chegam na sua recepção pacientes que já estão prontos pra agendar. Sem curioso, sem perguntinha à toa.</p>
+            </div>
+          </div>
+          <div class="solucao-feature">
+            <div class="solucao-feature-icon">🔔</div>
+            <div>
+              <h4>Confirmação e lembretes automáticos</h4>
+              <p>24h antes, a Sofia confirma. 2h antes, lembra. No-show cai mais de 70% no primeiro mês.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solucao-visual">
+        <div class="sofia-card-inner">
+          <div class="sofia-header">
+            <div class="sofia-photo-wrap">
+              <img class="sofia-photo" src="data:image/webp;base64,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" alt="Sofia — IA Atendente Rise Hub" width="96" height="96" decoding="async">
+              <div class="sofia-status-dot"></div>
+            </div>
+            <div class="sofia-info">
+              <div class="sofia-name">
+                Sofia
+                <span class="sofia-verified" title="IA verificada">
+                  <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+              </div>
+              <div class="sofia-role">IA Atendente • Rise Hub</div>
+              <div class="sofia-online">
+                <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="currentColor"/></svg>
+                Online agora
+              </div>
+            </div>
+          </div>
+
+          <div class="sofia-skills">
+            <div class="sofia-skill">
+              <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              Atende 24/7
+            </div>
+            <div class="sofia-skill">
+              <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              Entende áudio
+            </div>
+            <div class="sofia-skill">
+              <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              Agenda sozinha
+            </div>
+            <div class="sofia-skill">
+              <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              Reativa pacientes
+            </div>
+            <div class="sofia-skill">
+              <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              Qualifica leads
+            </div>
+            <div class="sofia-skill">
+              <div class="check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+              LGPD compliant
+            </div>
+          </div>
+
+          <div class="sofia-badge">
+            <div class="sofia-badge-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div class="sofia-badge-text">
+              <strong>Resposta em menos de 5 segundos</strong>
+              Treinada com +50 mil conversas reais de clínicas.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMO FUNCIONA
+     ============================================================ -->
+<section id="como-funciona">
+  <div class="container">
+    <div class="section-center">
+      <span class="section-tag">Nossa metodologia</span>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto">Como <span class="highlight">construímos</span> sua IA</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto">100% personalizada e desenvolvida sob demanda para a sua clínica</p>
+    </div>
+
+    <div class="timeline-wrapper">
+      <!-- Linha de etapas -->
+      <div class="timeline-steps">
+        <div class="timeline-line">
+          <div class="timeline-line-fill" id="timelineLineFill"></div>
+        </div>
+        <div class="timeline-step" data-step="1">
+          <div class="timeline-step-icon">
+            <!-- Estetoscópio: diagnóstico -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+          </div>
+          <div class="timeline-step-label">Etapa 1</div>
+        </div>
+        <div class="timeline-step" data-step="2">
+          <div class="timeline-step-icon">
+            <!-- Cérebro: treinamento da IA -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+          </div>
+          <div class="timeline-step-label">Etapa 2</div>
+        </div>
+        <div class="timeline-step" data-step="3">
+          <div class="timeline-step-icon">
+            <!-- Plugue/conexão: integração -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6"/><path d="M15 2v6"/><path d="M12 17v5"/><path d="M5 8h14"/><path d="M6 8v3a6 6 0 0 0 12 0V8"/></svg>
+          </div>
+          <div class="timeline-step-label">Etapa 3</div>
+        </div>
+        <div class="timeline-step" data-step="4">
+          <div class="timeline-step-icon">
+            <!-- Foguete: go live -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <div class="timeline-step-label">Etapa 4</div>
+        </div>
+        <div class="timeline-step" data-step="5">
+          <div class="timeline-step-icon">
+            <!-- Gráfico/trending up: otimização contínua -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div class="timeline-step-label">Etapa 5</div>
+        </div>
+      </div>
+
+      <!-- Card de detalhes -->
+      <div class="timeline-card">
+        <button type="button" class="timeline-next-btn" id="timelineNextBtn" aria-label="Próxima etapa">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="timeline-card-content" id="timelineCardContent">
+          <!-- Preenchido via JS -->
+        </div>
+        <div class="timeline-progress">
+          <div class="timeline-progress-fill" id="timelineProgressFill"></div>
+        </div>
+      </div>
+
+      <div class="timeline-complete" id="timelineComplete">
+        ✓ Processo completo! Sua clínica estará 100% automatizada em 7 dias úteis.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RESULTADOS
+     ============================================================ -->
+<section id="resultados" style="background:linear-gradient(180deg,transparent,rgba(231,76,139,.03));border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-center">
+      <span class="section-tag">O que muda na prática</span>
+      <h2 class="section-title">A diferença entre uma clínica com IA e <span class="highlight">uma clínica que ainda está perdendo paciente</span>.</h2>
+      <p class="section-subtitle">Três mudanças concretas que sua clínica passa a ter no primeiro mês com a Sofia atendendo seu WhatsApp.</p>
+    </div>
+
+    <div class="resultados-grid">
+      <div class="resultado-card">
+        <div class="resultado-number">+68%</div>
+        <div class="resultado-label">Mais agendamentos no mês</div>
+        <div class="resultado-desc">Porque a Sofia responde em segundos, 24h por dia, sem deixar ninguém esperando — nem de madrugada, nem no fim de semana.</div>
+      </div>
+      <div class="resultado-card">
+        <div class="resultado-number">74%</div>
+        <div class="resultado-label">Menos pacientes faltando</div>
+        <div class="resultado-desc">Confirmação automática 24h antes e lembrete 2h antes da consulta. Cada horário confirmado é um faturamento que não vai pro lixo.</div>
+      </div>
+      <div class="resultado-card">
+        <div class="resultado-number">3x</div>
+        <div class="resultado-label">Mais rápido no WhatsApp</div>
+        <div class="resultado-desc">De minutos de espera para segundos de resposta. Quem responde primeiro agenda primeiro — e é sempre a sua clínica agora.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEPOIMENTOS
+     ============================================================ -->
+<section id="depoimentos">
+  <div class="container">
+    <div class="section-center">
+      <span class="section-tag">Quem usa</span>
+      <h2 class="section-title">Clínicas que <span class="highlight">já tomaram a decisão</span>.</h2>
+      <p class="section-subtitle">Veja o que nossos clientes estão falando sobre a transformação que a Rise Hub trouxe pra operação deles.</p>
+    </div>
+
+    <div class="depoimentos-grid">
+      <div class="depoimento">
+        <div class="depoimento-stars">★★★★★</div>
+        <p class="depoimento-text">"A Sofia virou o jogo. Antes a gente perdia lead de madrugada. Agora ela agenda, confirma e a gente só atende. Faturamento subiu 40% em 2 meses."</p>
+        <div class="depoimento-author">
+          <div class="depoimento-avatar">M</div>
+          <div>
+            <strong>Dra. Mariana Costa</strong>
+            <span>Clínica Derma+, São Paulo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="depoimento">
+        <div class="depoimento-stars">★★★★★</div>
+        <p class="depoimento-text">"Minha recepção tava afogada. Hoje ela só cuida do paciente que já vem qualificado. A Sofia filtra tudo. Melhor investimento do ano."</p>
+        <div class="depoimento-author">
+          <div class="depoimento-avatar">R</div>
+          <div>
+            <strong>Dr. Rafael Lima</strong>
+            <span>Odonto Excellence, Rio de Janeiro</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="depoimento">
+        <div class="depoimento-stars">★★★★★</div>
+        <p class="depoimento-text">"Implementação foi rápida e o suporte é absurdo. Em 7 dias tava tudo funcionando. No-show caiu de 28% pra 6%. Simplesmente outro patamar."</p>
+        <div class="depoimento-author">
+          <div class="depoimento-avatar">J</div>
+          <div>
+            <strong>Juliana Mendes</strong>
+            <span>Instituto Saúde+, Belo Horizonte</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOBRE
+     ============================================================ -->
+<section id="sobre" class="sobre">
+  <div class="container">
+    <div class="sobre-content">
+      <span class="section-tag">Sobre a Rise Hub</span>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto">IA para clínicas é o que fazemos. <span class="highlight">É a única coisa que fazemos.</span></h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto">Não somos agência. Não fazemos site. Não mexemos com e-commerce. Vivemos dentro do universo das clínicas há anos — conhecemos cada gargalo, cada objeção de paciente e cada lead que vaza no meio da noite. A Rise Hub existe para transformar esse caos em operação previsível. Do consultório solo ao grupo com múltiplas unidades.</p>
+
+      <div class="sobre-highlights">
+        <div class="sobre-highlight">
+          <div class="sobre-highlight-icon">🎯</div>
+          <h4>100% focados em saúde</h4>
+          <p>Só trabalhamos com clínicas, consultórios e profissionais da área médica. Zero distração, zero aprendizado na sua conta.</p>
+        </div>
+        <div class="sobre-highlight">
+          <div class="sobre-highlight-icon">🧠</div>
+          <h4>IA de última geração</h4>
+          <p>Modelos GPT-4 e Claude treinados especificamente com fluxos reais de atendimento médico, estético e odontológico.</p>
+        </div>
+        <div class="sobre-highlight">
+          <div class="sobre-highlight-icon">⚡</div>
+          <h4>7 dias do zero ao ar</h4>
+          <p>Diagnóstico, treinamento, integração e go-live em uma semana. Sua próxima segunda-feira já pode ter a Sofia trabalhando.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SIMULADOR DE ROI
+     ============================================================ -->
+<section id="simulador" class="simulador">
+  <div class="container">
+    <div class="section-center">
+      <span class="section-tag">Simulador</span>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto">Quanto a Rise Hub vai <span class="highlight">colocar no caixa</span> da sua clínica?</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto">Mexe nos números abaixo e veja em tempo real quanto sua clínica pode faturar a mais com IA no atendimento.</p>
+    </div>
+
+    <div class="simulador-grid">
+      <!-- INPUTS -->
+      <div>
+        <div class="sim-input-card">
+          <div class="sim-input-header">
+            <div class="sim-label">Quantos pacientes chegam no seu WhatsApp por semana, em média?</div>
+            <div class="sim-value-box" id="simPacientesValue">50</div>
+          </div>
+          <input type="range" min="10" max="500" step="5" value="50" class="sim-slider" id="simPacientes">
+        </div>
+
+        <div class="sim-input-card">
+          <div class="sim-input-header">
+            <div class="sim-label">Qual o ticket médio da sua consulta?</div>
+            <div class="sim-value-box" id="simTicketValue">R$ 300</div>
+          </div>
+          <input type="range" min="80" max="3000" step="20" value="300" class="sim-slider" id="simTicket">
+        </div>
+
+        <div style="text-align:center;font-size:.78rem;color:var(--text-muted);margin-top:16px;line-height:1.5">
+          💡 Cálculo baseado em <strong style="color:var(--text-dim)">10% de conversão atual</strong> (média de mercado sem IA) vs <strong style="color:var(--accent-light)">25% de conversão</strong> com a Sofia respondendo em segundos, 24h por dia.
+        </div>
+      </div>
+
+      <!-- RESULTADOS -->
+      <div>
+        <div class="sim-result-card">
+          <div class="sim-result-icon">📉</div>
+          <div class="sim-result-info">
+            <div class="sim-result-label">Você fatura hoje (10% conversão):</div>
+            <div class="sim-result-value" id="simHoje">R$ 6.000<span class="small">/mês</span></div>
+          </div>
+        </div>
+
+        <div class="sim-result-card highlight">
+          <div class="sim-result-icon">📈</div>
+          <div class="sim-result-info">
+            <div class="sim-result-label">Com a Sofia atendendo (25% conversão):</div>
+            <div class="sim-result-value" id="simComIA">R$ 15.000<span class="small">/mês</span></div>
+          </div>
+        </div>
+
+        <div class="sim-result-card bonus">
+          <div class="sim-result-icon">🔄</div>
+          <div class="sim-result-info">
+            <div class="sim-result-label">Bônus com reativação de pacientes:</div>
+            <div class="sim-result-value" id="simBonus">+ R$ 4.500<span class="small">/mês</span></div>
+          </div>
+        </div>
+
+        <div class="sim-final-card">
+          <div class="sim-final-label">💰 Seu potencial extra com a Rise Hub</div>
+          <div class="sim-final-value" id="simTotal">R$ 13.500</div>
+          <div class="sim-final-extra" id="simExtra">a mais por mês no caixa</div>
+          <a href="#formulario" class="sim-cta-button">Quero esse resultado →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FORM + AGENDAMENTO EMBUTIDOS
+     ============================================================ -->
+<section id="formulario" class="form-section">
+  <div class="container">
+    <div class="section-center" style="margin-bottom:40px">
+      <span class="section-tag">Agende sua demonstração</span>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto">Veja a <span class="highlight">Sofia em ação</span> na sua clínica.</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto">Em 1h30 mostramos exatamente como a Rise Hub vai funcionar pra sua clínica — com IA treinada pro seu segmento, integrações e proposta personalizada. Responda 4 perguntas rápidas e escolha o melhor horário.</p>
+    </div>
+
+    <div class="form-container">
+      <div class="progress-section" id="progressSection">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-label" id="progressLabel">Etapa 1 de 5</div>
+      </div>
+
+      <form id="riseForm" novalidate>
+
+        <!-- STEP 1: QUALIFICAÇÃO INICIAL -->
+        <div class="form-step active" data-step="1">
+          <div class="step-title">Qual das opções melhor descreve você?</div>
+          <div class="step-subtitle">Atendemos exclusivamente profissionais da saúde.</div>
+
+          <div class="option-grid single-col" id="segmentOptions">
+            <label class="option-card">
+              <input type="radio" name="segmento" value="medico">
+              <div class="option-icon">👨‍⚕️</div>
+              <div><div class="option-label">Médico(a)</div><div class="option-desc">Qualquer especialidade médica</div></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="segmento" value="profissional_saude">
+              <div class="option-icon">🩺</div>
+              <div><div class="option-label">Profissional de saúde</div><div class="option-desc">Dentista, fisioterapeuta, psicólogo, nutricionista etc.</div></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="segmento" value="clinica">
+              <div class="option-icon">🏥</div>
+              <div><div class="option-label">Gestor(a) de clínica</div><div class="option-desc">Proprietário, sócio ou gestor de clínica/consultório</div></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="segmento" value="nao_clinica">
+              <div class="option-icon">👀</div>
+              <div><div class="option-label">Apenas interessado no tema</div><div class="option-desc">Não trabalho na área da saúde</div></div>
+            </label>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-next" id="btnStep1" disabled style="flex:1">
+              Continuar →
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: DADOS DE CONTATO (AGORA VEM PRIMEIRO) -->
+        <div class="form-step" data-step="2">
+          <div class="step-title">Seus dados de contato</div>
+          <div class="step-subtitle">Vamos usar esses dados para enviar a confirmação da demonstração.</div>
+
+          <div class="field">
+            <label>Nome completo <span class="req">*</span></label>
+            <input type="text" id="nome" placeholder="Seu nome completo" required>
+            <div class="error-msg" id="nomeError">Informe seu nome completo</div>
+          </div>
+
+          <div class="field">
+            <label>WhatsApp pessoal (seu contato direto) <span class="req">*</span></label>
+            <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
+            <div class="error-msg" id="whatsappError">WhatsApp inválido</div>
+            <div class="field-hint">Esse é o número que vamos usar pra te enviar o link da demonstração.</div>
+          </div>
+
+          <div class="field">
+            <label>WhatsApp de atendimento da clínica <span class="req">*</span></label>
+            <input type="tel" id="whatsappClinica" placeholder="(00) 00000-0000" required>
+            <div class="error-msg" id="whatsappClinicaError">WhatsApp inválido</div>
+            <div class="field-hint">É o número que seus pacientes usam pra agendar. Vamos analisar esse canal antes da demonstração.</div>
+          </div>
+
+          <div class="field">
+            <label>E-mail <span class="req">*</span></label>
+            <input type="email" id="email" placeholder="seu@email.com" required>
+            <div class="error-msg" id="emailError">E-mail inválido</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Nome da clínica <span class="req">*</span></label>
+              <input type="text" id="nomeClinica" placeholder="Ex: Clínica Saúde Plena" required>
+              <div class="error-msg">Informe o nome</div>
+            </div>
+            <div class="field">
+              <label>Cidade / Estado</label>
+              <input type="text" id="cidade" placeholder="Ex: Belo Horizonte - MG">
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="goToStep(1)">Voltar</button>
+            <button type="button" class="btn btn-next" id="btnStep2">Continuar →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: ESPECIALIDADE + DESAFIO + IMPACTO -->
+        <div class="form-step" data-step="3">
+          <div class="step-title">Conta pra gente sobre sua atuação</div>
+          <div class="step-subtitle">Essas respostas nos ajudam a personalizar a demonstração para o seu cenário.</div>
+
+          <div class="field">
+            <label>Qual a sua especialidade? <span class="req">*</span></label>
+            <input type="text" id="especialidade" placeholder="Ex: Ortopedia, Harmonização facial, Odontologia estética..." required>
+            <div class="error-msg" id="especialidadeError">Informe sua especialidade</div>
+          </div>
+
+          <div class="field">
+            <label>Qual o seu maior desafio hoje? <span class="req">*</span></label>
+            <div class="option-grid single-col">
+              <label class="option-card"><input type="radio" name="desafio" value="poucos_pacientes"><div class="option-label">Poucos pacientes / agenda com muitos horários vagos</div></label>
+              <label class="option-card"><input type="radio" name="desafio" value="baixo_ticket"><div class="option-label">Baixo ticket médio da consulta</div></label>
+              <label class="option-card"><input type="radio" name="desafio" value="baixa_conversao"><div class="option-label">Recebo contatos, mas poucos fecham consulta ou retornam o orçamento</div></label>
+              <label class="option-card"><input type="radio" name="desafio" value="atendimento_falho"><div class="option-label">Dificuldade no atendimento (tempo de resposta, falhas de comunicação, ausência de follow-up)</div></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>De 0 a 10, quanto as falhas no atendimento impactam negativamente seu faturamento? <span class="req">*</span></label>
+            <div class="scale-wrapper">
+              <div class="scale-grid" id="impactoGrid">
+                <label class="scale-item" data-val="1"><input type="radio" name="impacto" value="1">1</label>
+                <label class="scale-item" data-val="2"><input type="radio" name="impacto" value="2">2</label>
+                <label class="scale-item" data-val="3"><input type="radio" name="impacto" value="3">3</label>
+                <label class="scale-item" data-val="4"><input type="radio" name="impacto" value="4">4</label>
+                <label class="scale-item" data-val="5"><input type="radio" name="impacto" value="5">5</label>
+                <label class="scale-item" data-val="6"><input type="radio" name="impacto" value="6">6</label>
+                <label class="scale-item" data-val="7"><input type="radio" name="impacto" value="7">7</label>
+                <label class="scale-item" data-val="8"><input type="radio" name="impacto" value="8">8</label>
+                <label class="scale-item" data-val="9"><input type="radio" name="impacto" value="9">9</label>
+                <label class="scale-item" data-val="10"><input type="radio" name="impacto" value="10">10</label>
+              </div>
+              <div class="scale-labels">
+                <span>Nenhum impacto</span>
+                <span>Impacto altíssimo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="goToStep(2)">Voltar</button>
+            <button type="button" class="btn btn-next" id="btnStep3">Continuar →</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: OPERAÇÃO FINANCEIRA -->
+        <div class="form-step" data-step="4">
+          <div class="step-title">Sobre sua operação financeira</div>
+          <div class="step-subtitle">Para calcular o potencial de ganho da sua clínica com a IA.</div>
+
+          <div class="field">
+            <label>Qual o ticket médio das suas consultas particulares? <span class="req">*</span></label>
+            <div class="option-grid single-col">
+              <label class="option-card"><input type="radio" name="ticket" value="ate_200"><div class="option-label">Menos de R$ 200</div></label>
+              <label class="option-card"><input type="radio" name="ticket" value="200_300"><div class="option-label">Entre R$ 200 e R$ 300</div></label>
+              <label class="option-card"><input type="radio" name="ticket" value="300_500"><div class="option-label">Entre R$ 300 e R$ 500</div></label>
+              <label class="option-card"><input type="radio" name="ticket" value="500_1000"><div class="option-label">Entre R$ 500 e R$ 1.000</div></label>
+              <label class="option-card"><input type="radio" name="ticket" value="acima_1000"><div class="option-label">Acima de R$ 1.000</div></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Qual o faturamento médio mensal atual? <span class="req">*</span></label>
+            <div class="option-grid single-col">
+              <label class="option-card"><input type="radio" name="faturamento" value="ate_15k"><div class="option-label">Menos de R$ 15.000</div></label>
+              <label class="option-card"><input type="radio" name="faturamento" value="15k_25k"><div class="option-label">Entre R$ 15.000 e R$ 25.000</div></label>
+              <label class="option-card"><input type="radio" name="faturamento" value="25k_50k"><div class="option-label">Entre R$ 25.000 e R$ 50.000</div></label>
+              <label class="option-card"><input type="radio" name="faturamento" value="50k_100k"><div class="option-label">Entre R$ 50.000 e R$ 100.000</div></label>
+              <label class="option-card"><input type="radio" name="faturamento" value="acima_100k"><div class="option-label">Acima de R$ 100.000</div></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Qual sua urgência para aumentar os agendamentos? <span class="req">*</span></label>
+            <div class="option-grid single-col">
+              <label class="option-card">
+                <input type="radio" name="urgencia" value="alta">
+                <div class="option-icon">🔥</div>
+                <div>
+                  <div class="option-label">ALTA URGÊNCIA</div>
+                  <div class="option-desc">Preciso resolver imediatamente, meus resultados estão sendo prejudicados.</div>
+                </div>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="urgencia" value="baixa">
+                <div class="option-icon">🕒</div>
+                <div>
+                  <div class="option-label">BAIXA URGÊNCIA</div>
+                  <div class="option-desc">Sei que preciso melhorar, mas não é prioridade neste momento.</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Qual orçamento mensal disponível para investir em tecnologia e automação? <span class="req">*</span></label>
+            <div class="option-grid single-col">
+              <label class="option-card"><input type="radio" name="orcamento" value="ate_1k"><div class="option-label">Até R$ 1.000/mês</div></label>
+              <label class="option-card"><input type="radio" name="orcamento" value="1k_2k"><div class="option-label">R$ 1.000 a R$ 2.000/mês</div></label>
+              <label class="option-card"><input type="radio" name="orcamento" value="2k_3.5k"><div class="option-label">R$ 2.000 a R$ 3.500/mês</div></label>
+              <label class="option-card"><input type="radio" name="orcamento" value="3.5k_5k"><div class="option-label">R$ 3.500 a R$ 5.000/mês</div></label>
+              <label class="option-card"><input type="radio" name="orcamento" value="acima_5k"><div class="option-label">Acima de R$ 5.000/mês</div></label>
+              <label class="option-card"><input type="radio" name="orcamento" value="nao_sei"><div class="option-label">Preciso entender o retorno primeiro</div></label>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="goToStep(3)">Voltar</button>
+            <button type="button" class="btn btn-next" id="btnStep4">Continuar →</button>
+          </div>
+        </div>
+
+        <!-- STEP 5: AUTONOMIA + INSTAGRAM -->
+        <div class="form-step" data-step="5">
+          <div class="step-title">Decisão e presença digital</div>
+          <div class="step-subtitle">Duas perguntas rápidas antes de avançarmos pro agendamento.</div>
+
+          <div class="field">
+            <label>Você tem autonomia para investir em soluções de tecnologia? <span class="req">*</span></label>
+            <div class="option-grid single-col">
+              <label class="option-card"><input type="radio" name="autonomia" value="sozinho"><div class="option-label">Eu tomo a decisão sozinho(a)</div></label>
+              <label class="option-card"><input type="radio" name="autonomia" value="socios"><div class="option-label">Decido junto com meu(s) sócio(s) ou cônjuge</div></label>
+              <label class="option-card"><input type="radio" name="autonomia" value="outro_decisor"><div class="option-label">Indico a solução, mas outra pessoa toma a decisão final</div></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Qual o @ do seu Instagram profissional?</label>
+            <input type="text" id="instagram" placeholder="@seuinstagram">
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="goToStep(4)">Voltar</button>
+            <button type="button" class="btn btn-next" id="btnStep5">
+              <span id="step5Text">Agendar minha demonstração →</span>
+              <div class="spinner" id="step5Spinner"></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 6: AGENDAMENTO -->
+        <div class="form-step" data-step="6">
+          <div class="step-title">Escolha um horário</div>
+          <div class="step-subtitle">Demonstração ao vivo de 1h30 via Google Meet — você vê a Sofia funcionando na prática.</div>
+
+          <div class="week-nav">
+            <button type="button" class="week-btn" id="prevWeek">‹</button>
+            <div class="week-label" id="weekLabel">—</div>
+            <button type="button" class="week-btn" id="nextWeek">›</button>
+          </div>
+
+          <div class="day-grid" id="dayGrid"></div>
+
+          <div class="time-section" id="timeSection">
+            <div class="time-label" id="timeLabel">Horários</div>
+            <div class="time-grid" id="timeGrid"></div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-back" onclick="goToStep(5)">Voltar</button>
+            <button type="button" class="btn btn-submit" id="btnConfirm" disabled>
+              <span id="submitText">Confirmar demonstração</span>
+              <div class="spinner" id="submitSpinner"></div>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- BLOCKED SCREEN (não-clínica) -->
+      <div class="blocked-screen" id="blockedScreen">
+        <div class="blocked-icon">🚫</div>
+        <h2>Sentimos muito!</h2>
+        <p>No momento, a Rise Hub atende exclusivamente <strong style="color:var(--text)">clínicas e consultórios da área da saúde</strong>.</p>
+        <p style="margin-top:12px">Estamos trabalhando para expandir nossas soluções de IA para outros segmentos em breve. Agradecemos o interesse!</p>
+        <div class="blocked-divider"></div>
+        <div class="blocked-cta">
+          Quer ser avisado quando abrirmos para outros segmentos?<br>
+          <a href="https://www.instagram.com/risehub.br/" target="_blank">Siga-nos no Instagram @risehub.br</a>
+        </div>
+      </div>
+
+      <!-- DUPLICATE LEAD SCREEN -->
+      <div class="blocked-screen" id="duplicateScreen">
+        <div class="blocked-icon" style="background:rgba(155,89,182,.08);border-color:rgba(155,89,182,.2)">✅</div>
+        <h2 style="color:var(--accent-light)">Você já está no nosso radar!</h2>
+        <p>Identificamos que seus dados já estão cadastrados na nossa base. Nossa equipe já recebeu suas informações e um especialista entrará em contato em breve.</p>
+        <p style="margin-top:12px">Caso tenha urgência, fale conosco diretamente:</p>
+        <div class="blocked-divider"></div>
+        <a href="https://wa.me/5522997810444?text=Olá!%20Já%20preenchi%20o%20formulário%20da%20Rise%20Hub%20e%20gostaria%20de%20agendar%20uma%20demonstração." target="_blank" class="wpp-direct-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Agendar demonstração
+        </a>
+      </div>
+
+      <!-- SUCCESS SCREEN -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-check">
+          <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 class="success-title">Demonstração confirmada!</h2>
+        <p class="success-subtitle">Pronto, <span id="successNome"></span>. Sua demonstração está marcada.</p>
+
+        <div class="success-card">
+          <strong>📅 Data e horário</strong>
+          <p id="successDateTime">—</p>
+        </div>
+
+        <div class="success-card">
+          <strong>📱 Próximos passos</strong>
+          <p>Você vai receber um lembrete no WhatsApp <strong style="color:var(--text)">24h e 2h antes</strong> da demonstração com o link do Google Meet. Prepare suas dúvidas — o especialista vai mostrar a Sofia funcionando na prática!</p>
+        </div>
+
+        <div class="success-btn-row">
+          <a href="https://wa.me/5522997810444?text=Olá!%20Acabei%20de%20agendar%20uma%20demonstração%20com%20a%20Rise%20Hub." target="_blank" class="success-btn success-btn-wpp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Falar no WhatsApp
+          </a>
+          <a href="https://www.instagram.com/risehub.br/" target="_blank" class="success-btn success-btn-insta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            Seguir @risehub.br
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>© 2026 Rise Hub — IA para clínicas médicas</div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/risehub.br/" target="_blank">Instagram</a>
+        <a href="#formulario">Agendar demonstração</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+//  CONFIG
+// ============================================================
+const SUPABASE_URL = 'https://ibidukamkkgsurqswsvf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliaWR1a2Fta2tnc3VycXN3c3ZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjMwMjksImV4cCI6MjA4OTUzOTAyOX0.YRLsf8b8ZNK0w9MXNy27Xz4WoBKV9DzNZfGVWf4zK2E';
+const META_PIXEL_ID = '2238173290034845';
+const META_ACCESS_TOKEN = 'EAAHw1qXwSgwBQyxCU6yd1PKu8QZAtSH6QC6gf2StBaWwjJQWJ5ooeleZBIPNRoMmnxbrDiRGjulxYGM5ox7uKx5keY6OiVr3vCJjkXaFqpvAJOjyqrNHwHFHwJsYwNGZCiEQlnJGHREqcVscfmyNPsjImsbsbw1ZCAIAbD0VP3a1gydqP9cxLEhpAL5q0wZDZD';
+
+const WORK_DAYS = [1,2,3,4,5];
+const START_HOUR = 9;
+const END_HOUR = 18;
+const SLOT_DURATION = 90;
+const SLOT_STARTS = [];
+for (let m = START_HOUR * 60; m + SLOT_DURATION <= END_HOUR * 60; m += SLOT_DURATION) {
+  SLOT_STARTS.push(m);
+}
+const WEEKDAY_NAMES = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const MONTH_NAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+
+let currentStep = 1;
+let savedLeadId = null;
+let savedPayload = null;
+
+// ============================================================
+//  OPTION CARDS
+// ============================================================
+document.addEventListener('click', function(e) {
+  // Scale 0-10 handling
+  const scale = e.target.closest('.scale-item');
+  if (scale) {
+    e.preventDefault();
+    e.stopPropagation();
+    const input = scale.querySelector('input');
+    if (!input) return;
+    const siblings = scale.parentElement.children;
+    for (let i = 0; i < siblings.length; i++) siblings[i].classList.remove('selected');
+    scale.classList.add('selected');
+    input.checked = true;
+    return;
+  }
+  
+  const card = e.target.closest('.option-card');
+  if (!card) return;
+  const input = card.querySelector('input');
+  if (!input) return;
+  
+  // Sempre prevenir comportamento padrão (evita scroll do label/focus)
+  e.preventDefault();
+  e.stopPropagation();
+  
+  if (input.type === 'checkbox') {
+    input.checked = !input.checked;
+    card.classList.toggle('selected', input.checked);
+  } else {
+    const siblings = card.parentElement.children;
+    for (let i = 0; i < siblings.length; i++) siblings[i].classList.remove('selected');
+    card.classList.add('selected');
+    input.checked = true;
+  }
+  
+  if (input.name === 'segmento') {
+    if (input.value === 'nao_clinica') {
+      blockNonClinic();
+      return;
+    }
+    document.getElementById('btnStep1').disabled = false;
+  }
+});
+
+// ============================================================
+//  PROTOCOLO DE SEGURANÇA
+// ============================================================
+
+// Bloqueio permanente para não-clínicas
+function blockNonClinic() {
+  document.getElementById('riseForm').style.display = 'none';
+  document.getElementById('progressSection').style.display = 'none';
+  document.getElementById('blockedScreen').classList.add('active');
+}
+
+// Tela de duplicado
+function showDuplicateScreen() {
+  document.getElementById('riseForm').style.display = 'none';
+  document.getElementById('progressSection').style.display = 'none';
+  document.getElementById('duplicateScreen').classList.add('active');
+}
+
+// Marca localmente que já preencheu (sobrevive limpeza de cookies por 365 dias)
+function markLocalDuplicate() {
+  try {
+    const data = { filled: true, ts: Date.now() };
+    localStorage.setItem('rh_lead_submitted', JSON.stringify(data));
+    const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = `rh_lead=1; expires=${expires}; path=/; SameSite=Lax`;
+  } catch(e) {}
+}
+
+// Verifica localmente se já preencheu
+function checkLocalDuplicate() {
+  try {
+    const stored = localStorage.getItem('rh_lead_submitted');
+    if (stored) {
+      const data = JSON.parse(stored);
+      if (data.filled) return true;
+    }
+    if (document.cookie.includes('rh_lead=1')) return true;
+  } catch(e) {}
+  return false;
+}
+
+// Checa duplicado local + Supabase
+async function checkDuplicateLead() {
+  if (checkLocalDuplicate()) return true;
+
+  const email = document.getElementById('email').value.trim().toLowerCase();
+  const phoneFormatted = document.getElementById('whatsapp').value.trim();
+
+  try {
+    const emailCheck = await fetch(
+      `${SUPABASE_URL}/rest/v1/leads_rise_hub?email=eq.${encodeURIComponent(email)}&select=id&limit=1`,
+      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+    );
+    const emailResults = await emailCheck.json();
+    if (emailResults && emailResults.length > 0) {
+      markLocalDuplicate();
+      return true;
+    }
+
+    const phoneCheck = await fetch(
+      `${SUPABASE_URL}/rest/v1/leads_rise_hub?whatsapp=eq.${encodeURIComponent(phoneFormatted)}&select=id&limit=1`,
+      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+    );
+    const phoneResults = await phoneCheck.json();
+    if (phoneResults && phoneResults.length > 0) {
+      markLocalDuplicate();
+      return true;
+    }
+  } catch (err) {
+    console.log('Duplicate check failed:', err);
+  }
+  return false;
+}
+
+// Verificar localStorage na abertura (instantâneo)
+// Só checa no Supabase quando o lead realmente preenche os dados
+(function checkOnLoad() {
+  if (checkLocalDuplicate()) {
+    setTimeout(() => showDuplicateScreen(), 100);
+  }
+})();
+
+// ============================================================
+//  NAVIGATION
+// ============================================================
+function goToStep(step) {
+  const current = document.querySelector('.form-step.active');
+  if (current) current.classList.remove('active');
+  document.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
+  currentStep = step;
+  updateProgress();
+  
+  // Scroll suave pro topo do form APENAS se ele não estiver visível
+  const formContainer = document.querySelector('.form-container');
+  const rect = formContainer.getBoundingClientRect();
+  if (rect.top < 0 || rect.top > window.innerHeight * 0.5) {
+    formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  
+  if (typeof fbq === 'function') {
+    switch(step) {
+      case 2: fbq('track', 'ViewContent', { content_name: 'lp_step_dados' }); break;
+      case 3: fbq('track', 'InitiateCheckout', { content_name: 'lp_step_atuacao' }); break;
+      case 4: fbq('track', 'AddToCart', { content_name: 'lp_step_operacao' }); break;
+      case 5: fbq('track', 'AddPaymentInfo', { content_name: 'lp_step_autonomia' }); break;
+      case 6: fbq('track', 'AddPaymentInfo', { content_name: 'lp_step_agendamento' }); break;
+    }
+  }
+}
+
+function updateProgress() {
+  const ps = document.getElementById('progressSection');
+  ps.classList.add('visible');
+  const pct = (currentStep / 6) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `Etapa ${currentStep} de 6`;
+}
+
+// ============================================================
+//  PHONE MASK
+// ============================================================
+document.getElementById('whatsapp').addEventListener('input', function(e) {
+  let v = e.target.value.replace(/\D/g, '');
+  if (v.length > 11) v = v.slice(0, 11);
+  if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+  else if (v.length > 0) v = `(${v}`;
+  e.target.value = v;
+});
+
+// ============================================================
+//  VALIDATION — DETECÇÃO DE DADOS FALSOS (mesma do form original)
+// ============================================================
+function validateNome(value) {
+  const v = value.trim();
+  if (v.length < 3) return 'Informe seu nome completo';
+  const parts = v.split(/\s+/).filter(p => p.length > 0);
+  if (parts.length < 2) return 'Informe nome e sobrenome';
+  if (parts.some(p => p.length < 2)) return 'Nome parece incompleto';
+  if (!/^[a-zA-ZÀ-ÿ\s'-]+$/.test(v)) return 'Nome não pode conter números ou símbolos';
+  if (/(.)\1{2,}/i.test(v.replace(/\s/g, ''))) return 'Por favor, informe seu nome real';
+  
+  const fakeNames = [
+    'teste','test','asdf','qwerty','nenhum','nada','xxx','abc','aaa',
+    'fulano','ciclano','beltrano','joao silva','maria silva','nome nome',
+    'blabla','lalala','oi oi','nao sei','qualquer','hahaha','kkk'
+  ];
+  if (fakeNames.some(fn => v.toLowerCase().replace(/\s+/g,' ') === fn)) return 'Por favor, informe seu nome real';
+  
+  const keyboardSeqs = ['qwer','asdf','zxcv','abcd','1234','aaaa','bbbb'];
+  if (keyboardSeqs.some(s => v.toLowerCase().replace(/\s/g, '').includes(s))) return 'Por favor, informe seu nome real';
+  
+  return null;
+}
+
+function validateEmail(value) {
+  const v = value.trim().toLowerCase();
+  if (!v) return 'Informe seu e-mail';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return 'E-mail com formato inválido';
+  
+  const domain = v.split('@')[1];
+  if (!domain || !domain.includes('.')) return 'E-mail com formato inválido';
+  
+  const disposableDomains = [
+    'tempmail.com','throwaway.email','guerrillamail.com','mailinator.com',
+    'yopmail.com','10minutemail.com','trashmail.com','fakeinbox.com',
+    'sharklasers.com','guerrillamailblock.com','grr.la','dispostable.com',
+    'maildrop.cc','temp-mail.org','emailondeck.com','getnada.com',
+    'mohmal.com','burnermail.io','inboxbear.com'
+  ];
+  if (disposableDomains.includes(domain)) return 'Use um e-mail permanente, não temporário';
+  
+  const local = v.split('@')[0];
+  if (/^(.)\1+$/.test(local)) return 'E-mail parece inválido';
+  if (/^(teste|test|asdf|qwerty|nada|fake|spam|lixo|abc123)$/.test(local)) return 'Por favor, informe um e-mail real';
+  
+  const typoMap = {
+    'gmial.com':'gmail.com','gmal.com':'gmail.com','gmai.com':'gmail.com',
+    'gmail.co':'gmail.com','gamil.com':'gmail.com','gnail.com':'gmail.com',
+    'gmail.con':'gmail.com','gmail.om':'gmail.com','gmail.cm':'gmail.com',
+    'hotmal.com':'hotmail.com','hotmai.com':'hotmail.com','hotmil.com':'hotmail.com',
+    'hotmail.co':'hotmail.com','hitmail.com':'hotmail.com','hotamil.com':'hotmail.com',
+    'outloo.com':'outlook.com','outlok.com':'outlook.com','outlook.co':'outlook.com',
+    'yaho.com':'yahoo.com','yahooo.com':'yahoo.com','yahoo.co':'yahoo.com'
+  };
+  if (typoMap[domain]) return `Você quis dizer ${local}@${typoMap[domain]}?`;
+  
+  return null;
+}
+
+function validateWhatsapp(value) {
+  const digits = value.replace(/\D/g, '');
+  if (digits.length < 10) return 'Número precisa ter DDD + 9 dígitos';
+  if (digits.length > 11) return 'Número com dígitos a mais';
+  
+  const ddd = parseInt(digits.substring(0, 2));
+  const dddsValidos = [
+    11,12,13,14,15,16,17,18,19,
+    21,22,24,27,28,
+    31,32,33,34,35,37,38,
+    41,42,43,44,45,46,47,48,49,
+    51,53,54,55,
+    61,62,63,64,65,66,67,68,69,
+    71,73,74,75,77,79,
+    81,82,83,84,85,86,87,88,89,
+    91,92,93,94,95,96,97,98,99
+  ];
+  if (!dddsValidos.includes(ddd)) return `DDD ${ddd} não existe no Brasil`;
+  
+  if (digits.length === 11 && digits[2] !== '9') return 'Celular precisa começar com 9 após o DDD';
+  
+  if (/^(\d)\1+$/.test(digits)) return 'Número parece inválido';
+  if (/1234567|7654321|9999999|0000000|1111111/.test(digits)) return 'Por favor, informe um número real';
+  
+  const fakePhones = ['11999999999','11911111111','11900000000','00000000000','12345678901'];
+  if (fakePhones.includes(digits)) return 'Por favor, informe seu número real';
+  
+  return null;
+}
+
+// STEP 2: Dados de contato (AGORA é o primeiro depois da qualificação)
+function validateStep2() {
+  let valid = true;
+  const checks = [
+    ['nome', validateNome, 'nomeError'],
+    ['whatsapp', validateWhatsapp, 'whatsappError'],
+    ['whatsappClinica', validateWhatsapp, 'whatsappClinicaError'],
+    ['email', validateEmail, 'emailError']
+  ];
+  checks.forEach(([id, fn, errId]) => {
+    const el = document.getElementById(id);
+    const err = fn(el.value);
+    const field = el.closest('.field');
+    if (err) {
+      field.classList.add('error');
+      document.getElementById(errId).textContent = err;
+      valid = false;
+    } else {
+      field.classList.remove('error');
+    }
+  });
+  const clinica = document.getElementById('nomeClinica');
+  if (clinica.value.trim().length < 2) {
+    clinica.closest('.field').classList.add('error');
+    valid = false;
+  } else {
+    clinica.closest('.field').classList.remove('error');
+  }
+  return valid;
+}
+
+// STEP 3: Especialidade + desafio + impacto
+function validateStep3() {
+  const esp = document.getElementById('especialidade');
+  const field = esp.closest('.field');
+  if (esp.value.trim().length < 3) {
+    field.classList.add('error');
+    return false;
+  }
+  field.classList.remove('error');
+  
+  const desafio = document.querySelector('input[name="desafio"]:checked');
+  if (!desafio) { alert('Selecione o seu maior desafio.'); return false; }
+  
+  const impacto = document.querySelector('input[name="impacto"]:checked');
+  if (!impacto) { alert('Selecione o nível de impacto (0 a 10).'); return false; }
+  
+  return true;
+}
+
+// STEP 4: Ticket + Faturamento + Urgência + Orçamento
+function validateStep4() {
+  const ticket = document.querySelector('input[name="ticket"]:checked');
+  const faturamento = document.querySelector('input[name="faturamento"]:checked');
+  const urgencia = document.querySelector('input[name="urgencia"]:checked');
+  const orcamento = document.querySelector('input[name="orcamento"]:checked');
+  if (!ticket || !faturamento || !urgencia || !orcamento) {
+    alert('Preencha todas as perguntas desta etapa.');
+    return false;
+  }
+  return true;
+}
+
+// STEP 5: Autonomia (Instagram é opcional)
+function validateStep5() {
+  const autonomia = document.querySelector('input[name="autonomia"]:checked');
+  if (!autonomia) {
+    alert('Informe sua autonomia de decisão.');
+    return false;
+  }
+  return true;
+}
+
+// ============================================================
+//  LEAD SCORING (HOT / WARM / COLD) — baseado nas novas perguntas
+// ============================================================
+function calculateLeadScore() {
+  let score = 0;
+
+  // Segmento (médico vale mais que profissional de saúde)
+  const seg = document.querySelector('input[name="segmento"]:checked')?.value;
+  if (seg === 'clinica') score += 25;
+  else if (seg === 'medico') score += 20;
+  else if (seg === 'profissional_saude') score += 15;
+
+  // Impacto (quanto mais alto, mais quente)
+  const impacto = parseInt(document.querySelector('input[name="impacto"]:checked')?.value || 0);
+  score += Math.round(impacto * 3); // 0-30 pts
+
+  // Urgência
+  const urg = document.querySelector('input[name="urgencia"]:checked')?.value;
+  if (urg === 'alta') score += 35;
+  else if (urg === 'baixa') score += 10;
+
+  // Faturamento (maior = mais potencial de ticket)
+  const fat = document.querySelector('input[name="faturamento"]:checked')?.value;
+  switch(fat) {
+    case 'acima_100k': score += 40; break;
+    case '50k_100k':   score += 35; break;
+    case '25k_50k':    score += 25; break;
+    case '15k_25k':    score += 15; break;
+    case 'ate_15k':    score += 5;  break;
+  }
+
+  // Ticket médio (quanto maior, mais qualifica)
+  const ticket = document.querySelector('input[name="ticket"]:checked')?.value;
+  switch(ticket) {
+    case 'acima_1000': score += 25; break;
+    case '500_1000':   score += 20; break;
+    case '300_500':    score += 15; break;
+    case '200_300':    score += 10; break;
+    case 'ate_200':    score += 5;  break;
+  }
+
+  // Autonomia de decisão
+  const aut = document.querySelector('input[name="autonomia"]:checked')?.value;
+  if (aut === 'sozinho') score += 20;
+  else if (aut === 'socios') score += 15;
+  else if (aut === 'outro_decisor') score += 5;
+
+  // Desafio (todos válidos, pequena ponderação)
+  const des = document.querySelector('input[name="desafio"]:checked')?.value;
+  if (des === 'atendimento_falho' || des === 'baixa_conversao') score += 15;
+  else if (des) score += 10;
+
+  // Orçamento pra investir
+  const orc = document.querySelector('input[name="orcamento"]:checked')?.value;
+  switch(orc) {
+    case 'acima_5k': score += 25; break;
+    case '3.5k_5k':  score += 20; break;
+    case '2k_3.5k':  score += 15; break;
+    case '1k_2k':    score += 10; break;
+    case 'ate_1k':   score += 5;  break;
+    case 'nao_sei':  score += 8;  break;
+  }
+
+  // Classificação (max ~215 pts)
+  let classification;
+  if (score >= 140) classification = 'HOT';
+  else if (score >= 85) classification = 'WARM';
+  else classification = 'COLD';
+
+  return { score, classification };
+}
+
+// ============================================================
+//  STEP BUTTONS
+// ============================================================
+document.getElementById('btnStep1').addEventListener('click', () => {
+  const seg = document.querySelector('input[name="segmento"]:checked');
+  if (!seg || seg.value === 'nao_clinica') return;
+  goToStep(2);
+});
+
+// Step 2: Dados de contato — valida e verifica duplicado no Supabase
+document.getElementById('btnStep2').addEventListener('click', async () => {
+  if (!validateStep2()) return;
+
+  const btn = document.getElementById('btnStep2');
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner" style="display:block"></div>';
+
+  const isDuplicate = await checkDuplicateLead();
+  if (isDuplicate) {
+    showDuplicateScreen();
+    return;
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = originalText;
+  goToStep(3);
+});
+
+document.getElementById('btnStep3').addEventListener('click', () => {
+  if (validateStep3()) goToStep(4);
+});
+
+document.getElementById('btnStep4').addEventListener('click', () => {
+  if (validateStep4()) goToStep(5);
+});
+
+// Step 5: Autonomia + Instagram → SALVA o lead no Supabase + dispara Pixel/CAPI → vai pro agendamento
+document.getElementById('btnStep5').addEventListener('click', async () => {
+  if (!validateStep5()) return;
+  
+  const btn = document.getElementById('btnStep5');
+  const txt = document.getElementById('step5Text');
+  const spinner = document.getElementById('step5Spinner');
+  btn.disabled = true; txt.style.display = 'none'; spinner.style.display = 'block';
+  
+  const params = new URLSearchParams(window.location.search);
+  const score = calculateLeadScore();
+  
+  // Coletar todos os dados dos steps anteriores
+  const segmento = document.querySelector('input[name="segmento"]:checked')?.value || '';
+  const especialidade = document.getElementById('especialidade').value.trim();
+  const desafio = document.querySelector('input[name="desafio"]:checked')?.value || '';
+  const impacto = document.querySelector('input[name="impacto"]:checked')?.value || '';
+  const ticket = document.querySelector('input[name="ticket"]:checked')?.value || '';
+  const faturamento = document.querySelector('input[name="faturamento"]:checked')?.value || '';
+  const urgencia = document.querySelector('input[name="urgencia"]:checked')?.value || '';
+  const orcamento = document.querySelector('input[name="orcamento"]:checked')?.value || '';
+  const autonomia = document.querySelector('input[name="autonomia"]:checked')?.value || '';
+  const instagram = document.getElementById('instagram').value.trim();
+  const whatsappClinica = document.getElementById('whatsappClinica').value.trim();
+  
+  const payload = {
+    segmento: segmento,
+    nome: document.getElementById('nome').value.trim(),
+    whatsapp: document.getElementById('whatsapp').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    nome_clinica: document.getElementById('nomeClinica').value.trim(),
+    cidade: document.getElementById('cidade').value.trim() || null,
+    cargo: autonomia === 'sozinho' ? 'proprietario' : autonomia === 'socios' ? 'socio' : 'outro',
+    especialidade: especialidade,
+    whatsapp_clinica: whatsappClinica,
+    maior_dor: desafio,
+    impacto: impacto,
+    ticket_medio: ticket,
+    faturamento: faturamento,
+    urgencia: urgencia,
+    orcamento: orcamento,
+    autonomia: autonomia,
+    instagram: instagram || null,
+    interesses: [desafio],
+    observacao: null,
+    created_at: new Date().toISOString(),
+    lead_score: score.score,
+    lead_classification: score.classification,
+    utm_source: params.get('utm_source') || null,
+    utm_medium: params.get('utm_medium') || null,
+    utm_campaign: params.get('utm_campaign') || null,
+    fbclid: params.get('fbclid') || null,
+    entry_point: 'landing_page',
+    id_origem: 'LP-IA'
+  };
+  
+  savedPayload = payload;
+  
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data[0]) savedLeadId = data[0].id;
+      console.log('✅ Lead saved:', savedLeadId);
+      // Marcar localStorage como preenchido
+      try { localStorage.setItem('rh_lead_submitted', '1'); } catch(e) {}
+      try { document.cookie = 'rh_lead=1; max-age=31536000; path=/; SameSite=Lax'; } catch(e) {}
+    } else {
+      const errBody = await res.text();
+      console.error('❌ Lead save failed:', res.status, errBody);
+    }
+  } catch(e) { console.error('❌ Lead save error:', e); }
+  
+  // Meta Pixel + CAPI
+  const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  sendMetaConversionEvent(payload, eventId);
+  if (typeof fbq === 'function') {
+    const fatValue = faturamento === 'acima_100k' ? 10000 : faturamento === '50k_100k' ? 7500 : faturamento === '25k_50k' ? 3750 : faturamento === '15k_25k' ? 2000 : 1000;
+    fbq('track', 'Lead', {
+      content_name: 'lead_rise_hub_lp',
+      currency: 'BRL',
+      value: fatValue
+    }, {
+      eventID: eventId,
+      userData: {
+        em: payload.email.toLowerCase(),
+        ph: '55' + payload.whatsapp.replace(/\D/g, ''),
+        fn: payload.nome.split(' ')[0].toLowerCase(),
+        external_id: payload.email.toLowerCase(),
+        country: 'br'
+      }
+    });
+  }
+  
+  btn.disabled = false; txt.style.display = 'inline'; spinner.style.display = 'none';
+  goToStep(6);
+  await loadBookings();
+  renderWeek();
+});
+
+// ============================================================
+//  META CAPI
+// ============================================================
+async function hashSHA256(value) {
+  if (!value) return null;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(value.trim().toLowerCase());
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function sendMetaConversionEvent(lead, eventId) {
+  try {
+    const [em, ph, fn, ln] = await Promise.all([
+      hashSHA256(lead.email),
+      hashSHA256('55' + lead.whatsapp.replace(/\D/g, '')),
+      hashSHA256(lead.nome.split(' ')[0]),
+      hashSHA256(lead.nome.split(' ').slice(1).join(' ') || '')
+    ]);
+    const externalId = await hashSHA256(lead.email);
+    const country = await hashSHA256('br');
+    
+    const fbp = (document.cookie.split(';').find(c => c.trim().startsWith('_fbp=')) || '').split('=').slice(1).join('=').trim() || null;
+    let fbc = (document.cookie.split(';').find(c => c.trim().startsWith('_fbc=')) || '').split('=').slice(1).join('=').trim() || null;
+    if (!fbc) {
+      const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+      if (fbclid) fbc = `fb.1.${Date.now()}.${fbclid}`;
+    }
+    
+    const fat = lead.faturamento;
+    const orcValue = fat === 'acima_100k' ? 10000 : fat === '50k_100k' ? 7500 : fat === '25k_50k' ? 3750 : fat === '15k_25k' ? 2000 : 1000;
+    
+    await fetch(`https://graph.facebook.com/v21.0/${META_PIXEL_ID}/events?access_token=${META_ACCESS_TOKEN}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        data: [{
+          event_name: 'Lead',
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: eventId,
+          event_source_url: window.location.href,
+          action_source: 'website',
+          user_data: {
+            em: [em], ph: [ph], fn: [fn], ln: [ln],
+            country: [country], external_id: [externalId],
+            client_user_agent: navigator.userAgent,
+            fbp: fbp, fbc: fbc
+          },
+          custom_data: {
+            lead_segmento: lead.segmento,
+            lead_clinica: lead.nome_clinica,
+            lead_dor: lead.maior_dor,
+            lead_score: lead.lead_score,
+            lead_classification: lead.lead_classification,
+            currency: 'BRL',
+            value: orcValue
+          }
+        }]
+      })
+    });
+  } catch(e) { console.error('CAPI error:', e); }
+}
+
+// ============================================================
+//  AGENDAMENTO (STEP 5)
+// ============================================================
+let realBookings = {};
+let bookingsLoaded = false;
+let currentWeekStart = getNextWeekday(new Date());
+let selectedDate = null;
+let selectedTime = null;
+
+async function loadBookings() {
+  if (bookingsLoaded) return;
+  try {
+    const from = new Date(); from.setHours(0,0,0,0);
+    const to = new Date(from); to.setDate(to.getDate() + 28);
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/bookings_rise_hub?status=eq.confirmado&booking_date=gte.${from.toISOString()}&booking_date=lte.${to.toISOString()}&select=booking_date`,
+      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+    );
+    if (res.ok) {
+      const bookings = await res.json();
+      realBookings = {};
+      bookings.forEach(b => {
+        const d = new Date(b.booking_date);
+        const key = d.toISOString().split('T')[0];
+        const startMin = d.getHours() * 60 + d.getMinutes();
+        if (!realBookings[key]) realBookings[key] = [];
+        realBookings[key].push(startMin);
+      });
+    }
+  } catch(err) { console.log('Bookings load failed:', err); }
+  bookingsLoaded = true;
+}
+
+function getFakeTakenSlots(date) {
+  const seed = date.getDate() * 7 + date.getMonth() * 31;
+  return new Set([SLOT_STARTS[seed % SLOT_STARTS.length]]);
+}
+
+function getUnavailableSlots(date) {
+  const key = date.toISOString().split('T')[0];
+  const realMins = realBookings[key] || [];
+  const realTaken = new Set();
+  for (const slotStart of SLOT_STARTS) {
+    const slotEnd = slotStart + SLOT_DURATION;
+    for (const bookedStart of realMins) {
+      const bookedEnd = bookedStart + SLOT_DURATION;
+      if (slotStart < bookedEnd && slotEnd > bookedStart) {
+        realTaken.add(slotStart);
+        break;
+      }
+    }
+  }
+  const all = new Set([...realTaken]);
+  if (realTaken.size < SLOT_STARTS.length - 2) {
+    const fake = getFakeTakenSlots(date);
+    for (const f of fake) if (!realTaken.has(f)) all.add(f);
+  }
+  return all;
+}
+
+function getNextWeekday(date) {
+  const d = new Date(date); d.setHours(0,0,0,0);
+  while (!WORK_DAYS.includes(d.getDay())) d.setDate(d.getDate() + 1);
+  while (d.getDay() !== 1) d.setDate(d.getDate() - 1);
+  return d;
+}
+
+function formatTime(min) {
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+function renderWeek() {
+  const grid = document.getElementById('dayGrid');
+  grid.innerHTML = '';
+  const today = new Date(); today.setHours(0,0,0,0);
+  const endWeek = new Date(currentWeekStart); endWeek.setDate(endWeek.getDate() + 4);
+  document.getElementById('weekLabel').textContent = 
+    `${currentWeekStart.getDate()} ${MONTH_NAMES[currentWeekStart.getMonth()]} — ${endWeek.getDate()} ${MONTH_NAMES[endWeek.getMonth()]}`;
+  
+  for (let i = 0; i < 5; i++) {
+    const d = new Date(currentWeekStart); d.setDate(d.getDate() + i);
+    const isPast = d < today;
+    const isToday = d.getTime() === today.getTime();
+    const isSelected = selectedDate && d.getTime() === selectedDate.getTime();
+    
+    let avail = 0;
+    if (!isPast) {
+      const unav = getUnavailableSlots(d);
+      const nowMin = isToday ? new Date().getHours() * 60 : -1;
+      for (const s of SLOT_STARTS) if (!unav.has(s) && s > nowMin) avail++;
+    }
+    const isFull = !isPast && avail === 0;
+    
+    const card = document.createElement('div');
+    card.className = 'day-card' + ((isPast || isFull) ? ' disabled' : '') + (isSelected ? ' selected' : '');
+    card.innerHTML = `
+      <div class="day-weekday">${WEEKDAY_NAMES[d.getDay()]}</div>
+      <div class="day-number">${d.getDate()}</div>
+      <div class="day-month">${MONTH_NAMES[d.getMonth()]}</div>
+    `;
+    if (!isPast && !isFull) card.addEventListener('click', () => selectDate(d));
+    grid.appendChild(card);
+  }
+  
+  const thisMon = getNextWeekday(new Date());
+  document.getElementById('prevWeek').disabled = currentWeekStart <= thisMon;
+}
+
+function selectDate(date) {
+  selectedDate = date;
+  selectedTime = null;
+  document.getElementById('btnConfirm').disabled = true;
+  renderWeek();
+  renderTimeSlots();
+}
+
+function renderTimeSlots() {
+  const section = document.getElementById('timeSection');
+  const grid = document.getElementById('timeGrid');
+  if (!selectedDate) { section.classList.remove('visible'); return; }
+  section.classList.add('visible');
+  grid.innerHTML = '';
+  
+  const now = new Date();
+  const isToday = selectedDate.toDateString() === now.toDateString();
+  const nowMin = isToday ? now.getHours() * 60 + now.getMinutes() : -1;
+  
+  document.getElementById('timeLabel').textContent = 
+    `Horários para ${WEEKDAY_NAMES[selectedDate.getDay()]}, ${selectedDate.getDate()} de ${MONTH_NAMES[selectedDate.getMonth()]}`;
+  
+  const unav = getUnavailableSlots(selectedDate);
+  
+  for (const slotMin of SLOT_STARTS) {
+    const isPast = isToday && slotMin <= nowMin;
+    const isTaken = unav.has(slotMin);
+    const isSel = selectedTime === slotMin;
+    
+    const slot = document.createElement('div');
+    slot.className = 'time-slot' + ((isPast || isTaken) ? ' unavailable' : '') + (isSel ? ' selected' : '');
+    slot.textContent = formatTime(slotMin);
+    if (!isPast && !isTaken) slot.addEventListener('click', () => selectTime(slotMin));
+    grid.appendChild(slot);
+  }
+}
+
+function selectTime(min) {
+  selectedTime = min;
+  renderTimeSlots();
+  document.getElementById('btnConfirm').disabled = false;
+}
+
+document.getElementById('prevWeek').addEventListener('click', () => {
+  currentWeekStart.setDate(currentWeekStart.getDate() - 7);
+  selectedDate = null; selectedTime = null;
+  document.getElementById('timeSection').classList.remove('visible');
+  document.getElementById('btnConfirm').disabled = true;
+  renderWeek();
+});
+document.getElementById('nextWeek').addEventListener('click', () => {
+  currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+  selectedDate = null; selectedTime = null;
+  document.getElementById('timeSection').classList.remove('visible');
+  document.getElementById('btnConfirm').disabled = true;
+  renderWeek();
+});
+
+// Confirmar agendamento
+document.getElementById('btnConfirm').addEventListener('click', async () => {
+  if (!selectedDate || selectedTime === null) return;
+  const btn = document.getElementById('btnConfirm');
+  const txt = document.getElementById('submitText');
+  const spinner = document.getElementById('submitSpinner');
+  btn.disabled = true; txt.style.display = 'none'; spinner.style.display = 'block';
+  
+  const bookingDate = new Date(selectedDate);
+  bookingDate.setHours(Math.floor(selectedTime / 60), selectedTime % 60, 0, 0);
+  const dateStr = `${WEEKDAY_NAMES[selectedDate.getDay()]}, ${selectedDate.getDate()} de ${MONTH_NAMES[selectedDate.getMonth()]}`;
+  const timeStr = `${formatTime(selectedTime)} — ${formatTime(selectedTime + SLOT_DURATION)}`;
+  
+  const booking = {
+    lead_nome: savedPayload.nome,
+    lead_email: savedPayload.email,
+    lead_whatsapp: savedPayload.whatsapp,
+    lead_clinica: savedPayload.nome_clinica,
+    lead_id: savedLeadId,
+    booking_date: bookingDate.toISOString(),
+    booking_display: `${dateStr} às ${timeStr}`,
+    platform: 'google_meet',
+    duration_minutes: SLOT_DURATION,
+    status: 'confirmado',
+    created_at: new Date().toISOString()
+  };
+  
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/bookings_rise_hub`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(booking)
+    });
+    
+    // Atualizar lead com status agendado
+    if (savedLeadId) {
+      await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub?id=eq.${savedLeadId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          status: 'agendado',
+          notas_internas: `Demonstração agendada: ${dateStr} às ${timeStr} | Google Meet | 1h30`
+        })
+      });
+    }
+  } catch(e) { console.error('Booking error:', e); }
+  
+  // Schedule event no Pixel
+  if (typeof fbq === 'function') {
+    fbq('track', 'Schedule', {
+      content_name: 'booking_rise_hub',
+      content_category: 'demonstracao'
+    });
+  }
+  
+  // Mostrar success screen
+  markLocalDuplicate();
+  document.getElementById('riseForm').style.display = 'none';
+  document.getElementById('progressSection').style.display = 'none';
+  document.getElementById('successScreen').classList.add('active');
+  document.getElementById('successNome').textContent = savedPayload.nome.split(' ')[0];
+  document.getElementById('successDateTime').textContent = `${dateStr} às ${timeStr}`;
+  
+  // Scroll pro topo do container
+  document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });
+});
+
+// ============================================================
+//  TIMELINE INTERATIVO (Como construímos sua IA)
+// ============================================================
+(function initTimeline() {
+  const stepsData = [
+    {
+      num: '01',
+      title: 'Diagnóstico da Clínica',
+      desc: 'Analisamos toda a sua operação atual, identificando gargalos no atendimento, fluxo de pacientes, conversão e pontos de melhoria. Tudo personalizado para o seu segmento.',
+      badge: '🔍 Análise completa da jornada do paciente',
+      next: 'Treinamento da IA Sofia'
+    },
+    {
+      num: '02',
+      title: 'Treinamento da Sofia',
+      desc: 'Alimentamos a IA com seus procedimentos, valores, perguntas frequentes, tom de voz da clínica e protocolos de atendimento. A Sofia aprende a operar como sua melhor recepcionista.',
+      badge: '🧠 IA treinada sob medida para sua clínica',
+      next: 'Integração e Testes'
+    },
+    {
+      num: '03',
+      title: 'Integração e Testes',
+      desc: 'Conectamos a Sofia ao seu WhatsApp Business, agenda médica e CRM. Rodamos cenários reais de atendimento antes do go-live para garantir 100% de qualidade.',
+      badge: '⚙️ Conectado ao seu sistema atual',
+      next: 'Go Live no WhatsApp'
+    },
+    {
+      num: '04',
+      title: 'Go Live no WhatsApp',
+      desc: 'A Sofia entra em operação atendendo pacientes 24 horas por dia, 7 dias por semana, com a qualidade de um atendimento humanizado e a velocidade de uma IA.',
+      badge: '💬 Atendimento 24/7 ativo',
+      next: 'Acompanhamento e Otimização'
+    },
+    {
+      num: '05',
+      title: 'Acompanhamento Contínuo',
+      desc: 'Suporte semanal nos primeiros 30 dias com ajustes finos, análise de conversões e otimizações constantes. Sua IA fica cada vez melhor com o tempo.',
+      badge: '📈 Otimização e suporte recorrente',
+      next: null
+    }
+  ];
+
+  let currentStep = 1;
+  let autoAdvanceTimer = null;
+  const AUTO_ADVANCE_MS = 6000;
+
+  const stepsEls = document.querySelectorAll('.timeline-step');
+  const lineFill = document.getElementById('timelineLineFill');
+  const cardContent = document.getElementById('timelineCardContent');
+  const progressFill = document.getElementById('timelineProgressFill');
+  const completeMsg = document.getElementById('timelineComplete');
+  const nextBtn = document.getElementById('timelineNextBtn');
+
+  if (!stepsEls.length || !cardContent) return;
+
+  function renderStep(step) {
+    currentStep = step;
+    const data = stepsData[step - 1];
+
+    // Atualiza estados das etapas
+    stepsEls.forEach(el => {
+      const s = parseInt(el.dataset.step);
+      el.classList.remove('active', 'completed');
+      const icon = el.querySelector('.timeline-step-icon');
+      // Restaura icon original (caso tenha virado check)
+      if (el.dataset.originalIcon) {
+        icon.innerHTML = el.dataset.originalIcon;
+      } else {
+        el.dataset.originalIcon = icon.innerHTML;
+      }
+      
+      if (s < step) {
+        el.classList.add('completed');
+        icon.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+      } else if (s === step) {
+        el.classList.add('active');
+      }
+    });
+
+    // Atualiza linha de progresso entre as bolinhas
+    const linePct = ((step - 1) / (stepsData.length - 1)) * 100;
+    lineFill.style.width = linePct + '%';
+
+    // Renderiza card
+    cardContent.innerHTML = `
+      <div class="timeline-card-header">
+        <div class="timeline-card-num">${data.num}</div>
+        <h3>${data.title}</h3>
+      </div>
+      <p class="timeline-card-desc">${data.desc}</p>
+      <div class="timeline-card-badge">${data.badge}</div>
+      ${data.next ? `<div class="timeline-card-next" id="timelineNext"><strong>Próxima etapa:</strong> ${data.next} <span class="arrow">›</span></div>` : ''}
+    `;
+
+    // Bind do "próxima etapa"
+    const nextBtn = document.getElementById('timelineNext');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (currentStep < stepsData.length) {
+          stopAutoAdvance();
+          renderStep(currentStep + 1);
+          startAutoAdvance();
+        }
+      });
+    }
+
+    // Reinicia barra de progresso
+    progressFill.classList.remove('animating');
+    void progressFill.offsetWidth; // força reflow
+    progressFill.classList.add('animating');
+
+    // Mostra mensagem final apenas no último step
+    if (step === stepsData.length) {
+      completeMsg.classList.add('visible');
+    } else {
+      completeMsg.classList.remove('visible');
+    }
+  }
+
+  function startAutoAdvance() {
+    stopAutoAdvance();
+    autoAdvanceTimer = setTimeout(() => {
+      const next = currentStep < stepsData.length ? currentStep + 1 : 1;
+      renderStep(next);
+      startAutoAdvance();
+    }, AUTO_ADVANCE_MS);
+  }
+
+  function stopAutoAdvance() {
+    if (autoAdvanceTimer) {
+      clearTimeout(autoAdvanceTimer);
+      autoAdvanceTimer = null;
+    }
+  }
+
+  // Click handler nas bolinhas
+  stepsEls.forEach(el => {
+    el.addEventListener('click', () => {
+      const step = parseInt(el.dataset.step);
+      stopAutoAdvance();
+      renderStep(step);
+      startAutoAdvance();
+    });
+  });
+
+  // Click handler do botão "próximo"
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      stopAutoAdvance();
+      const next = currentStep < stepsData.length ? currentStep + 1 : 1;
+      renderStep(next);
+      startAutoAdvance();
+    });
+  }
+
+  // Inicia: renderiza step 1 e começa auto-advance quando a seção fica visível
+  renderStep(1);
+  
+  const timelineSection = document.getElementById('como-funciona');
+  if ('IntersectionObserver' in window && timelineSection) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startAutoAdvance();
+        } else {
+          stopAutoAdvance();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(timelineSection);
+  } else {
+    startAutoAdvance();
+  }
+})();
+
+// ============================================================
+//  SIMULADOR DE ROI
+// ============================================================
+(function initSimulador() {
+  const pacientesSlider = document.getElementById('simPacientes');
+  const ticketSlider = document.getElementById('simTicket');
+  const pacientesValue = document.getElementById('simPacientesValue');
+  const ticketValue = document.getElementById('simTicketValue');
+  const simHoje = document.getElementById('simHoje');
+  const simComIA = document.getElementById('simComIA');
+  const simBonus = document.getElementById('simBonus');
+  const simTotal = document.getElementById('simTotal');
+  const simExtra = document.getElementById('simExtra');
+  
+  if (!pacientesSlider) return;
+  
+  function fmt(n) {
+    return 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+  }
+  
+  function calcular() {
+    const pacientesSemana = parseInt(pacientesSlider.value);
+    const ticket = parseInt(ticketSlider.value);
+    const pacientesMes = pacientesSemana * 4;
+    
+    // Cenário atual: 10% de conversão
+    const hoje = pacientesMes * 0.10 * ticket;
+    // Cenário com IA: 25% de conversão (resposta em segundos, 24h)
+    const comIA = pacientesMes * 0.25 * ticket;
+    // Bônus de reativação: ~30% do faturamento atual
+    const bonus = hoje * 0.30;
+    // Total ganho extra
+    const ganhoExtra = (comIA - hoje) + bonus;
+    
+    pacientesValue.textContent = pacientesSemana;
+    ticketValue.textContent = fmt(ticket);
+    simHoje.innerHTML = fmt(hoje) + '<span class="small">/mês</span>';
+    simComIA.innerHTML = fmt(comIA) + '<span class="small">/mês</span>';
+    simBonus.innerHTML = '+ ' + fmt(bonus) + '<span class="small">/mês</span>';
+    simTotal.textContent = fmt(ganhoExtra);
+    simExtra.textContent = 'a mais por mês no caixa';
+  }
+  
+  pacientesSlider.addEventListener('input', calcular);
+  ticketSlider.addEventListener('input', calcular);
+  calcular();
+})();
+
+// ============================================================
+//  REVEAL ANIMATIONS (deferido para não bloquear)
+// ============================================================
+function initReveals() {
+  if (!('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '50px' });
+
+  document.querySelectorAll('.problema-card, .passo, .resultado-card, .depoimento, .sobre-highlight, .solucao-feature').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+}
+
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(initReveals);
+} else {
+  setTimeout(initReveals, 200);
+}
+</script>
+
+<!-- Vercel Analytics + Speed Insights -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
