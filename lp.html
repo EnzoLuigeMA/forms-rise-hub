@@ -2200,7 +2200,7 @@ footer{
 const SUPABASE_URL = 'https://ibidukamkkgsurqswsvf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliaWR1a2Fta2tnc3VycXN3c3ZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjMwMjksImV4cCI6MjA4OTUzOTAyOX0.YRLsf8b8ZNK0w9MXNy27Xz4WoBKV9DzNZfGVWf4zK2E';
 const META_PIXEL_ID = '2238173290034845';
-const META_ACCESS_TOKEN = 'EAAHw1qXwSgwBQyxCU6yd1PKu8QZAtSH6QC6gf2StBaWwjJQWJ5ooeleZBIPNRoMmnxbrDiRGjulxYGM5ox7uKx5keY6OiVr3vCJjkXaFqpvAJOjyqrNHwHFHwJsYwNGZCiEQlnJGHREqcVscfmyNPsjImsbsbw1ZCAIAbD0VP3a1gydqP9cxLEhpAL5q0wZDZD';
+// META_ACCESS_TOKEN removido do client — fica só na env var da Vercel (/api/meta-capi)
 
 const WORK_DAYS = [1,2,3,4,5];
 const START_HOUR = 9;
@@ -2335,24 +2335,21 @@ async function checkDuplicateLead() {
   const phoneFormatted = document.getElementById('whatsapp').value.trim();
 
   try {
-    const emailCheck = await fetch(
-      `${SUPABASE_URL}/rest/v1/leads_rise_hub?email=eq.${encodeURIComponent(email)}&select=id&limit=1`,
-      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-    );
-    const emailResults = await emailCheck.json();
-    if (emailResults && emailResults.length > 0) {
-      markLocalDuplicate();
-      return true;
-    }
-
-    const phoneCheck = await fetch(
-      `${SUPABASE_URL}/rest/v1/leads_rise_hub?whatsapp=eq.${encodeURIComponent(phoneFormatted)}&select=id&limit=1`,
-      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-    );
-    const phoneResults = await phoneCheck.json();
-    if (phoneResults && phoneResults.length > 0) {
-      markLocalDuplicate();
-      return true;
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/lead_exists`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({ p_email: email, p_whatsapp: phoneFormatted })
+    });
+    if (res.ok) {
+      const exists = await res.json();
+      if (exists === true) {
+        markLocalDuplicate();
+        return true;
+      }
     }
   } catch (err) {
     console.log('Duplicate check failed:', err);
@@ -2654,19 +2651,21 @@ async function savePartialLead() {
   };
   savedPayload = partial;
   try {
+    // id gerado no client -> não precisamos ler de volta (RLS bloqueia SELECT/return=representation)
+    const newId = (crypto.randomUUID && crypto.randomUUID()) || null;
+    if (newId) partial.id = newId;
     const res = await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'apikey': SUPABASE_ANON_KEY,
         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Prefer': 'return=representation'
+        'Prefer': 'return=minimal'
       },
       body: JSON.stringify(partial)
     });
     if (res.ok) {
-      const data = await res.json();
-      if (data && data[0]) savedLeadId = data[0].id;
+      savedLeadId = newId;
       console.log('Lead parcial salvo:', savedLeadId);
     } else {
       console.warn('Lead parcial falhou:', res.status, await res.text());
@@ -2714,31 +2713,41 @@ async function finalizeLead(classification, score, extraObs) {
 
   try {
     if (savedLeadId) {
-      await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub?id=eq.${savedLeadId}`, {
-        method: 'PATCH',
+      // Profiling progressivo via RPC segura (atualiza só os campos de qualificação)
+      await fetch(`${SUPABASE_URL}/rest/v1/rpc/update_lead_qualification`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'return=minimal'
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
         },
-        body: JSON.stringify(dados)
+        body: JSON.stringify({
+          p_lead_id: savedLeadId,
+          p_faturamento: dados.faturamento,
+          p_orcamento: dados.orcamento,
+          p_compromisso: dados.compromisso,
+          p_lead_score: dados.lead_score,
+          p_lead_classification: dados.lead_classification,
+          p_observacao: dados.observacao
+        })
       });
       console.log('Lead atualizado:', savedLeadId, classification);
     } else {
+      // id gerado no client -> return=minimal (RLS bloqueia SELECT/return=representation)
+      const newId = (crypto.randomUUID && crypto.randomUUID()) || null;
+      if (newId) fullPayload.id = newId;
       const res = await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'apikey': SUPABASE_ANON_KEY,
           'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'return=representation'
+          'Prefer': 'return=minimal'
         },
         body: JSON.stringify(fullPayload)
       });
       if (res.ok) {
-        const data = await res.json();
-        if (data && data[0]) savedLeadId = data[0].id;
+        savedLeadId = newId;
         console.log('Lead salvo (full):', savedLeadId);
       }
     }
@@ -2927,7 +2936,7 @@ async function sendMetaConversionEvent(lead, eventId, eventName) {
     };
     if (Object.keys(customData).length > 0) eventData.custom_data = customData;
 
-    var resp = await fetch('https://graph.facebook.com/v21.0/' + META_PIXEL_ID + '/events?access_token=' + META_ACCESS_TOKEN, {
+    var resp = await fetch('/api/meta-capi', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ data: [eventData] }),
@@ -2960,10 +2969,15 @@ async function loadBookings() {
   try {
     const from = new Date(); from.setHours(0,0,0,0);
     const to = new Date(from); to.setDate(to.getDate() + 28);
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/bookings_rise_hub?status=eq.confirmado&booking_date=gte.${from.toISOString()}&booking_date=lte.${to.toISOString()}&select=booking_date`,
-      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-    );
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_available_slots`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({ p_from: from.toISOString(), p_to: to.toISOString() })
+    });
     if (res.ok) {
       const bookings = await res.json();
       realBookings = {};
@@ -3155,17 +3169,16 @@ document.getElementById('btnConfirm').addEventListener('click', async () => {
     
     // Atualizar lead com status agendado
     if (savedLeadId) {
-      await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub?id=eq.${savedLeadId}`, {
-        method: 'PATCH',
+      await fetch(`${SUPABASE_URL}/rest/v1/rpc/mark_lead_scheduled`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'return=minimal'
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
         },
         body: JSON.stringify({
-          status: 'agendado',
-          notas_internas: `Demonstração agendada: ${dateStr} às ${timeStr} | Google Meet | 1h30`
+          p_lead_id: savedLeadId,
+          p_notas: `Demonstração agendada: ${dateStr} às ${timeStr} | Google Meet | 1h30`
         })
       });
     }

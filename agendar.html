@@ -434,10 +434,15 @@ async function loadBookings() {
     const to = new Date(from);
     to.setDate(to.getDate() + 28);
     
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/bookings_rise_hub?status=eq.confirmado&booking_date=gte.${from.toISOString()}&booking_date=lte.${to.toISOString()}&select=booking_date,duration_minutes`,
-      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-    );
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_available_slots`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({ p_from: from.toISOString(), p_to: to.toISOString() })
+    });
     
     if (res.ok) {
       const bookings = await res.json();
@@ -725,18 +730,17 @@ document.getElementById('btnConfirm').addEventListener('click', async () => {
 
     // 2. Atualizar status do lead para "agendado" no pipeline do CRM
     //    Busca por email (mais confiável) ou WhatsApp
-    const emailEnc = encodeURIComponent(leadData.email.trim().toLowerCase());
-    await fetch(`${SUPABASE_URL}/rest/v1/leads_rise_hub?email=eq.${emailEnc}`, {
-      method: 'PATCH',
+    const emailNorm = leadData.email.trim().toLowerCase();
+    await fetch(`${SUPABASE_URL}/rest/v1/rpc/mark_lead_scheduled`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Prefer': 'return=minimal'
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
       },
       body: JSON.stringify({
-        status: 'agendado',
-        notas_internas: `Consultoria agendada: ${dateStr} às ${timeStr} | Google Meet | 1h30`
+        p_email: emailNorm,
+        p_notas: `Consultoria agendada: ${dateStr} às ${timeStr} | Google Meet | 1h30`
       })
     });
 
