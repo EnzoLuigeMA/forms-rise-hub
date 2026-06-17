@@ -65,9 +65,12 @@ Credenciais ficam **inline no HTML** (não há `.env`). Por serviço (apenas nom
 
 ## ⚠️ Known issues / Gotchas
 
-1. **Descasamento de projeto Supabase.** Os HTML apontam para o projeto `ibidukamkkgsurqswsvf`, que
-   **não aparece** na conta Supabase conectada às ferramentas (a conta tem "Rise Clinic", "Parana
-   Repasses", "Aluni IA"). Antes de mexer em dados, **confirme qual é o projeto correto/atual**.
+1. **Supabase em organização separada (não é bug).** Os HTML apontam para o projeto
+   `ibidukamkkgsurqswsvf`, que fica na organização **`EnzoLuigeMA's Org`** — diferente da org
+   **`Rise Hub`** (`rllysttsvetpgahppysc`), que contém os projetos `Rise Clinic`, `Parana Repasses` e
+   `Aluni IA`. O projeto está correto; ele só vive em outra org. **Atenção**: uma conexão Supabase
+   (MCP) autorizada apenas na org `Rise Hub` **não alcança** o projeto dos forms — para inspecionar/
+   gerenciar os dados via ferramentas, é preciso uma conexão com acesso a `EnzoLuigeMA's Org`.
 2. **Token da Meta Conversions API exposto no cliente.** A *anon key* do Supabase ser pública é
    esperado (RLS protege), mas o token da CAPI no HTML é um vazamento real — idealmente movido para um
    backend/edge function. Ao documentar/editar, **não reproduza segredos**.
