@@ -63,14 +63,27 @@ Credenciais ficam **inline no HTML** (não há `.env`). Por serviço (apenas nom
 - **Meta** — `PIXEL_ID` (client) + access token da **Conversions API**.
 - **Vercel** — Speed Insights / Web Analytics (scripts `/_vercel/...`).
 
+## Conexão Supabase via MCP (todos os projetos)
+
+O OAuth padrão do Supabase é preso a **uma organização**. Como os projetos estão em orgs diferentes
+(`EnzoLuigeMA's Org` para os forms, `Rise Hub` para o produto), o repo declara um servidor MCP
+**personalizado** em `.mcp.json` (`supabase-all`) usando um **Personal Access Token (PAT)**, que é da
+conta inteira → enxerga **todas as orgs/projetos** numa só conexão (read-write; sem `--project-ref`).
+
+Para funcionar (passos manuais, fora do repo):
+- Definir a variável de ambiente **`SUPABASE_ACCESS_TOKEN`** (PAT da conta) na config do ambiente do
+  Claude Code na web. **Nunca commitar o token** — o `.mcp.json` só referencia `${SUPABASE_ACCESS_TOKEN}`.
+- A **política de rede** do ambiente precisa permitir `npm`/`npx` e `api.supabase.com` (+ hosts de DB).
+- Iniciar nova sessão e aprovar o servidor `supabase-all` (servidores de `.mcp.json` pedem aprovação).
+
 ## ⚠️ Known issues / Gotchas
 
 1. **Supabase em organização separada (não é bug).** Os HTML apontam para o projeto
    `ibidukamkkgsurqswsvf`, que fica na organização **`EnzoLuigeMA's Org`** — diferente da org
    **`Rise Hub`** (`rllysttsvetpgahppysc`), que contém os projetos `Rise Clinic`, `Parana Repasses` e
-   `Aluni IA`. O projeto está correto; ele só vive em outra org. **Atenção**: uma conexão Supabase
-   (MCP) autorizada apenas na org `Rise Hub` **não alcança** o projeto dos forms — para inspecionar/
-   gerenciar os dados via ferramentas, é preciso uma conexão com acesso a `EnzoLuigeMA's Org`.
+   `Aluni IA`. O projeto está correto; ele só vive em outra org. Para alcançar **ambas as orgs** numa
+   conexão só, use o servidor MCP `supabase-all` (PAT) definido em `.mcp.json` — ver seção
+   *Conexão Supabase via MCP*. O conector OAuth padrão só enxerga uma org por vez.
 2. **Token da Meta Conversions API exposto no cliente.** A *anon key* do Supabase ser pública é
    esperado (RLS protege), mas o token da CAPI no HTML é um vazamento real — idealmente movido para um
    backend/edge function. Ao documentar/editar, **não reproduza segredos**.
