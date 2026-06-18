@@ -1359,30 +1359,25 @@ async function checkDuplicateLead() {
 
   // 2. Verificação no Supabase por email OU telefone
   const email = document.getElementById('email').value.trim().toLowerCase();
-  const phone = document.getElementById('whatsapp').value.replace(/\D/g, '');
+  const phoneFormatted = document.getElementById('whatsapp').value.trim();
 
   try {
-    // Checar por email
-    const emailCheck = await fetch(
-      `${SUPABASE_URL}/rest/v1/leads_rise_hub?email=eq.${encodeURIComponent(email)}&select=id&limit=1`,
-      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-    );
-    const emailResults = await emailCheck.json();
-    if (emailResults && emailResults.length > 0) {
-      markLocalDuplicate();
-      return true;
-    }
-
-    // Checar por whatsapp
-    const phoneFormatted = document.getElementById('whatsapp').value.trim();
-    const phoneCheck = await fetch(
-      `${SUPABASE_URL}/rest/v1/leads_rise_hub?whatsapp=eq.${encodeURIComponent(phoneFormatted)}&select=id&limit=1`,
-      { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-    );
-    const phoneResults = await phoneCheck.json();
-    if (phoneResults && phoneResults.length > 0) {
-      markLocalDuplicate();
-      return true;
+    // Checagem via RPC segura (não expõe a tabela): devolve só true/false
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/lead_exists`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({ p_email: email, p_whatsapp: phoneFormatted })
+    });
+    if (res.ok) {
+      const exists = await res.json();
+      if (exists === true) {
+        markLocalDuplicate();
+        return true;
+      }
     }
   } catch (err) {
     console.log('Duplicate check failed (network), continuing:', err);
@@ -1526,7 +1521,8 @@ document.getElementById('btnSubmit').addEventListener('click', async () => {
 //  META CONVERSIONS API (CAPI)
 // ============================================================
 const META_PIXEL_ID = '2238173290034845';
-const META_ACCESS_TOKEN = 'EAAHw1qXwSgwBQyxCU6yd1PKu8QZAtSH6QC6gf2StBaWwjJQWJ5ooeleZBIPNRoMmnxbrDiRGjulxYGM5ox7uKx5keY6OiVr3vCJjkXaFqpvAJOjyqrNHwHFHwJsYwNGZCiEQlnJGHREqcVscfmyNPsjImsbsbw1ZCAIAbD0VP3a1gydqP9cxLEhpAL5q0wZDZD';
+// META_ACCESS_TOKEN removido do client — agora fica só na env var da Vercel,
+// usado pela função serverless /api/meta-capi (proxy da Conversions API).
 
 async function hashSHA256(value) {
   if (!value) return null;
@@ -1607,7 +1603,7 @@ async function sendMetaConversionEvent(lead, eventId) {
       }]
     };
 
-    await fetch(`https://graph.facebook.com/v21.0/${META_PIXEL_ID}/events?access_token=${META_ACCESS_TOKEN}`, {
+    await fetch('/api/meta-capi', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(eventData)

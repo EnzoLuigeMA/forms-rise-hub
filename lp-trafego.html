@@ -407,7 +407,7 @@ footer a{color:var(--accent-light);font-weight:600}
 <script>
 var SUPABASE_URL = 'https://ibidukamkkgsurqswsvf.supabase.co';
 var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliaWR1a2Fta2tnc3VycXN3c3ZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjMwMjksImV4cCI6MjA4OTUzOTAyOX0.YRLsf8b8ZNK0w9MXNy27Xz4WoBKV9DzNZfGVWf4zK2E';
-var META_ACCESS_TOKEN = 'EAAHw1qXwSgwBQyxCU6yd1PKu8QZAtSH6QC6gf2StBaWwjJQWJ5ooeleZBIPNRoMmnxbrDiRGjulxYGM5ox7uKx5keY6OiVr3vCJjkXaFqpvAJOjyqrNHwHFHwJsYwNGZCiEQlnJGHREqcVscfmyNPsjImsbsbw1ZCAIAbD0VP3a1gydqP9cxLEhpAL5q0wZDZD';
+// META_ACCESS_TOKEN removido do client — fica só na env var da Vercel (/api/meta-capi)
 var META_PIXEL_ID = '2238173290034845';
 var currentStep = 1;
 var savedPayload = null;
@@ -532,7 +532,7 @@ async function sendMetaConversionEvent(lead, eventId) {
     const fat = lead.faturamento;
     const orcValue = fat === 'acima_100k' ? 10000 : fat === '50k_100k' ? 7500 : fat === '25k_50k' ? 3750 : fat === '15k_25k' ? 2000 : 1000;
     
-    await fetch(`https://graph.facebook.com/v21.0/${META_PIXEL_ID}/events?access_token=${META_ACCESS_TOKEN}`, {
+    await fetch('/api/meta-capi', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -598,10 +598,12 @@ async function checkDuplicateLead() {
   var email = document.getElementById('email').value.trim();
   var wa = document.getElementById('whatsapp').value.trim();
   try {
-    var r1 = await fetch(SUPABASE_URL + '/rest/v1/leads_rise_hub?email=eq.' + encodeURIComponent(email) + '&select=id&limit=1', { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY } });
-    if (r1.ok) { var d1 = await r1.json(); if (d1.length > 0) return true; }
-    var r2 = await fetch(SUPABASE_URL + '/rest/v1/leads_rise_hub?whatsapp=eq.' + encodeURIComponent(wa) + '&select=id&limit=1', { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY } });
-    if (r2.ok) { var d2 = await r2.json(); if (d2.length > 0) return true; }
+    var res = await fetch(SUPABASE_URL + '/rest/v1/rpc/lead_exists', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+      body: JSON.stringify({ p_email: email, p_whatsapp: wa })
+    });
+    if (res.ok) { var exists = await res.json(); if (exists === true) return true; }
   } catch(e) { console.error('Dup check error:', e); }
   return false;
 }
@@ -709,13 +711,16 @@ document.getElementById('btnStep5').addEventListener('click', async function() {
 
   savedPayload = payload;
   try {
+    // id gerado no client -> return=minimal (RLS bloqueia SELECT/return=representation)
+    var newId = (crypto.randomUUID && crypto.randomUUID()) || null;
+    if (newId) payload.id = newId;
     var res = await fetch(SUPABASE_URL + '/rest/v1/leads_rise_hub', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Prefer': 'return=representation' },
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Prefer': 'return=minimal' },
       body: JSON.stringify(payload)
     });
     if (res.ok) {
-      var d = await res.json(); if (d && d[0]) savedLeadId = d[0].id;
+      savedLeadId = newId;
       console.log('✅ Lead saved:', savedLeadId);
       try { localStorage.setItem('rh_trafego_submitted', '1'); } catch(e) {}
       try { document.cookie = 'rh_trafego=1; max-age=31536000; path=/; SameSite=Lax'; } catch(e) {}
@@ -788,8 +793,10 @@ async function loadBookings() {
   var from = new Date(currentWeekStart);
   var to = new Date(from); to.setDate(to.getDate() + 14);
   try {
-    var res = await fetch(SUPABASE_URL + '/rest/v1/bookings_rise_hub?status=eq.confirmado&booking_date=gte.' + from.toISOString() + '&booking_date=lte.' + to.toISOString() + '&select=booking_date', {
-      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+    var res = await fetch(SUPABASE_URL + '/rest/v1/rpc/get_available_slots', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
+      body: JSON.stringify({ p_from: from.toISOString(), p_to: to.toISOString() })
     });
     if (res.ok) bookedSlots = await res.json();
   } catch(e) { console.error('Bookings load failed:', e); }
@@ -904,12 +911,12 @@ document.getElementById('btnConfirm').addEventListener('click', async function()
 
     // Update lead status
     if (savedLeadId) {
-      await fetch(SUPABASE_URL + '/rest/v1/leads_rise_hub?id=eq.' + savedLeadId, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY, 'Prefer': 'return=minimal' },
+      await fetch(SUPABASE_URL + '/rest/v1/rpc/mark_lead_scheduled', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
         body: JSON.stringify({
-          status: 'agendado',
-          notas_internas: 'Consultoria de tráfego agendada: ' + dateStr + ' às ' + timeStr + ' | Google Meet | 1h'
+          p_lead_id: savedLeadId,
+          p_notas: 'Consultoria de tráfego agendada: ' + dateStr + ' às ' + timeStr + ' | Google Meet | 1h'
         })
       });
     }
