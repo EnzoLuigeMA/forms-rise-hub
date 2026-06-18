@@ -2641,7 +2641,7 @@ async function savePartialLead() {
     cidade: document.getElementById('cidade').value.trim() || null,
     observacao: 'Lead parcial — preencheu contato, não completou qualificacao',
     created_at: new Date().toISOString(),
-    lead_classification: 'INCOMPLETO',
+    lead_classification: 'COLD',
     utm_source: params.get('utm_source') || null,
     utm_medium: params.get('utm_medium') || null,
     utm_campaign: params.get('utm_campaign') || null,
