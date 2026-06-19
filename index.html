@@ -789,7 +789,7 @@ body::after{
 
         <div class="field">
           <label>Quanto pensa em investir mensalmente nessa solução?</label>
-          <select id="orcamento">
+          <select id="orcamento" required>
             <option value="" disabled selected>Selecione a faixa</option>
             <option value="1000_2000">R$ 1.000 a R$ 2.000/mês</option>
             <option value="2000_3500">R$ 2.000 a R$ 3.500/mês</option>
@@ -839,6 +839,20 @@ body::after{
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
         Fale conosco @risehub.br
       </a>
+    </div>
+
+    <!-- LOW QUALIFICATION SCREEN (lead desqualificado) -->
+    <div class="blocked-screen" id="lowQualScreen">
+      <div class="blocked-icon">💡</div>
+      <h2>Ainda não é o momento ideal</h2>
+      <p>Com base nas suas respostas, percebemos que sua clínica ainda está em um estágio onde nossa solução de IA <strong style="color:var(--rh-text)">não traria o retorno que você merece</strong> neste momento.</p>
+      <p style="margin-top:12px">Nossa IA gera o melhor resultado para clínicas que já têm um orçamento estruturado para escalar com tráfego e automação. Investir antes da hora certa não seria justo com você.</p>
+      <div class="blocked-divider"></div>
+      <div class="blocked-cta">
+        Quer crescer e voltar quando estiver pronto(a)?<br>
+        Acompanhe nossos conteúdos gratuitos sobre gestão e crescimento de clínicas:<br>
+        <a href="https://www.instagram.com/risehub.br/" target="_blank">Siga @risehub.br no Instagram</a>
+      </div>
     </div>
 
     <!-- THANK YOU SCREEN -->
@@ -957,6 +971,19 @@ function blockNonClinic() {
   document.getElementById('blockedScreen').classList.add('active');
   document.getElementById('headerTitle').textContent = 'Rise Hub';
   document.getElementById('headerDesc').textContent = '';
+}
+
+// ============================================================
+//  BLOCK PARA LEAD DESQUALIFICADO (baixa qualificação)
+// ============================================================
+function blockLowQualification() {
+  formCompleted = true; // evita o popup de exit-intent sobre a tela
+  document.getElementById('riseForm').style.display = 'none';
+  document.getElementById('progressSection').style.display = 'none';
+  document.getElementById('lowQualScreen').classList.add('active');
+  document.getElementById('headerTitle').textContent = 'Rise Hub';
+  document.getElementById('headerDesc').textContent = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ============================================================
@@ -1084,6 +1111,18 @@ function calculateLeadScore() {
   else classification = 'COLD';
 
   return { score, classification };
+}
+
+// ============================================================
+//  LEAD DESQUALIFICADO — critério conservador
+//  Desqualifica quem NÃO tem orçamento definido E NÃO investe em ads.
+// ============================================================
+function isLowQualification() {
+  const orcamento = document.getElementById('orcamento').value;
+  const ads = document.querySelector('input[name="investe_ads"]:checked')?.value;
+  const semOrcamento = (orcamento === 'nao_sei' || orcamento === '');
+  const naoInvesteAds = (ads === 'nao');
+  return semOrcamento && naoInvesteAds;
 }
 
 function updateProgress() {
@@ -1307,12 +1346,15 @@ function validateStep2() {
 function validateStep3() {
   const volume = document.querySelector('input[name="volume"]:checked');
   const dor = document.getElementById('dorAtual').value;
-  if (!volume || !dor) { alert('Preencha o volume de atendimentos e a maior dor.'); return false; }
+  const ads = document.querySelector('input[name="investe_ads"]:checked');
+  if (!volume || !ads || !dor) { alert('Preencha o volume de atendimentos, quanto investe em anúncios e a maior dor.'); return false; }
   return true;
 }
 function validateStep4() {
   const interesses = document.querySelectorAll('input[name="interesse"]:checked');
   if (interesses.length === 0) { alert('Selecione ao menos uma solução de interesse.'); return false; }
+  const orcamento = document.getElementById('orcamento').value;
+  if (!orcamento) { alert('Selecione quanto pensa em investir mensalmente.'); return false; }
   return true;
 }
 
@@ -1442,6 +1484,14 @@ document.getElementById('btnSubmit').addEventListener('click', async () => {
   const interesses = Array.from(document.querySelectorAll('input[name="interesse"]:checked')).map(i => i.value);
   const params = new URLSearchParams(window.location.search);
 
+  // Lead scoring + checagem de baixa qualificação (lead desqualificado)
+  const score = calculateLeadScore();
+  const lowQual = isLowQualification();
+  const obsUser = document.getElementById('observacao').value.trim();
+  const observacaoFinal = lowQual
+    ? ('Desqualificado — sem orçamento definido e não investe em ads.' + (obsUser ? ' | ' + obsUser : ''))
+    : (obsUser || null);
+
   const payload = {
     segmento: document.querySelector('input[name="segmento"]:checked')?.value || '',
     nome: document.getElementById('nome').value.trim(),
@@ -1457,11 +1507,11 @@ document.getElementById('btnSubmit').addEventListener('click', async () => {
     maior_dor: document.getElementById('dorAtual').value,
     interesses: interesses,
     orcamento: document.getElementById('orcamento').value || null,
-    observacao: document.getElementById('observacao').value.trim() || null,
+    observacao: observacaoFinal,
     created_at: new Date().toISOString(),
     // Lead Scoring
-    lead_score: calculateLeadScore().score,
-    lead_classification: calculateLeadScore().classification,
+    lead_score: score.score,
+    lead_classification: lowQual ? 'COLD' : score.classification,
     // UTM: detecta se veio de /bio ou por parâmetros de URL
     utm_source: params.get('utm_source') || (isBioRoute() ? 'instagram' : null),
     utm_medium: params.get('utm_medium') || (isBioRoute() ? 'bio_link' : null),
@@ -1504,13 +1554,26 @@ document.getElementById('btnSubmit').addEventListener('click', async () => {
       console.log('Supabase not configured. Lead data:', payload);
     }
 
-    // Meta Conversions API (server-side) + shared event_id for deduplication
+    // LEAD DESQUALIFICADO: lead foi salvo (COLD), mas NÃO dispara conversão Lead/CAPI.
+    // Dispara evento custom (não otimizado pela Meta) e mostra tela educativa.
+    if (lowQual) {
+      if (typeof fbq === 'function') fbq('trackCustom', 'LeadDesqualificado', { motivo: 'baixa_qualificacao' });
+      blockLowQualification();
+      return;
+    }
+
+    // QUALIFICADO: Meta Conversions API (server-side) + Pixel (em showThankYou) com event_id compartilhado p/ dedupe
     const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     sendMetaConversionEvent(payload, eventId);
 
     showThankYou(payload.nome.split(' ')[0], payload.email, payload.whatsapp, eventId);
   } catch (err) {
     console.error('Erro ao salvar lead:', err);
+    if (lowQual) {
+      if (typeof fbq === 'function') fbq('trackCustom', 'LeadDesqualificado', { motivo: 'baixa_qualificacao' });
+      blockLowQualification();
+      return;
+    }
     const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     sendMetaConversionEvent(payload, eventId);
     showThankYou(payload.nome.split(' ')[0], payload.email, payload.whatsapp, eventId);
