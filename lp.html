@@ -2642,6 +2642,7 @@ async function savePartialLead() {
     observacao: 'Lead parcial — preencheu contato, não completou qualificacao',
     created_at: new Date().toISOString(),
     lead_classification: 'COLD',
+    status: 'parcial',
     utm_source: params.get('utm_source') || null,
     utm_medium: params.get('utm_medium') || null,
     utm_campaign: params.get('utm_campaign') || null,
@@ -2822,7 +2823,7 @@ document.getElementById('btnStep3Final').addEventListener('click', async () => {
   }
 
   // QUALIFICADO: completa lead + dispara conversão
-  const payload = await finalizeLead(score.classification, score.score, null);
+  const payload = await finalizeLead(score.classification, score.score, 'Qualificação completa');
 
   const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   sendMetaConversionEvent(payload, eventId, 'Lead');
