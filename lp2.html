@@ -83,10 +83,30 @@ html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:op
   /* One sanctioned gradient: violet -> magenta */
   --grad-accent: linear-gradient(116deg, var(--violet) 0%, var(--magenta) 100%);
 
+  /* ---- 4pt spacing scale (tokens) ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+  /* Fluid section rhythm: tight movements vs. generous gaps between */
+  --section-pad: clamp(72px, 10vw, 128px);
+  --section-pad-tight: clamp(48px, 7vw, 88px);
+  --section-pad-loose: clamp(96px, 13vw, 168px);
+
   --radius-xs: 10px;
   --radius-sm: 14px;
   --radius: 18px;
   --radius-lg: 26px;
+  --radius-xl: 34px;
   --radius-pill: 999px;
 
   --shadow-sm: 0 1px 2px oklch(0.10 0.03 300 / .4);
@@ -153,10 +173,30 @@ img{display:block;max-width:100%}
 
 /* ============================================================
    SHARED SECTION SCAFFOLDING
+   Rhythm: vary padding + header treatment per section.
    ============================================================ */
-.section{padding-block:clamp(72px,10vw,128px);position:relative}
+.section{padding-block:var(--section-pad);position:relative}
+.section.tight{padding-block:var(--section-pad-tight)}
+.section.loose{padding-block:var(--section-pad-loose)}
 .section-head{max-width:42rem;margin-bottom:clamp(40px,6vw,64px)}
 .section-head.center{margin-inline:auto;text-align:center}
+
+/* Asymmetric 2-col layout: heading column beside the content.
+   On wide screens the head can stick; collapses to stacked on mobile. */
+.split-section{
+  display:grid;
+  grid-template-columns:minmax(0,0.84fr) minmax(0,1.16fr);
+  gap:clamp(32px,6vw,80px);
+  align-items:start;
+}
+.split-section > .section-head{margin-bottom:0;max-width:34rem}
+.split-section.sticky-head > .section-head{position:sticky;top:clamp(84px,11vh,108px)}
+@media(max-width:880px){
+  .split-section{grid-template-columns:1fr;gap:clamp(28px,7vw,44px)}
+  .split-section > .section-head{max-width:46rem}
+  .split-section.sticky-head > .section-head{position:static;top:auto}
+}
+
 .kicker{
   display:inline-flex;align-items:center;gap:9px;
   font-family:var(--font-mono);
@@ -183,6 +223,15 @@ img{display:block;max-width:100%}
   text-decoration:underline;text-decoration-color:var(--magenta);
   text-decoration-thickness:2px;text-underline-offset:6px;
 }
+/* Eyebrow note that can sit under a split heading */
+.head-note{
+  margin-top:clamp(24px,3vw,32px);padding-top:var(--space-6);
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:var(--space-3);
+  font-size:.84rem;color:var(--ink-muted);line-height:1.5;
+}
+.head-note .live-dot{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 10px var(--live-a30);flex-shrink:0}
+@media(max-width:880px){.split-section.sticky-head > .section-head .head-note{display:none}}
 
 /* ============================================================
    BUTTONS
@@ -382,37 +431,91 @@ img{display:block;max-width:100%}
 .stat-l{font-size:.78rem;color:var(--ink-muted);margin-top:9px;letter-spacing:.01em}
 
 /* ============================================================
-   PROBLEMA
+   PROBLEMA — editorial / asymmetric bento, big numerals
    ============================================================ */
-.prob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.problema{border-block:1px solid var(--border)}
+.prob-grid{
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:var(--space-4);
+  align-items:stretch;
+}
+/* Lead statement spans the top, wide */
+.prob-lead{
+  grid-column:1 / span 12;
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(18px,3vw,30px);align-items:center;
+  background:
+    radial-gradient(120% 160% at 0% 0%, var(--danger-a20), transparent 58%),
+    var(--surface);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  padding:clamp(24px,3.5vw,36px) clamp(24px,3.5vw,40px);
+}
+.prob-lead .prob-lead-num{
+  font-family:var(--font-display);font-weight:700;line-height:.9;letter-spacing:-.04em;
+  font-size:clamp(3.2rem,10vw,6rem);color:var(--danger);
+}
+.prob-lead .prob-lead-tx{min-width:0;font-size:clamp(1.05rem,1.8vw,1.3rem);color:var(--ink);line-height:1.4;font-weight:500}
+.prob-lead .prob-lead-tx strong{color:var(--ink);font-weight:700}
+/* Three offset blocks of varying width below */
 .problema-card{
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:30px 28px;
+  padding:clamp(24px,3vw,34px) clamp(22px,2.6vw,30px);
   display:flex;flex-direction:column;
   transition:border-color .3s var(--ease-out-expo), transform .3s var(--ease-out-expo), background .3s;
 }
+.problema-card.span-5{grid-column:span 5}
+.problema-card.span-4{grid-column:span 4}
+.problema-card.span-3{grid-column:span 3}
 .problema-card:hover{border-color:var(--danger-a20);transform:translateY(-3px);background:oklch(0.215 0.042 300)}
+.prob-num{
+  font-family:var(--font-display);font-weight:700;line-height:.9;letter-spacing:-.03em;
+  font-size:clamp(2.2rem,4.5vw,3.2rem);color:var(--danger);margin-bottom:var(--space-3);
+}
 .prob-ico{
   width:46px;height:46px;border-radius:13px;
   display:flex;align-items:center;justify-content:center;font-size:23px;
   background:var(--danger-a20);
-  margin-bottom:20px;
+  margin-bottom:var(--space-5);
 }
 .problema-card h3{font-size:1.12rem;margin-bottom:10px}
 .problema-card p{font-size:.9rem;color:var(--ink-dim);line-height:1.6}
 .prob-stat{
-  margin-top:auto;padding-top:18px;
+  margin-top:auto;padding-top:var(--space-5);
   display:flex;align-items:center;gap:8px;
   font-size:.8rem;color:var(--danger);font-weight:500;
 }
 .prob-stat .big{font-family:var(--font-display);font-weight:600;font-size:1.05rem;color:var(--danger)}
+/* Tablet: 2-up that still varies; Mobile: single column */
+@media(max-width:880px){
+  .problema-card.span-5,.problema-card.span-4,.problema-card.span-3{grid-column:span 6}
+  .prob-lead{grid-template-columns:1fr;gap:var(--space-4)}
+}
+@media(max-width:560px){
+  .prob-grid{gap:var(--space-3)}
+  .problema-card.span-5,.problema-card.span-4,.problema-card.span-3{grid-column:span 12}
+}
 
 /* ============================================================
    SOLUÇÃO  (Sofia)
    ============================================================ */
-.solucao{border-block:1px solid var(--border);background:linear-gradient(180deg, transparent, var(--violet-a08))}
+/* Full-bleed drenched moment — edge-to-edge violet wash */
+.solucao{
+  position:relative;border-block:1px solid var(--border-strong);
+  background:
+    radial-gradient(80% 120% at 12% 0%, var(--violet-a18), transparent 56%),
+    radial-gradient(70% 120% at 100% 100%, var(--magenta-a30), transparent 60%),
+    linear-gradient(180deg, oklch(0.205 0.04 300), oklch(0.18 0.04 300));
+}
+.solucao::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(oklch(1 0 0 / .025) 1px,transparent 1px),linear-gradient(90deg, oklch(1 0 0 / .025) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 30%, black, transparent 78%);
+  mask-image:radial-gradient(ellipse at 50% 30%, black, transparent 78%);
+}
 .solucao-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,60px);align-items:center}
 @media(max-width:920px){.solucao-split{grid-template-columns:1fr}}
 .feature-list{display:flex;flex-direction:column;gap:8px;margin-top:30px}
@@ -462,8 +565,10 @@ img{display:block;max-width:100%}
 .sofia-id .rl{font-size:.82rem;color:var(--violet-bright);margin:3px 0 5px}
 .sofia-id .ol{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:.7rem;color:var(--live)}
 .sofia-id .ol svg{width:7px;height:7px}
-.sofia-skills{position:relative;z-index:var(--z-base);display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.sk{display:flex;align-items:center;gap:10px;padding:12px 13px;border-radius:11px;background:oklch(0.25 0.045 300 / .55);border:1px solid var(--violet-a18);font-size:.82rem;font-weight:500;color:var(--ink);transition:border-color .25s, transform .25s var(--ease-out-expo)}
+/* Bento of skills: varied cell spans (not a uniform 2-up) */
+.sofia-skills{position:relative;z-index:var(--z-base);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+.sk{display:flex;align-items:center;gap:10px;padding:12px 13px;border-radius:11px;background:oklch(0.25 0.045 300 / .55);border:1px solid var(--violet-a18);font-size:.82rem;font-weight:500;color:var(--ink);transition:border-color .25s, transform .25s var(--ease-out-expo);grid-column:span 3}
+.sk.sk-wide{grid-column:span 6}
 .sk:hover{border-color:var(--violet-a30);transform:translateY(-1px)}
 .sk .ck{width:19px;height:19px;border-radius:50%;background:var(--live);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 10px var(--live-a30)}
 .sk .ck svg{width:11px;height:11px;color:oklch(0.16 0.03 160);stroke-width:3.5}
@@ -477,12 +582,15 @@ img{display:block;max-width:100%}
   .sofia-pic img{width:78px;height:78px}
   .sofia-id .nm{font-size:1.22rem}
   .sofia-skills{grid-template-columns:1fr}
+  .sk,.sk.sk-wide{grid-column:auto}
 }
 
 /* ============================================================
    COMO FUNCIONA — interactive timeline
    ============================================================ */
 .timeline-wrap{margin-top:clamp(40px,6vw,60px);position:relative}
+.split-section .timeline-wrap{margin-top:0}
+@media(max-width:880px){.split-section .timeline-wrap{margin-top:clamp(8px,3vw,20px)}}
 .timeline-steps{position:relative;display:grid;grid-template-columns:repeat(5,1fr);margin-bottom:clamp(34px,5vw,48px);padding-inline:8px}
 .timeline-line{position:absolute;top:31px;left:10%;right:10%;height:2px;background:var(--border);z-index:var(--z-base)}
 .timeline-line-fill{position:absolute;inset:0 auto 0 0;width:0%;background:var(--grad-accent);box-shadow:0 0 12px var(--violet-glow);transition:width .8s var(--ease-out-quint)}
@@ -550,55 +658,133 @@ img{display:block;max-width:100%}
 }
 
 /* ============================================================
-   RESULTADOS
+   RESULTADOS — comparative split (sem IA vs. com a Sofia)
    ============================================================ */
-.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
-.resultado-card{
-  position:relative;overflow:hidden;
+.compare{
+  display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:0;align-items:stretch;
   background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:34px 30px;
-  transition:border-color .3s var(--ease-out-expo), transform .3s var(--ease-out-expo);
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-lg);
+  overflow:hidden;box-shadow:var(--shadow-md);
 }
-.resultado-card:hover{border-color:var(--violet);transform:translateY(-4px)}
-.res-n{font-family:var(--font-display);font-weight:600;font-size:clamp(2.6rem,5vw,3.4rem);color:var(--violet-bright);line-height:1;letter-spacing:-.03em;margin-bottom:10px}
-.resultado-card h3{font-size:1.05rem;margin-bottom:11px}
-.resultado-card p{font-size:.88rem;color:var(--ink-dim);line-height:1.6}
+.compare-col{display:flex;flex-direction:column;min-width:0;padding:clamp(24px,3.2vw,38px) clamp(22px,3vw,36px)}
+.compare-col.is-before{background:linear-gradient(180deg, var(--danger-a20), transparent 40%)}
+.compare-col.is-after{background:linear-gradient(180deg, var(--live-a12), transparent 42%)}
+.compare-head{display:flex;align-items:center;gap:10px;margin-bottom:clamp(20px,3vw,28px)}
+.compare-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:.72rem;font-weight:500;letter-spacing:.04em;
+  padding:6px 12px;border-radius:var(--radius-pill);
+}
+.compare-tag.tag-before{background:var(--danger-a20);color:var(--danger)}
+.compare-tag.tag-after{background:var(--live-a30);color:var(--live)}
+.compare-title{font-size:clamp(1.05rem,2vw,1.35rem);color:var(--ink);line-height:1.15}
+/* central divider line */
+.compare-vs{
+  align-self:stretch;width:1px;background:var(--border-strong);position:relative;
+}
+.compare-vs::after{
+  content:'VS';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;color:var(--ink-muted);
+  background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius-pill);
+  padding:6px 9px;line-height:1;
+}
+/* each row in a column (keeps .resultado-card for reveal) */
+.resultado-card{
+  position:relative;
+  padding:clamp(16px,2vw,20px) 0;
+  transition:transform .3s var(--ease-out-expo);
+}
+.resultado-card + .resultado-card{border-top:1px solid var(--border)}
+.compare-col.is-before .resultado-card + .resultado-card{border-top-color:var(--danger-a20)}
+.compare-col.is-after .resultado-card + .resultado-card{border-top-color:var(--live-a30)}
+.res-n{font-family:var(--font-display);font-weight:600;font-size:clamp(2.1rem,4vw,2.9rem);line-height:1;letter-spacing:-.03em;margin-bottom:6px}
+.compare-col.is-before .res-n{color:var(--danger)}
+.compare-col.is-after .res-n{color:var(--live)}
+.resultado-card h3{font-size:1.02rem;margin-bottom:7px}
+.resultado-card p{font-size:.88rem;color:var(--ink-dim);line-height:1.55}
+@media(max-width:780px){
+  .compare{grid-template-columns:1fr}
+  .compare-vs{width:auto;height:1px}
+  .compare-vs::after{padding:5px 10px}
+}
 
 /* ============================================================
-   DEPOIMENTOS
+   DEPOIMENTOS — bento (one featured spanning larger)
    ============================================================ */
-.dep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.dep-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}
 .depoimento{
   display:flex;flex-direction:column;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:28px;
+  padding:clamp(24px,2.6vw,30px);
   transition:border-color .3s var(--ease-out-expo), transform .3s var(--ease-out-expo);
 }
 .depoimento:hover{border-color:var(--violet);transform:translateY(-4px)}
+/* Featured cell: spans both columns, drenched, larger quote */
+.depoimento.is-featured{
+  grid-column:1 / -1;
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(80% 120% at 100% 0%, var(--violet-a18), transparent 58%),
+    linear-gradient(180deg, var(--surface), oklch(0.19 0.04 300));
+  border-color:var(--border-strong);
+  padding:clamp(28px,3.4vw,42px);
+}
+.depoimento.is-featured .dep-quote{font-family:var(--font-display);font-weight:500;font-size:clamp(1.2rem,2.4vw,1.7rem);line-height:1.3;color:var(--ink);max-width:30ch}
+.depoimento.is-featured .dep-stars svg{width:18px;height:18px}
 .dep-stars{display:flex;gap:3px;margin-bottom:16px;color:var(--warn)}
 .dep-stars svg{width:16px;height:16px;fill:currentColor}
 .dep-quote{font-size:.96rem;color:var(--ink);line-height:1.6;margin-bottom:22px}
 .dep-author{display:flex;align-items:center;gap:13px;margin-top:auto;padding-top:20px;border-top:1px solid var(--border)}
 .dep-av{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:1rem;color:oklch(0.99 0 0);background:var(--grad-accent)}
+.depoimento.is-featured .dep-av{width:52px;height:52px;font-size:1.18rem}
 .dep-author > span{display:flex;flex-direction:column;min-width:0}
 .dep-author strong{display:block;font-size:.9rem;color:var(--ink)}
 .dep-author > span > span{font-size:.78rem;color:var(--ink-muted)}
+@media(max-width:680px){
+  .dep-grid{grid-template-columns:1fr}
+  .depoimento.is-featured{grid-column:auto}
+}
 
 /* ============================================================
    SOBRE
    ============================================================ */
+/* ============================================================
+   SOBRE — asymmetric split header + bento highlights
+   ============================================================ */
 .sobre{border-block:1px solid var(--border);background:linear-gradient(180deg, transparent, var(--violet-a08))}
-.sobre-inner{max-width:54rem;margin:0 auto;text-align:center}
-.sobre-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:clamp(38px,5vw,52px);text-align:left}
-.sobre-highlight{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px 24px;transition:border-color .3s, transform .3s var(--ease-out-expo)}
+.sobre-grid{
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--space-4);
+  margin-top:clamp(40px,5vw,56px);
+}
+.sobre-highlight{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(24px,2.6vw,30px) clamp(22px,2.4vw,28px);transition:border-color .3s, transform .3s var(--ease-out-expo)}
 .sobre-highlight:hover{border-color:var(--violet);transform:translateY(-3px)}
+/* Varied spans: first cell wider/lead, others smaller */
+.sobre-highlight.span-3{grid-column:span 3}
+.sobre-highlight.span-2{grid-column:span 2}
+.sobre-highlight.is-lead{
+  grid-column:span 6;
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(16px,2.4vw,26px);align-items:center;
+  background:
+    radial-gradient(80% 140% at 0% 0%, var(--violet-a18), transparent 56%),
+    var(--surface);
+  border-color:var(--border-strong);
+}
+.sobre-highlight.is-lead .sob-ico{margin-bottom:0;width:54px;height:54px;font-size:26px}
+.sobre-highlight.is-lead h4{font-size:clamp(1.1rem,2vw,1.4rem)}
 .sob-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:21px;background:var(--violet-a12);border:1px solid var(--violet-a18);margin-bottom:16px}
 .sobre-highlight h4{font-size:1.02rem;margin-bottom:9px}
 .sobre-highlight p{font-size:.86rem;color:var(--ink-dim);line-height:1.58}
+@media(max-width:880px){
+  .sobre-highlight.span-3,.sobre-highlight.span-2{grid-column:span 3}
+}
+@media(max-width:560px){
+  .sobre-highlight.span-3,.sobre-highlight.span-2,.sobre-highlight.is-lead{grid-column:span 6}
+  .sobre-highlight.is-lead{grid-template-columns:1fr}
+  .sobre-highlight.is-lead .sob-ico{margin-bottom:0}
+}
 
 /* ============================================================
    SIMULADOR
@@ -645,17 +831,37 @@ img{display:block;max-width:100%}
 /* ============================================================
    FORM (embedded)
    ============================================================ */
-.form-section{padding-block:clamp(72px,10vw,120px);border-top:1px solid var(--border);background:linear-gradient(180deg, oklch(0.66 0.21 350 / .05), var(--violet-a08));position:relative}
+/* THE destination — strongest emphasis zone on the page */
+.form-section{
+  padding-block:var(--section-pad-loose);
+  border-top:1px solid var(--border-strong);
+  position:relative;overflow:clip;
+  background:
+    radial-gradient(60rem 40rem at 50% -6%, var(--violet-a18), transparent 60%),
+    radial-gradient(46rem 36rem at 90% 110%, var(--magenta-a30), transparent 62%),
+    linear-gradient(180deg, oklch(0.66 0.21 350 / .06), var(--violet-a08));
+}
+/* .form-container is the JS scroll anchor (querySelector('.form-container')) */
+.form-container{position:relative;z-index:var(--z-base);scroll-margin-top:84px}
 .form-shell{
   position:relative;overflow:hidden;
-  max-width:660px;margin:0 auto;
-  background:var(--surface);
+  max-width:680px;margin:0 auto;
+  background:
+    radial-gradient(120% 60% at 50% -8%, var(--violet-a12), transparent 60%),
+    var(--surface);
   border:1px solid var(--border-strong);
-  border-radius:var(--radius-lg);
-  padding:clamp(28px,4vw,46px) clamp(22px,3.5vw,42px);
-  box-shadow:var(--shadow-lg);
+  border-radius:var(--radius-xl);
+  padding:clamp(28px,4vw,48px) clamp(22px,3.5vw,44px);
+  box-shadow:var(--shadow-lg), 0 0 0 1px var(--violet-a18), 0 40px 120px var(--violet-glow);
 }
 .form-shell::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:var(--grad-accent)}
+/* Trust ribbon below the form shell */
+.form-trust{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-3) var(--space-6);
+  max-width:680px;margin:var(--space-6) auto 0;
+}
+.form-trust span{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;color:var(--ink-muted)}
+.form-trust svg{width:16px;height:16px;color:var(--violet-bright);flex-shrink:0}
 
 .progress-section{margin-bottom:28px;display:none}
 .progress-section.visible{display:block}
@@ -816,9 +1022,23 @@ img{display:block;max-width:100%}
 /* ============================================================
    CTA BAND  (pre-footer)
    ============================================================ */
-.cta-band{border-top:1px solid var(--border);background:radial-gradient(70% 120% at 50% -20%, var(--violet-a12), transparent 60%)}
-.cta-inner{text-align:center;max-width:44rem;margin-inline:auto;padding-block:clamp(64px,9vw,104px)}
-.cta-inner h2{font-size:clamp(1.9rem,4.4vw,3rem);margin-bottom:16px}
+/* Full-bleed drenched CTA band (edge-to-edge violet) */
+.cta-band{
+  position:relative;overflow:clip;border-top:1px solid var(--border-strong);
+  background:
+    radial-gradient(70% 130% at 50% -20%, var(--violet-a30), transparent 58%),
+    radial-gradient(60% 120% at 12% 120%, var(--magenta-a30), transparent 60%),
+    linear-gradient(180deg, oklch(0.205 0.04 300), var(--bg));
+}
+.cta-band::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(oklch(1 0 0 / .03) 1px,transparent 1px),linear-gradient(90deg, oklch(1 0 0 / .03) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 20%, black, transparent 72%);
+  mask-image:radial-gradient(ellipse at 50% 20%, black, transparent 72%);
+}
+.cta-inner{position:relative;z-index:var(--z-base);text-align:center;max-width:46rem;margin-inline:auto;padding-block:clamp(72px,11vw,128px)}
+.cta-inner h2{font-size:clamp(2.1rem,5vw,3.4rem);margin-bottom:16px}
 .cta-inner p{font-size:clamp(1rem,1.4vw,1.1rem);color:var(--ink-dim);margin-bottom:30px;max-width:54ch;margin-inline:auto}
 
 /* ============================================================
@@ -830,6 +1050,40 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
 .footer-links{display:flex;gap:22px}
 .footer-links a{color:var(--ink-dim);text-decoration:none;transition:color .2s}
 .footer-links a:hover{color:var(--violet-bright)}
+
+/* ============================================================
+   STICKY CTA BAR (focus, blindado) — always routes to #formulario
+   Mobile-first: thin bottom bar; hidden on wide screens.
+   ============================================================ */
+.sticky-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:var(--z-sticky);
+  display:flex;align-items:center;gap:var(--space-3);
+  padding:10px max(var(--pad), env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom));
+  background:oklch(0.16 0.035 300 / .86);
+  backdrop-filter:blur(16px) saturate(1.4);
+  border-top:1px solid var(--border-strong);
+  transform:translateY(110%);
+  transition:transform .4s var(--ease-out-expo);
+}
+@media (prefers-reduced-motion: reduce){.sticky-cta{transition:none}}
+.sticky-cta.show{transform:translateY(0)}
+.sticky-cta-tx{min-width:0;flex:1;line-height:1.2}
+.sticky-cta-tx b{display:block;font-family:var(--font-display);font-weight:600;font-size:.92rem;color:var(--ink)}
+.sticky-cta-tx span{display:block;font-size:.72rem;color:var(--ink-muted)}
+.sticky-cta a{
+  flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:11px 20px;border-radius:var(--radius-xs);
+  background:var(--grad-accent);color:oklch(0.99 0 0);
+  font-family:var(--font-body);font-size:.88rem;font-weight:600;text-decoration:none;
+  box-shadow:0 8px 24px var(--violet-glow), inset 0 1px 0 oklch(1 0 0 / .18);
+  white-space:nowrap;
+}
+/* Only the on-page persistent bar for narrow viewports; nav CTA covers wide */
+@media(min-width:921px){.sticky-cta{display:none}}
+/* Lift the bar above the bottom edge content padding when shown */
+@media(max-width:920px){
+  body.has-sticky-cta{padding-bottom:env(safe-area-inset-bottom)}
+}
 
 /* ============================================================
    REVEAL (enhancement — content visible by default; JS adds .reveal then .visible)
@@ -928,32 +1182,41 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
 </section>
 
 <!-- ============================================================ PROBLEMA ============================================================ -->
-<section id="problema" class="section">
+<section id="problema" class="section problema">
   <div class="container">
-    <div class="section-head center">
-      <span class="kicker">O problema real</span>
-      <h2 class="h2">Toda clínica está <span class="u-accent">perdendo dinheiro</span> e nem percebe.</h2>
-      <p class="lede">São três buracos invisíveis que drenam o faturamento de 9 em cada 10 clínicas no Brasil hoje.</p>
-    </div>
-    <div class="prob-grid">
-      <article class="problema-card">
-        <div class="prob-ico" aria-hidden="true">📱</div>
-        <h3>Leads esquecidos no WhatsApp</h3>
-        <p>Paciente manda mensagem às 22h querendo agendar. Sua recepção só vê no dia seguinte. E ele já marcou em outra clínica.</p>
-        <div class="prob-stat"><span class="big">78%</span> dos leads são perdidos por atraso na resposta</div>
-      </article>
-      <article class="problema-card">
-        <div class="prob-ico" aria-hidden="true">❌</div>
-        <h3>No-show destruindo a agenda</h3>
-        <p>Paciente marca e não aparece. Horário perdido, equipe ociosa, faturamento no lixo. E ninguém tem tempo de ligar pra confirmar.</p>
-        <div class="prob-stat"><span class="big">30%</span> de faltas, em média, em clínicas sem automação</div>
-      </article>
-      <article class="problema-card">
-        <div class="prob-ico" aria-hidden="true">🔄</div>
-        <h3>Pacientes antigos esquecidos</h3>
-        <p>Você tem centenas de pacientes na base que não voltam há meses. Ninguém vai atrás. Receita recorrente virando pó.</p>
-        <div class="prob-stat"><span class="big">85%</span> das clínicas nunca reativam pacientes</div>
-      </article>
+    <div class="split-section">
+      <div class="section-head">
+        <span class="kicker">O problema real</span>
+        <h2 class="h2">Toda clínica está <span class="u-accent">perdendo dinheiro</span> e nem percebe.</h2>
+        <p class="lede">São três buracos invisíveis que drenam o faturamento de 9 em cada 10 clínicas no Brasil hoje.</p>
+      </div>
+      <div class="prob-grid">
+        <div class="prob-lead">
+          <div class="prob-lead-num" aria-hidden="true">9/10</div>
+          <p class="prob-lead-tx">clínicas no Brasil sangram faturamento por três falhas que <strong>ninguém está vendo</strong>.</p>
+        </div>
+        <article class="problema-card span-5">
+          <div class="prob-num" aria-hidden="true">78%</div>
+          <div class="prob-ico" aria-hidden="true">📱</div>
+          <h3>Leads esquecidos no WhatsApp</h3>
+          <p>Paciente manda mensagem às 22h querendo agendar. Sua recepção só vê no dia seguinte. E ele já marcou em outra clínica.</p>
+          <div class="prob-stat"><span class="big">78%</span> dos leads são perdidos por atraso na resposta</div>
+        </article>
+        <article class="problema-card span-4">
+          <div class="prob-num" aria-hidden="true">30%</div>
+          <div class="prob-ico" aria-hidden="true">❌</div>
+          <h3>No-show destruindo a agenda</h3>
+          <p>Paciente marca e não aparece. Horário perdido, equipe ociosa, faturamento no lixo. E ninguém tem tempo de ligar pra confirmar.</p>
+          <div class="prob-stat"><span class="big">30%</span> de faltas, em média, em clínicas sem automação</div>
+        </article>
+        <article class="problema-card span-3">
+          <div class="prob-num" aria-hidden="true">85%</div>
+          <div class="prob-ico" aria-hidden="true">🔄</div>
+          <h3>Pacientes antigos esquecidos</h3>
+          <p>Você tem centenas de pacientes na base que não voltam há meses. Ninguém vai atrás. Receita recorrente virando pó.</p>
+          <div class="prob-stat"><span class="big">85%</span> das clínicas nunca reativam pacientes</div>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -1011,12 +1274,12 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
           </div>
         </div>
         <div class="sofia-skills">
-          <div class="sk"><span class="ck"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span> Atende 24/7</div>
+          <div class="sk sk-wide"><span class="ck"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span> Atende 24/7</div>
           <div class="sk"><span class="ck"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span> Entende áudio</div>
           <div class="sk"><span class="ck"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span> Agenda sozinha</div>
           <div class="sk"><span class="ck"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span> Reativa pacientes</div>
           <div class="sk"><span class="ck"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span> Qualifica leads</div>
-          <div class="sk"><span class="ck"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span> LGPD compliant</div>
+          <div class="sk sk-wide"><span class="ck"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span> LGPD compliant</div>
         </div>
         <div class="sofia-note">
           <span class="ic"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
@@ -1030,11 +1293,13 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
 <!-- ============================================================ COMO FUNCIONA — TIMELINE ============================================================ -->
 <section id="como-funciona" class="section">
   <div class="container">
-    <div class="section-head center">
-      <span class="kicker">Nossa metodologia</span>
-      <h2 class="h2">Como <span class="accent">construímos</span> a sua IA</h2>
-      <p class="lede">100% personalizada e desenvolvida sob demanda para a realidade da sua clínica.</p>
-    </div>
+    <div class="split-section sticky-head">
+      <div class="section-head">
+        <span class="kicker">Nossa metodologia</span>
+        <h2 class="h2">Como <span class="accent">construímos</span> a sua IA</h2>
+        <p class="lede">100% personalizada e desenvolvida sob demanda para a realidade da sua clínica.</p>
+        <div class="head-note"><span class="live-dot"></span> Do diagnóstico ao go-live em 7 dias úteis.</div>
+      </div>
 
     <div class="timeline-wrap">
       <div class="timeline-steps">
@@ -1081,6 +1346,7 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
 
       <div class="timeline-complete" id="timelineComplete">✓ Processo completo! Sua clínica estará 100% automatizada em 7 dias úteis.</div>
     </div>
+    </div>
   </div>
 </section>
 
@@ -1092,22 +1358,50 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
       <h2 class="h2">A diferença entre uma clínica com IA e <span class="u-accent">uma que ainda perde paciente</span>.</h2>
       <p class="lede">Três mudanças concretas que sua clínica passa a ter já no primeiro mês com a Sofia atendendo o WhatsApp.</p>
     </div>
-    <div class="res-grid">
-      <article class="resultado-card">
-        <div class="res-n">+68%</div>
-        <h3>Mais agendamentos no mês</h3>
-        <p>Porque a Sofia responde em segundos, 24h por dia, sem deixar ninguém esperando, nem de madrugada, nem no fim de semana.</p>
-      </article>
-      <article class="resultado-card">
-        <div class="res-n">74%</div>
-        <h3>Menos pacientes faltando</h3>
-        <p>Confirmação automática 24h antes e lembrete 2h antes da consulta. Cada horário confirmado é um faturamento que não vai pro lixo.</p>
-      </article>
-      <article class="resultado-card">
-        <div class="res-n">3×</div>
-        <h3>Mais rápido no WhatsApp</h3>
-        <p>De minutos de espera para segundos de resposta. Quem responde primeiro agenda primeiro. E agora é sempre a sua clínica.</p>
-      </article>
+    <div class="compare">
+      <div class="compare-col is-before">
+        <div class="compare-head">
+          <span class="compare-tag tag-before">Sem IA</span>
+        </div>
+        <h3 class="compare-title" style="margin-bottom:clamp(16px,2vw,22px)">A clínica que ainda perde paciente</h3>
+        <article class="resultado-card">
+          <div class="res-n">78%</div>
+          <h3>Leads perdidos por demora</h3>
+          <p>Mensagem de madrugada fica esperando até o dia seguinte. Quando alguém responde, o paciente já marcou em outra clínica.</p>
+        </article>
+        <article class="resultado-card">
+          <div class="res-n">30%</div>
+          <h3>Faltas sem confirmação</h3>
+          <p>Sem ninguém pra confirmar, o no-show corrói a agenda. Horário perdido, equipe ociosa, faturamento no lixo.</p>
+        </article>
+        <article class="resultado-card">
+          <div class="res-n">min</div>
+          <h3>Minutos de espera no chat</h3>
+          <p>A resposta sai quando dá. E quem responde por último quase nunca é quem fecha o agendamento.</p>
+        </article>
+      </div>
+      <div class="compare-vs" aria-hidden="true"></div>
+      <div class="compare-col is-after">
+        <div class="compare-head">
+          <span class="compare-tag tag-after">Com a Sofia</span>
+        </div>
+        <h3 class="compare-title" style="margin-bottom:clamp(16px,2vw,22px)">A clínica com a Sofia atendendo</h3>
+        <article class="resultado-card">
+          <div class="res-n">+68%</div>
+          <h3>Mais agendamentos no mês</h3>
+          <p>Porque a Sofia responde em segundos, 24h por dia, sem deixar ninguém esperando, nem de madrugada, nem no fim de semana.</p>
+        </article>
+        <article class="resultado-card">
+          <div class="res-n">74%</div>
+          <h3>Menos pacientes faltando</h3>
+          <p>Confirmação automática 24h antes e lembrete 2h antes da consulta. Cada horário confirmado é um faturamento que não vai pro lixo.</p>
+        </article>
+        <article class="resultado-card">
+          <div class="res-n">3×</div>
+          <h3>Mais rápido no WhatsApp</h3>
+          <p>De minutos de espera para segundos de resposta. Quem responde primeiro agenda primeiro. E agora é sempre a sua clínica.</p>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -1115,13 +1409,13 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
 <!-- ============================================================ DEPOIMENTOS ============================================================ -->
 <section id="depoimentos" class="section">
   <div class="container">
-    <div class="section-head center">
+    <div class="section-head">
       <span class="kicker">Quem usa</span>
       <h2 class="h2">Clínicas que <span class="u-accent">já tomaram a decisão</span>.</h2>
       <p class="lede">O que nossos clientes falam sobre a transformação que a Rise Hub trouxe pra operação deles.</p>
     </div>
     <div class="dep-grid">
-      <figure class="depoimento">
+      <figure class="depoimento is-featured">
         <div class="dep-stars" aria-label="5 de 5 estrelas">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 7.1-1.01z"/></svg>
         </div>
@@ -1158,27 +1452,31 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
 <!-- ============================================================ SOBRE ============================================================ -->
 <section id="sobre" class="section sobre">
   <div class="container">
-    <div class="sobre-inner">
-      <span class="kicker" style="margin-inline:auto">Sobre a Rise Hub</span>
-      <h2 class="h2">IA para clínicas é o que fazemos. <span class="u-accent">É a única coisa que fazemos.</span></h2>
-      <p class="lede" style="margin-inline:auto">Não somos agência. Não fazemos site. Não mexemos com e-commerce. Vivemos dentro do universo das clínicas há anos. Conhecemos cada gargalo, cada objeção de paciente e cada lead que vaza no meio da noite. A Rise Hub existe para transformar esse caos em operação previsível. Do consultório solo ao grupo com múltiplas unidades.</p>
-    </div>
-    <div class="sobre-grid">
-      <article class="sobre-highlight">
-        <div class="sob-ico" aria-hidden="true">🎯</div>
-        <h4>100% focados em saúde</h4>
-        <p>Só trabalhamos com clínicas, consultórios e profissionais da área médica. Zero distração, zero aprendizado na sua conta.</p>
-      </article>
-      <article class="sobre-highlight">
-        <div class="sob-ico" aria-hidden="true">🧠</div>
-        <h4>IA de última geração</h4>
-        <p>Modelos GPT-4 e Claude treinados especificamente com fluxos reais de atendimento médico, estético e odontológico.</p>
-      </article>
-      <article class="sobre-highlight">
-        <div class="sob-ico" aria-hidden="true">⚡</div>
-        <h4>7 dias do zero ao ar</h4>
-        <p>Diagnóstico, treinamento, integração e go-live em uma semana. Sua próxima segunda-feira já pode ter a Sofia trabalhando.</p>
-      </article>
+    <div class="split-section">
+      <div class="section-head">
+        <span class="kicker">Sobre a Rise Hub</span>
+        <h2 class="h2">IA para clínicas é o que fazemos. <span class="u-accent">É a única coisa que fazemos.</span></h2>
+        <p class="lede">Não somos agência. Não fazemos site. Não mexemos com e-commerce. Vivemos dentro do universo das clínicas há anos. Conhecemos cada gargalo, cada objeção de paciente e cada lead que vaza no meio da noite. A Rise Hub existe para transformar esse caos em operação previsível. Do consultório solo ao grupo com múltiplas unidades.</p>
+      </div>
+      <div class="sobre-grid">
+        <article class="sobre-highlight is-lead">
+          <div class="sob-ico" aria-hidden="true">🎯</div>
+          <div>
+            <h4>100% focados em saúde</h4>
+            <p>Só trabalhamos com clínicas, consultórios e profissionais da área médica. Zero distração, zero aprendizado na sua conta.</p>
+          </div>
+        </article>
+        <article class="sobre-highlight span-3">
+          <div class="sob-ico" aria-hidden="true">🧠</div>
+          <h4>IA de última geração</h4>
+          <p>Modelos GPT-4 e Claude treinados especificamente com fluxos reais de atendimento médico, estético e odontológico.</p>
+        </article>
+        <article class="sobre-highlight span-3">
+          <div class="sob-ico" aria-hidden="true">⚡</div>
+          <h4>7 dias do zero ao ar</h4>
+          <p>Diagnóstico, treinamento, integração e go-live em uma semana. Sua próxima segunda-feira já pode ter a Sofia trabalhando.</p>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -1253,6 +1551,7 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
       <p class="lede">Em 1h30 mostramos exatamente como a Rise Hub vai funcionar pra sua clínica: IA treinada pro seu segmento, integrações e proposta personalizada. Responda 4 perguntas rápidas e escolha o melhor horário.</p>
     </div>
 
+    <div class="form-container">
     <div class="form-shell">
       <div class="progress-section" id="progressSection">
         <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
@@ -1483,6 +1782,12 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
       </div>
 
     </div>
+    <div class="form-trust">
+      <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg> LGPD compliant</span>
+      <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> Demonstração ao vivo de 1h30</span>
+      <span><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Sem compromisso</span>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -1542,6 +1847,12 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
     </div>
   </div>
 </footer>
+
+<!-- ============================================================ STICKY CTA (focus, blindado) ============================================================ -->
+<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+  <span class="sticky-cta-tx"><b>Veja a Sofia em ação</b><span>Demonstração ao vivo, sem compromisso</span></span>
+  <a href="#formulario">Agendar demonstração</a>
+</div>
 
 <script>
 // ============================================================
@@ -2813,6 +3124,40 @@ if ('requestIdleCallback' in window) {
   setTimeout(function() {
     sendMetaConversionEvent(null, pvEventId, 'PageView');
   }, 1500);
+})();
+</script>
+
+<!-- Sticky CTA controller (separate from main script; layout enhancement only) -->
+<script>
+(function(){
+  var bar = document.getElementById('stickyCta');
+  var form = document.getElementById('formulario');
+  if (!bar || !form) return;
+  document.body.classList.add('has-sticky-cta');
+  var formVisible = false;
+  var pastHero = false;
+  function sync(){
+    var show = pastHero && !formVisible;
+    bar.classList.toggle('show', show);
+    bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+  }
+  // Hide the bar whenever the form (the destination) is on screen
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      formVisible = entries[0].isIntersecting;
+      sync();
+    }, { threshold: 0.18 }).observe(form);
+    // Reveal only after the hero scrolled past
+    var hero = document.querySelector('.hero');
+    if (hero) {
+      new IntersectionObserver(function(entries){
+        pastHero = !entries[0].isIntersecting;
+        sync();
+      }, { threshold: 0 }).observe(hero);
+    } else {
+      pastHero = true; sync();
+    }
+  }
 })();
 </script>
 
