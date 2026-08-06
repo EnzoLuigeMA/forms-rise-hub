@@ -315,9 +315,10 @@ img{display:block;max-width:100%}
 .hero h1{
   font-size:clamp(2.4rem,5.5vw,4rem);
   font-weight:600;
-  letter-spacing:-0.04em;
+  letter-spacing:-0.03em;
+  line-height:1.14;
   margin-bottom:22px;
-  max-width:16ch;
+  max-width:18ch;
 }
 .hero h1 .pop{color:var(--violet-bright);font-weight:700}
 .hero-sub{font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--ink-dim);max-width:54ch;line-height:1.62;margin-bottom:32px}
@@ -334,6 +335,10 @@ img{display:block;max-width:100%}
   background:radial-gradient(closest-side, var(--violet-a18), transparent 78%);
   filter:blur(8px);
 }
+/* ---- Hero robô 3D (Spline) — substitui o celular (teste) ---- */
+.robot-stage{max-width:none;width:100%;height:clamp(360px,40vw,520px)}
+.robot-stage spline-viewer{position:relative;z-index:var(--z-raised);width:100%;height:100%;display:block}
+@media(max-width:920px){.robot-stage{height:clamp(320px,78vw,430px)}}
 .phone{
   position:relative;z-index:var(--z-raised);
   background:linear-gradient(176deg, oklch(0.205 0.04 300), oklch(0.18 0.04 300));
@@ -1116,6 +1121,9 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
 </head>
 <body>
 
+<!-- Spline viewer (web component) — robô 3D no hero (teste) -->
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
+
 <!-- ============================================================ NAV ============================================================ -->
 <nav class="nav">
   <div class="nav-inner">
@@ -1158,31 +1166,9 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
         </ul>
       </div>
 
-      <!-- Signature: WhatsApp live demo with Sofia -->
-      <div class="phone-stage">
-        <div class="phone">
-          <div class="phone-screen">
-            <div class="phone-bar">
-              <span>23:47</span>
-              <span class="sig"><i></i><i></i><i></i> 5G</span>
-            </div>
-            <div class="wa-head">
-              <span class="wa-back" aria-hidden="true">‹</span>
-              <span class="wa-avatar">S<span class="on"></span></span>
-              <span class="wa-meta">
-                <strong>Sofia · Agente Rise Hub</strong>
-                <span class="st">online</span>
-              </span>
-            </div>
-            <div class="wa-body" aria-label="Conversa de exemplo entre um lead e a Sofia">
-              <div class="bubble them">Olá! Vi o anúncio de vocês. Qual o valor?<span class="t">23:47</span></div>
-              <div class="bubble me">Oi! Tudo bem? 😊 Posso te ajudar agora mesmo. O valor depende do que você precisa. Me conta: é pra você ou pra sua empresa?<span class="t">23:47 ✓✓</span></div>
-              <div class="bubble them">Pra empresa. Quero entender melhor.<span class="t">23:48</span></div>
-              <div class="bubble me">Perfeito! Consigo te encaixar com um especialista amanhã às 14h ou quinta às 10h. Qual fica melhor pra você?<span class="t">23:48 ✓✓</span></div>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-            </div>
-          </div>
-        </div>
+      <!-- Signature: robô 3D (Spline) — teste, no lugar do celular -->
+      <div class="phone-stage robot-stage">
+        <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" loading="lazy"></spline-viewer>
       </div>
     </div>
   </div>
