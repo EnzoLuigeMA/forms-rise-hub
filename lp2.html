@@ -335,6 +335,19 @@ img{display:block;max-width:100%}
   background:radial-gradient(closest-side, var(--violet-a18), transparent 78%);
   filter:blur(8px);
 }
+/* ---- Hero robô 3D (Spline) — substitui o celular (teste) ---- */
+.robot-stage{max-width:none;width:100%;height:clamp(360px,40vw,520px)}
+.robot-stage spline-viewer{position:relative;z-index:1;width:100%;height:100%;display:block}
+.robot-spotlight{
+  position:absolute;left:50%;top:42%;width:clamp(220px,26vw,340px);aspect-ratio:1;
+  transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle at center, oklch(0.92 0.06 300 / .26), oklch(0.72 0.15 300 / .12) 46%, transparent 72%);
+  filter:blur(14px);pointer-events:none;opacity:0;transition:opacity .35s ease;
+  z-index:2;will-change:left,top,opacity;mix-blend-mode:screen;
+}
+.robot-stage.rf-on .robot-spotlight{opacity:1}
+@media(max-width:920px){.robot-stage{height:clamp(320px,78vw,430px)}}
+@media(prefers-reduced-motion:reduce){.robot-spotlight{display:none}}
 .phone{
   position:relative;z-index:var(--z-raised);
   background:linear-gradient(176deg, oklch(0.205 0.04 300), oklch(0.18 0.04 300));
@@ -1117,6 +1130,11 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
 </head>
 <body>
 
+<!-- Spline viewer (web component) — robô 3D no hero (teste) -->
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="preconnect" href="https://prod.spline.design" crossorigin>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
+
 <!-- ============================================================ NAV ============================================================ -->
 <nav class="nav">
   <div class="nav-inner">
@@ -1159,31 +1177,10 @@ footer{padding-block:40px;border-top:1px solid var(--border);background:var(--su
         </ul>
       </div>
 
-      <!-- Signature: WhatsApp live demo with Sofia -->
-      <div class="phone-stage">
-        <div class="phone">
-          <div class="phone-screen">
-            <div class="phone-bar">
-              <span>23:47</span>
-              <span class="sig"><i></i><i></i><i></i> 5G</span>
-            </div>
-            <div class="wa-head">
-              <span class="wa-back" aria-hidden="true">‹</span>
-              <span class="wa-avatar">S<span class="on"></span></span>
-              <span class="wa-meta">
-                <strong>Sofia · Agente Rise Hub</strong>
-                <span class="st">online</span>
-              </span>
-            </div>
-            <div class="wa-body" aria-label="Conversa de exemplo entre um lead e a Sofia">
-              <div class="bubble them">Olá! Vi o anúncio de vocês. Qual o valor?<span class="t">23:47</span></div>
-              <div class="bubble me">Oi! Tudo bem? 😊 Posso te ajudar agora mesmo. O valor depende do que você precisa. Me conta: é pra você ou pra sua empresa?<span class="t">23:47 ✓✓</span></div>
-              <div class="bubble them">Pra empresa. Quero entender melhor.<span class="t">23:48</span></div>
-              <div class="bubble me">Perfeito! Consigo te encaixar com um especialista amanhã às 14h ou quinta às 10h. Qual fica melhor pra você?<span class="t">23:48 ✓✓</span></div>
-              <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-            </div>
-          </div>
-        </div>
+      <!-- Signature: robô 3D (Spline) — teste, no lugar do celular -->
+      <div class="phone-stage robot-stage">
+        <div class="robot-spotlight" aria-hidden="true"></div>
+        <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" loading="eager"></spline-viewer>
       </div>
     </div>
   </div>
@@ -3139,6 +3136,47 @@ if ('requestIdleCallback' in window) {
 <!-- Vercel Analytics + Speed Insights -->
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<!-- Robô FX (teste): remove marca d'água da Spline + spotlight que segue o mouse -->
+<script id="rh-robot-fx">
+(function(){
+  // 1) Esconde o badge "Built with Spline" (dentro do shadow DOM do viewer)
+  var v = document.querySelector('spline-viewer');
+  if (v) {
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      var sr = v.shadowRoot;
+      if (sr) {
+        var rm = function(){ var l = sr.getElementById && sr.getElementById('logo'); if (l) l.remove(); };
+        rm();
+        try { new MutationObserver(rm).observe(sr, { childList:true, subtree:true }); } catch(e){}
+        clearInterval(t);
+      }
+      if (tries > 80) clearInterval(t);
+    }, 80);
+  }
+  // 2) Spotlight que segue o cursor (leve suavização), como o Spotlight do original
+  var stage = document.querySelector('.robot-stage');
+  var spot = stage && stage.querySelector('.robot-spotlight');
+  if (stage && spot) {
+    var tx=0, ty=0, cx=0, cy=0, raf=null, seeded=false;
+    function loop(){
+      cx += (tx-cx)*0.18; cy += (ty-cy)*0.18;
+      spot.style.left = cx+'px'; spot.style.top = cy+'px';
+      raf = (Math.abs(tx-cx) > 0.4 || Math.abs(ty-cy) > 0.4) ? requestAnimationFrame(loop) : null;
+    }
+    stage.addEventListener('pointermove', function(e){
+      var r = stage.getBoundingClientRect();
+      tx = e.clientX - r.left; ty = e.clientY - r.top;
+      if (!seeded) { cx = tx; cy = ty; seeded = true; }
+      stage.classList.add('rf-on');
+      if (!raf) raf = requestAnimationFrame(loop);
+    }, { passive:true });
+    stage.addEventListener('pointerleave', function(){ stage.classList.remove('rf-on'); });
+  }
+})();
+</script>
+
 <!-- ===== HEATMAP CAPTURA — independente do funil; NUNCA preventDefault ===== -->
 <script id="rh-heatmap-capture">
 (function () {
