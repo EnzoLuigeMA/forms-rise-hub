@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/proposta-comercial", "destination": "/proposta-comercial.html" },
     { "source": "/bio", "destination": "/index.html" },
     { "source": "/form", "destination": "/index.html" },
     { "source": "/agendar", "destination": "/agendar.html" },
