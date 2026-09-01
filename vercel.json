@@ -6,7 +6,11 @@
     { "source": "/agendar", "destination": "/agendar.html" },
     { "source": "/lp", "destination": "/lp.html" },
     { "source": "/lp2", "destination": "/lp2.html" },
-    { "source": "/trafego", "destination": "/lp-trafego.html" }
+    { "source": "/trafego", "destination": "/lp-trafego.html" },
+    { "source": "/sun-victory", "destination": "/relatorio-sun-victory.html" },
+    { "source": "/modular", "destination": "/relatorio-modular.html" },
+    { "source": "/blue-lake", "destination": "/relatorio-blue-lake.html" },
+    { "source": "/parana-repasses", "destination": "/relatorio-parana-repasses.html" }
   ],
   "headers": [
     {
