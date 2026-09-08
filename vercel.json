@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/dossie-ruan-carlo", "destination": "/dossie-ruan-carlo.html" },
     { "source": "/proposta-comercial", "destination": "/proposta-comercial.html" },
     { "source": "/bio", "destination": "/index.html" },
     { "source": "/form", "destination": "/index.html" },
