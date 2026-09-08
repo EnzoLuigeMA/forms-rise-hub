@@ -1,0 +1,470 @@
+<title>Dossiê Ruan Carlo Imóveis — Onboarding</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --sand:      #F1F4F5;
+    --paper:     #FBFCFC;
+    --ink:       #0E2229;
+    --ink-soft:  #3A4F56;
+    --muted:     #6B7E84;
+    --line:      #D9E0E1;
+    --teal:      #0B6B73;
+    --teal-dim:  #0B6B7314;
+    --amber:     #C77F1A;
+    --amber-dim: #C77F1A18;
+    --good:      #2F7D5B;
+    --warn:      #B4791E;
+    --crit:      #B0483A;
+    --good-dim:  #2F7D5B18;
+    --warn-dim:  #B4791E18;
+    --crit-dim:  #B0483A16;
+    --shadow:    0 1px 2px rgba(14,34,41,.05), 0 8px 24px rgba(14,34,41,.06);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --sand:      #0C1A20;
+      --paper:     #10242C;
+      --ink:       #E7EEEF;
+      --ink-soft:  #B4C3C6;
+      --muted:     #7E9296;
+      --line:      #21363E;
+      --teal:      #46B7BE;
+      --teal-dim:  #46B7BE1F;
+      --amber:     #E0AE5C;
+      --amber-dim: #E0AE5C1C;
+      --good:      #59C58E;
+      --warn:      #E0AE5C;
+      --crit:      #E58273;
+      --good-dim:  #59C58E1C;
+      --warn-dim:  #E0AE5C1C;
+      --crit-dim:  #E582731A;
+      --shadow:    0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --sand:#F1F4F5; --paper:#FBFCFC; --ink:#0E2229; --ink-soft:#3A4F56; --muted:#6B7E84;
+    --line:#D9E0E1; --teal:#0B6B73; --teal-dim:#0B6B7314; --amber:#C77F1A; --amber-dim:#C77F1A18;
+    --good:#2F7D5B; --warn:#B4791E; --crit:#B0483A; --good-dim:#2F7D5B18; --warn-dim:#B4791E18; --crit-dim:#B0483A16;
+    --shadow:0 1px 2px rgba(14,34,41,.05), 0 8px 24px rgba(14,34,41,.06);
+  }
+  :root[data-theme="dark"] {
+    --sand:#0C1A20; --paper:#10242C; --ink:#E7EEEF; --ink-soft:#B4C3C6; --muted:#7E9296;
+    --line:#21363E; --teal:#46B7BE; --teal-dim:#46B7BE1F; --amber:#E0AE5C; --amber-dim:#E0AE5C1C;
+    --good:#59C58E; --warn:#E0AE5C; --crit:#E58273; --good-dim:#59C58E1C; --warn-dim:#E0AE5C1C; --crit-dim:#E582731A;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 500px at 80% -8%, var(--teal-dim), transparent 60%),
+      var(--sand);
+    color: var(--ink);
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 22px 96px; }
+
+  /* ---- Typography ---- */
+  h1,h2,h3 { text-wrap: balance; line-height: 1.15; margin: 0; }
+  .eyebrow {
+    font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--teal); margin: 0;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ---- Header ---- */
+  header.top { padding: 56px 0 26px; }
+  .kicker-row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: baseline; justify-content: space-between; }
+  .top h1 {
+    font-size: clamp(2.3rem, 6vw, 3.5rem); font-weight: 800; letter-spacing: -.02em;
+    margin: 14px 0 0;
+  }
+  .top .lede { color: var(--ink-soft); font-size: 1.06rem; max-width: 60ch; margin: 14px 0 0; }
+  .meetchip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--amber-dim); color: var(--amber);
+    font-size: .78rem; font-weight: 700; letter-spacing: .02em;
+    padding: 6px 12px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--amber) 30%, transparent);
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; display: inline-block; }
+
+  /* ---- Section scaffolding ---- */
+  section { padding-top: 46px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+  .sec-head .idx { font-variant-numeric: tabular-nums; font-size: .8rem; font-weight: 700; color: var(--muted); letter-spacing: .05em; }
+  .sec-head h2 { font-size: clamp(1.35rem, 3vw, 1.7rem); font-weight: 750; letter-spacing: -.01em; }
+
+  p { margin: 0 0 14px; }
+  a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  strong { color: var(--ink); font-weight: 680; }
+
+  /* ---- Cards / grids ---- */
+  .grid { display: grid; gap: 14px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 720px){ .g3,.g4 { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 460px){ .g2,.g3,.g4 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px; box-shadow: var(--shadow);
+  }
+  .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+
+  /* stat tile */
+  .stat { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); }
+  .stat .k { font-size: 1.9rem; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.05; }
+  .stat .l { font-size: .82rem; color: var(--muted); margin-top: 4px; }
+  .stat.accent { border-color: color-mix(in srgb, var(--teal) 40%, var(--line)); background: linear-gradient(180deg, var(--teal-dim), var(--paper) 70%); }
+  .stat.accent .k { color: var(--teal); }
+
+  /* identity list */
+  dl.kv { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 0; }
+  dl.kv dt { color: var(--muted); font-size: .85rem; }
+  dl.kv dd { margin: 0; font-weight: 600; }
+  @media (max-width: 460px){ dl.kv { grid-template-columns: 1fr; gap: 2px 0; } dl.kv dd { margin-bottom: 8px; } }
+
+  /* rating stars */
+  .rating { display: flex; align-items: center; gap: 10px; }
+  .rating .score { font-size: 2rem; font-weight: 800; color: var(--amber); line-height: 1; }
+  .stars { color: var(--amber); letter-spacing: 2px; }
+  .bar { height: 7px; border-radius: 4px; background: var(--line); overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: var(--teal); }
+
+  /* callouts */
+  .call { border-radius: var(--radius); padding: 14px 16px 14px 18px; border-left: 4px solid; margin: 14px 0; }
+  .call.op  { background: var(--good-dim); border-color: var(--good); }
+  .call.risk{ background: var(--crit-dim); border-color: var(--crit); }
+  .call.note{ background: var(--warn-dim); border-color: var(--warn); }
+  .call .t { font-weight: 700; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px; }
+  .call.op .t { color: var(--good); }
+  .call.risk .t { color: var(--crit); }
+  .call.note .t { color: var(--warn); }
+  .call p:last-child { margin-bottom: 0; }
+
+  /* table */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; background: var(--paper); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 700; position: sticky; top: 0; background: var(--paper); }
+  td.n { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  tr:hover td { background: color-mix(in srgb, var(--teal) 5%, var(--paper)); }
+  .code { font-family: "Cascadia Code", "Consolas", ui-monospace, monospace; font-size: .82rem; color: var(--ink-soft); }
+
+  /* segment pills */
+  .pill { display: inline-block; font-size: .72rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; letter-spacing: .02em; }
+  .p-alto { background: var(--amber-dim); color: var(--amber); }
+  .p-temp { background: var(--teal-dim); color: var(--teal); }
+  .p-med  { background: var(--good-dim); color: var(--good); }
+  .p-com  { background: color-mix(in srgb, var(--muted) 16%, transparent); color: var(--muted); }
+
+  ul.clean { margin: 0; padding-left: 1.15em; }
+  ul.clean li { margin: 5px 0; }
+  ul.check { list-style: none; margin: 0; padding: 0; }
+  ul.check li { position: relative; padding-left: 28px; margin: 9px 0; }
+  ul.check li::before {
+    content: ""; position: absolute; left: 0; top: 7px; width: 16px; height: 16px; border-radius: 5px;
+    border: 2px solid var(--teal); }
+
+  /* numbered flow */
+  ol.flow { list-style: none; counter-reset: f; margin: 0; padding: 0; display: grid; gap: 12px; }
+  ol.flow li { counter-increment: f; position: relative; padding-left: 50px; }
+  ol.flow li::before {
+    content: counter(f); position: absolute; left: 0; top: -2px;
+    width: 34px; height: 34px; border-radius: 10px; background: var(--teal); color: #fff;
+    display: grid; place-items: center; font-weight: 800; font-variant-numeric: tabular-nums;
+  }
+  ol.flow li h3 { margin-bottom: 2px; }
+  ol.flow li p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+
+  .q { font-weight: 640; }
+  .q + .why { color: var(--muted); font-size: .88rem; margin: 2px 0 12px; }
+
+  footer { margin-top: 60px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; }
+
+  .lead-line { color: var(--ink-soft); max-width: 68ch; }
+  .mini { font-size: .8rem; color: var(--muted); }
+  hr.soft { border: none; border-top: 1px solid var(--line); margin: 22px 0; }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="kicker-row">
+      <p class="eyebrow">Dossiê de cliente · Onboarding</p>
+      <span class="meetchip"><span class="dot"></span>Reunião hoje — 8 set 2026</span>
+    </div>
+    <h1>Ruan Carlo Imóveis</h1>
+    <p class="lede">Imobiliária de Cabo Frio (Região dos Lagos, RJ) com portfólio que vai do apartamento na praia ao alto padrão à beira do canal. Este dossiê reúne quem é o cliente, sua presença digital, o portfólio real, o mercado — e onde entra o <strong>agente de IA no WhatsApp</strong> que vamos propor.</p>
+  </header>
+
+  <!-- 1 · IDENTIDADE -->
+  <section id="quem">
+    <div class="sec-head"><span class="idx">01</span><h2>Quem é o cliente</h2></div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Identidade</h3>
+        <dl class="kv">
+          <dt>Razão social</dt><dd>Ruan Carlo Intermediação Imobiliária</dd>
+          <dt>CRECI</dt><dd>J7864</dd>
+          <dt>Endereço</dt><dd>R. Francisco Mendes, 153, loja 01 — Centro, Cabo Frio/RJ</dd>
+          <dt>Telefone / WhatsApp</dt><dd class="num">(22) 99780-2129</dd>
+          <dt>Fixos</dt><dd class="num">(22) 2645-5538 · 2644-6863</dd>
+          <dt>E-mail</dt><dd>contatoruancarloimoveis@gmail.com</dd>
+          <dt>Site</dt><dd><a href="https://ruancarloimoveis.com.br">ruancarloimoveis.com.br</a></dd>
+          <dt>Horário</dt><dd>Seg–Sex 9h–19h · Sáb 9h–13h</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <h3>Reputação — Google</h3>
+        <div class="rating">
+          <span class="score num">4,6</span>
+          <div>
+            <div class="stars">★★★★★</div>
+            <div class="mini"><span class="num">31</span> avaliações · ~90% são 4–5★</div>
+          </div>
+        </div>
+        <div style="margin-top:14px; display:grid; gap:6px;">
+          <div class="mini">5★ <span class="num">25</span></div><div class="bar"><i style="width:81%"></i></div>
+          <div class="mini">4★ <span class="num">3</span></div><div class="bar"><i style="width:10%"></i></div>
+          <div class="mini">3★ <span class="num">2</span></div><div class="bar"><i style="width:6%"></i></div>
+          <div class="mini">1★ <span class="num">1</span></div><div class="bar"><i style="width:3%"></i></div>
+        </div>
+        <p class="mini" style="margin-top:12px">Elogios dominantes: <strong>atendimento</strong> e <strong>corretores</strong> ("melhor imobiliária de Cabo Frio"). Ruan Carlo é citado nominalmente. A empresa responde às avaliações — faz gestão de reputação.</p>
+      </div>
+    </div>
+    <div class="call note">
+      <div class="t">Posicionamento</div>
+      <p>Selo Loft (imobiliária certificada), parceria de financiamento (Financiei) e discurso de "localização, praticidade e conforto" perto da praia. Atendimento pessoal e relacionamento são o orgulho da casa — importante para o pitch: <strong>a IA não substitui o corretor, protege o relacionamento dele</strong>.</p>
+    </div>
+  </section>
+
+  <!-- 2 · PRESENÇA DIGITAL -->
+  <section id="digital">
+    <div class="sec-head"><span class="idx">02</span><h2>Presença digital</h2></div>
+    <p class="lead-line">Operação multicanal e antiga (10 anos de casa), porém ainda "faça você mesmo": presença consistente, mas alcance modesto e sem estratégia de captura de lead além do WhatsApp direto.</p>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card">
+        <h3>Canais</h3>
+        <ul class="clean">
+          <li><strong>Site próprio</strong> — busca, favoritos, financiamento, "anuncie seu imóvel". Bem estruturado.</li>
+          <li><strong>YouTube</strong> ("Ruan Carlo Imóveis") — ativo, cheio de <em>tours</em> de imóveis; títulos padronizados por bairro e preço. É o ativo digital mais forte.</li>
+          <li><strong>Instagram</strong> @ruancarloimobiliariacabofrio — <strong>2.160 seguidores · 1.230 posts · 10 anos</strong>. Bio "Há 10 anos realizando sonhos · Venda | Locação", link <span class="code">linktr.ee/ruancarloimoveis</span>. Destaques organizados: Imóveis · Depoimentos · Quem Somos · Clientes · Fale Conosco · Horários.</li>
+          <li><strong>Facebook</strong> — ~113 curtidas (bem abaixo do Instagram).</li>
+          <li><strong>Google Meu Negócio</strong> — ficha ativa, 4,6★, agendamento online.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Leitura de profissionalização</h3>
+        <p><strong>Média — consistente, mas com alcance abaixo do líder local.</strong> Conta ativa e antiga (10 anos, 1.230 posts), forte em vídeo/tour; o gargalo é o funil, não a presença.</p>
+        <ul class="clean">
+          <li>Destaques com <strong>Depoimentos e Clientes</strong> mostram que já valorizam prova social — dá pra amplificar.</li>
+          <li>Captação depende do WhatsApp direto, sem qualificação estruturada.</li>
+          <li>Benchmark: <span class="code">@imobiliaria.cabofrio</span> ~12 mil seguidores (vs 2.160). No Google, RM Cabo Frio 5,0, Krause 5,0, JR Imóveis 4,8 (37).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="call note">
+      <div class="t">A confirmar na reunião</div>
+      <p>A bio do Instagram diz "Cabo Frio – RJ" e a empresa fala em Região dos Lagos, mas <strong>os 16 imóveis analisados são 100% Cabo Frio</strong> — vale checar a real área de cobertura. Há um pin duplicado no Google ("Luciano Ruan Carlo Imóveis", sem avaliações) que talvez convenha unificar.</p>
+    </div>
+  </section>
+
+  <!-- 3 · PORTFÓLIO -->
+  <section id="portfolio">
+    <div class="sec-head"><span class="idx">03</span><h2>Portfólio analisado — 16 imóveis</h2></div>
+    <div class="grid g4">
+      <div class="stat accent"><div class="k num">R$450k–5,5M</div><div class="l">Faixa de venda (10 imóveis)</div></div>
+      <div class="stat"><div class="k num">6</div><div class="l">Locações (R$1,8k–8k/mês)</div></div>
+      <div class="stat"><div class="k num">9</div><div class="l">Bairros distintos</div></div>
+      <div class="stat"><div class="k num">3</div><div class="l">Imóveis acima de R$2,5M</div></div>
+    </div>
+
+    <div class="grid g4" style="margin-top:14px">
+      <div class="stat"><div class="k num">6</div><div class="l"><span class="pill p-temp">Temporada / 2ª residência</span></div></div>
+      <div class="stat"><div class="k num">4</div><div class="l"><span class="pill p-med">Médio (morador)</span></div></div>
+      <div class="stat"><div class="k num">3</div><div class="l"><span class="pill p-alto">Alto padrão</span></div></div>
+      <div class="stat"><div class="k num">3</div><div class="l"><span class="pill p-com">Comercial</span></div></div>
+    </div>
+
+    <p style="margin-top:22px" class="lead-line">A carteira é <strong>ampla e mista</strong>: convive apartamento compacto de R$450 mil na Passagem com casa de R$5,5 milhões à beira do canal na Ogiva, mais galpão e salas comerciais. Isso confirma que <strong>o lead que chega não é único</strong> — e é exatamente o que a IA precisa separar antes de passar ao corretor.</p>
+
+    <div class="tablewrap" style="margin-top:16px">
+      <table>
+        <thead>
+          <tr><th>Cód.</th><th>Tipo</th><th>Bairro</th><th>Op.</th><th class="n">Preço</th><th>Dorm.</th><th>Segmento</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="code">RCA4132</td><td>Casa</td><td>Ogiva</td><td>Venda</td><td class="n">R$ 5.500.000</td><td class="n">4</td><td><span class="pill p-alto">Alto padrão</span></td></tr>
+          <tr><td class="code">RCO4069</td><td>Cobertura</td><td>Passagem</td><td>Venda</td><td class="n">R$ 3.000.000</td><td class="n">4</td><td><span class="pill p-alto">Alto padrão</span></td></tr>
+          <tr><td class="code">RCA2173</td><td>Casa (uso misto)</td><td>Braga</td><td>Venda</td><td class="n">R$ 2.600.000</td><td class="n">2</td><td><span class="pill p-com">Comercial</span></td></tr>
+          <tr><td class="code">RCA3188</td><td>Casa em condomínio</td><td>Praia do Siqueira</td><td>Venda</td><td class="n">R$ 2.500.000</td><td class="n">3</td><td><span class="pill p-alto">Alto padrão</span></td></tr>
+          <tr><td class="code">RCO3079</td><td>Cobertura</td><td>Vila Nova</td><td>Venda</td><td class="n">R$ 890.000</td><td class="n">3</td><td><span class="pill p-temp">Temporada</span></td></tr>
+          <tr><td class="code">RAP3212</td><td>Apartamento</td><td>Centro</td><td>Venda</td><td class="n">R$ 850.000</td><td class="n">3</td><td><span class="pill p-temp">Temporada</span></td></tr>
+          <tr><td class="code">RAP2306</td><td>Apartamento</td><td>Braga</td><td>Venda</td><td class="n">R$ 750.000</td><td class="n">2</td><td><span class="pill p-temp">Temporada</span></td></tr>
+          <tr><td class="code">RCA3187</td><td>Casa</td><td>Palmeiras</td><td>Venda</td><td class="n">R$ 680.000</td><td class="n">3</td><td><span class="pill p-temp">Temporada</span></td></tr>
+          <tr><td class="code">RAP2305</td><td>Apartamento</td><td>Centro</td><td>Venda</td><td class="n">R$ 495.000</td><td class="n">2</td><td><span class="pill p-med">Médio</span></td></tr>
+          <tr><td class="code">RAP2274</td><td>Apartamento</td><td>Passagem</td><td>Venda</td><td class="n">R$ 450.000</td><td class="n">2</td><td><span class="pill p-temp">Temporada</span></td></tr>
+          <tr><td class="code">RGP17</td><td>Galpão</td><td>Praia do Siqueira</td><td>Aluguel</td><td class="n">R$ 8.000/mês</td><td class="n">—</td><td><span class="pill p-com">Comercial</span></td></tr>
+          <tr><td class="code">RAP3205</td><td>Apartamento</td><td>Centro</td><td>Aluguel</td><td class="n">R$ 3.300/mês</td><td class="n">3</td><td><span class="pill p-med">Médio</span></td></tr>
+          <tr><td class="code">RAP2296</td><td>Apartamento</td><td>Centro</td><td>Aluguel</td><td class="n">R$ 2.700/mês</td><td class="n">2</td><td><span class="pill p-med">Médio</span></td></tr>
+          <tr><td class="code">RAP1089</td><td>Apartamento</td><td>Algodoal</td><td>Aluguel</td><td class="n">R$ 2.500/mês</td><td class="n">1</td><td><span class="pill p-temp">Temporada</span></td></tr>
+          <tr><td class="code">RAP2304</td><td>Apartamento</td><td>Villa Nova</td><td>Aluguel</td><td class="n">R$ 2.243/mês</td><td class="n">2</td><td><span class="pill p-med">Médio</span></td></tr>
+          <tr><td class="code">RLO0075</td><td>Salas/conjuntos</td><td>Centro</td><td>Aluguel</td><td class="n">R$ 1.800/mês</td><td class="n">—</td><td><span class="pill p-com">Comercial</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mini" style="margin-top:10px">Recorrência de bairro: <strong>Centro</strong> (5) concentra liquidez de locação; <strong>Braga, Passagem, Praia do Siqueira</strong> (2 cada) puxam ticket alto e proximidade da praia. Destaque de catálogo: RCA3188 tem vaga náutica escriturada para lancha até 30 pés + jet ski.</p>
+  </section>
+
+  <!-- 4 · MERCADO -->
+  <section id="mercado">
+    <div class="sec-head"><span class="idx">04</span><h2>Mercado & sazonalidade</h2></div>
+    <div class="grid g3">
+      <div class="stat accent"><div class="k num">+300–400%</div><div class="l">População na alta temporada (nov→carnaval)</div></div>
+      <div class="stat"><div class="k num">5–8%</div><div class="l">Valorização projetada p/ 2026</div></div>
+      <div class="stat"><div class="k">&lt; 1 min</div><div class="l">Resposta no WhatsApp separa conversão de 35% vs 15%</div></div>
+    </div>
+
+    <div class="grid g3" style="margin-top:18px">
+      <div class="card">
+        <h3>Veranista / 2ª residência</h3>
+        <p class="mini">O coração do mercado. Vem de RJ capital, Grande Rio e SP/MG. Costuma <strong>alugar por temporada, conhecer, e depois comprar</strong>. Uso próprio no verão + renda no resto do ano.</p>
+      </div>
+      <div class="card">
+        <h3>Investidor de renda</h3>
+        <p class="mini">Compra mirando ocupação de alta temporada. Fala a língua de <strong>ROI, diária e ocupação</strong>. Sensível a praia certificada (Bandeira Azul).</p>
+      </div>
+      <div class="card">
+        <h3>Morador local</h3>
+        <p class="mini">Busca custo-benefício, bairros residenciais, <strong>financiamento</strong>. Ticket menor e decisão mais longa — precisa de follow-up.</p>
+      </div>
+    </div>
+
+    <div class="call op" style="margin-top:18px">
+      <div class="t">O gancho da sazonalidade</div>
+      <p>No verão chega uma <strong>enxurrada de leads em poucas semanas</strong> — quando o corretor humano satura e leads ficam sem resposta. Fora de temporada, o mesmo veranista que alugou vira comprador. A IA cobre os dois momentos: atende 24/7 no pico e mantém o follow-up que hoje vaza na baixa. Canais: portais (ZAP, VivaReal, OLX) no topo do funil → <strong>WhatsApp é onde a venda acontece</strong>.</p>
+    </div>
+  </section>
+
+  <!-- 5 · DIAGNÓSTICO -->
+  <section id="diagnostico">
+    <div class="sec-head"><span class="idx">05</span><h2>Diagnóstico — dores &amp; oportunidades</h2></div>
+    <div class="grid g2">
+      <div class="call risk" style="margin:0">
+        <div class="t">Dores</div>
+        <ul class="clean">
+          <li><strong>Resposta lenta no 1º contato</strong> — já apareceu em avaliação ("~1 dia para receber informações; corretor sem os dados na mão").</li>
+          <li><strong>Sem qualificação estruturada</strong> — todo lead cai igual no WhatsApp, sem separar veranista/investidor/morador nem bairro/ticket.</li>
+          <li><strong>Follow-up manual</strong> — o veranista que alugou e voltaria a comprar depende da memória do corretor.</li>
+          <li><strong>Pico de verão satura a equipe</strong> — leads sem resposta = conversão perdida.</li>
+        </ul>
+      </div>
+      <div class="call op" style="margin:0">
+        <div class="t">Oportunidades</div>
+        <ul class="clean">
+          <li><strong>Base de reputação forte (4,6★)</strong> e catálogo rico — matéria-prima pronta para a IA usar.</li>
+          <li><strong>WhatsApp já é o canal</strong> — número único e conhecido; só falta a camada de IA em cima.</li>
+          <li><strong>Catálogo estruturado por bairro/preço/segmento</strong> — perfeito para casar lead ↔ imóvel automaticamente.</li>
+          <li><strong>Concorrência com social forte mas atendimento comum</strong> — dá pra ganhar no tempo de resposta.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · SOLUÇÃO -->
+  <section id="solucao">
+    <div class="sec-head"><span class="idx">06</span><h2>Solução recomendada — Agente de IA no WhatsApp</h2></div>
+    <p class="lead-line">Um SDR de IA no número da imobiliária que <strong>atende, qualifica, casa com o imóvel certo e entrega o lead quente ao corretor</strong> — sem tirar o fechamento das mãos humanas.</p>
+    <ol class="flow" style="margin-top:20px">
+      <li><h3>Atendimento instantâneo 24/7</h3><p>Responde em segundos no WhatsApp, inclusive de madrugada e no pico do verão. Ataca direto a perda de conversão por demora.</p></li>
+      <li><h3>Qualificação das 3 personas</h3><p>Identifica logo na 1ª conversa se é veranista, investidor ou morador — e captura orçamento, bairro-alvo e urgência.</p></li>
+      <li><h3>Match com o catálogo</h3><p>Cruza a intenção com os imóveis (bairro, ticket, dorms, operação) e sugere as opções certas com link/foto.</p></li>
+      <li><h3>Roteamento &amp; agendamento</h3><p>Entrega ao corretor só o lead quente, já com contexto, e agenda a visita. Alto padrão pode ir direto ao Ruan.</p></li>
+      <li><h3>Follow-up de entressafra</h3><p>Nutre quem alugou por temporada e o morador de decisão longa — reconvertendo o que hoje vaza por falta de acompanhamento.</p></li>
+    </ol>
+    <div class="call note">
+      <div class="t">Objeção esperada &amp; resposta</div>
+      <p>"Meu forte é o relacionamento pessoal." → A IA <strong>não fecha venda</strong>; ela garante que nenhum lead do verão fique sem resposta e chega ao corretor já qualificado, com bairro e ticket certos. O corretor recebe menos conversa fria e mais visita marcada.</p>
+    </div>
+  </section>
+
+  <!-- 7 · ROTEIRO DA REUNIÃO -->
+  <section id="reuniao">
+    <div class="sec-head"><span class="idx">07</span><h2>Roteiro da reunião de onboarding</h2></div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>Agenda sugerida (~45 min)</h3>
+        <ol class="clean">
+          <li>Confirmar objetivo e expectativa (5 min)</li>
+          <li>Como funciona hoje: leads, WhatsApp, equipe (10 min)</li>
+          <li>Apresentar o agente de IA + fluxo (10 min)</li>
+          <li>Levantar acessos e dados necessários (10 min)</li>
+          <li>Definir escopo da Fase 1 e prazos (7 min)</li>
+          <li>Próximos passos e responsáveis (3 min)</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>O que precisamos deles (acessos)</h3>
+        <ul class="check">
+          <li>Número de WhatsApp dedicado ao robô + decisão <strong>Evolution API vs Cloud API oficial</strong></li>
+          <li>Acesso ao catálogo de imóveis (site/CRM tem API? ou exportação?)</li>
+          <li>Quais portais usam (ZAP/VivaReal/OLX) e integrador/Canal Pro</li>
+          <li>CRM atual (se houver) e como distribuem lead entre corretores</li>
+          <li>Lista de corretores + regra de roteamento (bairro, ticket, plantão)</li>
+          <li>Tom de voz e políticas (o que a IA pode/não pode dizer)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Perguntas de discovery</h3>
+      <p class="q">Quantos leads chegam por semana hoje — e de onde (portais, Instagram, indicação)?</p>
+      <p class="why">Dimensiona volume, dita a arquitetura e vira a métrica-base de sucesso.</p>
+      <p class="q">Quem responde o WhatsApp hoje e em quanto tempo, inclusive fora do horário e no fim de semana?</p>
+      <p class="why">É o "antes" que a resposta &lt;1 min vai atacar.</p>
+      <p class="q">No verão, quantos leads vocês sentem que ficam sem resposta?</p>
+      <p class="why">Quantifica a dor sazonal — o argumento mais forte.</p>
+      <p class="q">Como vocês separam hoje quem quer comprar, alugar temporada ou investir?</p>
+      <p class="why">Valida a qualificação das 3 personas.</p>
+      <p class="q">O catálogo do site é atualizado por vocês? Existe API/integração ou é manual?</p>
+      <p class="why">Define se o match de imóvel é automático ou precisa de sincronização.</p>
+      <p class="q">Atuam só em Cabo Frio ou em toda a Região dos Lagos?</p>
+      <p class="why">A bio diz Região dos Lagos, mas todo o portfólio é Cabo Frio — precisa alinhar.</p>
+      <p class="q">Qual o resultado que faria essa parceria valer a pena em 90 dias?</p>
+      <p class="why">Fecha o critério de sucesso na voz do cliente.</p>
+    </div>
+  </section>
+
+  <!-- 8 · SUCESSO -->
+  <section id="sucesso">
+    <div class="sec-head"><span class="idx">08</span><h2>Métricas de sucesso &amp; próximos passos</h2></div>
+    <div class="grid g3">
+      <div class="stat"><div class="k">&lt; 1 min</div><div class="l">Tempo de 1ª resposta (meta)</div></div>
+      <div class="stat"><div class="k num">100%</div><div class="l">Leads respondidos — inclusive fora do horário</div></div>
+      <div class="stat accent"><div class="k">↑ visitas</div><div class="l">Mais visitas agendadas por lead qualificado</div></div>
+    </div>
+    <div class="call op" style="margin-top:18px">
+      <div class="t">Fase 1 sugerida</div>
+      <p>Agente de recepção + qualificação das 3 personas no WhatsApp, com match básico ao catálogo e handoff para o corretor. Rápido de subir, dor imediata resolvida — e base para o follow-up e a integração de portais na Fase 2.</p>
+    </div>
+    <hr class="soft">
+    <p class="mini">Lacunas a fechar hoje: cobertura geográfica real (Cabo Frio vs Região dos Lagos), volume de leads e origem, CRM/portais em uso, e a decisão do número (Evolution vs Cloud API oficial).</p>
+  </section>
+
+  <footer>
+    <span>Dossiê Ruan Carlo Imóveis · preparado para onboarding</span>
+    <span>Fontes: site, Google Maps, Instagram/YouTube/Facebook, pesquisa de mercado Região dos Lagos · 8 set 2026</span>
+  </footer>
+
+</div>
