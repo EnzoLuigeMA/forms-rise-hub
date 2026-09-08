@@ -95,8 +95,26 @@
   }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; display: inline-block; }
 
+  .toc {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 22px 0 0; padding-top: 16px; border-top: 1px solid var(--line);
+  }
+  .toc a {
+    font-size: .75rem; font-weight: 700; letter-spacing: .02em;
+    padding: 5px 11px; border-radius: 999px;
+    background: var(--paper); border: 1px solid var(--line);
+    text-decoration: none; color: var(--ink-soft);
+  }
+  .toc a:hover { border-color: var(--teal); color: var(--teal); }
+  .topic-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 8px 14px; margin: 28px 0 12px;
+  }
+  .topic-head h3 { font-size: 1.12rem; font-weight: 750; }
+  .topic-head .meta { font-size: .82rem; color: var(--muted); }
+
   /* ---- Section scaffolding ---- */
-  section { padding-top: 46px; }
+  section { padding-top: 46px; scroll-margin-top: 12px; }
   .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
   .sec-head .idx { font-variant-numeric: tabular-nums; font-size: .8rem; font-weight: 700; color: var(--muted); letter-spacing: .05em; }
   .sec-head h2 { font-size: clamp(1.35rem, 3vw, 1.7rem); font-weight: 750; letter-spacing: -.01em; }
@@ -165,6 +183,7 @@
   .p-alto { background: var(--amber-dim); color: var(--amber); }
   .p-temp { background: var(--teal-dim); color: var(--teal); }
   .p-med  { background: var(--good-dim); color: var(--good); }
+  .p-baixo{ background: var(--crit-dim); color: var(--crit); }
   .p-com  { background: color-mix(in srgb, var(--muted) 16%, transparent); color: var(--muted); }
 
   ul.clean { margin: 0; padding-left: 1.15em; }
@@ -204,7 +223,22 @@
       <span class="meetchip"><span class="dot"></span>Reunião hoje — 8 set 2026</span>
     </div>
     <h1>Ruan Carlo Imóveis</h1>
-    <p class="lede">Imobiliária de Cabo Frio (Região dos Lagos, RJ) com <strong>526 imóveis ativos</strong> no site — do terreno de R$110 mil à casa de R$26 milhões em Búzios. Este dossiê reúne quem é o cliente, sua presença digital, o portfólio completo, o mercado — e onde entra o <strong>agente de IA no WhatsApp</strong> que vamos propor.</p>
+    <p class="lede">Imobiliária de Cabo Frio (Região dos Lagos, RJ) com <strong>526 imóveis ativos</strong> no site — do terreno de R$110 mil à casa de R$26 milhões em Búzios. Este dossiê reúne quem é o cliente, a presença digital, o portfólio por faixa (baixo, médio, alto e aluguel), o mercado — e onde entra o <strong>agente de IA no WhatsApp</strong>.</p>
+    <nav class="toc" aria-label="Tópicos do dossiê">
+      <a href="#quem">Cliente</a>
+      <a href="#digital">Digital</a>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#geografia">Geografia</a>
+      <a href="#venda-baixo">Baixo</a>
+      <a href="#venda-medio">Médio</a>
+      <a href="#venda-alto">Alto</a>
+      <a href="#aluguel">Aluguel</a>
+      <a href="#mercado">Mercado</a>
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#solucao">Solução</a>
+      <a href="#reuniao">Reunião</a>
+      <a href="#sucesso">Próximos passos</a>
+    </nav>
   </header>
 
   <!-- 1 · IDENTIDADE -->
@@ -275,31 +309,24 @@
     </div>
     <div class="call note">
       <div class="t">A confirmar na reunião</div>
-      <p>O catálogo confirma atuação na <strong>Região dos Lagos</strong>, com concentração forte em Cabo Frio (504/526) e cauda em São Pedro da Aldeia (17), Búzios (2), Arraial do Cabo (2) e Iguaba Grande (1). Há um pin duplicado no Google ("Luciano Ruan Carlo Imóveis", sem avaliações) que talvez convenha unificar.</p>
+      <p>Há um pin duplicado no Google ("Luciano Ruan Carlo Imóveis", sem avaliações) que talvez convenha unificar. Cobertura geográfica real está no tópico <a href="#geografia">Geografia</a>.</p>
     </div>
   </section>
 
   <!-- 3 · PORTFÓLIO -->
   <section id="portfolio">
-    <div class="sec-head"><span class="idx">03</span><h2>Portfólio completo — 526 imóveis</h2></div>
-    <p class="lead-line">Extraído em 8 set 2026 de <a href="https://ruancarloimoveis.com.br/busca">ruancarloimoveis.com.br/busca</a> (o site declara 528; 2 códigos repetem na paginação). CRM por trás: <strong>Vista</strong> + vitrine Loft Sites — catálogo estruturado, pronto para match automático.</p>
+    <div class="sec-head"><span class="idx">03</span><h2>Portfólio — visão geral</h2></div>
+    <p class="lead-line">526 imóveis únicos extraídos em 8 set 2026 de <a href="https://ruancarloimoveis.com.br/busca">ruancarloimoveis.com.br/busca</a> (o site declara 528; 2 códigos repetem na paginação). CRM: <strong>Vista</strong> + vitrine Loft Sites. Operação de <strong>volume no miolo</strong>, com cauda de luxo — o lead não é único, e a IA precisa separar faixa, bairro e operação.</p>
     <div class="grid g4" style="margin-top:16px">
-      <div class="stat accent"><div class="k num">R$110k–26M</div><div class="l">Faixa de venda · mediana R$790 mil</div></div>
-      <div class="stat"><div class="k num">516</div><div class="l">À venda (9 só aluguel · 7 nas duas)</div></div>
-      <div class="stat"><div class="k num">62</div><div class="l">Bairros distintos</div></div>
-      <div class="stat"><div class="k num">63</div><div class="l">Imóveis ≥ R$2,5M (196 ≥ R$1M)</div></div>
-    </div>
-
-    <div class="grid g4" style="margin-top:14px">
-      <div class="stat"><div class="k num">312</div><div class="l"><span class="pill p-med">Médio / morador</span></div></div>
-      <div class="stat"><div class="k num">91</div><div class="l"><span class="pill p-temp">Temporada / 2ª residência</span></div></div>
-      <div class="stat"><div class="k num">70</div><div class="l"><span class="pill p-alto">Alto padrão</span></div></div>
-      <div class="stat"><div class="k num">53</div><div class="l"><span class="pill p-com">Comercial / terreno</span></div></div>
+      <div class="stat accent"><div class="k num">526</div><div class="l">Imóveis ativos no site</div></div>
+      <div class="stat"><div class="k num">509</div><div class="l">Só venda · 9 só aluguel · 7 nas duas</div></div>
+      <div class="stat"><div class="k num">R$790 mil</div><div class="l">Mediana de venda</div></div>
+      <div class="stat"><div class="k num">9 tipos</div><div class="l">62 bairros · 5 cidades</div></div>
     </div>
 
     <div class="grid g2" style="margin-top:18px">
       <div class="card">
-        <h3>Tipos</h3>
+        <h3>Por tipo</h3>
         <div style="display:grid; gap:8px; margin-top:10px">
           <div class="mini">Apartamento <span class="num">188</span></div><div class="bar"><i style="width:36%"></i></div>
           <div class="mini">Casa em condomínio <span class="num">97</span></div><div class="bar"><i style="width:18%"></i></div>
@@ -310,55 +337,205 @@
         </div>
       </div>
       <div class="card">
-        <h3>Faixa de venda</h3>
+        <h3>Por faixa de venda</h3>
         <div style="display:grid; gap:8px; margin-top:10px">
-          <div class="mini">&lt; R$400 mil <span class="num">61</span></div><div class="bar"><i style="width:12%"></i></div>
-          <div class="mini">R$400–800 mil <span class="num">194</span> — o miolo</div><div class="bar"><i style="width:38%"></i></div>
-          <div class="mini">R$800 mil–1,5M <span class="num">131</span></div><div class="bar"><i style="width:26%"></i></div>
-          <div class="mini">R$1,5–3M <span class="num">82</span></div><div class="bar"><i style="width:16%"></i></div>
-          <div class="mini">≥ R$3M <span class="num">40</span></div><div class="bar"><i style="width:8%"></i></div>
+          <div class="mini"><span class="pill p-baixo">Baixo</span> &lt; R$400 mil · <span class="num">61</span></div><div class="bar"><i style="width:12%"></i></div>
+          <div class="mini"><span class="pill p-med">Médio</span> R$400 mil–1,5M · <span class="num">325</span> — o miolo</div><div class="bar"><i style="width:64%"></i></div>
+          <div class="mini"><span class="pill p-alto">Alto</span> ≥ R$1,5M · <span class="num">122</span></div><div class="bar"><i style="width:24%"></i></div>
         </div>
-        <p class="mini" style="margin-top:12px">Locação é cauda pequena: 16 anúncios, R$1,5 mil a R$20 mil/mês (mediana R$4 mil).</p>
+        <p class="mini" style="margin-top:12px">Dentro do médio: 194 em R$400–800 mil e 131 em R$800 mil–1,5M. Locação é cauda: 16 anúncios (ver <a href="#aluguel">Aluguel</a>).</p>
       </div>
     </div>
+  </section>
 
-    <p style="margin-top:22px" class="lead-line">A amostra inicial de 16 imóveis subestimou a operação. O catálogo real é um <strong>negócio de volume no miolo de R$400–800 mil</strong>, com cauda de alto padrão até R$26 milhões (casa em Praia Brava, Búzios) e cobertura em 5 cidades da Região dos Lagos. <strong>O lead que chega não é único</strong> — e a IA precisa separar persona, bairro e ticket antes de passar ao corretor.</p>
-
-    <h3 style="margin:22px 0 10px; font-size:1rem">Onde estão os imóveis</h3>
-    <div class="grid g4">
+  <!-- 4 · GEOGRAFIA -->
+  <section id="geografia">
+    <div class="sec-head"><span class="idx">04</span><h2>Geografia — onde está o estoque</h2></div>
+    <p class="lead-line">Atuação real é Região dos Lagos, com <strong>96% do volume em Cabo Frio</strong>. Os 22 imóveis fora da sede precisam de regra de roteamento (mesmo funil ou corretor à parte?).</p>
+    <div class="grid g4" style="margin-top:16px">
       <div class="stat accent"><div class="k num">504</div><div class="l">Cabo Frio (96%)</div></div>
       <div class="stat"><div class="k num">17</div><div class="l">São Pedro da Aldeia</div></div>
-      <div class="stat"><div class="k num">2+2+1</div><div class="l">Búzios · Arraial · Iguaba</div></div>
-      <div class="stat"><div class="k num">73 / 72</div><div class="l">Centro e Braga — os dois maiores</div></div>
+      <div class="stat"><div class="k num">2</div><div class="l">Búzios (inclui o R$26M)</div></div>
+      <div class="stat"><div class="k num">3</div><div class="l">Arraial do Cabo (2) + Iguaba (1)</div></div>
     </div>
-    <p class="mini" style="margin-top:10px">Em seguida: Passagem (45), Algodoal (38), Guriri (28), Palmeiras e Praia do Forte (24 cada), Vila Nova (23), Ogiva e Balneário das Dunas (19). São Bento concentra o ultra-luxo (casas de condomínio a R$6,9–8,9M).</p>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card">
+        <h3>Bairros com mais estoque</h3>
+        <dl class="kv" style="margin-top:10px">
+          <dt>Centro</dt><dd>73</dd>
+          <dt>Braga</dt><dd>72</dd>
+          <dt>Passagem</dt><dd>45</dd>
+          <dt>Algodoal</dt><dd>38</dd>
+          <dt>Guriri</dt><dd>28</dd>
+          <dt>Palmeiras / Praia do Forte</dt><dd>24 cada</dd>
+          <dt>Vila Nova</dt><dd>23</dd>
+          <dt>Ogiva / Balneário das Dunas</dt><dd>19 cada</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <h3>Leitura por bairro</h3>
+        <ul class="clean">
+          <li><strong>Centro e Braga</strong> — liquidez e volume; misturam médio, locação e entrada.</li>
+          <li><strong>Passagem, Algodoal, Praia do Forte</strong> — puxam ticket mais alto e 2ª residência.</li>
+          <li><strong>São Bento, Ogiva, Palmeiras</strong> — cauda de luxo (condomínio, canal, casas grandes).</li>
+          <li><strong>Guriri, Jardim Flamboyant, Baixo Grande</strong> — entrada / baixo ticket.</li>
+        </ul>
+        <p class="mini" style="margin-top:10px">Pin duplicado no Google: “Luciano Ruan Carlo Imóveis”, sem avaliações — vale unificar.</p>
+      </div>
+    </div>
+  </section>
 
-    <h3 style="margin:22px 0 10px; font-size:1rem">Destaques de venda (top 10)</h3>
+  <!-- 5 · VENDA BAIXO -->
+  <section id="venda-baixo">
+    <div class="sec-head"><span class="idx">05</span><h2>Venda — baixo ticket</h2></div>
+    <div class="topic-head">
+      <p class="lead-line" style="margin:0">Abaixo de <strong>R$400 mil</strong> — 61 imóveis. Entrada de morador local, terreno e comercial compacto. Quase metade são casas em condomínio (21) e apartamentos (13).</p>
+      <span class="pill p-baixo">61 imóveis · 12% das vendas</span>
+    </div>
+    <div class="grid g3" style="margin-bottom:14px">
+      <div class="stat"><div class="k num">R$110 mil</div><div class="l">Piso (terreno no Guriri)</div></div>
+      <div class="stat"><div class="k num">21 + 13</div><div class="l">Casas em cond. + apartamentos</div></div>
+      <div class="stat"><div class="k num">Centro / Guriri</div><div class="l">Bairros mais frequentes (8 e 7)</div></div>
+    </div>
     <div class="tablewrap">
       <table>
         <thead>
-          <tr><th>Cód.</th><th>Tipo</th><th>Bairro</th><th>Cidade</th><th class="n">Preço</th><th>Dorm.</th></tr>
+          <tr><th>Cód.</th><th>Tipo</th><th>Bairro</th><th>Cidade</th><th class="n">Preço</th><th>Dorm.</th><th>Área</th></tr>
         </thead>
         <tbody>
-          <tr><td class="code">RCA6019</td><td>Casa</td><td>Praia Brava</td><td>Búzios</td><td class="n">R$ 26.000.000</td><td class="n">6</td></tr>
-          <tr><td class="code">RCA6020</td><td>Casa</td><td>Palmeiras</td><td>Cabo Frio</td><td class="n">R$ 15.000.000</td><td class="n">6</td></tr>
-          <tr><td class="code">RCA6008</td><td>Casa em condomínio</td><td>Passagem</td><td>Cabo Frio</td><td class="n">R$ 12.000.000</td><td class="n">6</td></tr>
-          <tr><td class="code">RGP14</td><td>Galpão</td><td>Passagem</td><td>Cabo Frio</td><td class="n">R$ 10.000.000</td><td class="n">—</td></tr>
-          <tr><td class="code">RCA4131</td><td>Casa em condomínio</td><td>São Bento</td><td>Cabo Frio</td><td class="n">R$ 8.900.000</td><td class="n">4</td></tr>
-          <tr><td class="code">RTE052</td><td>Terreno</td><td>Praia do Sudoeste</td><td>São Pedro da Aldeia</td><td class="n">R$ 8.000.000</td><td class="n">—</td></tr>
-          <tr><td class="code">RCA9002</td><td>Casa em condomínio</td><td>São Bento</td><td>Cabo Frio</td><td class="n">R$ 7.500.000</td><td class="n">9</td></tr>
-          <tr><td class="code">RCA3123</td><td>Casa em condomínio</td><td>São Bento</td><td>Cabo Frio</td><td class="n">R$ 6.900.000</td><td class="n">3</td></tr>
-          <tr><td class="code">RCA6002</td><td>Casa em condomínio</td><td>Passagem</td><td>Cabo Frio</td><td class="n">R$ 6.900.000</td><td class="n">6</td></tr>
-          <tr><td class="code">RCA4132</td><td>Casa</td><td>Ogiva</td><td>Cabo Frio</td><td class="n">R$ 5.500.000</td><td class="n">4</td></tr>
+          <tr><td class="code">RTE025</td><td>Terreno</td><td>Guriri</td><td>Cabo Frio</td><td class="n">R$ 110.000</td><td class="n">—</td><td class="n">300 m²</td></tr>
+          <tr><td class="code">RCA2015</td><td>Casa</td><td>Jardim Peró</td><td>Cabo Frio</td><td class="n">R$ 170.000</td><td class="n">2</td><td class="n">140 m²</td></tr>
+          <tr><td class="code">RCA2100</td><td>Casa em condomínio</td><td>Guriri</td><td>Cabo Frio</td><td class="n">R$ 199.000</td><td class="n">2</td><td class="n">64 m²</td></tr>
+          <tr><td class="code">RCA2091</td><td>Casa em condomínio</td><td>Balneário</td><td>São Pedro da Aldeia</td><td class="n">R$ 200.000</td><td class="n">2</td><td class="n">65 m²</td></tr>
+          <tr><td class="code">RLO0017</td><td>Loja</td><td>Centro</td><td>Cabo Frio</td><td class="n">R$ 200.000</td><td class="n">—</td><td class="n">30 m²</td></tr>
+          <tr><td class="code">RAP2200</td><td>Apartamento</td><td>Baixo Grande</td><td>Cabo Frio</td><td class="n">R$ 250.000</td><td class="n">2</td><td class="n">69 m²</td></tr>
+          <tr><td class="code">RAP1080</td><td>Apartamento</td><td>Centro</td><td>Cabo Frio</td><td class="n">R$ 280.000</td><td class="n">1</td><td class="n">30 m²</td></tr>
+          <tr><td class="code">RAP2158</td><td>Apartamento</td><td>Centro</td><td>São Pedro da Aldeia</td><td class="n">R$ 360.000</td><td class="n">2</td><td class="n">85 m²</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="mini" style="margin-top:10px">Locação de maior ticket: RCA2173 (casa/uso misto na Braga) a <strong>R$20 mil/mês</strong>; apartamento na Praia do Forte a R$10 mil; galpão na Praia do Siqueira a R$8 mil. Destaque náutico da amostra original (RCA3188, vaga para lancha 30 pés) permanece no catálogo a R$2,5M.</p>
+    <div class="call note">
+      <div class="t">Lead típico desta faixa</div>
+      <p>Morador local com financiamento (parceria Financiei). Decisão mais longa, 2 quartos predominam (33 de 61). A IA precisa falar de <strong>entrada, prestações e bairro residencial</strong> — não de ROI de temporada.</p>
+    </div>
   </section>
 
-  <!-- 4 · MERCADO -->
+  <!-- 6 · VENDA MÉDIO -->
+  <section id="venda-medio">
+    <div class="sec-head"><span class="idx">06</span><h2>Venda — médio ticket</h2></div>
+    <div class="topic-head">
+      <p class="lead-line" style="margin:0">De <strong>R$400 mil a R$1,5 milhão</strong> — 325 imóveis, <strong>o coração da operação</strong>. 144 apartamentos, 58 casas em condomínio, 56 coberturas. Braga (57) e Centro (51) concentram o volume.</p>
+      <span class="pill p-med">325 imóveis · 64% das vendas</span>
+    </div>
+    <div class="grid g3" style="margin-bottom:14px">
+      <div class="stat accent"><div class="k num">194</div><div class="l">Na fatia R$400–800 mil (o miolo)</div></div>
+      <div class="stat"><div class="k num">3 quartos</div><div class="l">Padrão mais comum (120 imóveis)</div></div>
+      <div class="stat"><div class="k num">Braga + Centro</div><div class="l">108 anúncios só nesses dois</div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Cód.</th><th>Tipo</th><th>Bairro</th><th>Cidade</th><th class="n">Preço</th><th>Dorm.</th><th>Área</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="code">RAP1095</td><td>Apartamento</td><td>Braga</td><td>Cabo Frio</td><td class="n">R$ 400.000</td><td class="n">1</td><td class="n">80 m²</td></tr>
+          <tr><td class="code">RAP2274</td><td>Apartamento</td><td>Passagem</td><td>Cabo Frio</td><td class="n">R$ 450.000</td><td class="n">2</td><td class="n">68 m²</td></tr>
+          <tr><td class="code">RCA3187</td><td>Casa</td><td>Palmeiras</td><td>Cabo Frio</td><td class="n">R$ 680.000</td><td class="n">3</td><td class="n">120 m²</td></tr>
+          <tr><td class="code">RAP2306</td><td>Apartamento</td><td>Braga</td><td>Cabo Frio</td><td class="n">R$ 750.000</td><td class="n">2</td><td class="n">80 m²</td></tr>
+          <tr><td class="code">RAP2266</td><td>Apartamento</td><td>Centro</td><td>Cabo Frio</td><td class="n">R$ 780.000</td><td class="n">2</td><td class="n">118 m²</td></tr>
+          <tr><td class="code">RAP3212</td><td>Apartamento</td><td>Centro</td><td>Cabo Frio</td><td class="n">R$ 850.000</td><td class="n">3</td><td class="n">85 m²</td></tr>
+          <tr><td class="code">RCO4004</td><td>Cobertura</td><td>Braga</td><td>Cabo Frio</td><td class="n">R$ 950.000</td><td class="n">4</td><td class="n">220 m²</td></tr>
+          <tr><td class="code">RAP4025</td><td>Apartamento</td><td>Praia do Forte</td><td>Cabo Frio</td><td class="n">R$ 1.480.000</td><td class="n">4</td><td class="n">160 m²</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="call op">
+      <div class="t">Lead típico desta faixa</div>
+      <p>Mistura veranista/2ª residência (praia, Braga, Passagem) e morador que sobe de padrão. É a faixa em que a IA mais precisa <strong>qualificar orçamento + bairro</strong> antes de mandar 3 opções — senão o corretor recebe 325 imóveis “parecidos”.</p>
+    </div>
+  </section>
+
+  <!-- 7 · VENDA ALTO -->
+  <section id="venda-alto">
+    <div class="sec-head"><span class="idx">07</span><h2>Venda — alto padrão</h2></div>
+    <div class="topic-head">
+      <p class="lead-line" style="margin:0">A partir de <strong>R$1,5 milhão</strong> — 122 imóveis (40 acima de R$3M). Coberturas lideram (39), depois apartamentos (26) e casas (23). Praia do Forte, Passagem e Algodoal concentram; São Bento e Ogiva puxam o ultra-luxo.</p>
+      <span class="pill p-alto">122 imóveis · 24% das vendas</span>
+    </div>
+    <div class="grid g3" style="margin-bottom:14px">
+      <div class="stat accent"><div class="k num">R$26 mi</div><div class="l">Teto — casa Praia Brava, Búzios</div></div>
+      <div class="stat"><div class="k num">63</div><div class="l">Imóveis ≥ R$2,5M</div></div>
+      <div class="stat"><div class="k num">São Bento</div><div class="l">Condomínios de R$6,9–8,9M</div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Cód.</th><th>Tipo</th><th>Bairro</th><th>Cidade</th><th class="n">Preço</th><th>Dorm.</th><th>Área</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="code">RCA6019</td><td>Casa</td><td>Praia Brava</td><td>Búzios</td><td class="n">R$ 26.000.000</td><td class="n">6</td><td class="n">620 m²</td></tr>
+          <tr><td class="code">RCA6020</td><td>Casa</td><td>Palmeiras</td><td>Cabo Frio</td><td class="n">R$ 15.000.000</td><td class="n">6</td><td class="n">18.000 m²</td></tr>
+          <tr><td class="code">RCA6008</td><td>Casa em condomínio</td><td>Passagem</td><td>Cabo Frio</td><td class="n">R$ 12.000.000</td><td class="n">6</td><td class="n">620 m²</td></tr>
+          <tr><td class="code">RGP14</td><td>Galpão</td><td>Passagem</td><td>Cabo Frio</td><td class="n">R$ 10.000.000</td><td class="n">—</td><td class="n">—</td></tr>
+          <tr><td class="code">RCA4131</td><td>Casa em condomínio</td><td>São Bento</td><td>Cabo Frio</td><td class="n">R$ 8.900.000</td><td class="n">4</td><td class="n">600 m²</td></tr>
+          <tr><td class="code">RTE052</td><td>Terreno</td><td>Praia do Sudoeste</td><td>São Pedro da Aldeia</td><td class="n">R$ 8.000.000</td><td class="n">—</td><td class="n">15.990 m²</td></tr>
+          <tr><td class="code">RCA9002</td><td>Casa em condomínio</td><td>São Bento</td><td>Cabo Frio</td><td class="n">R$ 7.500.000</td><td class="n">9</td><td class="n">1.591 m²</td></tr>
+          <tr><td class="code">RCA4132</td><td>Casa</td><td>Ogiva</td><td>Cabo Frio</td><td class="n">R$ 5.500.000</td><td class="n">4</td><td class="n">1.000 m²</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="call note">
+      <div class="t">Lead típico desta faixa</div>
+      <p>Investidor ou 2ª residência de alto padrão. Handoff direto ao Ruan faz sentido. Destaque náutico: RCA3188 (Praia do Siqueira, R$2,5M) com vaga escriturada para lancha até 30 pés + jet ski.</p>
+    </div>
+  </section>
+
+  <!-- 8 · ALUGUEL -->
+  <section id="aluguel">
+    <div class="sec-head"><span class="idx">08</span><h2>Aluguel</h2></div>
+    <div class="topic-head">
+      <p class="lead-line" style="margin:0">Só <strong>16 anúncios de locação</strong> no site (9 exclusivos + 7 também à venda). Catálogo é de venda; aluguel é cauda — mas o WhatsApp recebe os dois pedidos, então a IA precisa separar na 1ª mensagem.</p>
+      <span class="pill p-temp">16 imóveis · mediana R$4 mil/mês</span>
+    </div>
+    <div class="grid g3" style="margin-bottom:14px">
+      <div class="stat"><div class="k num">R$1,5–20 mil</div><div class="l">Faixa mensal</div></div>
+      <div class="stat"><div class="k num">7 aptos</div><div class="l">+ 3 casas · 2 coberturas · 4 comercial</div></div>
+      <div class="stat"><div class="k num">Centro (5)</div><div class="l">Bairro com mais locação</div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Cód.</th><th>Tipo</th><th>Bairro</th><th class="n">Aluguel</th><th>Dorm.</th><th>Área</th><th>Também vende?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="code">RCA2173</td><td>Casa (uso misto)</td><td>Braga</td><td class="n">R$ 20.000</td><td class="n">2</td><td class="n">1.200 m²</td><td>Sim · R$ 2,6M</td></tr>
+          <tr><td class="code">RAP3195</td><td>Apartamento</td><td>Praia do Forte</td><td class="n">R$ 10.000</td><td class="n">3</td><td class="n">215 m²</td><td>Sim · R$ 3,5M</td></tr>
+          <tr><td class="code">RGP17</td><td>Galpão</td><td>Praia do Siqueira</td><td class="n">R$ 8.000</td><td class="n">—</td><td class="n">—</td><td>Não</td></tr>
+          <tr><td class="code">RCO4069</td><td>Cobertura</td><td>Passagem</td><td class="n">R$ 8.000</td><td class="n">4</td><td class="n">170 m²</td><td>Sim · R$ 3,0M</td></tr>
+          <tr><td class="code">RCA3170</td><td>Casa</td><td>Palmeiras</td><td class="n">R$ 6.800</td><td class="n">3</td><td class="n">200 m²</td><td>Não</td></tr>
+          <tr><td class="code">RAP3131</td><td>Apartamento</td><td>Balneário das Dunas</td><td class="n">R$ 4.700</td><td class="n">3</td><td class="n">150 m²</td><td>Sim · R$ 1,1M</td></tr>
+          <tr><td class="code">RCA3144</td><td>Casa</td><td>Ville Blanche</td><td class="n">R$ 4.500</td><td class="n">3</td><td class="n">150 m²</td><td>Sim · R$ 1,38M</td></tr>
+          <tr><td class="code">RCO4071</td><td>Cobertura</td><td>Passagem</td><td class="n">R$ 4.000</td><td class="n">4</td><td class="n">278 m²</td><td>Sim · R$ 1,3M</td></tr>
+          <tr><td class="code">RLO0076</td><td>Loja</td><td>Centro</td><td class="n">R$ 4.000</td><td class="n">—</td><td class="n">90 m²</td><td>Não</td></tr>
+          <tr><td class="code">RAP3205</td><td>Apartamento</td><td>Centro</td><td class="n">R$ 3.300</td><td class="n">3</td><td class="n">70 m²</td><td>Não</td></tr>
+          <tr><td class="code">RAP2296</td><td>Apartamento</td><td>Centro</td><td class="n">R$ 2.700</td><td class="n">2</td><td class="n">68 m²</td><td>Não</td></tr>
+          <tr><td class="code">RAP1089</td><td>Apartamento</td><td>Algodoal</td><td class="n">R$ 2.500</td><td class="n">1</td><td class="n">45 m²</td><td>Não</td></tr>
+          <tr><td class="code">RAP2227</td><td>Apartamento</td><td>Braga</td><td class="n">R$ 2.500</td><td class="n">2</td><td class="n">148 m²</td><td>Sim · R$ 630 mil</td></tr>
+          <tr><td class="code">RAP2304</td><td>Apartamento</td><td>Villa Nova</td><td class="n">R$ 2.243</td><td class="n">2</td><td class="n">—</td><td>Não</td></tr>
+          <tr><td class="code">RLO0075</td><td>Salas/conjuntos</td><td>Centro</td><td class="n">R$ 1.800</td><td class="n">—</td><td class="n">18 m²</td><td>Não</td></tr>
+          <tr><td class="code">RLO0063</td><td>Loja</td><td>Centro</td><td class="n">R$ 1.500</td><td class="n">—</td><td class="n">75 m²</td><td>Não</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="call note">
+      <div class="t">Leitura para o agente</div>
+      <p>Pergunta 1 no WhatsApp: <strong>comprar ou alugar</strong>. Se alugar, o match é nesses 16 — não diluir no catálogo de 509 vendas. Os 7 “venda + aluguel” são ponte veranista → comprador (follow-up de entressafra).</p>
+    </div>
+  </section>
+
+  <!-- 9 · MERCADO -->
   <section id="mercado">
-    <div class="sec-head"><span class="idx">04</span><h2>Mercado & sazonalidade</h2></div>
+    <div class="sec-head"><span class="idx">09</span><h2>Mercado &amp; sazonalidade</h2></div>
     <div class="grid g3">
       <div class="stat accent"><div class="k num">+300–400%</div><div class="l">População na alta temporada (nov→carnaval)</div></div>
       <div class="stat"><div class="k num">5–8%</div><div class="l">Valorização projetada p/ 2026</div></div>
@@ -386,9 +563,9 @@
     </div>
   </section>
 
-  <!-- 5 · DIAGNÓSTICO -->
+  <!-- 10 · DIAGNÓSTICO -->
   <section id="diagnostico">
-    <div class="sec-head"><span class="idx">05</span><h2>Diagnóstico — dores &amp; oportunidades</h2></div>
+    <div class="sec-head"><span class="idx">10</span><h2>Diagnóstico — dores &amp; oportunidades</h2></div>
     <div class="grid g2">
       <div class="call risk" style="margin:0">
         <div class="t">Dores</div>
@@ -411,14 +588,14 @@
     </div>
   </section>
 
-  <!-- 6 · SOLUÇÃO -->
+  <!-- 11 · SOLUÇÃO -->
   <section id="solucao">
-    <div class="sec-head"><span class="idx">06</span><h2>Solução recomendada — Agente de IA no WhatsApp</h2></div>
+    <div class="sec-head"><span class="idx">11</span><h2>Solução recomendada — Agente de IA no WhatsApp</h2></div>
     <p class="lead-line">Um SDR de IA no número da imobiliária que <strong>atende, qualifica, casa com o imóvel certo e entrega o lead quente ao corretor</strong> — sem tirar o fechamento das mãos humanas.</p>
     <ol class="flow" style="margin-top:20px">
       <li><h3>Atendimento instantâneo 24/7</h3><p>Responde em segundos no WhatsApp, inclusive de madrugada e no pico do verão. Ataca direto a perda de conversão por demora.</p></li>
       <li><h3>Qualificação das 3 personas</h3><p>Identifica logo na 1ª conversa se é veranista, investidor ou morador — e captura orçamento, bairro-alvo e urgência.</p></li>
-      <li><h3>Match com o catálogo</h3><p>Cruza a intenção com os 526 imóveis (bairro, ticket, dorms, operação) e sugere as opções certas com link/foto.</p></li>
+      <li><h3>Match com o catálogo</h3><p>Cruza comprar vs alugar, faixa (baixo / médio / alto), bairro e dorms — e sugere 2–3 opções com link, sem despejar os 526.</p></li>
       <li><h3>Roteamento &amp; agendamento</h3><p>Entrega ao corretor só o lead quente, já com contexto, e agenda a visita. Alto padrão pode ir direto ao Ruan.</p></li>
       <li><h3>Follow-up de entressafra</h3><p>Nutre quem alugou por temporada e o morador de decisão longa — reconvertendo o que hoje vaza por falta de acompanhamento.</p></li>
     </ol>
@@ -428,9 +605,9 @@
     </div>
   </section>
 
-  <!-- 7 · ROTEIRO DA REUNIÃO -->
+  <!-- 12 · ROTEIRO DA REUNIÃO -->
   <section id="reuniao">
-    <div class="sec-head"><span class="idx">07</span><h2>Roteiro da reunião de onboarding</h2></div>
+    <div class="sec-head"><span class="idx">12</span><h2>Roteiro da reunião de onboarding</h2></div>
 
     <div class="grid g2">
       <div class="card">
@@ -465,8 +642,8 @@
       <p class="why">É o "antes" que a resposta &lt;1 min vai atacar.</p>
       <p class="q">No verão, quantos leads vocês sentem que ficam sem resposta?</p>
       <p class="why">Quantifica a dor sazonal — o argumento mais forte.</p>
-      <p class="q">Como vocês separam hoje quem quer comprar, alugar temporada ou investir?</p>
-      <p class="why">Valida a qualificação das 3 personas.</p>
+      <p class="q">Como vocês separam hoje quem quer comprar, alugar ou investir — e quem atende baixo vs alto padrão?</p>
+      <p class="why">Valida personas + regra de ticket (61 baixo / 325 médio / 122 alto / 16 aluguel).</p>
       <p class="q">O catálogo do site (Vista/Loft, 526 imóveis) é atualizado por vocês? Existe API ou exportação?</p>
       <p class="why">Define se o match de imóvel é automático ou precisa de sincronização periódica.</p>
       <p class="q">Os 22 imóveis fora de Cabo Frio (São Pedro, Búzios, Arraial, Iguaba) entram no mesmo funil — ou têm corretor/regra à parte?</p>
@@ -476,9 +653,9 @@
     </div>
   </section>
 
-  <!-- 8 · SUCESSO -->
+  <!-- 13 · SUCESSO -->
   <section id="sucesso">
-    <div class="sec-head"><span class="idx">08</span><h2>Métricas de sucesso &amp; próximos passos</h2></div>
+    <div class="sec-head"><span class="idx">13</span><h2>Métricas de sucesso &amp; próximos passos</h2></div>
     <div class="grid g3">
       <div class="stat"><div class="k">&lt; 1 min</div><div class="l">Tempo de 1ª resposta (meta)</div></div>
       <div class="stat"><div class="k num">100%</div><div class="l">Leads respondidos — inclusive fora do horário</div></div>
