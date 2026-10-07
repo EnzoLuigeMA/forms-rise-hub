@@ -39,9 +39,16 @@ n.queue=[];t=b.createElement(e);t.async=!0;t.defer=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+// Um id por evento: o mesmo id segue no Pixel (navegador) e na API de Conversões (servidor),
+// para a Meta contar uma vez só.
+window.rhEventId = function (prefix) {
+  return prefix + '_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+};
+window.rhPageViewId = rhEventId('pv');
+window.rhViewContentId = rhEventId('vc');
 fbq('init', '2238173290034845');
-fbq('track', 'PageView');
-fbq('track', 'ViewContent', { content_name: 'paginas_premium', value: 597, currency: 'BRL' });
+fbq('track', 'PageView', {}, { eventID: rhPageViewId });
+fbq('track', 'ViewContent', { content_name: 'paginas_premium', content_type: 'product', value: 597, currency: 'BRL' }, { eventID: rhViewContentId });
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2238173290034845&ev=PageView&noscript=1"/></noscript>
 
@@ -543,9 +550,53 @@ var PAGES = [
   { id: 'parana',           name: 'Paraná Repasses',     tag: 'Repasse de veículos',                          url: 'https://parana-mu.vercel.app' }
 ];
 
-function track(name, params) {
-  try { if (window.fbq) fbq('track', name, params || {}); } catch (e) { /* bloqueador de anúncios: segue sem rastrear */ }
+// ---------- Rastreamento: Pixel (navegador) + API de Conversões (servidor) ----------
+function cookie(name) {
+  var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return m ? decodeURIComponent(m[1]) : null;
 }
+// Envia o evento pelo servidor (/api/meta-capi guarda o token; nada de segredo no navegador)
+function sendCapi(name, eventId, customData) {
+  var userData = { client_user_agent: navigator.userAgent };
+  var fbp = cookie('_fbp'), fbc = cookie('_fbc');
+  if (fbp) userData.fbp = fbp;
+  if (fbc) userData.fbc = fbc;
+  var event = {
+    event_name: name,
+    event_time: Math.floor(Date.now() / 1000),
+    event_id: eventId,
+    event_source_url: location.href,
+    action_source: 'website',
+    user_data: userData
+  };
+  if (customData) event.custom_data = customData;
+  try {
+    fetch('/api/meta-capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: [event] }),
+      keepalive: true   // o clique de compra sai da página; keepalive deixa o envio terminar
+    }).catch(function () { /* rede/bloqueador: o Pixel do navegador continua valendo */ });
+  } catch (e) { /* idem */ }
+}
+// Dispara nos dois canais com o mesmo id
+function track(name, params) {
+  var eventId = rhEventId(name.toLowerCase());
+  try { if (window.fbq) fbq('track', name, params || {}, { eventID: eventId }); } catch (e) { /* bloqueador de anúncios */ }
+  sendCapi(name, eventId, params);
+}
+// PageView e ViewContent já saíram pelo Pixel no <head>; aqui vai o par deles pelo servidor.
+// Espera o Pixel gravar o cookie _fbp para a Meta conseguir casar os dois.
+(function sendInitialCapi() {
+  var tries = 0;
+  var timer = setInterval(function () {
+    tries += 1;
+    if (!cookie('_fbp') && tries < 8) return;
+    clearInterval(timer);
+    sendCapi('PageView', rhPageViewId);
+    sendCapi('ViewContent', rhViewContentId, { content_name: 'paginas_premium', content_type: 'product', value: PRICE, currency: 'BRL' });
+  }, 400);
+})();
 
 // ---------- Galeria ----------
 (function renderWork() {
@@ -584,14 +635,24 @@ function track(name, params) {
 (function wireCheckout() {
   var fallback = 'https://wa.me/' + SUPPORT_WHATSAPP + '?text=' +
     encodeURIComponent('Olá! Quero garantir minha Página Premium da Rise Hub (R$ ' + PRICE + ').');
-  var target = CHECKOUT_URL || fallback;
+  var target = CHECKOUT_URL ? withCampaignParams(CHECKOUT_URL) : fallback;
   document.querySelectorAll('[data-checkout]').forEach(function (a) {
     a.href = target;
     if (!CHECKOUT_URL) { a.target = '_blank'; a.rel = 'noopener'; }
     a.addEventListener('click', function () {
-      track('InitiateCheckout', { content_name: 'paginas_premium', content_category: a.dataset.checkout, value: PRICE, currency: 'BRL' });
+      track('InitiateCheckout', { content_name: 'paginas_premium', content_category: a.dataset.checkout, content_type: 'product', num_items: 1, value: PRICE, currency: 'BRL' });
     });
   });
+
+  // Leva utm_*, fbclid, src e sck do anúncio até o checkout, para a venda ser atribuída à campanha certa
+  function withCampaignParams(url) {
+    var from = new URLSearchParams(location.search), out;
+    try { out = new URL(url); } catch (e) { return url; }
+    from.forEach(function (value, key) {
+      if (/^(utm_|fbclid$|src$|sck$)/.test(key) && !out.searchParams.has(key)) out.searchParams.set(key, value);
+    });
+    return out.toString();
+  }
 })();
 
 // ---------- Raio-X ----------

@@ -142,14 +142,34 @@ var waUrl = 'https://wa.me/' + SUPPORT_WHATSAPP + '?text=' +
   encodeURIComponent('Olá! Acabei de comprar minha Página Premium da Rise Hub e quero iniciar o briefing.');
 document.getElementById('wa').href = waUrl;
 
-// Purchase: uma vez por navegador, para recarregar a página não duplicar a conversão
+// Purchase: quem confirma a venda é a Kiwify (o Pixel de lá dispara o Purchase no pagamento aprovado).
+// Disparar aqui também contaria a mesma venda duas vezes, e esta página pode ser aberta sem compra.
+// Só ligue (true) se o Pixel NÃO estiver configurado na Kiwify.
+var TRACK_PURCHASE_ON_THIS_PAGE = false;
+
 (function trackPurchase() {
+  if (!TRACK_PURCHASE_ON_THIS_PAGE) return;
   var KEY = 'rh_paginas_purchase';
+  function cookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : null;
+  }
   try {
-    if (localStorage.getItem(KEY)) return;
+    if (localStorage.getItem(KEY)) return;   // recarregar a página não duplica
     var eventId = 'purchase_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+    var params = { value: PRICE, currency: 'BRL', content_name: 'paginas_premium', content_type: 'product', num_items: 1 };
     localStorage.setItem(KEY, eventId);
-    fbq('track', 'Purchase', { value: PRICE, currency: 'BRL', content_name: 'paginas_premium' }, { eventID: eventId });
+    fbq('track', 'Purchase', params, { eventID: eventId });
+    var userData = { client_user_agent: navigator.userAgent };
+    if (cookie('_fbp')) userData.fbp = cookie('_fbp');
+    if (cookie('_fbc')) userData.fbc = cookie('_fbc');
+    fetch('/api/meta-capi', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+      body: JSON.stringify({ data: [{
+        event_name: 'Purchase', event_time: Math.floor(Date.now() / 1000), event_id: eventId,
+        event_source_url: location.href, action_source: 'website', user_data: userData, custom_data: params
+      }] })
+    }).catch(function () {});
   } catch (e) { /* storage ou pixel bloqueado: a compra já foi feita, só não rastreia */ }
 })();
 
