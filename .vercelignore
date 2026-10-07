@@ -1,0 +1,11 @@
+# Arquivos locais de ferramentas/agentes: nao publicar no site
+.claude
+.claude-flow
+.agents
+.mcp.json
+.env.example
+CLAUDE.md
+AGENTS.md
+README.md
+tools
+supabase

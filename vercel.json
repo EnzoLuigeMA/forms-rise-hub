@@ -5,6 +5,8 @@
     { "source": "/bio", "destination": "/index.html" },
     { "source": "/form", "destination": "/index.html" },
     { "source": "/agendar", "destination": "/agendar.html" },
+    { "source": "/paginas", "destination": "/paginas.html" },
+    { "source": "/paginas/obrigado", "destination": "/paginas-obrigado.html" },
     { "source": "/lp", "destination": "/lp.html" },
     { "source": "/lp2", "destination": "/lp2.html" },
     { "source": "/trafego", "destination": "/lp-trafego.html" },
