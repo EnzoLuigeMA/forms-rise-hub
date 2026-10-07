@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing da sua Página Premium — Rise Hub</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#150d1f">
+<link rel="icon" href="/img/logo.webp" type="image/webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://ibidukamkkgsurqswsvf.supabase.co">
+
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;-webkit-tap-highlight-color:transparent}
+:root{
+  /* Mesma paleta do site Rise Hub */
+  --bg: oklch(0.16 0.035 300);
+  --bg-deep: oklch(0.125 0.03 300);
+  --surface: oklch(0.205 0.04 300);
+  --surface-2: oklch(0.25 0.045 300);
+  --border: oklch(0.32 0.045 300);
+  --border-strong: oklch(0.42 0.05 300);
+  --ink: oklch(0.97 0.012 300);
+  --ink-dim: oklch(0.80 0.02 300);
+  --ink-muted: oklch(0.64 0.03 300);
+  --violet: oklch(0.64 0.19 300);
+  --violet-bright: oklch(0.72 0.20 305);
+  --magenta: oklch(0.66 0.21 350);
+  --live: oklch(0.80 0.16 160);
+  --danger: oklch(0.72 0.19 22);
+  --wa: oklch(0.72 0.19 150);
+  --violet-a12: oklch(0.64 0.19 300 / .12);
+  --violet-a30: oklch(0.64 0.19 300 / .30);
+  --violet-glow: oklch(0.64 0.19 300 / .35);
+  --grad-accent: linear-gradient(116deg, var(--violet) 0%, var(--magenta) 100%);
+  --radius-sm: 14px;
+  --radius: 18px;
+  --radius-lg: 26px;
+  --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --font-display: 'Clash Display', 'Hanken Grotesk', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.55;font-size:17px;min-height:100vh;min-height:100dvh;overflow-x:hidden;position:relative}
+body::before{content:"";position:fixed;right:-260px;top:-320px;width:820px;height:820px;background:radial-gradient(closest-side, oklch(0.64 0.19 300 / .26), transparent 70%);pointer-events:none}
+body::after{content:"";position:fixed;left:-300px;bottom:-340px;width:700px;height:700px;background:radial-gradient(closest-side, oklch(0.66 0.21 350 / .13), transparent 70%);pointer-events:none}
+.grad{background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;color:transparent}
+:focus-visible{outline:2px solid var(--violet-bright);outline-offset:3px;border-radius:6px}
+[hidden]{display:none !important}
+
+/* ---------- Topo + progresso ---------- */
+.top{position:sticky;top:0;z-index:50;background:oklch(0.16 0.035 300 / .86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid oklch(0.32 0.045 300 / .5)}
+.top-in{max-width:780px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit}
+.brand img{width:32px;height:32px;border-radius:9px}
+.brand b{font-family:var(--font-display);font-weight:600;font-size:18px}
+.step-count{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--ink-muted);text-transform:uppercase;white-space:nowrap}
+.step-count b{color:var(--ink);font-weight:500}
+.progress{height:3px;background:var(--surface-2)}
+.progress i{display:block;height:100%;width:0;background:var(--grad-accent);transition:width .6s var(--ease-out-expo)}
+
+main{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:clamp(28px,5vw,56px) 20px 140px}
+
+/* ---------- Abertura ---------- */
+.intro{margin-bottom:clamp(28px,4vw,44px)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet-bright);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--violet-bright)}
+h1{font-family:var(--font-display);font-weight:600;font-size:clamp(34px,6vw,54px);line-height:1.04;letter-spacing:-.02em;margin:18px 0 16px;text-wrap:balance}
+.intro p{color:var(--ink-dim);max-width:58ch;text-wrap:pretty}
+.intro ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-family:var(--font-mono);font-size:12.5px;color:var(--ink-muted)}
+.intro li{display:inline-flex;align-items:center;gap:8px}
+.intro li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--live)}
+
+/* ---------- Etapas ---------- */
+.step{display:none}
+.step.on{display:block;animation:in .55s var(--ease-out-expo) both}
+@keyframes in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.step.on{animation:none}}
+.step-head{margin-bottom:26px}
+.step-head .n{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;color:var(--magenta)}
+h2{font-family:var(--font-display);font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.1;letter-spacing:-.015em;margin:10px 0 8px}
+.step-head p{color:var(--ink-dim);font-size:16px;max-width:60ch}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:clamp(20px,3.6vw,32px);display:grid;gap:22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:640px){.row{grid-template-columns:1fr}}
+
+/* ---------- Campos ---------- */
+.f{display:grid;gap:8px;min-width:0}
+.f > label,.f > .lbl{font-weight:600;font-size:15px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.f .req{color:var(--magenta);font-weight:700}
+.f .opt{font-family:var(--font-mono);font-weight:400;font-size:11px;letter-spacing:.06em;color:var(--ink-muted);text-transform:uppercase}
+.f .hint{font-size:13.5px;color:var(--ink-muted);line-height:1.45}
+input[type=text],input[type=email],input[type=tel],input[type=url],select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg-deep);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;min-height:52px;transition:border-color .2s, box-shadow .2s;appearance:none;-webkit-appearance:none}
+textarea{min-height:108px;resize:vertical;line-height:1.5}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23b9a8cf' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:18px;padding-right:44px}
+select option{background:#1d1329;color:#fff}
+::placeholder{color:oklch(0.52 0.03 300)}
+input:hover,select:hover,textarea:hover{border-color:var(--border-strong)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--violet-bright);box-shadow:0 0 0 4px var(--violet-a12)}
+.f.bad input,.f.bad select,.f.bad textarea{border-color:var(--danger)}
+.f .err{display:none;font-size:13.5px;color:var(--danger)}
+.f.bad .err{display:block}
+
+/* Chips (múltipla escolha) */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chips span{display:inline-flex;align-items:center;min-height:44px;padding:9px 16px;border-radius:999px;border:1px solid var(--border);background:var(--bg-deep);font-size:15px;color:var(--ink-dim);transition:all .2s}
+.chips label:hover span{border-color:var(--border-strong);color:var(--ink)}
+.chips input:checked + span{background:var(--violet-a30);border-color:var(--violet-bright);color:#fff}
+.chips input:focus-visible + span{outline:2px solid var(--violet-bright);outline-offset:3px}
+
+/* ---------- Upload ---------- */
+.drop{position:relative;border:1.5px dashed var(--border-strong);border-radius:var(--radius);background:var(--bg-deep);padding:22px 18px;text-align:center;cursor:pointer;transition:border-color .2s, background .2s}
+.drop:hover,.drop.over{border-color:var(--violet-bright);background:var(--violet-a12)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop svg{color:var(--violet-bright);margin-bottom:8px}
+.drop b{display:block;font-size:15.5px}
+.drop small{display:block;font-size:13px;color:var(--ink-muted);margin-top:4px}
+.files{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+.files:empty{display:none}
+.files li{position:relative;border:1px solid var(--border);border-radius:12px;background:var(--bg-deep);overflow:hidden;font-size:12px}
+.files .thumb{aspect-ratio:1;display:grid;place-items:center;background:var(--surface-2);color:var(--ink-muted);font-family:var(--font-mono);font-size:12px;text-transform:uppercase;overflow:hidden}
+.files img{width:100%;height:100%;object-fit:cover;display:block}
+.files .nm{padding:7px 9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink-dim)}
+.files button{position:absolute;top:5px;right:5px;width:30px;height:30px;border-radius:50%;border:0;background:oklch(0.1 0.02 300 / .85);color:#fff;font-size:17px;line-height:1;cursor:pointer}
+.files li.done::after{content:"";position:absolute;left:6px;top:6px;width:22px;height:22px;border-radius:50%;background:var(--live) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%230b2a1d' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 10.5l2.6 2.6L14 7.6'/%3E%3C/svg%3E") center/16px no-repeat}
+.files .bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--grad-accent);transition:width .2s}
+.up-err{font-size:13.5px;color:var(--danger)}
+.up-err:empty{display:none}
+
+/* ---------- Consentimento ---------- */
+.consent{display:flex;gap:14px;align-items:flex-start;cursor:pointer;font-size:15px;color:var(--ink-dim)}
+.consent input{flex:none;width:24px;height:24px;margin-top:1px;accent-color:var(--violet);cursor:pointer}
+.consent a{color:var(--violet-bright)}
+
+/* ---------- Navegação ---------- */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:60;background:oklch(0.125 0.03 300 / .94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:12px 20px calc(12px + env(safe-area-inset-bottom))}
+.nav-in{max-width:780px;margin:0 auto;display:flex;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:700;font-size:16.5px;min-height:54px;padding:14px 26px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;transition:transform .3s var(--ease-out-expo), opacity .2s}
+.btn-primary{flex:1;color:#fff;background:var(--grad-accent);box-shadow:0 10px 30px var(--violet-glow), inset 0 1px 0 oklch(1 0 0 / .25)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{color:var(--ink-dim);background:transparent;border:1px solid var(--border)}
+.btn-ghost:hover{color:var(--ink);border-color:var(--border-strong)}
+.btn[disabled]{opacity:.55;cursor:progress;transform:none}
+.saved{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-muted);text-align:center;max-width:780px;margin:0 auto 8px;min-height:1.4em}
+
+/* ---------- Envio / sucesso ---------- */
+.status{margin-top:18px;padding:16px 18px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);font-size:15px;color:var(--ink-dim)}
+.status.err{border-color:var(--danger);color:var(--ink)}
+.status .track{height:4px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-top:12px}
+.status .track i{display:block;height:100%;width:0;background:var(--grad-accent);transition:width .25s}
+.done-screen{text-align:center;padding-top:clamp(20px,6vw,60px)}
+.ok{width:76px;height:76px;margin:0 auto 26px;border-radius:50%;display:grid;place-items:center;background:oklch(0.80 0.16 160 / .14);border:1px solid oklch(0.80 0.16 160 / .5);color:var(--live)}
+.done-screen p{color:var(--ink-dim);max-width:50ch;margin:0 auto 30px}
+.btn-wa{background:var(--wa);color:oklch(0.16 0.04 150);box-shadow:0 12px 34px oklch(0.72 0.19 150 / .3)}
+.proto{font-family:var(--font-mono);font-size:12px;color:var(--ink-muted);margin-top:26px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/paginas" aria-label="Rise Hub"><img src="/img/logo.webp" alt="" width="32" height="32"><b>Rise Hub</b></a>
+    <span class="step-count" id="stepCount" aria-live="polite">Etapa <b>1</b> de 7</span>
+  </div>
+  <div class="progress" role="progressbar" aria-label="Progresso do briefing" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="bar"></i></div>
+</header>
+
+<main>
+  <form id="form" novalidate>
+
+    <div class="intro" id="intro">
+      <span class="eyebrow">Briefing · Página Premium</span>
+      <h1>Conte tudo sobre o seu negócio. <span class="grad">A gente cuida do resto.</span></h1>
+      <p>Quanto mais completo for este briefing, melhor fica a sua página. Preencha no seu ritmo: o que você digita fica salvo neste aparelho e você pode continuar depois.</p>
+      <ul><li>7 etapas curtas</li><li>Cerca de 10 minutos</li><li>Só 6 campos são obrigatórios</li></ul>
+    </div>
+
+    <!-- ============ 1 · EMPRESA ============ -->
+    <section class="step on" data-step="1" aria-labelledby="h1s">
+      <div class="step-head"><span class="n">01 · EMPRESA</span><h2 id="h1s">Quem é a sua empresa</h2><p>Os dados básicos do negócio que vai aparecer na página.</p></div>
+      <div class="card">
+        <div class="row">
+          <div class="f"><label for="empresa_nome">Nome da empresa ou marca <span class="req">*</span></label><input type="text" id="empresa_nome" name="empresa_nome" required maxlength="200" autocomplete="organization" placeholder="Como o cliente conhece você"><span class="err">Informe o nome da empresa.</span></div>
+          <div class="f"><label for="segmento">Segmento <span class="req">*</span></label><input type="text" id="segmento" name="segmento" required maxlength="200" placeholder="Ex.: clínica odontológica, pousada, imobiliária"><span class="err">Informe o segmento.</span></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="razao_social">Razão social <span class="opt">opcional</span></label><input type="text" id="razao_social" name="razao_social" maxlength="200"></div>
+          <div class="f"><label for="cnpj_cpf">CNPJ ou CPF <span class="opt">opcional</span></label><input type="text" id="cnpj_cpf" name="cnpj_cpf" maxlength="20" inputmode="numeric" placeholder="Para o rodapé da página"></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="cidade_uf">Cidade e estado <span class="opt">opcional</span></label><input type="text" id="cidade_uf" name="cidade_uf" maxlength="200" autocomplete="address-level2" placeholder="Ex.: Cabo Frio - RJ"></div>
+          <div class="f"><label for="endereco">Endereço <span class="opt">opcional</span></label><input type="text" id="endereco" name="endereco" maxlength="300" autocomplete="street-address" placeholder="Se atende em local físico"></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="regiao_atendimento">Onde você atende <span class="opt">opcional</span></label><input type="text" id="regiao_atendimento" name="regiao_atendimento" maxlength="200" placeholder="Bairro, cidade, região ou Brasil todo"></div>
+          <div class="f"><label for="tempo_mercado">Há quanto tempo existe <span class="opt">opcional</span></label><input type="text" id="tempo_mercado" name="tempo_mercado" maxlength="100" placeholder="Ex.: desde 2015"></div>
+        </div>
+        <div class="f"><label for="descricao">Conte a história do negócio em poucas linhas <span class="req">*</span></label><textarea id="descricao" name="descricao" required maxlength="4000" placeholder="O que vocês fazem, para quem e como começaram"></textarea><span class="err">Conte um pouco sobre o negócio.</span></div>
+      </div>
+    </section>
+
+    <!-- ============ 2 · CONTATO ============ -->
+    <section class="step" data-step="2" aria-labelledby="h2s">
+      <div class="step-head"><span class="n">02 · CONTATO</span><h2 id="h2s">Como falamos com você</h2><p>Primeiro os seus dados. Depois, os contatos que vão aparecer na página para o seu cliente.</p></div>
+      <div class="card">
+        <div class="row">
+          <div class="f"><label for="responsavel_nome">Seu nome <span class="req">*</span></label><input type="text" id="responsavel_nome" name="responsavel_nome" required maxlength="200" autocomplete="name"><span class="err">Informe o seu nome.</span></div>
+          <div class="f"><label for="responsavel_cargo">Seu cargo <span class="opt">opcional</span></label><input type="text" id="responsavel_cargo" name="responsavel_cargo" maxlength="120" placeholder="Ex.: proprietário, gerente"></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="whatsapp">Seu WhatsApp <span class="req">*</span></label><input type="tel" id="whatsapp" name="whatsapp" required maxlength="20" autocomplete="tel" inputmode="tel" data-mask="tel" placeholder="(00) 00000-0000"><span class="err">Informe um WhatsApp com DDD.</span></div>
+          <div class="f"><label for="email">Seu e-mail <span class="req">*</span></label><input type="email" id="email" name="email" required maxlength="200" autocomplete="email" placeholder="voce@empresa.com.br"><span class="err">Informe um e-mail válido.</span></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="whatsapp_atendimento">WhatsApp que atende os clientes <span class="opt">opcional</span></label><input type="tel" id="whatsapp_atendimento" name="whatsapp_atendimento" maxlength="20" inputmode="tel" data-mask="tel" placeholder="Para onde o botão da página leva"><span class="hint">Deixe em branco se for o mesmo número acima.</span></div>
+          <div class="f"><label for="telefone_comercial">Telefone fixo <span class="opt">opcional</span></label><input type="tel" id="telefone_comercial" name="telefone_comercial" maxlength="20" inputmode="tel" data-mask="tel"></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="email_comercial">E-mail de atendimento <span class="opt">opcional</span></label><input type="email" id="email_comercial" name="email_comercial" maxlength="200" placeholder="O que aparece na página"><span class="err">E-mail inválido.</span></div>
+          <div class="f"><label for="horario">Horário de atendimento <span class="opt">opcional</span></label><input type="text" id="horario" name="horario" maxlength="200" placeholder="Ex.: seg a sex, 9h às 18h"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3 · PRESENÇA DIGITAL ============ -->
+    <section class="step" data-step="3" aria-labelledby="h3s">
+      <div class="step-head"><span class="n">03 · PRESENÇA DIGITAL</span><h2 id="h3s">Onde a sua marca já está</h2><p>Usamos seus perfis para captar o tom, as fotos e o estilo que você já comunica.</p></div>
+      <div class="card">
+        <div class="row">
+          <div class="f"><label for="instagram">Instagram <span class="opt">opcional</span></label><input type="text" id="instagram" name="instagram" maxlength="200" autocapitalize="none" placeholder="@suaempresa"></div>
+          <div class="f"><label for="site_atual">Site ou página atual <span class="opt">opcional</span></label><input type="text" id="site_atual" name="site_atual" maxlength="300" autocapitalize="none" inputmode="url" placeholder="suaempresa.com.br"></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="outras_redes">Outras redes <span class="opt">opcional</span></label><input type="text" id="outras_redes" name="outras_redes" maxlength="400" autocapitalize="none" placeholder="Facebook, TikTok, YouTube, LinkedIn"></div>
+          <div class="f"><label for="google_negocio">Google Meu Negócio <span class="opt">opcional</span></label><input type="text" id="google_negocio" name="google_negocio" maxlength="400" autocapitalize="none" placeholder="Link do perfil no Google Maps"></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="dominio_situacao">Você já tem um domínio? <span class="opt">opcional</span></label>
+            <select id="dominio_situacao" name="dominio_situacao"><option value="">Selecione</option><option>Sim, já tenho</option><option>Não tenho, quero registrar um</option><option>Não sei</option></select></div>
+          <div class="f"><label for="dominio">Qual domínio? <span class="opt">opcional</span></label><input type="text" id="dominio" name="dominio" maxlength="200" autocapitalize="none" placeholder="suaempresa.com.br"><span class="hint">Se ainda não tem, diga o que gostaria.</span></div>
+        </div>
+        <div class="f"><label for="referencias">Páginas ou sites que você acha bonitos <span class="opt">opcional</span></label><textarea id="referencias" name="referencias" maxlength="2000" placeholder="Cole os links e diga o que te agrada em cada um"></textarea></div>
+        <div class="f"><label for="concorrentes">Principais concorrentes <span class="opt">opcional</span></label><textarea id="concorrentes" name="concorrentes" maxlength="2000" placeholder="Nomes, Instagram ou sites"></textarea></div>
+      </div>
+    </section>
+
+    <!-- ============ 4 · OFERTA ============ -->
+    <section class="step" data-step="4" aria-labelledby="h4s">
+      <div class="step-head"><span class="n">04 · OFERTA E PÚBLICO</span><h2 id="h4s">O que a página precisa vender</h2><p>É daqui que sai a copy. Escreva do jeito que você fala com o seu cliente.</p></div>
+      <div class="card">
+        <div class="row">
+          <div class="f"><label for="objetivo">Objetivo principal da página <span class="req">*</span></label>
+            <select id="objetivo" name="objetivo" required><option value="">Selecione</option><option>Vender um produto ou serviço</option><option>Receber contatos pelo WhatsApp</option><option>Captar cadastros (leads)</option><option>Agendar atendimentos ou visitas</option><option>Levar para um grupo ou comunidade</option><option>Apresentar a empresa</option><option>Outro</option></select><span class="err">Escolha o objetivo da página.</span></div>
+          <div class="f"><label for="destino_botao">Para onde o botão principal leva <span class="opt">opcional</span></label><input type="text" id="destino_botao" name="destino_botao" maxlength="400" autocapitalize="none" placeholder="Link de pagamento, WhatsApp, formulário"></div>
+        </div>
+        <div class="f"><label for="oferta">O que você vende nesta página <span class="req">*</span></label><textarea id="oferta" name="oferta" required maxlength="4000" placeholder="Produto ou serviço, o que está incluso e como funciona"></textarea><span class="err">Descreva o que a página vai vender.</span></div>
+        <div class="row">
+          <div class="f"><label for="preco">Preço e condições <span class="opt">opcional</span></label><input type="text" id="preco" name="preco" maxlength="400" placeholder="Valor, parcelamento, promoção"></div>
+          <div class="f"><label for="garantia">Garantia ou bônus <span class="opt">opcional</span></label><input type="text" id="garantia" name="garantia" maxlength="400"></div>
+        </div>
+        <div class="f"><label for="diferenciais">Por que escolher você e não o concorrente <span class="opt">opcional</span></label><textarea id="diferenciais" name="diferenciais" maxlength="4000" placeholder="Seus diferenciais, números, prêmios, certificações"></textarea></div>
+        <div class="f"><label for="cliente_ideal">Quem é o seu cliente ideal <span class="opt">opcional</span></label><textarea id="cliente_ideal" name="cliente_ideal" maxlength="4000" placeholder="Idade, perfil, o que ele procura, qual problema quer resolver"></textarea></div>
+        <div class="f"><label for="objecoes">Dúvidas e objeções mais comuns <span class="opt">opcional</span></label><textarea id="objecoes" name="objecoes" maxlength="4000" placeholder="O que os clientes perguntam antes de fechar"></textarea></div>
+        <div class="f"><label for="depoimentos_texto">Depoimentos de clientes <span class="opt">opcional</span></label><textarea id="depoimentos_texto" name="depoimentos_texto" maxlength="6000" placeholder="Cole os textos aqui. Prints você envia na etapa de arquivos."></textarea></div>
+      </div>
+    </section>
+
+    <!-- ============ 5 · IDENTIDADE ============ -->
+    <section class="step" data-step="5" aria-labelledby="h5s">
+      <div class="step-head"><span class="n">05 · IDENTIDADE VISUAL</span><h2 id="h5s">A cara da sua marca</h2><p>Se não tiver certeza de algo, deixe em branco: nós propomos.</p></div>
+      <div class="card">
+        <div class="row">
+          <div class="f"><label for="cores">Cores da marca <span class="opt">opcional</span></label><input type="text" id="cores" name="cores" maxlength="300" placeholder="Ex.: azul-marinho e dourado, ou #0A1F44"></div>
+          <div class="f"><label for="fontes">Fontes que a marca usa <span class="opt">opcional</span></label><input type="text" id="fontes" name="fontes" maxlength="300"></div>
+        </div>
+        <div class="f"><span class="lbl" id="l-estilo">Estilo que combina com a sua marca <span class="opt">marque quantos quiser</span></span>
+          <div class="chips" role="group" aria-labelledby="l-estilo">
+            <label><input type="checkbox" name="estilo" value="Sofisticado"><span>Sofisticado</span></label>
+            <label><input type="checkbox" name="estilo" value="Minimalista"><span>Minimalista</span></label>
+            <label><input type="checkbox" name="estilo" value="Moderno"><span>Moderno</span></label>
+            <label><input type="checkbox" name="estilo" value="Clássico"><span>Clássico</span></label>
+            <label><input type="checkbox" name="estilo" value="Vibrante"><span>Vibrante</span></label>
+            <label><input type="checkbox" name="estilo" value="Acolhedor"><span>Acolhedor</span></label>
+            <label><input type="checkbox" name="estilo" value="Tecnológico"><span>Tecnológico</span></label>
+            <label><input type="checkbox" name="estilo" value="Escuro"><span>Fundo escuro</span></label>
+            <label><input type="checkbox" name="estilo" value="Claro"><span>Fundo claro</span></label>
+          </div></div>
+        <div class="f"><span class="lbl" id="l-tom">Tom de voz <span class="opt">marque quantos quiser</span></span>
+          <div class="chips" role="group" aria-labelledby="l-tom">
+            <label><input type="checkbox" name="tom_de_voz" value="Próximo e informal"><span>Próximo e informal</span></label>
+            <label><input type="checkbox" name="tom_de_voz" value="Profissional"><span>Profissional</span></label>
+            <label><input type="checkbox" name="tom_de_voz" value="Técnico"><span>Técnico</span></label>
+            <label><input type="checkbox" name="tom_de_voz" value="Elegante"><span>Elegante</span></label>
+            <label><input type="checkbox" name="tom_de_voz" value="Direto"><span>Direto ao ponto</span></label>
+            <label><input type="checkbox" name="tom_de_voz" value="Divertido"><span>Divertido</span></label>
+          </div></div>
+        <div class="f"><label for="nao_quero">O que você NÃO quer na página <span class="opt">opcional</span></label><textarea id="nao_quero" name="nao_quero" maxlength="2000" placeholder="Cores, palavras, estilos ou coisas que não combinam com a marca"></textarea></div>
+      </div>
+    </section>
+
+    <!-- ============ 6 · ARQUIVOS ============ -->
+    <section class="step" data-step="6" aria-labelledby="h6s">
+      <div class="step-head"><span class="n">06 · ARQUIVOS</span><h2 id="h6s">Logo, fotos e materiais</h2><p>Envie na melhor qualidade que tiver. Imagens, PDF, ZIP e vídeo MP4, até 50 MB por arquivo.</p></div>
+      <div class="card">
+        <div class="f" data-up="logo" data-max="5"><span class="lbl">Logo <span class="opt">até 5 arquivos</span></span>
+          <div class="drop"><input type="file" multiple aria-label="Enviar logo" accept="image/*,.pdf,.svg,.ai,.eps,.psd,.zip">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5M7.5 9.5L12 5l4.5 4.5M5 19h14"/></svg>
+            <b>Toque para escolher ou arraste aqui</b><small>De preferência em PNG com fundo transparente, SVG ou PDF</small></div>
+          <ul class="files"></ul><p class="up-err" role="alert"></p></div>
+
+        <div class="f" data-up="fotos" data-max="40"><span class="lbl">Fotos do negócio, produtos, equipe e espaço <span class="opt">até 40 arquivos</span></span>
+          <div class="drop"><input type="file" multiple aria-label="Enviar fotos" accept="image/*,video/mp4,video/quicktime,.zip">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17"/></svg>
+            <b>Toque para escolher ou arraste aqui</b><small>Quanto mais opções, melhor fica a página</small></div>
+          <ul class="files"></ul><p class="up-err" role="alert"></p></div>
+
+        <div class="f" data-up="depoimentos" data-max="15"><span class="lbl">Prints de depoimentos e avaliações <span class="opt">até 15 arquivos</span></span>
+          <div class="drop"><input type="file" multiple aria-label="Enviar prints de depoimentos" accept="image/*,.pdf">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v10H9l-4 4V5z"/></svg>
+            <b>Toque para escolher ou arraste aqui</b><small>Conversas, avaliações do Google, comentários</small></div>
+          <ul class="files"></ul><p class="up-err" role="alert"></p></div>
+
+        <div class="f" data-up="marca" data-max="10"><span class="lbl">Manual da marca e outros materiais <span class="opt">até 10 arquivos</span></span>
+          <div class="drop"><input type="file" multiple aria-label="Enviar materiais da marca" accept="image/*,.pdf,.zip,.ai,.eps,.psd">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3.5h7l4 4V20.5H7z"/><path d="M14 3.5v4h4"/></svg>
+            <b>Toque para escolher ou arraste aqui</b><small>Guia de identidade, catálogo, cardápio, tabela de preços</small></div>
+          <ul class="files"></ul><p class="up-err" role="alert"></p></div>
+
+        <div class="f"><label for="link_arquivos">Tem uma pasta no Drive ou Dropbox? <span class="opt">opcional</span></label><input type="text" id="link_arquivos" name="link_arquivos" maxlength="500" autocapitalize="none" placeholder="Cole o link (deixe com acesso liberado)"></div>
+      </div>
+    </section>
+
+    <!-- ============ 7 · RASTREAMENTO + ENVIO ============ -->
+    <section class="step" data-step="7" aria-labelledby="h7s">
+      <div class="step-head"><span class="n">07 · ANÚNCIOS E ENVIO</span><h2 id="h7s">Últimos detalhes</h2><p>Para instalarmos o rastreamento na sua página. Se não souber, deixe em branco e nós orientamos.</p></div>
+      <div class="card">
+        <div class="row">
+          <div class="f"><label for="anuncia">Você já anuncia no Instagram ou Facebook? <span class="opt">opcional</span></label>
+            <select id="anuncia" name="anuncia"><option value="">Selecione</option><option>Sim, eu mesmo cuido</option><option>Sim, com uma agência ou gestor</option><option>Ainda não, mas pretendo</option><option>Não pretendo anunciar</option></select></div>
+          <div class="f"><label for="pixel_id">ID do Pixel da Meta <span class="opt">opcional</span></label><input type="text" id="pixel_id" name="pixel_id" maxlength="40" inputmode="numeric" placeholder="Sequência de números"></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="gestor_trafego">Contato do seu gestor de tráfego <span class="opt">opcional</span></label><input type="text" id="gestor_trafego" name="gestor_trafego" maxlength="200" placeholder="Nome e WhatsApp"></div>
+          <div class="f"><label for="outras_tags">Outras ferramentas <span class="opt">opcional</span></label><input type="text" id="outras_tags" name="outras_tags" maxlength="300" placeholder="Google Analytics, Google Ads, TikTok"></div>
+        </div>
+        <div class="f"><label for="observacoes">Algo mais que a gente precisa saber? <span class="opt">opcional</span></label><textarea id="observacoes" name="observacoes" maxlength="4000" placeholder="Prazos, datas importantes, ideias, pedidos específicos"></textarea></div>
+        <div class="f" id="f-consent">
+          <label class="consent"><input type="checkbox" id="consentimento" name="consentimento" required>
+            <span>Autorizo a Rise Hub a usar as informações e os arquivos enviados para criar a minha página e entrar em contato comigo. Declaro que tenho direito de uso sobre os materiais que enviei. <span class="req">*</span></span></label>
+          <span class="err">Marque a autorização para enviar.</span>
+        </div>
+      </div>
+      <div class="status" id="status" hidden role="status" aria-live="polite"><span id="statusText"></span><div class="track"><i id="statusBar"></i></div></div>
+    </section>
+
+  </form>
+
+  <!-- ============ SUCESSO ============ -->
+  <section class="done-screen" id="done" hidden>
+    <div class="ok" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17.5l5.5 5.5L25 12"/></svg></div>
+    <span class="eyebrow">Briefing recebido</span>
+    <h1>Tudo certo. <span class="grad">Agora é com a gente.</span></h1>
+    <p>Recebemos as suas informações e os arquivos. Nosso time vai analisar e falar com você pelo WhatsApp. Se quiser adiantar, mande um oi.</p>
+    <a class="btn btn-wa" id="waBtn" href="https://wa.me/5522997810444" target="_blank" rel="noopener">Avisar o time no WhatsApp</a>
+    <p class="proto" id="proto"></p>
+  </section>
+</main>
+
+<div class="nav" id="nav">
+  <p class="saved" id="saved" aria-live="polite"></p>
+  <div class="nav-in">
+    <button class="btn btn-ghost" type="button" id="back" hidden>Voltar</button>
+    <button class="btn btn-primary" type="button" id="next">Continuar</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  CONFIG
+// ============================================================
+var SUPABASE_URL = 'https://ibidukamkkgsurqswsvf.supabase.co';
+// Chave pública (anon) do projeto, a mesma já usada em index.html. Só permite INSERT/RPC.
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliaWR1a2Fta2tnc3VycXN3c3ZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjMwMjksImV4cCI6MjA4OTUzOTAyOX0.YRLsf8b8ZNK0w9MXNy27Xz4WoBKV9DzNZfGVWf4zK2E';
+var BUCKET = 'paginas-briefing';
+var SUPPORT_WHATSAPP = '5522997810444';
+var MAX_FILE_BYTES = 50 * 1024 * 1024;
+var DRAFT_KEY = 'rh_paginas_briefing_v1';
+var TOTAL_STEPS = 7;
+// Tipos aceitos pelo bucket; extensão -> mime para quando o navegador não informa (ex.: HEIC, AI)
+var MIME_BY_EXT = {
+  png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif', svg: 'image/svg+xml',
+  heic: 'image/heic', heif: 'image/heif', pdf: 'application/pdf', zip: 'application/zip',
+  ai: 'application/postscript', eps: 'application/postscript', psd: 'image/vnd.adobe.photoshop',
+  mp4: 'video/mp4', mov: 'video/quicktime'
+};
+var ALLOWED_MIMES = Object.keys(MIME_BY_EXT).map(function (k) { return MIME_BY_EXT[k]; }).concat(['application/x-zip-compressed']);
+
+var form = document.getElementById('form');
+var state = { step: 1, id: null, files: { logo: [], fotos: [], depoimentos: [], marca: [] }, sending: false };
+
+function $(id) { return document.getElementById(id); }
+function uuid() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16);
+  });
+}
+
+// ============================================================
+//  RASCUNHO (só texto; arquivos não cabem no armazenamento do navegador)
+// ============================================================
+function collect() {
+  var data = {};
+  Array.prototype.forEach.call(form.elements, function (el) {
+    if (!el.name || el.type === 'file') return;
+    if (el.type === 'checkbox') {
+      if (el.name === 'consentimento') { data.consentimento = el.checked; return; }
+      data[el.name] = data[el.name] || [];
+      if (el.checked) data[el.name].push(el.value);
+      return;
+    }
+    data[el.name] = el.value.trim();
+  });
+  return data;
+}
+function saveDraft() {
+  try {
+    var data = collect(); delete data.consentimento;
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({ id: state.id, step: state.step, data: data }));
+    $('saved').textContent = 'Rascunho salvo neste aparelho';
+  } catch (e) { $('saved').textContent = ''; }
+}
+function loadDraft() {
+  var draft = null;
+  try { draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch (e) { draft = null; }
+  state.id = (draft && draft.id) || uuid();
+  if (!draft || !draft.data) return;
+  Array.prototype.forEach.call(form.elements, function (el) {
+    var v = draft.data[el.name];
+    if (v === undefined || el.type === 'file') return;
+    if (el.type === 'checkbox') el.checked = Array.isArray(v) && v.indexOf(el.value) >= 0;
+    else el.value = v;
+  });
+  if (draft.step > 1) $('saved').textContent = 'Continuando de onde você parou';
+  state.step = Math.min(Math.max(parseInt(draft.step, 10) || 1, 1), TOTAL_STEPS);
+}
+var saveTimer;
+form.addEventListener('input', function (e) {
+  var f = e.target.closest('.f'); if (f) f.classList.remove('bad');
+  clearTimeout(saveTimer); saveTimer = setTimeout(saveDraft, 500);
+});
+
+// Máscara simples de telefone BR
+form.addEventListener('input', function (e) {
+  if (e.target.dataset.mask !== 'tel') return;
+  var d = e.target.value.replace(/\D/g, '').slice(0, 11), out = d;
+  if (d.length > 2) out = '(' + d.slice(0, 2) + ') ' + d.slice(2);
+  if (d.length > 6) out = '(' + d.slice(0, 2) + ') ' + (d.length > 10 ? d.slice(2, 7) + '-' + d.slice(7) : d.slice(2, 6) + '-' + d.slice(6));
+  e.target.value = out;
+});
+
+// ============================================================
+//  ETAPAS
+// ============================================================
+function show(step, focus) {
+  state.step = step;
+  document.querySelectorAll('.step').forEach(function (s) { s.classList.toggle('on', Number(s.dataset.step) === step); });
+  $('intro').hidden = step !== 1;
+  $('back').hidden = step === 1;
+  $('next').textContent = step === TOTAL_STEPS ? 'Enviar briefing' : 'Continuar';
+  $('stepCount').innerHTML = 'Etapa <b>' + step + '</b> de ' + TOTAL_STEPS;
+  var pct = Math.round(((step - 1) / TOTAL_STEPS) * 100);
+  $('bar').style.width = pct + '%';
+  document.querySelector('.progress').setAttribute('aria-valuenow', pct);
+  if (focus) {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    var h = document.querySelector('.step.on h2'); h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true });
+  }
+}
+function validateStep(step) {
+  var section = document.querySelector('.step[data-step="' + step + '"]');
+  var firstBad = null;
+  section.querySelectorAll('input, select, textarea').forEach(function (el) {
+    if (el.type === 'file') return;
+    var ok = el.checkValidity();
+    if (ok && el.dataset.mask === 'tel' && el.value && el.value.replace(/\D/g, '').length < 10) ok = false;
+    var f = el.closest('.f');
+    if (f) f.classList.toggle('bad', !ok);
+    if (!ok && !firstBad) firstBad = el;
+  });
+  if (firstBad) { firstBad.focus(); firstBad.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  return !firstBad;
+}
+$('next').addEventListener('click', function () {
+  if (state.sending || !validateStep(state.step)) return;
+  if (state.step < TOTAL_STEPS) { show(state.step + 1, true); saveDraft(); return; }
+  submit();
+});
+$('back').addEventListener('click', function () { if (!state.sending && state.step > 1) show(state.step - 1, true); });
+
+// ============================================================
+//  ARQUIVOS
+// ============================================================
+function extOf(name) { var m = /\.([a-z0-9]+)$/i.exec(name); return m ? m[1].toLowerCase() : ''; }
+function mimeOf(file) {
+  if (file.type && ALLOWED_MIMES.indexOf(file.type) >= 0) return file.type;
+  return MIME_BY_EXT[extOf(file.name)] || null;
+}
+function safeName(name) {
+  var ext = extOf(name);
+  var base = name.replace(/\.[^.]+$/, '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'arquivo';
+  return base + (ext ? '.' + ext : '');
+}
+function renderFiles(box) {
+  var cat = box.dataset.up, list = box.querySelector('.files');
+  list.innerHTML = '';
+  state.files[cat].forEach(function (item, i) {
+    var li = document.createElement('li');
+    if (item.path) li.className = 'done';
+    var thumb = document.createElement('div'); thumb.className = 'thumb';
+    if (item.preview) { var img = document.createElement('img'); img.src = item.preview; img.alt = ''; thumb.appendChild(img); }
+    else thumb.textContent = extOf(item.file.name) || 'arq';
+    var nm = document.createElement('div'); nm.className = 'nm'; nm.textContent = item.file.name; nm.title = item.file.name;
+    var rm = document.createElement('button'); rm.type = 'button'; rm.textContent = '×';
+    rm.setAttribute('aria-label', 'Remover ' + item.file.name);
+    rm.addEventListener('click', function () {
+      if (state.sending) return;
+      if (item.preview) URL.revokeObjectURL(item.preview);
+      state.files[cat].splice(i, 1); renderFiles(box);
+    });
+    var bar = document.createElement('i'); bar.className = 'bar'; item.bar = bar; item.li = li;
+    li.appendChild(thumb); li.appendChild(nm); if (!item.path) li.appendChild(rm); li.appendChild(bar);
+    list.appendChild(li);
+  });
+}
+function addFiles(box, fileList) {
+  var cat = box.dataset.up, max = Number(box.dataset.max), errEl = box.querySelector('.up-err'), problems = [];
+  Array.prototype.forEach.call(fileList, function (file) {
+    if (state.files[cat].length >= max) { problems.push('Limite de ' + max + ' arquivos neste campo.'); return; }
+    if (!mimeOf(file)) { problems.push('"' + file.name + '" não é um tipo aceito.'); return; }
+    if (file.size > MAX_FILE_BYTES) { problems.push('"' + file.name + '" passa de 50 MB.'); return; }
+    if (file.size === 0) { problems.push('"' + file.name + '" está vazio.'); return; }
+    var dup = state.files[cat].some(function (it) { return it.file.name === file.name && it.file.size === file.size; });
+    if (dup) return;
+    var previewable = /^image\/(png|jpe?g|webp|gif|svg\+xml)$/.test(file.type);
+    state.files[cat].push({ file: file, preview: previewable ? URL.createObjectURL(file) : null, path: null });
+  });
+  errEl.textContent = problems.filter(function (p, i, a) { return a.indexOf(p) === i; }).join(' ');
+  renderFiles(box);
+}
+document.querySelectorAll('[data-up]').forEach(function (box) {
+  var drop = box.querySelector('.drop'), input = drop.querySelector('input');
+  input.addEventListener('change', function () { addFiles(box, input.files); input.value = ''; });
+  ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function () { drop.classList.remove('over'); }); });
+  drop.addEventListener('drop', function (e) { e.preventDefault(); if (e.dataTransfer) addFiles(box, e.dataTransfer.files); });
+});
+
+function uploadOne(item, cat, index, onProgress) {
+  return new Promise(function (resolve, reject) {
+    var path = state.id + '/' + cat + '/' + Date.now().toString(36) + '-' + index + '-' + safeName(item.file.name);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', SUPABASE_URL + '/storage/v1/object/' + BUCKET + '/' + path.split('/').map(encodeURIComponent).join('/'));
+    xhr.setRequestHeader('apikey', SUPABASE_ANON_KEY);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + SUPABASE_ANON_KEY);
+    xhr.setRequestHeader('Content-Type', mimeOf(item.file));
+    xhr.upload.onprogress = function (e) { if (e.lengthComputable) onProgress(e.loaded); };
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) { item.path = path; resolve(); }
+      else reject(new Error('Falha ao enviar "' + item.file.name + '" (' + xhr.status + ')'));
+    };
+    xhr.onerror = function () { reject(new Error('Sem conexão ao enviar "' + item.file.name + '"')); };
+    xhr.send(item.file);
+  });
+}
+
+// ============================================================
+//  ENVIO
+// ============================================================
+function setStatus(text, pct, isError) {
+  var box = $('status'); box.hidden = false; box.classList.toggle('err', !!isError);
+  $('statusText').textContent = text;
+  $('statusBar').style.width = (pct || 0) + '%';
+}
+async function submit() {
+  // Revalida as etapas obrigatórias: o rascunho pode ter pulado o usuário para o fim
+  for (var s = 1; s <= TOTAL_STEPS; s++) {
+    if (!validateStep(s)) { show(s, false); validateStep(s); return; }
+  }
+  state.sending = true;
+  $('next').disabled = true; $('back').disabled = true; $('next').textContent = 'Enviando…';
+
+  try {
+    var queue = [];
+    Object.keys(state.files).forEach(function (cat) {
+      state.files[cat].forEach(function (item, i) { if (!item.path) queue.push({ item: item, cat: cat, i: i }); });
+    });
+    var totalBytes = queue.reduce(function (n, q) { return n + q.item.file.size; }, 0), sentBytes = 0;
+    for (var k = 0; k < queue.length; k++) {
+      var q = queue[k];
+      setStatus('Enviando arquivo ' + (k + 1) + ' de ' + queue.length + ': ' + q.item.file.name, totalBytes ? (sentBytes / totalBytes) * 92 : 0);
+      await uploadOne(q.item, q.cat, q.i, function (loaded) {
+        if (q.item.bar) q.item.bar.style.width = Math.round((loaded / q.item.file.size) * 100) + '%';
+        setStatus('Enviando arquivo ' + (k + 1) + ' de ' + queue.length + ': ' + q.item.file.name, ((sentBytes + loaded) / totalBytes) * 92);
+      });
+      sentBytes += q.item.file.size;
+      if (q.item.li) q.item.li.classList.add('done');
+    }
+
+    setStatus('Salvando o seu briefing…', 96);
+    var dados = collect();
+    dados.user_agent = navigator.userAgent;
+    dados.pagina_origem = location.href;
+    var arquivos = [];
+    Object.keys(state.files).forEach(function (cat) {
+      state.files[cat].forEach(function (item) {
+        if (item.path) arquivos.push({ categoria: cat, caminho: item.path, nome_original: item.file.name, mime: mimeOf(item.file), tamanho_bytes: item.file.size });
+      });
+    });
+    var resp = await fetch(SUPABASE_URL + '/rest/v1/rpc/paginas_briefing_enviar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + SUPABASE_ANON_KEY },
+      body: JSON.stringify({ p_id: state.id, p_dados: dados, p_arquivos: arquivos })
+    });
+    if (!resp.ok) {
+      var detail = await resp.json().catch(function () { return {}; });
+      throw new Error(detail.message || ('Erro ' + resp.status + ' ao salvar o briefing'));
+    }
+    finish(dados);
+  } catch (err) {
+    // Os arquivos já enviados ficam marcados; tentar de novo reaproveita o que subiu.
+    state.sending = false;
+    $('next').disabled = false; $('back').disabled = false; $('next').textContent = 'Tentar enviar de novo';
+    setStatus('Não foi possível concluir: ' + err.message + '. Seus dados continuam aqui. Confira a conexão e tente de novo.', 0, true);
+  }
+}
+function finish(dados) {
+  try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+  form.hidden = true; $('nav').hidden = true;
+  $('bar').style.width = '100%';
+  $('stepCount').textContent = 'Concluído';
+  $('done').hidden = false;
+  $('proto').textContent = 'Protocolo: ' + state.id.slice(0, 8).toUpperCase();
+  $('waBtn').href = 'https://wa.me/' + SUPPORT_WHATSAPP + '?text=' + encodeURIComponent(
+    'Olá! Acabei de enviar o briefing da minha Página Premium. Empresa: ' + dados.empresa_nome + ' (protocolo ' + state.id.slice(0, 8).toUpperCase() + ').');
+  window.scrollTo({ top: 0 });
+}
+window.addEventListener('beforeunload', function (e) { if (state.sending) { e.preventDefault(); e.returnValue = ''; } });
+
+loadDraft();
+show(state.step, false);
+</script>
+</body>
+</html>
