@@ -8,6 +8,8 @@
     { "source": "/paginas", "destination": "/paginas.html" },
     { "source": "/paginas/obrigado", "destination": "/paginas-obrigado.html" },
     { "source": "/paginas/briefing", "destination": "/paginas-briefing.html" },
+    { "source": "/privacidade", "destination": "/privacidade.html" },
+    { "source": "/politica-de-privacidade", "destination": "/privacidade.html" },
     { "source": "/lp", "destination": "/lp.html" },
     { "source": "/lp2", "destination": "/lp2.html" },
     { "source": "/trafego", "destination": "/lp-trafego.html" },
