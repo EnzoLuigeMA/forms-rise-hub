@@ -16,7 +16,18 @@
     { "source": "/sun-victory", "destination": "/relatorio-sun-victory.html" },
     { "source": "/modular", "destination": "/relatorio-modular.html" },
     { "source": "/blue-lake", "destination": "/relatorio-blue-lake.html" },
-    { "source": "/parana-repasses", "destination": "/relatorio-parana-repasses.html" }
+    { "source": "/parana-repasses", "destination": "/relatorio-parana-repasses.html" },
+    { "source": "/servicos", "destination": "/servicos.html" },
+    { "source": "/criativos", "destination": "/criativos.html" },
+    { "source": "/sofia", "destination": "/sofia.html" },
+    { "source": "/implementacao", "destination": "/implementacao.html" },
+    { "source": "/sistemas", "destination": "/sistemas.html" },
+    { "source": "/consultoria", "destination": "/consultoria.html" }
+  ],
+  "redirects": [
+    { "source": "/marketing-tech", "destination": "/servicos#marketing-tech", "statusCode": 308 },
+    { "source": "/rise-engine", "destination": "/servicos#rise-engine", "statusCode": 308 },
+    { "source": "/scale-up", "destination": "/servicos#scale-up", "statusCode": 308 }
   ],
   "headers": [
     {
@@ -33,6 +44,48 @@
     },
     {
       "source": "/lp2",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/trafego",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/servicos",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/criativos",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/sofia",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/implementacao",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/sistemas",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/consultoria",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400" }
       ]

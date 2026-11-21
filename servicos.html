@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serviços | Rise Hub · Diagnóstico, Marketing Tech, Rise Engine e Scale-up</title>
+<meta name="description" content="A Rise Hub transforma operação comercial manual em motor previsível. Tudo começa pelo Diagnóstico Comercial gratuito. Depois, três pacotes: Marketing Tech, Rise Engine e Scale-up.">
+<link rel="canonical" href="https://form.risehub.com.br/servicos">
+<meta name="theme-color" content="#150d1f">
+<link rel="icon" href="/img/logo.webp" type="image/webp">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Rise Hub">
+<meta property="og:title" content="Serviços | Rise Hub">
+<meta property="og:description" content="Uma porta de entrada e três pacotes. Tudo começa pelo Diagnóstico Comercial gratuito.">
+<meta property="og:image" content="https://form.risehub.com.br/img/logo.webp">
+<meta property="og:url" content="https://form.risehub.com.br/servicos">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+
+<!-- Marca que o JS está ativo (libera a entrada suave) e captura o fbclid -->
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var fbclid = params.get('fbclid');
+  if (fbclid && !document.cookie.includes('_fbc=')) {
+    document.cookie = '_fbc=fb.1.' + Date.now() + '.' + fbclid + '; max-age=7776000; path=/; SameSite=Lax';
+  }
+})();
+</script>
+
+<!-- Meta Pixel: init + PageView. ViewContent e Contact saem de /assets/servico.js -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;t.defer=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+// Um id por evento: o mesmo id segue no Pixel e na API de Conversões, para a Meta contar uma vez só.
+window.rhEventId = function (prefix) {
+  return prefix + '_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+};
+window.rhPageViewId = rhEventId('pv');
+fbq('init', '2238173290034845');
+fbq('track', 'PageView', {}, { eventID: rhPageViewId });
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2238173290034845&ev=PageView&noscript=1"/></noscript>
+
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+
+<!-- Base compartilhada. /assets/ tem cache de 1 ano: ao mudar o arquivo, suba o ?v= -->
+<link rel="stylesheet" href="/assets/servico.css?v=2">
+
+<!-- CSS específico do hub -->
+<style>
+/* Hero: trilha do método ao lado do texto */
+.hero h1{max-width:16ch}
+.path{list-style:none;display:grid;gap:0;position:relative}
+.path li{position:relative;display:grid;grid-template-columns:44px 1fr;gap:16px;padding:16px 0}
+.path li::after{content:"";position:absolute;left:21px;top:56px;bottom:-12px;width:2px;background:linear-gradient(var(--violet-a30),transparent)}
+.path li:last-child::after{display:none}
+.path i{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-family:var(--font-mono);font-size:13px;color:var(--violet-bright);border:1px solid var(--border-strong);background:var(--bg)}
+.path li:first-child i{color:#fff;background:var(--grad-accent);border-color:transparent;box-shadow:0 8px 24px var(--violet-glow)}
+.path b{display:block;font-family:var(--font-display);font-weight:600;font-size:20px;line-height:1.2}
+.path span{display:block;font-size:15px;color:var(--ink-dim);margin-top:4px}
+
+/* 7 frentes + cartão do diagnóstico: grade de 4 colunas fecha em 2 linhas */
+#frentes .cards{grid-template-columns:1fr}
+@media (min-width:640px){#frentes .cards{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1040px){#frentes .cards{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body data-slug="servicos">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#conteudo" aria-label="Rise Hub, voltar ao topo">
+      <img src="/img/logo.webp" alt="" width="34" height="34" decoding="async">
+      <b>Rise Hub</b>
+      <small>Serviços</small>
+    </a>
+    <nav class="nav-right" aria-label="Principal">
+      <a class="nav-link" href="/servicos" aria-current="page">Todos os serviços</a>
+      <a class="btn btn-sm" data-cta="nav" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=servicos">Agendar diagnóstico</a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Serviços · Rise Hub</span>
+      <h1>Uma porta de entrada e <span class="grad">três pacotes.</span></h1>
+      <p class="lead">A Rise Hub transforma operação comercial manual em <strong>motor previsível</strong>. A gente não abre vendendo serviço. Abre medindo: o Diagnóstico Comercial gratuito mostra onde a sua venda vaza, e só depois indica o degrau que faz sentido.</p>
+      <div class="actions">
+        <a class="btn" data-cta="hero" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=servicos">Agendar diagnóstico gratuito
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+        </a>
+        <a class="btn btn-ghost" data-cta="hero-whatsapp" href="https://wa.me/5522997810444?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20de%20servi%C3%A7os%20da%20Rise%20Hub%20e%20quero%20entender%20qual%20pacote%20faz%20sentido%20para%20a%20minha%20empresa." target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+      <ul class="micro">
+        <li>Diagnóstico gratuito</li>
+        <li>Sem compromisso de contratar</li>
+        <li>Proposta só depois de medir</li>
+      </ul>
+    </div>
+
+    <aside class="panel" aria-label="O método Rise Hub em quatro etapas">
+      <p class="panel-head">O método</p>
+      <ol class="path">
+        <li><i aria-hidden="true">01</i><div><b>Diagnóstico</b><span>Medimos cada etapa do funil antes de propor qualquer coisa.</span></div></li>
+        <li><i aria-hidden="true">02</i><div><b>Estrutura</b><span>Processo, CRM e rotina de follow-up no lugar.</span></div></li>
+        <li><i aria-hidden="true">03</i><div><b>Motor</b><span>Aquisição e atendimento com IA rodando juntos, todo dia.</span></div></li>
+        <li><i aria-hidden="true">04</i><div><b>Escala</b><span>Sistemas sob medida para crescer o que já provou resultado.</span></div></li>
+      </ol>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= ESCADA ================= -->
+<section class="band" id="escada">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">A escada</span>
+      <h2>Você entra no degrau que faz sentido. <span class="grad">Não no mais caro.</span></h2>
+      <p class="lead">Cada degrau resolve um gargalo diferente. O diagnóstico mostra qual é o seu hoje, e o que precisa acontecer para valer a pena subir.</p>
+    </div>
+    <ol class="ladder">
+      <li class="rung reveal" id="diagnostico">
+        <span class="rung-n">Degrau 1</span>
+        <h3>Diagnóstico Comercial</h3>
+        <p class="rung-tag">Gratuito · porta de entrada</p>
+        <p>Uma varredura do seu funil, de ponta a ponta, antes de qualquer proposta.</p>
+        <ul class="rung-list">
+          <li>Medição do tráfego e da origem dos leads</li>
+          <li>Como o atendimento responde e qualifica</li>
+          <li>Follow-up: quem é lembrado e quem some</li>
+          <li>Ticket e onde a venda se perde</li>
+        </ul>
+        <p class="rung-up"><b>Quando faz sentido</b>Sempre. Todo cliente começa aqui.</p>
+      </li>
+      <li class="rung reveal" id="marketing-tech">
+        <span class="rung-n">Degrau 2</span>
+        <h3>Marketing Tech</h3>
+        <p class="rung-tag">Para quem quer gerar leads</p>
+        <p>Aquisição bem feita, com rastreamento certo desde o primeiro dia.</p>
+        <ul class="rung-list">
+          <li><a href="/trafego">Tráfego pago</a></li>
+          <li><a href="/criativos">Criativos de performance</a></li>
+          <li><a href="/paginas">Páginas Premium</a></li>
+        </ul>
+        <p class="rung-up"><b>Quando subir para cá</b>O gargalo é volume ou qualidade de lead.</p>
+      </li>
+      <li class="rung is-flagship reveal" id="rise-engine">
+        <span class="rung-badge">Carro-chefe</span>
+        <span class="rung-n">Degrau 3</span>
+        <h3>Rise Engine</h3>
+        <p class="rung-tag">Aquisição + IA + implementação</p>
+        <p>O motor completo: o lead chega, é atendido em segundos e segue um processo até a venda.</p>
+        <ul class="rung-list">
+          <li>Aquisição: tráfego, criativos e páginas</li>
+          <li><a href="/sofia">Sofia, agente de IA no WhatsApp e no Instagram</a></li>
+          <li><a href="/implementacao">Implementação comercial: processo, CRM, follow-up e painel</a></li>
+        </ul>
+        <p class="rung-up"><b>Quando subir para cá</b>Já chegam leads, a partir de 30 por mês, mas a conversão é baixa.</p>
+      </li>
+      <li class="rung reveal" id="scale-up">
+        <span class="rung-n">Degrau 4</span>
+        <h3>Scale-up</h3>
+        <p class="rung-tag">Para escalar o que funciona</p>
+        <p>Em cima de um motor que já roda, o que é feito sob medida para crescer.</p>
+        <ul class="rung-list">
+          <li><a href="/sistemas">Sistemas de IA sob medida</a></li>
+          <li><a href="/consultoria">Consultoria de estruturação comercial</a></li>
+        </ul>
+        <p class="rung-up"><b>Quando subir para cá</b>O motor provou resultado, depois de 60 a 90 dias rodando.</p>
+      </li>
+    </ol>
+    <div class="ladder-foot reveal">
+      <p>Não sabe em qual degrau está? É exatamente isso que o diagnóstico responde.</p>
+      <a class="btn" data-cta="escada" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=servicos">Agendar diagnóstico gratuito</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AS 7 FRENTES ================= -->
+<section id="frentes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">As 7 frentes</span>
+      <h2>Cada pacote é feito destas peças.</h2>
+      <p class="lead">Conheça cada frente em detalhe: o que entregamos, como funciona e em qual degrau ela entra.</p>
+    </div>
+    <div class="cards">
+      <a class="card reveal" href="/trafego">
+        <span class="tag">Marketing Tech</span>
+        <h3>Tráfego pago</h3>
+        <p>Campanhas planejadas a partir do diagnóstico, com rastreamento instalado para saber qual anúncio traz venda.</p>
+        <span class="go">Ver tráfego pago</span>
+      </a>
+      <a class="card reveal" href="/criativos">
+        <span class="tag">Marketing Tech</span>
+        <h3>Criativos</h3>
+        <p>Peças estáticas, motion e roteiros feitos para performance, com variações para testar o que funciona.</p>
+        <span class="go">Ver criativos</span>
+      </a>
+      <a class="card reveal" href="/paginas">
+        <span class="tag">Marketing Tech</span>
+        <h3>Páginas</h3>
+        <p>Página de vendas sob medida, rápida no celular, com Pixel e API de Conversões instalados.</p>
+        <span class="go">Ver Páginas Premium</span>
+      </a>
+      <a class="card reveal" href="/sofia">
+        <span class="tag t-rise">Rise Engine</span>
+        <h3>Sofia, agente de IA</h3>
+        <p>Responde em segundos no WhatsApp e no Instagram, qualifica, agenda e faz follow-up. Passa para um humano quando precisa.</p>
+        <span class="go">Conhecer a Sofia</span>
+      </a>
+      <a class="card reveal" href="/implementacao">
+        <span class="tag t-rise">Rise Engine</span>
+        <h3>Implementação comercial</h3>
+        <p>Processo de vendas, CRM, rotina de follow-up e painel para enxergar o funil desde o dia 1.</p>
+        <span class="go">Ver implementação</span>
+      </a>
+      <a class="card reveal" href="/sistemas">
+        <span class="tag t-scale">Scale-up</span>
+        <h3>Sistemas de IA sob medida</h3>
+        <p>Integrações e automações construídas para a sua operação, quando a ferramenta pronta já não dá conta.</p>
+        <span class="go">Ver sistemas</span>
+      </a>
+      <a class="card reveal" href="/consultoria">
+        <span class="tag t-scale">Scale-up</span>
+        <h3>Consultoria</h3>
+        <p>Estruturação comercial acompanhada de perto, para escalar o que já provou resultado sem perder o controle.</p>
+        <span class="go">Ver consultoria</span>
+      </a>
+      <a class="card is-accent reveal" data-cta="frentes" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=servicos">
+        <span class="tag t-free">Degrau 1 · Gratuito</span>
+        <h3>Não sabe por onde começar?</h3>
+        <p>O Diagnóstico Comercial aponta qual frente resolve o seu gargalo de hoje. Sem compromisso.</p>
+        <span class="go">Agendar diagnóstico</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NÃO SOMOS AGÊNCIA ================= -->
+<section class="band" id="metodo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Por que diagnóstico primeiro</span>
+      <h2>Não somos agência de tráfego. <span class="grad">Somos método.</span></h2>
+      <p class="lead">Agência vende execução antes de entender o problema. Nós entramos medindo. Muitas vezes o gargalo não é o anúncio: é o que acontece depois que o lead chega. São quatro vazamentos que se repetem em quase toda operação.</p>
+    </div>
+    <div class="cards cols-4">
+      <article class="card reveal"><span class="n">01 · Atendimento</span><h3>Lead esquecido</h3><p>A mensagem chega e fica horas sem resposta. Quando alguém responde, a pessoa já fechou com outro.</p></article>
+      <article class="card reveal"><span class="n">02 · Conversa</span><h3>Papo que não vira venda</h3><p>O atendimento tira dúvida, manda preço e espera. Ninguém conduz a conversa até o fechamento.</p></article>
+      <article class="card reveal"><span class="n">03 · Follow-up</span><h3>Ninguém volta a chamar</h3><p>Quem disse "vou pensar" nunca mais é procurado. A venda morre por esquecimento.</p></article>
+      <article class="card reveal"><span class="n">04 · Previsibilidade</span><h3>Mês no escuro</h3><p>Sem números do funil, não dá para saber quanto vai vender nem onde colocar o próximo investimento.</p></article>
+    </div>
+    <p class="pull reveal">Mais tráfego em cima desses vazamentos só aumenta a conta. Por isso a ordem é sempre a mesma: <span class="grad">diagnóstico, estrutura, motor, escala.</span></p>
+  </div>
+</section>
+
+<!-- ================= PARA QUEM É / NÃO É ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Para quem é</span>
+      <h2>Feito para quem já vende e quer vender com processo.</h2>
+      <p class="lead">O método funciona em segmentos bem diferentes, como clínica, imobiliária e pousada. O que importa é o momento da operação, não o setor.</p>
+    </div>
+    <div class="fit">
+      <div class="fit-col yes reveal">
+        <h3>É para você se</h3>
+        <ul>
+          <li>Você já vende, mas o processo comercial ainda é manual.</li>
+          <li>Já investe em aquisição, ou está pronto para investir.</li>
+          <li>Aceita mudar a rotina para o processo funcionar.</li>
+          <li>Pensa: "sei que preciso vender mais, mas não sei onde está vazando".</li>
+        </ul>
+      </div>
+      <div class="fit-col no reveal">
+        <h3>Não é para você se</h3>
+        <ul>
+          <li>Ainda não fez a primeira venda e está validando o produto.</li>
+          <li>Decide só pelo menor preço.</li>
+          <li>Não quer mudar nada no jeito que vende hoje.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="tight">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2>O que costumam perguntar antes do diagnóstico.</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>O diagnóstico é gratuito mesmo?</summary><p>Sim. É uma conversa em que medimos cada etapa do seu funil: tráfego, atendimento, follow-up e ticket. Você sai sabendo onde a venda vaza, contratando a Rise Hub ou não.</p></details>
+      <details><summary>Preciso contratar um pacote inteiro?</summary><p>Não. Você entra no degrau que o diagnóstico indicar, com o escopo fechado para o seu gargalo. As <a href="/paginas">Páginas Premium</a> também podem ser contratadas sozinhas.</p></details>
+      <details><summary>Quanto custa?</summary><p>Depende do degrau e do tamanho da operação. Por isso a conversa começa pelo diagnóstico: a proposta só vem depois de medir, nunca antes.</p></details>
+      <details><summary>Qual a diferença entre Marketing Tech e Rise Engine?</summary><p>O Marketing Tech cuida de gerar leads: tráfego, criativos e páginas. O Rise Engine inclui a aquisição e também o que acontece depois que o lead chega: atendimento com a Sofia, processo comercial, CRM, follow-up e painel.</p></details>
+      <details><summary>Funciona para o meu segmento?</summary><p>O método não depende do setor, depende do momento: você já vende, investe em aquisição e o processo ainda é manual. Ele se aplica em clínica, imobiliária, pousada e outros negócios que vendem pela conversa. Se tiver dúvida, fale com a gente no <a href="https://wa.me/5522997810444?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20de%20servi%C3%A7os%20da%20Rise%20Hub%20e%20quero%20entender%20qual%20pacote%20faz%20sentido%20para%20a%20minha%20empresa." data-cta="faq-whatsapp" target="_blank" rel="noopener">WhatsApp</a>.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA FINAL ================= -->
+<section class="close tight">
+  <div class="wrap reveal">
+    <span class="eyebrow">Próximo passo</span>
+    <h2>Antes de investir mais, <span class="grad">descubra onde está vazando.</span></h2>
+    <p class="lead">O Diagnóstico Comercial é gratuito e mostra, etapa por etapa, onde a sua venda se perde. Depois disso, você decide.</p>
+    <div class="actions center">
+      <a class="btn" data-cta="fecho" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=servicos">Agendar diagnóstico gratuito
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+      </a>
+      <a class="btn btn-ghost" data-cta="fecho-whatsapp" href="https://wa.me/5522997810444?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20de%20servi%C3%A7os%20da%20Rise%20Hub%20e%20quero%20entender%20qual%20pacote%20faz%20sentido%20para%20a%20minha%20empresa." target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+    <ul class="micro center">
+      <li>Diagnóstico gratuito</li>
+      <li>Sem compromisso de contratar</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <span>© <span data-year>2026</span> Rise Hub. Todos os direitos reservados.</span>
+    <nav aria-label="Rodapé">
+      <ul class="foot-links">
+        <li><a href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=servicos">Diagnóstico</a></li>
+        <li><a href="/servicos" aria-current="page">Serviços</a></li>
+        <li><a href="https://www.instagram.com/risehub.br/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="/privacidade">Privacidade</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!-- CTA fixo no mobile -->
+<div class="sticky" id="sticky">
+  <div><b>Diagnóstico gratuito</b><span>Descubra onde a venda vaza</span></div>
+  <a class="btn" data-cta="sticky" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=servicos">Agendar</a>
+</div>
+
+<script src="/assets/servico.js?v=1" defer></script>
+</body>
+</html>

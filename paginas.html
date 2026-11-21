@@ -142,6 +142,9 @@ p{text-wrap:pretty}
 body.xray .xray-toggle i{background:var(--violet)}
 body.xray .xray-toggle i::after{transform:translateX(12px);background:#fff}
 @media (max-width:720px){.brand small{display:none}.nav .btn-sm{display:none}}
+.nav-link{font-size:14.5px;font-weight:600;color:var(--ink-dim);text-decoration:none;display:inline-flex;align-items:center;min-height:44px;padding:0 4px;white-space:nowrap}
+.nav-link:hover{color:var(--ink)}
+@media (max-width:980px){.nav-link{display:none}}
 
 /* ---------- Raio-X: a página explica a si mesma ---------- */
 .xr{display:none;font-family:var(--font-mono);font-size:12px;line-height:1.5;color:var(--live);background:var(--live-a12);border:1px dashed oklch(0.80 0.16 160 / .5);border-radius:10px;padding:10px 14px;margin:0 0 22px;max-width:64ch}
@@ -313,6 +316,7 @@ footer a{color:var(--ink-dim)}
       <small>Páginas Premium</small>
     </a>
     <div class="nav-right">
+      <a class="nav-link" href="/servicos">Todos os serviços</a>
       <button class="xray-toggle" type="button" aria-pressed="false" data-xray><i aria-hidden="true"></i>Raio-X</button>
       <a class="btn btn-sm" data-checkout="nav" href="#oferta">Quero a minha · R$ 597</a>
     </div>
@@ -518,6 +522,7 @@ footer a{color:var(--ink-dim)}
 <footer>
   <div class="wrap">
     <span>© <span id="ano">2026</span> Rise Hub. Todos os direitos reservados.</span>
+    <a href="/servicos">Todos os serviços</a>
     <a href="https://wa.me/5522997810444" target="_blank" rel="noopener">Suporte: (22) 99781-0444</a>
   </div>
 </footer>

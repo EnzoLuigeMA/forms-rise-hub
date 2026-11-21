@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!--
+  ======================================================================
+  MOLDE DAS PÁGINAS DE SERVIÇO · Rise Hub (não é roteado; não publicar como página)
+  Como usar:
+  1. Copie para <slug>.html (ex.: sofia.html) e troque TODOS os {{...}}.
+     Confira no fim: grep -n '{{' <slug>.html  (deve voltar vazio)
+  2. {{SLUG}} = nome da rota sem barra (trafego, criativos, sofia, implementacao,
+     sistemas, consultoria). Vai no data-slug do <body>, nas utm e no Pixel.
+  3. {{WHATS_TEXT}} = mensagem do WhatsApp JÁ url-encoded, citando o serviço.
+     Gere com: node -e "console.log(encodeURIComponent('Olá! Vim pela página de X da Rise Hub e quero entender como funciona.'))"
+  4. Base visual: /assets/servico.css. Comportamento: /assets/servico.js.
+     CSS só desta página vai no <style> marcado abaixo. Não duplique tokens.
+  5. Regras do brief: sem preços, sem cases ou números inventados, sem em-dash
+     na copy, alt real em imagens, frases curtas.
+  6. Classes de entrada suave: .reveal (o JS adiciona .in ao aparecer).
+  7. Já existem na base: .panel-head/.panel-note (cabeçalho e nota do painel do hero),
+     .tag.t-rise/.t-scale/.t-free (cor da etiqueta por pacote), .related/.related-head
+     (bloco "frentes relacionadas" abaixo da escada) e .fit-note. Não os redefina na página.
+  8. Itens de .fit-col e .checks são flex: se o texto tiver um link, envolva o conteúdo do <li>
+     num <span>, senão o link vira uma coluna à parte.
+  ======================================================================
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITULO_SEO}} | Rise Hub</title>
+<meta name="description" content="{{DESCRICAO_SEO_ATE_155_CARACTERES}}">
+<link rel="canonical" href="https://form.risehub.com.br/{{SLUG}}">
+<meta name="theme-color" content="#150d1f">
+<link rel="icon" href="/img/logo.webp" type="image/webp">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Rise Hub">
+<meta property="og:title" content="{{TITULO_OG}} | Rise Hub">
+<meta property="og:description" content="{{DESCRICAO_OG}}">
+<meta property="og:image" content="https://form.risehub.com.br/img/logo.webp">
+<meta property="og:url" content="https://form.risehub.com.br/{{SLUG}}">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+
+<!-- Marca que o JS está ativo (libera a entrada suave) e captura o fbclid -->
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var fbclid = params.get('fbclid');
+  if (fbclid && !document.cookie.includes('_fbc=')) {
+    document.cookie = '_fbc=fb.1.' + Date.now() + '.' + fbclid + '; max-age=7776000; path=/; SameSite=Lax';
+  }
+})();
+</script>
+
+<!-- Meta Pixel: init + PageView. ViewContent e Contact saem de /assets/servico.js -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;t.defer=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+// Um id por evento: o mesmo id segue no Pixel e na API de Conversões, para a Meta contar uma vez só.
+window.rhEventId = function (prefix) {
+  return prefix + '_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+};
+window.rhPageViewId = rhEventId('pv');
+fbq('init', '2238173290034845');
+fbq('track', 'PageView', {}, { eventID: rhPageViewId });
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2238173290034845&ev=PageView&noscript=1"/></noscript>
+
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+
+<!-- Base compartilhada. /assets/ tem cache de 1 ano: ao mudar o arquivo, suba o ?v= -->
+<link rel="stylesheet" href="/assets/servico.css?v=2">
+
+<!-- CSS específico desta página (só o que a base não cobre) -->
+<style>
+</style>
+</head>
+<body data-slug="{{SLUG}}">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#conteudo" aria-label="Rise Hub, voltar ao topo">
+      <img src="/img/logo.webp" alt="" width="34" height="34" decoding="async">
+      <b>Rise Hub</b>
+      <small>{{NOME_CURTO_DO_SERVICO}}</small>
+    </a>
+    <nav class="nav-right" aria-label="Principal">
+      <a class="nav-link" href="/servicos">Todos os serviços</a>
+      <a class="btn btn-sm" data-cta="nav" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign={{SLUG}}">Agendar diagnóstico</a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ================= 1. HERO ================= -->
+<!-- Eyebrow com o degrau. h1 com .grad em UMA palavra ou expressão curta. -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Degrau {{N}} · {{PACOTE: Marketing Tech | Rise Engine | Scale-up}}</span>
+    <h1>{{TITULO_PARTE_1}} <span class="grad">{{PALAVRA_DESTAQUE}}</span></h1>
+    <p class="lead">{{LEAD: 1 a 2 frases. O que muda na operação do cliente. Pode usar <strong>negrito</strong> numa ideia.}}</p>
+    <div class="actions">
+      <a class="btn" data-cta="hero" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign={{SLUG}}">Agendar diagnóstico gratuito
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+      </a>
+      <a class="btn btn-ghost" data-cta="hero-whatsapp" href="https://wa.me/5522997810444?text={{WHATS_TEXT}}" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+    <!-- 3 garantias de PROCESSO (nada de resultado prometido) -->
+    <ul class="micro">
+      <li>{{GARANTIA_DE_PROCESSO_1}}</li>
+      <li>{{GARANTIA_DE_PROCESSO_2}}</li>
+      <li>{{GARANTIA_DE_PROCESSO_3}}</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 2. O PROBLEMA ================= -->
+<!-- 3 dores concretas do dia a dia, sem números. -->
+<section class="tight">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Onde a venda se perde</span>
+      <h2>{{TITULO_DO_PROBLEMA}}</h2>
+      <p class="lead">{{CONTEXTO_DO_PROBLEMA}}</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal"><span class="n">01 · {{ROTULO}}</span><h3>{{DOR_1}}</h3><p>{{EXPLICACAO_1}}</p></article>
+      <article class="card reveal"><span class="n">02 · {{ROTULO}}</span><h3>{{DOR_2}}</h3><p>{{EXPLICACAO_2}}</p></article>
+      <article class="card reveal"><span class="n">03 · {{ROTULO}}</span><h3>{{DOR_3}}</h3><p>{{EXPLICACAO_3}}</p></article>
+    </div>
+    <p class="pull reveal">{{FRASE_DE_VIRADA}} <span class="grad">{{DESTAQUE}}</span></p>
+  </div>
+</section>
+
+<!-- ================= 3. O QUE ENTREGAMOS ================= -->
+<!-- Só entregáveis reais. 3 ou 6 itens fecham a grade sem buraco. -->
+<section class="band" id="entrega">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">O que entregamos</span>
+      <h2>{{TITULO_DA_ENTREGA}}</h2>
+    </div>
+    <div class="inc-grid reveal">
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg></div>
+        <h3>{{ENTREGAVEL_1}}</h3><p>{{DESCRICAO_1}}</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg></div>
+        <h3>{{ENTREGAVEL_2}}</h3><p>{{DESCRICAO_2}}</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg></div>
+        <h3>{{ENTREGAVEL_3}}</h3><p>{{DESCRICAO_3}}</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg></div>
+        <h3>{{ENTREGAVEL_4}}</h3><p>{{DESCRICAO_4}}</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg></div>
+        <h3>{{ENTREGAVEL_5}}</h3><p>{{DESCRICAO_5}}</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg></div>
+        <h3>{{ENTREGAVEL_6}}</h3><p>{{DESCRICAO_6}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. COMO FUNCIONA ================= -->
+<!-- 4 passos, do diagnóstico à operação. .when é opcional (marco ou prazo real). -->
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Como funciona</span>
+      <h2>{{TITULO_DO_PROCESSO}}</h2>
+    </div>
+    <ol class="steps">
+      <li class="step reveal"><span class="when">Início</span><h3>Diagnóstico Comercial</h3><p>{{PASSO_1: medimos o funil e achamos onde esta frente entra}}</p></li>
+      <li class="step reveal"><span class="when">{{MARCO_2}}</span><h3>{{PASSO_2}}</h3><p>{{DESCRICAO_PASSO_2}}</p></li>
+      <li class="step reveal"><span class="when">{{MARCO_3}}</span><h3>{{PASSO_3}}</h3><p>{{DESCRICAO_PASSO_3}}</p></li>
+      <li class="step reveal"><span class="when">{{MARCO_4}}</span><h3>{{PASSO_4: operação rodando}}</h3><p>{{DESCRICAO_PASSO_4}}</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= 5. ONDE ENTRA NA ESCADA ================= -->
+<!-- Marque o pacote que inclui esta frente com .is-current + o selo .rung-here.
+     O Rise Engine continua com .is-flagship e o selo "Carro-chefe" em todas as páginas. -->
+<section class="band" id="escada">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Onde entra na escada</span>
+      <h2>{{NOME_DO_SERVICO}} faz parte do <span class="grad">{{PACOTE}}</span>.</h2>
+      <p class="lead">Ninguém começa comprando pacote. Começa pelo diagnóstico, e ele mostra o degrau que faz sentido para a sua operação.</p>
+    </div>
+    <ol class="ladder">
+      <li class="rung reveal">
+        <span class="rung-n">Degrau 1</span>
+        <h3>Diagnóstico Comercial</h3>
+        <p class="rung-tag">Gratuito · porta de entrada</p>
+        <p>Medimos cada etapa do funil para achar onde a venda vaza.</p>
+      </li>
+      <li class="rung reveal">
+        <span class="rung-n">Degrau 2</span>
+        <h3>Marketing Tech</h3>
+        <p class="rung-tag">Tráfego, criativos e páginas</p>
+        <p>Para quem precisa de mais lead, e de lead melhor.</p>
+      </li>
+      <li class="rung is-flagship reveal">
+        <span class="rung-badge">Carro-chefe</span>
+        <span class="rung-n">Degrau 3</span>
+        <h3>Rise Engine</h3>
+        <p class="rung-tag">Aquisição, Sofia e implementação</p>
+        <p>Para quem já recebe lead, mas converte pouco.</p>
+      </li>
+      <li class="rung reveal">
+        <span class="rung-n">Degrau 4</span>
+        <h3>Scale-up</h3>
+        <p class="rung-tag">Sistemas de IA e consultoria</p>
+        <p>Para escalar o motor depois que ele provou resultado.</p>
+      </li>
+      <!-- Exemplo de marcação no degrau certo (mova para o <li> do pacote desta página):
+           <li class="rung is-current reveal"> ... <span class="rung-here">Esta frente entra aqui</span> ... </li> -->
+    </ol>
+    <!-- Opcional: frentes relacionadas, antes do rodapé da escada
+         <div class="related">
+           <h3 class="related-head reveal">{{TITULO_DAS_FRENTES_RELACIONADAS}}</h3>
+           <div class="cards"> <a class="card reveal" href="/x"><span class="tag t-rise">Rise Engine · a outra frente</span><h3>…</h3><p>…</p><span class="go">Ver …</span></a> … </div>
+         </div> -->
+
+    <div class="ladder-foot reveal">
+      <p>Quer ver o que cada degrau inclui e quando faz sentido subir?</p>
+      <a class="btn btn-ghost" href="/servicos#escada">Ver todos os serviços</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. PARA QUEM É / NÃO É ================= -->
+<!-- Baseado no ICP do brief. Adapte 1 ou 2 itens ao serviço, sem fugir do ICP. -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Para quem é</span>
+      <h2>{{TITULO_DO_FIT}}</h2>
+    </div>
+    <div class="fit">
+      <div class="fit-col yes reveal">
+        <h3>É para você se</h3>
+        <ul>
+          <li>Você já vende, mas o processo comercial ainda é manual.</li>
+          <li>Já investe em aquisição, ou está pronto para investir.</li>
+          <li>Aceita mudar a rotina para o processo funcionar.</li>
+          <li>{{ITEM_ESPECIFICO_DO_SERVICO}}</li>
+        </ul>
+      </div>
+      <div class="fit-col no reveal">
+        <h3>Não é para você se</h3>
+        <ul>
+          <li>Ainda não fez a primeira venda e está validando o produto.</li>
+          <li>Decide só pelo menor preço.</li>
+          <li>Não quer mudar nada no jeito que vende hoje.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. FAQ (5 perguntas) ================= -->
+<section class="tight">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2>{{TITULO_DO_FAQ}}</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>{{PERGUNTA_1}}</summary><p>{{RESPOSTA_1}}</p></details>
+      <details><summary>{{PERGUNTA_2}}</summary><p>{{RESPOSTA_2}}</p></details>
+      <details><summary>{{PERGUNTA_3}}</summary><p>{{RESPOSTA_3}}</p></details>
+      <details><summary>{{PERGUNTA_4}}</summary><p>{{RESPOSTA_4}}</p></details>
+      <details><summary>Quanto custa?</summary><p>Depende do tamanho da operação e do degrau que faz sentido para você. Por isso a conversa começa pelo diagnóstico gratuito: a proposta só vem depois de medir.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. CTA FINAL ================= -->
+<section class="close tight">
+  <div class="wrap reveal">
+    <span class="eyebrow">Próximo passo</span>
+    <h2>{{TITULO_FINAL_PARTE_1}} <span class="grad">{{DESTAQUE_FINAL}}</span></h2>
+    <p class="lead">{{LEAD_FINAL: reforça que tudo começa pelo diagnóstico gratuito}}</p>
+    <div class="actions center">
+      <a class="btn" data-cta="fecho" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign={{SLUG}}">Agendar diagnóstico gratuito
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+      </a>
+      <a class="btn btn-ghost" data-cta="fecho-whatsapp" href="https://wa.me/5522997810444?text={{WHATS_TEXT}}" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+    <ul class="micro center">
+      <li>Diagnóstico gratuito</li>
+      <li>Sem compromisso de contratar</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER (igual em todas) ================= -->
+<footer>
+  <div class="wrap">
+    <span>© <span data-year>2026</span> Rise Hub. Todos os direitos reservados.</span>
+    <nav aria-label="Rodapé">
+      <ul class="foot-links">
+        <li><a href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign={{SLUG}}">Diagnóstico</a></li>
+        <li><a href="/servicos">Serviços</a></li>
+        <li><a href="https://www.instagram.com/risehub.br/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="/privacidade">Privacidade</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!-- CTA fixo no mobile: aparece quando o botão do hero sai da tela -->
+<div class="sticky" id="sticky">
+  <div><b>Diagnóstico gratuito</b><span>Descubra onde a venda vaza</span></div>
+  <a class="btn" data-cta="sticky" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign={{SLUG}}">Agendar</a>
+</div>
+
+<script src="/assets/servico.js?v=1" defer></script>
+</body>
+</html>

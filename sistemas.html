@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas de IA sob medida | Rise Hub</title>
+<meta name="description" content="Agentes de IA, integrações e automações sob medida para quem já tem o motor comercial rodando. Comece pelo diagnóstico comercial gratuito.">
+<link rel="canonical" href="https://form.risehub.com.br/sistemas">
+<meta name="theme-color" content="#150d1f">
+<link rel="icon" href="/img/logo.webp" type="image/webp">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Rise Hub">
+<meta property="og:title" content="Sistemas de IA sob medida | Rise Hub">
+<meta property="og:description" content="Quando o fluxo padrão não basta: agentes de IA, integrações entre CRM, agenda, ERP e pagamento, automações e painéis consolidados.">
+<meta property="og:image" content="https://form.risehub.com.br/img/logo.webp">
+<meta property="og:url" content="https://form.risehub.com.br/sistemas">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+
+<!-- Marca que o JS está ativo (libera a entrada suave) e captura o fbclid -->
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var fbclid = params.get('fbclid');
+  if (fbclid && !document.cookie.includes('_fbc=')) {
+    document.cookie = '_fbc=fb.1.' + Date.now() + '.' + fbclid + '; max-age=7776000; path=/; SameSite=Lax';
+  }
+})();
+</script>
+
+<!-- Meta Pixel: init + PageView. ViewContent e Contact saem de /assets/servico.js -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;t.defer=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+// Um id por evento: o mesmo id segue no Pixel e na API de Conversões, para a Meta contar uma vez só.
+window.rhEventId = function (prefix) {
+  return prefix + '_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+};
+window.rhPageViewId = rhEventId('pv');
+fbq('init', '2238173290034845');
+fbq('track', 'PageView', {}, { eventID: rhPageViewId });
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2238173290034845&ev=PageView&noscript=1"/></noscript>
+
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+
+<!-- Base compartilhada. /assets/ tem cache de 1 ano: ao mudar o arquivo, suba o ?v= -->
+<link rel="stylesheet" href="/assets/servico.css?v=2">
+
+<!-- CSS específico desta página (só o que a base não cobre) -->
+<style>
+.hero h1{max-width:17ch}
+.panel-head{margin-bottom:18px}
+.panel-foot{margin-top:18px;font-size:13.5px;color:var(--ink-muted)}
+
+/* ---------- Diagrama de integrações (hero) ----------
+   Desktop: camadas ligadas por linhas (barramentos + hastes).
+   Celular: uma coluna só, com trilho vertical.
+   Linhas centradas com margin-inline:auto e barramentos posicionados pela grade
+   (nós ocupam 2 colunas; o barramento vai do centro do primeiro ao centro do último). */
+.flow{--line:var(--violet);--gap-tier:32px;--half:16px;list-style:none;display:grid;gap:var(--gap-tier);position:relative}
+.tier{position:relative;display:grid;grid-template-columns:repeat(var(--cols,6),minmax(0,1fr));align-items:stretch}
+.tier.c4{--cols:4}
+.tier::before{content:"";position:absolute;left:0;right:0;margin-inline:auto;width:2px;background:linear-gradient(var(--violet),var(--magenta))}
+.tier.from-bus::before{top:calc(var(--half) * -1);height:var(--half)}
+.tier.to-bus::before{top:calc(var(--gap-tier) * -1);height:var(--half)}
+.tier.first::before{display:none}
+.bus{grid-row:1;grid-column:2 / -2;height:2px;background:var(--line);opacity:.75;pointer-events:none}
+.bus.top{align-self:start;transform:translateY(calc(var(--half) * -1))}
+.bus.bottom{align-self:end;transform:translateY(var(--half))}
+.node{grid-row:1;grid-column:span 2;margin-inline:5px;position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px 13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);text-align:center;min-width:0}
+.tier > .node:nth-of-type(1){grid-column:1 / 3}
+.tier > .node:nth-of-type(2){grid-column:3 / 5}
+.tier > .node:nth-of-type(3){grid-column:5 / 7}
+.tier > .node.core,.tier > .node.wide{grid-column:2 / -2}
+.tier.has-top .node::before,.tier.has-bottom .node::after{content:"";position:absolute;left:0;right:0;margin-inline:auto;width:2px;height:var(--half);background:var(--line);opacity:.75}
+.tier.has-top .node::before{top:calc(var(--half) * -1 - 1px)}
+.tier.has-bottom .node::after{bottom:calc(var(--half) * -1 - 1px)}
+.node .ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--violet-a18);color:var(--violet-bright);flex:none}
+.node b{font-family:var(--font-display);font-weight:600;font-size:15px;line-height:1.15;letter-spacing:-.005em;overflow-wrap:anywhere}
+.node small{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-muted);line-height:1.35}
+.node.core{grid-column:2 / -2;padding:18px 14px;background:linear-gradient(var(--surface),var(--surface)) padding-box, var(--grad-accent) border-box;border:1px solid transparent;box-shadow:0 18px 50px oklch(0.64 0.19 300 / .28)}
+.node.core .ico{background:var(--grad-accent);color:#fff;width:42px;height:42px}
+.node.core b{font-size:18px}
+.node.wide{grid-column:2 / -2}
+.node.wide .ico{background:var(--live-a12);color:var(--live)}
+.node > span:last-child{display:flex;flex-direction:column;align-items:inherit;gap:3px;min-width:0}
+.node .live{display:inline-flex;align-items:center;gap:6px}
+.node .live::before{content:"";width:6px;height:6px;border-radius:999px;background:var(--live)}
+@media (prefers-reduced-motion: no-preference){
+  .node.core{animation:corePulse 3.2s ease-in-out infinite alternate}
+  @keyframes corePulse{from{box-shadow:0 18px 50px oklch(0.64 0.19 300 / .18)}to{box-shadow:0 18px 60px oklch(0.64 0.19 300 / .42)}}
+}
+@media (max-width:560px){
+  .flow{gap:10px}
+  .flow::before{content:"";position:absolute;left:27px;top:24px;bottom:24px;width:2px;background:linear-gradient(var(--violet),var(--magenta))}
+  .tier{display:flex;flex-direction:column;gap:10px}
+  .tier::before,.bus,.tier.has-top .node::before,.tier.has-bottom .node::after{display:none}
+  .node > span:last-child{align-items:flex-start}
+  .node,.node.core,.node.wide{margin:0;flex-direction:row;align-items:center;text-align:left;gap:14px;padding:12px 14px 12px 8px}
+}
+
+/* Exemplos de sistemas */
+#exemplos .card .tag{color:var(--live);background:var(--live-a12)}
+.note{margin-top:22px;font-size:14.5px;color:var(--ink-muted);max-width:70ch}
+
+</style>
+</head>
+<body data-slug="sistemas">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#conteudo" aria-label="Rise Hub, voltar ao topo">
+      <img src="/img/logo.webp" alt="" width="34" height="34" decoding="async">
+      <b>Rise Hub</b>
+      <small>Sistemas de IA</small>
+    </a>
+    <nav class="nav-right" aria-label="Principal">
+      <a class="nav-link" href="/servicos">Todos os serviços</a>
+      <a class="btn btn-sm" data-cta="nav" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Agendar diagnóstico</a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ================= 1. HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Degrau 4 · Scale-up</span>
+      <h1>Sistemas de IA para quando o padrão <span class="grad">não basta.</span></h1>
+      <p class="lead">Seu motor comercial já roda. Agora chegam o segundo canal, a nova unidade e o processo que não cabe no fluxo pronto. Construímos <strong>agentes, integrações e automações sob medida</strong> em cima do que já funciona.</p>
+      <div class="actions">
+        <a class="btn" data-cta="hero" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Agendar diagnóstico gratuito
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+        </a>
+        <a class="btn btn-ghost" data-cta="hero-whatsapp" href="https://wa.me/5522997810444?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20de%20Sistemas%20de%20IA%20sob%20medida%20da%20Rise%20Hub%20e%20quero%20entender%20como%20funciona." target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+      <ul class="micro">
+        <li>Começa por um mapeamento</li>
+        <li>Piloto antes da produção</li>
+        <li>Documentado e monitorado</li>
+      </ul>
+    </div>
+
+    <figure class="panel" role="img" aria-label="Diagrama ilustrativo de integração: mensagens do WhatsApp e do Instagram chegam a um agente de IA, que registra no CRM, marca na agenda e aciona o ERP e o pagamento. Tudo aparece num painel único.">
+      <p class="panel-head" aria-hidden="true">Exemplo de integração</p>
+      <ol class="flow" aria-hidden="true">
+        <li class="tier c4 first has-bottom">
+          <span class="node">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18.5V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H8z"/><path d="M8.5 9h7M8.5 12.2h4.5"/></svg></span>
+            <span><b>WhatsApp</b><small>conversas</small></span>
+          </span>
+          <span class="node">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 3.3 6.5L4 20l1.3-3.5A8 8 0 0 1 4 12z"/><path d="M8.5 12.5l2.5-2.5 2 2 2.5-2.5"/></svg></span>
+            <span><b>Instagram DM</b><small>mensagens</small></span>
+          </span>
+          <i class="bus bottom"></i>
+        </li>
+        <li class="tier from-bus">
+          <span class="node core">
+            <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 4v3M9.5 12h.01M14.5 12h.01M9.5 15h5"/></svg></span>
+            <span><b>Agente de IA</b><small>atende, qualifica e decide o próximo passo</small></span>
+          </span>
+        </li>
+        <li class="tier to-bus has-top has-bottom">
+          <i class="bus top"></i>
+          <span class="node">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/></svg></span>
+            <span><b>CRM</b><small>pipeline e histórico</small></span>
+          </span>
+          <span class="node">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span>
+            <span><b>Agenda</b><small>horários e lembretes</small></span>
+          </span>
+          <span class="node">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12" rx="2.5"/><path d="M3.5 10h17M7.5 14.5h3"/></svg></span>
+            <span><b>ERP e pagamento</b><small>pedido e cobrança</small></span>
+          </span>
+          <i class="bus bottom"></i>
+        </li>
+        <li class="tier from-bus">
+          <span class="node wide">
+            <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M7 16v-4M12 16V8M17 16v-6"/></svg></span>
+            <span><b>Painel</b><small class="live">tudo num lugar só</small></span>
+          </span>
+        </li>
+      </ol>
+      <figcaption class="panel-foot">Ilustrativo. Cada sistema é desenhado no mapeamento da sua operação.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= 2. O PROBLEMA ================= -->
+<section class="tight">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Onde a operação trava</span>
+      <h2>O motor roda. O resto ainda é na mão.</h2>
+      <p class="lead">Depois que atendimento e processo funcionam, o gargalo muda de lugar. Ele sai do lead e vai para tudo o que acontece em volta da venda.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal"><span class="n">01 · Integração</span><h3>Sistemas que não conversam</h3><p>A venda fecha no CRM, mas o pedido é digitado de novo no ERP e a cobrança sai de uma planilha. Cada cópia é uma chance de erro.</p></article>
+      <article class="card reveal"><span class="n">02 · Expansão</span><h3>Novo canal, mesmo processo manual</h3><p>A operação cresceu e o fluxo padrão não cobre a nova unidade, o segundo produto ou o canal que acabou de abrir.</p></article>
+      <article class="card reveal"><span class="n">03 · Dados</span><h3>Números espalhados</h3><p>Cada ferramenta tem o próprio relatório. Para saber como o mês está, alguém junta tudo à mão e decide com atraso.</p></article>
+    </div>
+    <p class="pull reveal">IA sob medida não substitui o processo. <span class="grad">Ela amplia o que já funciona.</span></p>
+  </div>
+</section>
+
+<!-- ================= 3. O QUE ENTREGAMOS ================= -->
+<section class="band" id="entrega">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">O que entregamos</span>
+      <h2>Sistemas construídos para a sua operação.</h2>
+    </div>
+    <div class="inc-grid reveal">
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 4v3M9.5 12h.01M14.5 12h.01M9.5 15h5"/></svg></div>
+        <h3>Agentes de IA para outras etapas</h3><p>Além do atendimento: pós-venda, reativação de base, confirmação, cobrança e apoio ao time interno.</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.3 11l7.4-3.8M8.3 13l7.4 3.8"/></svg></div>
+        <h3>Integrações entre sistemas</h3><p>CRM, ERP, agenda, pagamento e planilhas trocando dados sem ninguém copiar e colar.</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.5M20 4.5v4h-4M20 12a8 8 0 0 1-13.7 5.6L4 15.5M4 19.5v-4h4"/></svg></div>
+        <h3>Automações de rotina</h3><p>Fluxos em n8n e chamadas de API para as tarefas repetitivas que hoje tomam o tempo do time.</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M7 16v-4M12 16V8M17 16v-6"/></svg></div>
+        <h3>Dashboards consolidados</h3><p>Canais, funil, agenda e financeiro num painel só, para decidir com o dado do dia.</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10A.5.5 0 0 1 7 20z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15.5h6"/></svg></div>
+        <h3>Documentação</h3><p>Cada sistema sai documentado: o que faz, onde roda, quem aciona e como ajustar.</p>
+      </div>
+      <div class="inc">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 12h4l2.5-5.5 4 11 2.5-5.5h4"/></svg></div>
+        <h3>Monitoramento e manutenção</h3><p>Acompanhamos o sistema em produção e ajustamos o fluxo quando a operação muda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXTRA: EXEMPLOS DE SISTEMAS ================= -->
+<section id="exemplos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Exemplos de sistemas</span>
+      <h2>O que dá para <span class="grad">construir.</span></h2>
+      <p class="lead">São possibilidades, não cases. O que entra no seu projeto sai do mapeamento da sua operação.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal"><span class="tag">Possibilidade</span><h3>Agente de pós-venda</h3><p>Acompanha o cliente depois da compra, tira dúvidas de uso, pede avaliação e chama alguém do time quando precisa.</p></article>
+      <article class="card reveal"><span class="tag">Possibilidade</span><h3>Reativação de base</h3><p>Volta a falar com quem já comprou ou já pediu orçamento, com uma mensagem pensada para cada grupo da base.</p></article>
+      <article class="card reveal"><span class="tag">Possibilidade</span><h3>Confirmação e cobrança</h3><p>Confirma pedido ou horário, envia o link de pagamento e lembra quem ainda não pagou, com o tom certo.</p></article>
+      <article class="card reveal"><span class="tag">Possibilidade</span><h3>SDR interno</h3><p>Prepara o vendedor antes da conversa: resume o histórico, puxa os dados do CRM e sugere o próximo passo.</p></article>
+      <article class="card reveal"><span class="tag">Possibilidade</span><h3>Integração CRM e ERP</h3><p>Venda fechada no CRM vira pedido no ERP. A baixa do pagamento volta para o CRM sem digitação.</p></article>
+      <article class="card reveal"><span class="tag">Possibilidade</span><h3>Dashboard consolidado</h3><p>Canais, funil, agenda e financeiro na mesma tela, atualizados sem planilha no meio do caminho.</p></article>
+    </div>
+    <p class="note reveal">Exemplos ilustrativos de aplicação. Funcionam em clínica, imobiliária, pousada, loja e outras operações que já vendem com processo.</p>
+  </div>
+</section>
+
+<!-- ================= 4. COMO FUNCIONA ================= -->
+<section class="band" id="como-funciona">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Do mapeamento à produção, sem pular etapa.</h2>
+    </div>
+    <ol class="steps">
+      <li class="step reveal"><span class="when">Início</span><h3>Diagnóstico Comercial</h3><p>Medimos o funil e vemos se o momento é de sistema sob medida ou se ainda falta estrutura antes.</p></li>
+      <li class="step reveal"><span class="when">Escopo</span><h3>Mapeamento</h3><p>Desenhamos o fluxo atual, os sistemas envolvidos e o que precisa conversar com o quê. Prazo e escopo saem daqui.</p></li>
+      <li class="step reveal"><span class="when">Teste</span><h3>Protótipo e piloto</h3><p>Construímos a primeira versão e rodamos num recorte controlado da operação antes de abrir para todos.</p></li>
+      <li class="step reveal"><span class="when">Operação</span><h3>Produção monitorada</h3><p>O sistema entra em operação com monitoramento, documentação e ajustes conforme a rotina muda.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= 5. ONDE ENTRA NA ESCADA ================= -->
+<section id="escada">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Onde entra na escada</span>
+      <h2>Sistemas de IA sob medida fazem parte do <span class="grad">Scale-up</span>.</h2>
+      <p class="lead">Ninguém começa comprando pacote. Começa pelo diagnóstico, e ele mostra o degrau que faz sentido para a sua operação. O Scale-up vem depois que o motor provou resultado, com 60 a 90 dias rodando.</p>
+    </div>
+    <ol class="ladder">
+      <li class="rung reveal">
+        <span class="rung-n">Degrau 1</span>
+        <h3>Diagnóstico Comercial</h3>
+        <p class="rung-tag">Gratuito · porta de entrada</p>
+        <p>Medimos cada etapa do funil para achar onde a venda vaza.</p>
+      </li>
+      <li class="rung reveal">
+        <span class="rung-n">Degrau 2</span>
+        <h3>Marketing Tech</h3>
+        <p class="rung-tag">Tráfego, criativos e páginas</p>
+        <p>Para quem precisa de mais lead, e de lead melhor.</p>
+      </li>
+      <li class="rung is-flagship reveal">
+        <span class="rung-badge">Carro-chefe</span>
+        <span class="rung-n">Degrau 3</span>
+        <h3>Rise Engine</h3>
+        <p class="rung-tag">Aquisição, Sofia e implementação</p>
+        <p>Para quem já recebe lead, mas converte pouco.</p>
+      </li>
+      <li class="rung is-current reveal">
+        <span class="rung-n">Degrau 4</span>
+        <h3>Scale-up</h3>
+        <p class="rung-tag">Sistemas de IA e consultoria</p>
+        <p>Para escalar o motor depois que ele provou resultado.</p>
+        <span class="rung-here">Esta frente entra aqui</span>
+      </li>
+    </ol>
+
+    <div class="related">
+      <h3 class="related-head reveal">O que vem antes e o que anda junto</h3>
+      <div class="cards">
+        <a class="card reveal" href="/consultoria">
+          <span class="tag t-scale">Scale-up · a outra frente</span>
+          <h3>Consultoria de estruturação comercial</h3>
+          <p>Metas por etapa, papéis do time e cadência de gestão. O sistema automatiza, a consultoria organiza quem decide.</p>
+          <span class="go">Ver consultoria</span>
+        </a>
+        <a class="card reveal" href="/sofia">
+          <span class="tag t-rise">Rise Engine · pré-requisito</span>
+          <h3>Sofia, agente de IA</h3>
+          <p>Atendimento em segundos no WhatsApp e no Instagram. É o primeiro agente do motor, antes de qualquer sistema novo.</p>
+          <span class="go">Conhecer a Sofia</span>
+        </a>
+        <a class="card reveal" href="/implementacao">
+          <span class="tag t-rise">Rise Engine · pré-requisito</span>
+          <h3>Implementação comercial</h3>
+          <p>Processo, CRM, follow-up e painel. Sem essa base, um sistema sob medida automatiza a bagunça.</p>
+          <span class="go">Ver implementação</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="ladder-foot reveal">
+      <p>Quer ver o que cada degrau inclui e quando faz sentido subir?</p>
+      <a class="btn btn-ghost" href="/servicos#escada">Ver todos os serviços</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. PARA QUEM É / NÃO É ================= -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Para quem é</span>
+      <h2>Para quem já tem o motor rodando e quer expandir.</h2>
+    </div>
+    <div class="fit">
+      <div class="fit-col yes reveal">
+        <h3>É para você se</h3>
+        <ul>
+          <li>Você já vende e tem atendimento e processo comercial funcionando.</li>
+          <li>Já investe em aquisição e acompanha o funil em números.</li>
+          <li>Aceita mudar a rotina para o sistema funcionar.</li>
+          <li>Quer expandir: nova unidade, novo canal ou novo produto.</li>
+        </ul>
+      </div>
+      <div class="fit-col no reveal">
+        <h3>Não é para você se</h3>
+        <ul>
+          <li>Ainda não fez a primeira venda e está validando o produto.</li>
+          <li>Decide só pelo menor preço.</li>
+          <li>Quer começar por IA sem ter um processo comercial definido.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fit-note reveal">Ainda está montando o processo? Tudo bem. O <a class="text-link" data-cta="fit" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">diagnóstico gratuito</a> mostra o degrau certo para agora.</p>
+  </div>
+</section>
+
+<!-- ================= 7. FAQ (5 perguntas) ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2>Perguntas sobre sistemas sob medida.</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>É só para quem já é cliente do Rise Engine?</summary><p>É para quem já tem motor estável: atendimento rápido, processo definido e funil medido. Quem passou pelo Rise Engine, com a <a href="/sofia">Sofia</a> e a <a href="/implementacao">implementação comercial</a>, chega pronto. Quem montou essa base de outro jeito também pode entrar, e o diagnóstico confirma se é o caso.</p></details>
+      <details><summary>Quais ferramentas vocês usam?</summary><p>n8n para automações, as APIs dos sistemas que você já usa e modelos de IA escolhidos para cada tarefa. Integramos com CRMs como HubSpot, RD Station e Pipedrive, além de ERP, agenda, pagamento e planilhas. A escolha sai do mapeamento, não de preferência nossa.</p></details>
+      <details><summary>Quem mantém o sistema depois que ele entra no ar?</summary><p>A gente acompanha. O sistema sai documentado e fica com monitoramento e manutenção. Quando a operação muda, o fluxo é ajustado junto.</p></details>
+      <details><summary>E os dados dos meus clientes? Como fica a LGPD?</summary><p>Os dados continuam nos seus sistemas. Cada integração acessa só o que precisa para funcionar, e o desenho segue a LGPD desde o mapeamento.</p></details>
+      <details><summary>Quanto tempo leva e quanto custa?</summary><p>Depende do escopo. Prazo e investimento são definidos no mapeamento, depois de entender o que precisa ser construído. Se você ainda não passou pelo diagnóstico gratuito, a conversa começa por ele: a proposta só vem depois de medir.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. CTA FINAL ================= -->
+<section class="close tight">
+  <div class="wrap reveal">
+    <span class="eyebrow">Próximo passo</span>
+    <h2>Primeiro o motor. <span class="grad">Depois o sob medida.</span></h2>
+    <p class="lead">Não sabe se a sua operação está pronta para um sistema próprio? O diagnóstico gratuito mede o funil em 1h30, ao vivo, e mostra o degrau certo. A proposta chega em até 48 horas.</p>
+    <div class="actions center">
+      <a class="btn" data-cta="fecho" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Agendar diagnóstico gratuito
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+      </a>
+      <a class="btn btn-ghost" data-cta="fecho-whatsapp" href="https://wa.me/5522997810444?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20de%20Sistemas%20de%20IA%20sob%20medida%20da%20Rise%20Hub%20e%20quero%20entender%20como%20funciona." target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+    <ul class="micro center">
+      <li>Diagnóstico gratuito</li>
+      <li>Sem compromisso de contratar</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER (igual em todas) ================= -->
+<footer>
+  <div class="wrap">
+    <span>© <span data-year>2026</span> Rise Hub. Todos os direitos reservados.</span>
+    <nav aria-label="Rodapé">
+      <ul class="foot-links">
+        <li><a href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Diagnóstico</a></li>
+        <li><a href="/servicos">Serviços</a></li>
+        <li><a href="https://www.instagram.com/risehub.br/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="/privacidade">Privacidade</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!-- CTA fixo no mobile: aparece quando o botão do hero sai da tela -->
+<div class="sticky" id="sticky">
+  <div><b>Diagnóstico gratuito</b><span>Descubra onde a venda vaza</span></div>
+  <a class="btn" data-cta="sticky" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Agendar</a>
+</div>
+
+<script src="/assets/servico.js?v=1" defer></script>
+</body>
+</html>
