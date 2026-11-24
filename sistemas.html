@@ -60,7 +60,7 @@ fbq('track', 'PageView', {}, { eventID: rhPageViewId });
 <noscript><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
 
 <!-- Base compartilhada. /assets/ tem cache de 1 ano: ao mudar o arquivo, suba o ?v= -->
-<link rel="stylesheet" href="/assets/servico.css?v=2">
+<link rel="stylesheet" href="/assets/servico.css?v=3">
 
 <!-- CSS específico desta página (só o que a base não cobre) -->
 <style>
@@ -127,13 +127,24 @@ fbq('track', 'PageView', {}, { eventID: rhPageViewId });
 <!-- ================= NAV ================= -->
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#conteudo" aria-label="Rise Hub, voltar ao topo">
+    <a class="brand" href="/servicos" aria-label="Rise Hub, início">
       <img src="/img/logo.webp" alt="" width="34" height="34" decoding="async">
       <b>Rise Hub</b>
       <small>Sistemas de IA</small>
     </a>
     <nav class="nav-right" aria-label="Principal">
-      <a class="nav-link" href="/servicos">Todos os serviços</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-frentes" aria-label="Abrir menu"><svg class="ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Menu</span></button>
+      <ul class="nav-links" id="menu-frentes">
+        <li><a class="nav-link" href="/servicos">Início</a></li>
+        <li><a class="nav-link" href="/trafego">Tráfego</a></li>
+        <li><a class="nav-link" href="/criativos">Criativos</a></li>
+        <li><a class="nav-link" href="/paginas">Páginas</a></li>
+        <li><a class="nav-link" href="/sofia">Sofia IA</a></li>
+        <li><a class="nav-link" href="/implementacao">Implementação</a></li>
+        <li><a class="nav-link" href="/sistemas" aria-current="page">Sistemas</a></li>
+        <li><a class="nav-link" href="/consultoria">Consultoria</a></li>
+        <li class="menu-only"><a class="btn" data-cta="menu" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Diagnóstico gratuito</a></li>
+      </ul>
       <a class="btn btn-sm" data-cta="nav" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Agendar diagnóstico</a>
     </nav>
   </div>
@@ -436,16 +447,42 @@ fbq('track', 'PageView', {}, { eventID: rhPageViewId });
 
 <!-- ================= FOOTER (igual em todas) ================= -->
 <footer>
-  <div class="wrap">
-    <span>© <span data-year>2026</span> Rise Hub. Todos os direitos reservados.</span>
-    <nav aria-label="Rodapé">
-      <ul class="foot-links">
-        <li><a href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Diagnóstico</a></li>
-        <li><a href="/servicos">Serviços</a></li>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <b>Rise Hub</b>
+      <p>Motor comercial com método: aquisição, atendimento com IA e processo de venda numa operação só.</p>
+    </div>
+    <nav class="foot-col" aria-label="Começar">
+      <h3>Começar</h3>
+      <ul>
+        <li><a href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Diagnóstico gratuito</a></li>
+        <li><a href="https://wa.me/5522997810444?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Rise%20Hub%20e%20quero%20entender%20qual%20servi%C3%A7o%20faz%20sentido%20para%20a%20minha%20empresa." target="_blank" rel="noopener" data-cta="footer">Falar no WhatsApp</a></li>
+        <li><a href="/lp2">Como funciona o motor comercial</a></li>
+      </ul>
+    </nav>
+    <nav class="foot-col" aria-label="Serviços">
+      <h3>Serviços</h3>
+      <ul>
+        <li><a href="/servicos">Todos os serviços</a></li>
+        <li><a href="/trafego">Tráfego pago</a></li>
+        <li><a href="/criativos">Criativos de performance</a></li>
+        <li><a href="/paginas">Páginas Premium</a></li>
+        <li><a href="/sofia">Sofia, agente de IA</a></li>
+        <li><a href="/implementacao">Implementação comercial</a></li>
+        <li><a href="/sistemas" aria-current="page">Sistemas de IA</a></li>
+        <li><a href="/consultoria">Consultoria de estruturação</a></li>
+      </ul>
+    </nav>
+    <nav class="foot-col" aria-label="Rise Hub">
+      <h3>Rise Hub</h3>
+      <ul>
         <li><a href="https://www.instagram.com/risehub.br/" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="/privacidade">Privacidade</a></li>
       </ul>
     </nav>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© <span data-year>2026</span> Rise Hub. Todos os direitos reservados.</span>
   </div>
 </footer>
 
@@ -455,6 +492,6 @@ fbq('track', 'PageView', {}, { eventID: rhPageViewId });
   <a class="btn" data-cta="sticky" href="/form?utm_source=site&amp;utm_medium=pagina&amp;utm_campaign=sistemas">Agendar</a>
 </div>
 
-<script src="/assets/servico.js?v=1" defer></script>
+<script src="/assets/servico.js?v=2" defer></script>
 </body>
 </html>

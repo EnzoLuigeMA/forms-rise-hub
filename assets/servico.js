@@ -9,7 +9,7 @@
    - Links para /form herdam utm_* e fbclid de quem chegou por anúncio
    - FAQ: um item aberto por vez dentro de cada .faq
    - CTA fixo no mobile (#sticky), ano no rodapé ([data-year])
-   Sem dependências. Carregar com <script src="/assets/servico.js?v=1" defer>.
+   Sem dependências. Carregar com <script src="/assets/servico.js?v=2" defer>.
    ===================================================================== */
 (function () {
   'use strict';
@@ -124,6 +124,24 @@
       if (!ticking) { ticking = true; window.requestAnimationFrame(syncNav); }
     }, { passive: true });
     syncNav();
+  }
+
+  // ---------- Menu das frentes (telas estreitas) ----------
+  var menuBtn = document.querySelector('.menu-btn');
+  if (nav && menuBtn) {
+    var setMenu = function (open) {
+      nav.classList.toggle('menu-open', open);
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    };
+    menuBtn.addEventListener('click', function () { setMenu(!nav.classList.contains('menu-open')); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('menu-open')) { setMenu(false); menuBtn.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('menu-open') && !nav.contains(e.target)) setMenu(false);
+    });
+    window.addEventListener('resize', function () { if (window.innerWidth > 1200) setMenu(false); });
   }
 
   // ---------- Entrada suave ----------

@@ -524,6 +524,19 @@ body::after{
   }
   .urgency-bar{font-size:.72rem;padding:8px 12px}
 }
+
+/* Navegação do site (v3) */
+.site-nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px 2px;font-family:'Space Grotesk',sans-serif}
+.site-nav-brand{white-space:nowrap;display:inline-flex;align-items:center;gap:9px;color:var(--rh-text);text-decoration:none;font-weight:700;font-size:1rem;min-height:44px}
+.site-nav-brand img{width:28px;height:28px;border-radius:7px}
+.site-nav-links{display:flex;gap:4px}
+.site-nav-links a{white-space:nowrap;color:var(--rh-text-dim);text-decoration:none;font-size:.86rem;font-weight:600;display:inline-flex;align-items:center;min-height:44px;padding:0 8px;border-radius:8px}
+.site-nav-links a:hover{color:var(--rh-text);background:rgba(155,89,182,.12)}
+.site-foot{width:100%;margin:28px 0 0;padding:18px 4px 28px;border-top:1px solid var(--rh-border);color:var(--rh-text-muted);font-size:.78rem;font-family:'Space Grotesk',sans-serif;display:flex;flex-direction:column;gap:12px}
+@media(max-width:400px){.site-nav-links a:nth-child(3){display:none}}
+.site-foot nav{display:flex;flex-wrap:wrap;gap:0 14px}
+.site-foot a{color:var(--rh-text-dim);text-decoration:none;display:inline-flex;min-height:36px;align-items:center}
+.site-foot a:hover{color:var(--rh-text)}
 </style>
 </head>
 <body>
@@ -558,6 +571,14 @@ body::after{
 <!-- /conversion elements -->
 
 <div class="form-wrapper">
+<nav class="site-nav" aria-label="Principal">
+  <a class="site-nav-brand" href="/servicos" aria-label="Rise Hub, início"><img src="/img/logo.webp" alt="" width="28" height="28" decoding="async">Rise Hub</a>
+  <div class="site-nav-links">
+    <a href="/servicos">Serviços</a>
+    <a href="/sofia">Sofia IA</a>
+    <a href="/lp2">Como funciona</a>
+  </div>
+</nav>
   <div class="form-header">
     <img src="data:image/webp;base64,UklGRvYCAABXRUJQVlA4IOoCAADwFwCdASqgAKAAPm00lkekIyIhKBUpSIANiWNu4MAAZn6KX1bOPla7l9MfpT/13mV/pL7/+cB5sfSAdMv6AHS1fs/+wGYp3Ke3VbHXLvVVx1IFOsEydkHGjp1y70NMvaVfxrBpXxKZRkkMoqSGOoqCkeFfxJFS+bA9ksKPzkYKIDuRfenl0vsy8cxJAALB5RWNKVXfGGpYM+uye1hf7j7P50RAJvKrEnSdk/kARk7n8Pt8+YBBbtkEY8OAox+OBB2pgIp1wYxMAAD+0cYAGz51x8w/HDklS2RkFuPmEdVzDWT0nInhuZbv6hxV3Kz3hpo5IO04gxwIFxC5q2mjJYBleKGHZxPzExbF6S8L4fTrQCn01uc3+w1mjldq9v9DVfSZK7m03CZJNm9h+pBjt9mwnOjPziB6WMBF7DtxBaUQLMizh+lz7nW7ohD7A2r0GDrXAHr1S1fI4231vUeeKxnfLqV+XuLebW+5EGL09WKgiyJmvD2MhkhjnMC032mnGC1vye2GfRcSBiWBJ9Z1X+8Je5F+yssmH/jDll+Xj8rCG0fY4eMwCFfxZVt9dryJnJZvCE4QDfjAk9WLsDF56brb8tIRZ4qNhDAnLTtazKOdo/KvKKc2kiwIRmrOUv9JUszNUB8f8ElI4b8f8DkQdTsm1fc3K9MMqCHy9NpnVyMYz79vfkQsy/hOwVEbU6hh7wiEG7pGI5Cxxno0desp+Rgs69lbopIKEEckAVK1G4NjU2tzAD2tTRvfiJu2cT0OxCijfDx1Qw5B00VudEKR/3CzSLYk87XecF+8RdCwVsFMdTOx06JE1JcatoXR1wAH6bSPWyzdhcni+2zj/XHLOGapzdACvftN4qe7P9+Q9kCljq+/5yS/9qcXCPKJe/j+hv6Y7UfBpZABvLlTLPmKA7VaTb7yi+NBZBVlH2W5OCtbSNfQhavxsOBbm/giuqKGY4gzCa1vB0khxtimoetFbCalsLqPJaAAAAAAAA==" alt="Rise Hub" class="logo-img" width="80" height="80" id="logoImg">
     <h1 id="headerTitle">Diagnóstico Comercial gratuito</h1>
@@ -898,6 +919,21 @@ body::after{
       Resposta em até 24h
     </div>
   </div>
+
+<footer class="site-foot">
+  <nav aria-label="Rodapé">
+    <a href="/servicos">Todos os serviços</a>
+    <a href="/trafego">Tráfego pago</a>
+    <a href="/criativos">Criativos de performance</a>
+    <a href="/paginas">Páginas Premium</a>
+    <a href="/sofia">Sofia, agente de IA</a>
+    <a href="/implementacao">Implementação comercial</a>
+    <a href="/sistemas">Sistemas de IA</a>
+    <a href="/consultoria">Consultoria de estruturação</a>
+    <a href="/privacidade">Privacidade</a>
+  </nav>
+  <span>© 2026 Rise Hub. Todos os direitos reservados.</span>
+</footer>
 </div>
 
 <script>

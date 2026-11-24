@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /diagnostico.html
+Disallow: /_vercel/
+
+Sitemap: https://form.risehub.com.br/sitemap.xml
